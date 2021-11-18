@@ -17,6 +17,7 @@ const TabObservaciones = ({
                         <Button
                            variant='outline-primary'
                            size='sm'
+                           onClick={() => handleShowModalObservaciones()}
                         >Añadir Observacion</Button> 
                      </Col> 
                   </Row>

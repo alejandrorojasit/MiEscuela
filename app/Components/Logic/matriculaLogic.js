@@ -3,7 +3,6 @@ import {postUpdateWholeDB} from '../../Hooks/postFetch'
 import {getMatriculaSingle} from '../../Hooks/getFetch'
 import { updateWholeDB } from '../../Helpers/Urls'
 
-
 export const handleGetDataAlumno = (
    context,
    selectedAlumnoForEdit,

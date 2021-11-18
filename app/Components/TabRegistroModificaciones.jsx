@@ -48,6 +48,8 @@ const TabRegistroModificaciones = ({
                      {dataMap?.cambios?.map((dataMap,index)=>
                      <Row
                         key={index}
+                        style={{marginLeft:10}
+                        }
                      >
                         {dataMap}    
                      </Row>

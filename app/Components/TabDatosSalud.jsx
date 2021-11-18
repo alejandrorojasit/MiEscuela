@@ -276,99 +276,90 @@ const TabDatosSalud = ({
                         )}
                      </Form.Select>
                   </Col>
-                  <Row
-                     className='mt-2'
-                  >
-                     <Col>
-                        <h6>Examen visual:</h6>
-                        <Form.Select
-                           placeholder={dataAlumno?.examenVisual}
-                           aria-label="examenVisual"
-                           disabled={switchEdit}
-                           ref={(element) => modalEditRef.current[31] = element}
-                        >
-                           <option 
-                              value={dataAlumno.examenVisual}
-                           >
-                              {dataAlumno.examenVisual}
-                           </option>
-                           {vacunas.map((dataMap)=> 
-                              dataMap !== dataAlumno.examenVisual ? 
-                                 <option 
-                                    key={dataMap} 
-                                    value={dataMap}
-                                 >
-                                    {dataMap}
-                                 </option>
-                                 :
-                              null
-                           )}
-                        </Form.Select>     
-                     </Col>
-                  </Row>
-                  <Row>
-                     <Row>
-                        <Col
-                           md={4}
-                           className='mt-2'
-                        >
-                           <h6>Otras:</h6>
-                        </Col>
-                        <Row>
-                           <Col>
-                              <Form.Select
-                                 placeholder={dataAlumno?.otras1}
-                                 aria-label="otras1"
-                                 disabled={switchEdit}
-                                 ref={(element) => modalEditRef.current[41] = element}
-                              >
-                                 <option 
-                                    value={dataAlumno?.otras1}
-                                 >
-                                    {dataAlumno?.otras1}
-                                 </option>
-                                 {vacunas.map((dataMap)=> 
-                                    dataMap !== dataAlumno?.otras1 ? 
-                                       <option 
-                                          key={dataMap} 
-                                          value={dataMap}
-                                       >
-                                          {dataMap}
-                                       </option>
-                                       :
-                                    null
-                                 )}
-                              </Form.Select> 
-                           </Col>
-                           <Col> 
-                              <Form.Select
-                                 placeholder={dataAlumno?.otras2}
-                                 aria-label="otras2"
-                                 disabled={switchEdit}
-                                 ref={(element) => modalEditRef.current[42] = element}
-                              >
-                                 <option 
-                                    value={dataAlumno?.otras2}
-                                 >
-                                    {dataAlumno.otras2}
-                                 </option>
-                                 {vacunas.map((dataMap)=> 
-                                    dataMap !== dataAlumno.otras2 ? 
-                                       <option 
-                                          key={dataMap} 
-                                          value={dataMap}
-                                       >
-                                          {dataMap}
-                                       </option>
-                                       :
-                                    null
-                                 )}
-                              </Form.Select>
+               </Row>
+               <Row
+                  className='mt-2'
+               >
 
-                           </Col>
-                        </Row>
-                     </Row> 
-                  </Row>
+                  <Col>
+                     <h6>Examen visual:</h6>
+                     <Form.Select
+                        placeholder={dataAlumno?.examenVisual}
+                        aria-label="examenVisual"
+                        disabled={switchEdit}
+                        ref={(element) => modalEditRef.current[31] = element}
+                     >
+                        <option 
+                           value={dataAlumno.examenVisual}
+                        >
+                           {dataAlumno.examenVisual}
+                        </option>
+                        {vacunas.map((dataMap)=> 
+                           dataMap !== dataAlumno.examenVisual ? 
+                              <option 
+                                 key={dataMap} 
+                                 value={dataMap}
+                              >
+                                 {dataMap}
+                              </option>
+                              :
+                           null
+                        )}
+                     </Form.Select>     
+                  </Col>
+
+                  <Col>
+                     <h6>Otras:</h6>
+                     <Form.Select
+                        placeholder={dataAlumno?.otras1}
+                        aria-label="otras1"
+                        disabled={switchEdit}
+                        ref={(element) => modalEditRef.current[41] = element}
+                     >
+                        <option 
+                           value={dataAlumno?.otras1}
+                        >
+                           {dataAlumno?.otras1}
+                        </option>
+                        {vacunas.map((dataMap)=> 
+                           dataMap !== dataAlumno?.otras1 ? 
+                              <option 
+                                 key={dataMap} 
+                                 value={dataMap}
+                              >
+                                 {dataMap}
+                              </option>
+                              :
+                           null
+                        )}
+                     </Form.Select> 
+                  </Col>
+                  <Col> 
+                     <h6>Otras:</h6>
+                     <Form.Select
+                        placeholder={dataAlumno?.otras2}
+                        aria-label="otras2"
+                        disabled={switchEdit}
+                        ref={(element) => modalEditRef.current[42] = element}
+                     >
+                        <option 
+                           value={dataAlumno?.otras2}
+                        >
+                           {dataAlumno.otras2}
+                        </option>
+                        {vacunas.map((dataMap)=> 
+                           dataMap !== dataAlumno.otras2 ? 
+                              <option 
+                                 key={dataMap} 
+                                 value={dataMap}
+                              >
+                                 {dataMap}
+                              </option>
+                              :
+                           null
+                        )}
+                     </Form.Select>
+                  </Col>
                </Row>
             </Col>
             <Col
