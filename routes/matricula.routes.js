@@ -56,6 +56,24 @@ app.post('/UpdateAlumno', verificarToken,(req,res) => {
    )
 })
 
+app.post('/updateObservaciones',verificarToken,(req,res)=>{
+   let _id = req.body._id
+   let dataObservacion = req.body.data
+   let dataRegistro = req.body.dataRegistro
+   console.log(dataObservacion)
+   console.log(dataRegistro)
+   dataToSend = {$push: {observaciones:dataObservacion,registro: dataRegistro}}
+   console.log(dataToSend)
+   data.findOneAndUpdate(
+      {_id : _id},
+      dataToSend,
+      (err,data)=> {
+         res.json(data)
+         console.log(err)
+      }
+   )
+})
+
 app.post('/updateWholeDB', verificarToken,(req,res) => {
 
    let _id = req.body._id

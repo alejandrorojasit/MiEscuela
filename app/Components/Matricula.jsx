@@ -4,6 +4,7 @@ import {
    useRef
 } from 'react'
 import ModalEditAlumno from './ModalEditAlumno.jsx'
+import ModalEditObservaciones from './ModalEditObservaciones.jsx'
 import SelectFormStage1 from './SelectFormStage1.jsx'
 import SelectFormStage2 from './SelectFormStage2.jsx'
 import TableAlumnosMatricula from './TableAlumnosMatricula.jsx'
@@ -33,6 +34,8 @@ const Matricula = () => {
    const [showModalUpdate,setShowModalUpdate] = useState(false)
    const [updatedData,setUpdatedData] = useState({})
    const [switchEdit,setSwitchEdit] = useState(true)
+   const [nuevaObservacionState,setNuevaObservacion] = useState('')
+   const [showModalEditObservaciones,setShowModalEditObservaciones] = useState(false)
    const matriculaRef = useRef([]) 
    const context  =  useAuth()
 
@@ -69,6 +72,16 @@ const Matricula = () => {
                   setSelectedAlumnoForEdit={setSelectedAlumnoForEdit}
                   switchEdit={switchEdit}
                   setSwitchEdit={setSwitchEdit}
+                  showModalEditObservaciones={showModalEditObservaciones}
+                  setShowModalEditObservaciones={setShowModalEditObservaciones}
+               />
+               <ModalEditObservaciones
+                  setShowModalEditObservaciones={setShowModalEditObservaciones}
+                  showModalEditObservaciones={showModalEditObservaciones}
+                  setNuevaObservacion={setNuevaObservacion}
+                  nuevaObservacionState={nuevaObservacionState}
+                  dataAlumno={dataAlumno}
+                  context={context}
                />
                <ModalUpdate 
                   dataAlumno={dataAlumno}

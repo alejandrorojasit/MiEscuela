@@ -5,9 +5,11 @@ import {
 } from 'react-bootstrap'
 
 const TabObservaciones = ({
-   dataAlumno
+   dataAlumno,
+   setShowModalEditObservaciones,
+   showModalEditObservaciones,
 }) => { 
-
+   console.log(dataAlumno.observaciones)
       return ( 
          <>
                   <Row>
@@ -17,7 +19,7 @@ const TabObservaciones = ({
                         <Button
                            variant='outline-primary'
                            size='sm'
-                           onClick={() => handleShowModalObservaciones()}
+                           onClick={() => setShowModalEditObservaciones(true)}
                         >Añadir Observacion</Button> 
                      </Col> 
                   </Row>
@@ -25,11 +27,6 @@ const TabObservaciones = ({
                      <Col
                         className='mt-2 border'
                      >
-                        {dataAlumno.observaciones?.map((dataMap) => 
-                        <p
-                           key={dataMap === "" ? Math.random() : dataMap}
-                        >{dataMap}</p>
-                        )} 
                      </Col>
 
                   </Row>

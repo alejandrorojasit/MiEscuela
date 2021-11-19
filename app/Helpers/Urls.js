@@ -21,3 +21,5 @@ export const updateAlumnoUrl = 'api/matricula/updateAlumno'
 export const hardCodeData = 'api/hardCodeData'
 
 export const updateWholeDB = 'api/matricula/updateWholeDB'
+
+export const updateObservacionesUrl = 'api/matricula/updateObservaciones'

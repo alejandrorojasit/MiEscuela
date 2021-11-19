@@ -36,6 +36,8 @@ const ModalEditAlumno = ({
    setSelectedAlumnoForEdit,
    switchEdit,
    setSwitchEdit,
+   showModalEditObservaciones,
+   setShowModalEditObservaciones,
 }) => { 
 
    const [fechaNacimiento,setFechaNacimiento] = useState()
@@ -123,6 +125,8 @@ const ModalEditAlumno = ({
                >
                   <TabObservaciones
                      dataAlumno={dataAlumno}
+                     setShowModalEditObservaciones={setShowModalEditObservaciones}
+                     showModalEditObservaciones={showModalEditObservaciones}
                   />
                </Tab>
                <Tab
