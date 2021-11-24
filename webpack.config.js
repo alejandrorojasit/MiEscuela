@@ -9,6 +9,9 @@ module.exports = {
          '*': 'http://[::1]:3000/',
          "secure": false,
          "changeOrigin":true,
+      },
+      devMiddleware:{
+      writeToDisk: true
       }
    },
    entry:['react-hot-loader/patch','./app/index'],
@@ -53,7 +56,8 @@ module.exports = {
       alias: {
          process: 'process/browser',
          stream: "stream-browserify",
-         zlib: "browserify-zlib"
+         zlib: "browserify-zlib",
+         'react-dom': '@hot-loader/react-dom'
       }
    },
    plugins: [

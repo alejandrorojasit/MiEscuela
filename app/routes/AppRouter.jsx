@@ -1,9 +1,9 @@
 import React from 'react'
 import {
    BrowserRouter,
-   Switch,
+   Routes,
    Route,
-   Redirect
+   Navigate
 } from 'react-router-dom'
 
 import HomePage from '../Pages/HomePage.jsx'
@@ -23,69 +23,74 @@ const AppRouter = () => {
 
    return (
       <BrowserRouter>
-         <Switch>
+         <Routes>
             <Route 
-               exact 
                path='/'
-               render={() => 
+               element={ 
                      stateUser.isAuthenticated ? 
                         <HomePage/> 
                         : 
-                        <Redirect 
+                        <Navigate 
                            to='/LogIn'
                         />
                }
             />
             <Route 
                path='/Home' 
-               render={() => 
+               element={ 
                      stateUser.isAuthenticated ? 
                         <HomePage/> 
                         : 
-                        <Redirect 
+                        <Navigate 
                            to='/LogIn'
                         />
                } />
             <Route 
                path='/LogIn' 
-               render={() => 
+               element={ 
                      !stateUser.isAuthenticated ? 
                         <LogInPage/> 
                         : 
-                        <Redirect 
+                        <Navigate 
                            to='/'
                         />
                } 
             />
             <Route 
                path='/RatificacionInscripcion'
-               render={() =>
+               element={
                      stateUser.isAuthenticated ? 
                         <RatificacionInscripcionPage/> 
                         : 
-                        <Redirect 
+                        <Navigate 
                            to='/LogIn'
                         />
                }
             />
             <Route 
                path='/Matricula'
-               render={()=>
+               element={
                      stateUser.isAuthenticated ? 
                         <MatriculaPage/> 
                         : 
-                        <Redirect 
+                        <Navigate 
                            to='/LogIn'
                         />
                }
             />
-            <AdminRoute 
+            <Route
                path='/AdminPannel' 
-               component={AdminPannelPage}/>
+               element={
+                  <AdminRoute>
+                     <AdminPannelPage/>
+                  </AdminRoute>
+               }
+            >
+            </Route>
             <Route 
                path='/Forbidden' 
                component={ForbiddenPage}/>
-         </Switch>
+         </Routes>
       </BrowserRouter>
    )
 }
