@@ -1,5 +1,5 @@
-import Header from '../Components/header.jsx'
-import Footer from '../Components/footer.jsx'
+import Header from '../Components/Header.jsx'
+import Footer from '../Components/Footer.jsx'
 
 import {
    Container,
@@ -14,13 +14,11 @@ const LogInPage = () => {
          fluid
       >
          <Row>
-            <Header/>
          </Row>
          <Row>
             <Login/>
          </Row>
          <Row>
-            <Footer/>
          </Row>
       </Container>
    )

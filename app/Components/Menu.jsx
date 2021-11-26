@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {
    Navbar,
    Nav,
@@ -18,8 +16,8 @@ const Menu = () => {
    const context = useAuth()
    return (
       <Navbar 
-         bg='dark' 
          variant='dark'
+         style={{background:'#000000'}}
       >
          <Navbar.Toggle 
             aria-controls="basic-navbar-nav" 

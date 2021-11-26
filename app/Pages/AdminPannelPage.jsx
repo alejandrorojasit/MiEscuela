@@ -1,6 +1,6 @@
-import Header from '../Components/header.jsx'
-import Menu from '../Components/menu.jsx'
-import Footer from '../Components/footer.jsx'
+import Header from '../Components/Header.jsx'
+import Menu from '../Components/Menu.jsx'
+import Footer from '../Components/Footer.jsx'
 
 import {
    Container,

@@ -3,8 +3,8 @@ import {
    Row
 } from 'react-bootstrap'
 
-import Header from '../Components/header.jsx'
-import Menu from '../Components/menu.jsx'
+import Header from '../Components/Header.jsx'
+import Menu from '../Components/Menu.jsx'
 import Matricula from '../Components/Matricula.jsx'
 
 const MatriculaPage = () => {

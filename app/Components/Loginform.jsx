@@ -1,20 +1,46 @@
+import {useEffect} from 'react'
+
 import {
    Container,
    Col,
    Row,
    Form,
-   Button
+   Button,
+   Image
 } from 'react-bootstrap'
 
 import {handleChangeUser,handleChangePassowrd,handleClick} from './Logic/loginformLogic'
-
+import Lottie from 'lottie-react'
+import HeaderAnimation from '../Assets/Header/Header.json'
+import WebFont from 'webfontloader'
+import LogoEscuela from '../Assets/jpg/LogoEPAt.png'
 
 const style = {
    form: {
-      marginTop: 20,
+      height: '100vh',
    },
    button: {
       marginTop: 20,
+   },
+      lottieAnimation : {
+      height: 350,
+   },
+   titleFont : {
+      fontFamily: 'Schoolbell',
+      fontSize: 50,
+      marginTop: 10,
+   },
+   image:{
+      height:350,
+   },
+   headerLogInForm:{
+      display:'flex', 
+      justifyContent:'center',
+      background:'#007f43',
+      color:'#152a20',
+      width:'100vw',
+      padding:10,
+      fontFamily:'Schoolbell',
    }
 }
 
@@ -25,15 +51,40 @@ const Loginform = ({
    setPassword,
    context,
 }) => {
-   
+      useEffect (() => {
+      WebFont.load({
+         google: {
+            families:['Schoolbell']
+         }
+      })
+   },[])
+
    return (
       <Container 
          style={style.form}
       >
          <Row>
-            <Col>
+            <Col
+               style={style.headerLogInForm}
+            > 
+                  <h1>Mi Escuela</h1>
             </Col>
-            <Col>
+         </Row>
+         <Row
+               style={{marginTop:50}}
+         >
+            <Col
+               className='d-flex justify-content-center'
+            >
+               <Image 
+                  className='p-2'
+                  src={LogoEscuela} 
+                  style={style.image}
+               />
+            </Col>
+            <Col
+               className='mt-4'
+            >
                <Form> 
                   <Form.Group>
                      <Form.Label>Usuario</Form.Label>
@@ -46,7 +97,7 @@ const Loginform = ({
                         )}
                      />
                      <Form.Text 
-                        className='text-muted'
+                        className='textSemiDark'
                      >
                         El nombre de usuario es el mismo que utiliza para iniciar sesion en la maquina.
                      </Form.Text>
@@ -62,15 +113,16 @@ const Loginform = ({
                         )}
                      />
                      <Form.Text 
-                        className='text-muted'
+                        className='textSemiDark'
                      >
                         La contraseña es la misma que utiliza para iniciar sesion en la maquina.
                      </Form.Text>
                   </Form.Group>
                   <Button 
-                     variant='primary' 
+                     variant='success'
                      type='button' 
                      style={style.button} 
+                     className='textLigth'
                      onClick={()=> handleClick(
                      usuario,
                      password,
@@ -82,6 +134,10 @@ const Loginform = ({
                </Form>
             </Col>
             <Col>
+               <Lottie 
+                  animationData={HeaderAnimation}
+                  style={style.lottieAnimation}
+               />
             </Col>
          </Row>
       </Container>

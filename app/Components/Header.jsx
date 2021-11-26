@@ -9,7 +9,7 @@ import {Container,
 import Lottie from 'lottie-react'
 import HeaderAnimation from '../Assets/Header/Header.json'
 import WebFont from 'webfontloader'
-import LogoEscuela from '../Assets/jpg/LogoEPA.jpg'
+import LogoEscuela from '../Assets/jpg/LogoEPAt.png'
 
 const style = {
 
@@ -22,7 +22,7 @@ const style = {
       marginTop: 10,
    },
    header:{
-      backgroundColor: '#f9f9f9',
+      backgroundColor: '#007f43',
    }
 }
 

@@ -6,7 +6,7 @@ import {
 
 const style = {
    footer: {
-      backgroundColor: 'rgb(120,120,120)',
+      backgroundColor: '#007f43',
       position: 'fixed',
       bottom: 0,
    }
@@ -18,7 +18,8 @@ const Footer = () => {
          fluid
       >
          <Row>
-            <Col>
+            <Col
+            >
                <h5>E.P.A. Nº 9 "Dr. Horacio de la Mota"</h5>
             </Col>
             <Col>

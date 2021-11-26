@@ -1,5 +1,5 @@
-import Header from '../Components/header.jsx'
-import Footer from '../Components/footer.jsx'
+import Header from '../Components/Header.jsx'
+import Footer from '../Components/Footer.jsx'
 import {
    Container, 
    Row

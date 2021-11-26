@@ -10,9 +10,6 @@ module.exports = {
          "secure": false,
          "changeOrigin":true,
       },
-      devMiddleware:{
-      writeToDisk: true
-      }
    },
    entry:['react-hot-loader/patch','./app/index'],
    output: {

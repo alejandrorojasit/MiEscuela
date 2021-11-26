@@ -1,11 +1,11 @@
-import Header from '../Components/header.jsx'
-import Footer from '../Components/footer.jsx'
+import Header from '../Components/Header.jsx'
+import Footer from '../Components/Footer.jsx'
 import {
    Container,
    Col,
    Row
 } from 'react-bootstrap'
-import Menu from '../Components/menu.jsx'
+import Menu from '../Components/Menu.jsx'
 import Ratificacion from '../Components/Ratificacion.jsx'
 
 const RatificacionInscripcionPage = () => {
