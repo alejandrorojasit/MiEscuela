@@ -14,10 +14,12 @@ import Lottie from 'lottie-react'
 import HeaderAnimation from '../Assets/Header/Header.json'
 import WebFont from 'webfontloader'
 import LogoEscuela from '../Assets/jpg/LogoEPAt.png'
+import {colors} from '../Helpers/styleColors'
 
 const style = {
    form: {
       height: '100vh',
+      background:colors.light30,
    },
    button: {
       marginTop: 20,
@@ -36,8 +38,7 @@ const style = {
    headerLogInForm:{
       display:'flex', 
       justifyContent:'center',
-      background:'#007f43',
-      color:'#152a20',
+      background:colors.base,
       width:'100vw',
       padding:10,
       fontFamily:'Schoolbell',
@@ -97,7 +98,6 @@ const Loginform = ({
                         )}
                      />
                      <Form.Text 
-                        className='textSemiDark'
                      >
                         El nombre de usuario es el mismo que utiliza para iniciar sesion en la maquina.
                      </Form.Text>
@@ -113,7 +113,6 @@ const Loginform = ({
                         )}
                      />
                      <Form.Text 
-                        className='textSemiDark'
                      >
                         La contraseña es la misma que utiliza para iniciar sesion en la maquina.
                      </Form.Text>
