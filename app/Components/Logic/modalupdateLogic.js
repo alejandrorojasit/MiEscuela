@@ -7,9 +7,7 @@ export const handleShow = (setShowModalUpdate) => {
 export const handleClickAccept = (updatedData,token,apiUrl,id,dataRegistro,setAlumnoEditModal,setShowModalUpdate,setSwitchEdit,setSelectedAlumnoForEdit) => {
    postFetchUpdateAlumno(token,updatedData,apiUrl,id,dataRegistro)
    setShowModalUpdate(false)
-   setAlumnoEditModal(false)
    setSwitchEdit(true)
-   setSelectedAlumnoForEdit('')
 }
 
 export const createDataRegistro = (dataAlumno,updatedData,usuario) => {

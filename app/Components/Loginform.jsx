@@ -19,13 +19,13 @@ import {colors} from '../Helpers/styleColors'
 const style = {
    form: {
       height: '100vh',
-      background:colors.light30,
+      background:colors.background,
+      color:colors.darken
    },
    button: {
       marginTop: 20,
    },
       lottieAnimation : {
-      height: 350,
    },
    titleFont : {
       fontFamily: 'Schoolbell',
@@ -33,15 +33,15 @@ const style = {
       marginTop: 10,
    },
    image:{
-      height:350,
    },
    headerLogInForm:{
       display:'flex', 
       justifyContent:'center',
-      background:colors.base,
+      background:colors.analogus[0],
       width:'100vw',
       padding:10,
       fontFamily:'Schoolbell',
+      color:colors.darken
    }
 }
 
@@ -75,12 +75,13 @@ const Loginform = ({
                style={{marginTop:50}}
          >
             <Col
-               className='d-flex justify-content-center'
+               style={{display:'flex',height:'25vw',alignContent:'center',justifyContent:'center',margin:'auto'}}
             >
                <Image 
                   className='p-2'
                   src={LogoEscuela} 
                   style={style.image}
+                  fluid
                />
             </Col>
             <Col
@@ -90,7 +91,7 @@ const Loginform = ({
                   <Form.Group>
                      <Form.Label>Usuario</Form.Label>
                      <Form.Control 
-                        placeholder='Ingerse Usuario' 
+                        placeholder='Ingrese Usuario' 
                         type='text' 
                         onChange={(event) => handleChangeUser(
                         event,
@@ -105,7 +106,7 @@ const Loginform = ({
                   <Form.Group>
                      <Form.Label>Contraseña</Form.Label>
                      <Form.Control 
-                        placeholder='Ingerse Contraseña' 
+                        placeholder='Ingrese Contraseña' 
                         type='password' 
                         onChange={(event) => handleChangePassowrd(
                         event,
@@ -118,7 +119,7 @@ const Loginform = ({
                      </Form.Text>
                   </Form.Group>
                   <Button 
-                     variant='success'
+                     variant='outline-success'
                      type='button' 
                      style={style.button} 
                      className='textLigth'
@@ -132,7 +133,9 @@ const Loginform = ({
                   </Button>
                </Form>
             </Col>
-            <Col>
+            <Col
+               style={{display:'flex',margin:'auto',height:'25vw',justifyContent:'center'}}
+            >
                <Lottie 
                   animationData={HeaderAnimation}
                   style={style.lottieAnimation}

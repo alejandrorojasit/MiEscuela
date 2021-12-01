@@ -16,6 +16,7 @@ import {
 
 import {FaUserEdit} from 'react-icons/fa'
 
+import {colors} from '../Helpers/styleColors.js'
 
 const TableAlumnosMatricula = ({
    isFiltredStage2,
@@ -30,7 +31,8 @@ const TableAlumnosMatricula = ({
    return ( 
       <>
          <Row 
-            className='m-2 p-1 border border-primary'
+            className='m-2 p-1 border border-success'
+            style={{color:colors.darken}}
          >
             <Col 
                className='d-flex justify-content-center'
@@ -51,15 +53,19 @@ const TableAlumnosMatricula = ({
          <Row 
             style={{marginTop:10}}
          >
-            <Col>
+            <Col
+            >
                <Table 
                   bordered 
                   striped 
                   hover 
                   size="sm"
+            style={{color:colors.darken}}
                >
-                  <thead>
-                     <tr>
+                  <thead
+                  >
+                     <tr
+                     >
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
@@ -80,6 +86,7 @@ const TableAlumnosMatricula = ({
                                  >
                                     <th>
                                        <Button 
+                                          variant='outline-success'
                                           onClick={()=> handleEdit(
                                              dataMap._id,
                                              setAlumnoEditModal,
@@ -111,6 +118,7 @@ const TableAlumnosMatricula = ({
                                  >
                                     <th>
                                        <Button 
+                                          variant='outline-success'
                                           onClick={()=> handleEdit(
                                              dataMap._id,
                                              setAlumnoEditModal,

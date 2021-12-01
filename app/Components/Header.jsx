@@ -10,6 +10,7 @@ import Lottie from 'lottie-react'
 import HeaderAnimation from '../Assets/Header/Header.json'
 import WebFont from 'webfontloader'
 import LogoEscuela from '../Assets/jpg/LogoEPAt.png'
+import {colors} from '../Helpers/styleColors'
 
 const style = {
 
@@ -20,9 +21,10 @@ const style = {
       fontFamily: 'Schoolbell',
       fontSize: 50,
       marginTop: 10,
+      color:colors.darken
    },
    header:{
-      backgroundColor: '#007f43',
+      backgroundColor: colors.analogus[0],
    }
 }
 

@@ -6,6 +6,8 @@ import LoadingSpinner from './LoadingSpinner.jsx'
 
 import {handleClickLimpiarFiltrosStage1} from './Logic/matriculaLogic.js'
 
+import {colors} from '../Helpers/styleColors'
+
 const ModalPdf = ({
    selectedItems,
    showModalPdf,
@@ -50,7 +52,8 @@ const ModalPdf = ({
             closeButton
          >
          </Modal.Header>
-         <Modal.Body>
+         <Modal.Body
+         >
             {isRender ? 
                <LoadingSpinner/>
                :

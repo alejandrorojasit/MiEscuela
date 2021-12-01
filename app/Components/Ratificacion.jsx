@@ -14,7 +14,7 @@ import {getMatricula} from '../Hooks/getFetch.js'
 import useAuth from '../Context/Store/useAuth.jsx'
 
 const Ratificacion = () => { 
-   const [grado,setGrado] = useState('Grado')
+   const [grado,setGrado] = useState('Grado/Año')
    const [isFiltredStage1,setIsFiltredStage1] = useState(false)
    const [filtredDatosAlumnoStage1,setFiltredDatosAlumnoStage1] = useState([])
    const [isFiltredStage2,setIsFiltredStage2] = useState(false)

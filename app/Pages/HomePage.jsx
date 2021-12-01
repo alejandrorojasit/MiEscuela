@@ -5,8 +5,8 @@ import {
 
 import Header from '../Components/Header.jsx'
 import Menu from '../Components/Menu.jsx'
-import Footer from '../Components/Footer.jsx'
 
+import { colors } from '../Helpers/styleColors.js'
 
 
 
@@ -14,6 +14,7 @@ const HomePage = () => {
    return (
       <Container 
          fluid
+         style={{color:colors.darken,background:colors.background}} 
       >
          <Row>
             <Header/>
@@ -22,7 +23,6 @@ const HomePage = () => {
             <Menu/>
          </Row>
          <Row> 
-            <Footer/>
          </Row>
       </Container>
    )

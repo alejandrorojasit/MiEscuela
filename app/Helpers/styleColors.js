@@ -1,15 +1,21 @@
 export const colors = {
-   base: '#6ad4a1',
-   alert: '#d2d46a',
-   warning: '#d46a9d',
-   success: '#6c6ad4',
-   monochromatic: {
-      highDark:'#152a20',
-      highLight:'#7ffec1',
-      dark:'#2a5440',
-      light:'#55a981',
-      middle:'#3f7f60',
-   },
-   complementary:'#d46a9d',
-   light30:'#e1f6ec'
+   base: '#00a859',
+   alert: '#a3a800',
+   warning: '#a8004f',
+   success: '#a500a8',
+   lighten:'#0fff8e',
+   darken:'#004223',
+   greyscale:'#545454',
+   saturate:'#00a859',
+   desaturate:'#119758',
+   brighten:'#33db8c',
+   background:'#e5ffff',
+   header:'#a8ffd6',
+   analogus:[
+      '#00a816',
+      '#00a837',
+      '#00a859',
+      '#00a87b',
+      '#00a89c',
+   ]
 }

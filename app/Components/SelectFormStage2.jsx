@@ -11,6 +11,8 @@ import {
    handleEdad3006
 } from './Logic/matriculaLogic'
 
+import {colors} from '../Helpers/styleColors.js'
+
 const SelectFormStage2 = ({
    datosAlumno,
    setIsFiltredStage1,
@@ -22,16 +24,19 @@ const SelectFormStage2 = ({
    matriculaRef
 }) => { 
    return ( 
-      <Form>
+      <Form
+                  style={{color:colors.darken}}
+      >
          <Form.Group>
             <Row 
-               className='m-2 p-1 border border-primary pb-3'
+               className='m-2 p-1 border border-success pb-3'
             >
                <Col>
                   <Form.Label>
                      Filtrar por Apellido
                   </Form.Label>
                   <Form.Control 
+                  style={{color:colors.darken}}
                      type='text' 
                      placeholder='Ingrese Apellido' 
                      onChange={
@@ -53,6 +58,7 @@ const SelectFormStage2 = ({
                      Filtrar por Nombre
                   </Form.Label>
                   <Form.Control 
+                  style={{color:colors.darken}}
                      type='text' 
                      placeholder='Ingrese Nombre' 
                      onChange={
@@ -74,6 +80,7 @@ const SelectFormStage2 = ({
                      Filtrar por Edad (Real)
                   </Form.Label>
                   <Form.Control 
+                  style={{color:colors.darken}}
                      type='text' 
                      placeholder='Seleccione Edad' 
                      onChange={
@@ -95,6 +102,7 @@ const SelectFormStage2 = ({
                      Filtrar por Edad (al 30/06)
                   </Form.Label>
                   <Form.Control 
+                  style={{color:colors.darken}}
                      type='text' 
                      placeholder='Seleccione Edad' 
                      onChange={(event) => handleEdad3006(

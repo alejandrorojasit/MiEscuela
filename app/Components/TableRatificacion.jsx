@@ -19,7 +19,7 @@ const TableRatificacion = ({
    return ( 
       <> 
          <Row 
-            className='m-2 p-1 border border-primary'
+            className='m-2 p-1 border border-success'
          >
             <Col 
                className='d-flex justify-content-center'

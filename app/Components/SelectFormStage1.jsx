@@ -16,6 +16,8 @@ import {
 } 
 from './Logic/matriculaLogic'
 
+import {colors} from '../Helpers/styleColors.js'
+
 const SelectFormStage1 = ({
    nivelState,
    gradoState,
@@ -35,12 +37,14 @@ const SelectFormStage1 = ({
    const {grado,nivel,division} = context.stateHardCodeData.hardCodeData
 
    return ( 
-      <Form>
+      <Form
+      >
          <Row 
-            className='m-2 border border-primary p-1 pt-3 pb-3'
+            className='m-2 border border-success p-1 pt-3 pb-3'
          >
             <Col>
-               <Form.Select 
+               <Form.Select
+                  style={{color:colors.darken}}
                   aria-label='Nivel' 
                   onChange={(event) => handleNivelChange(
                      event,
@@ -61,6 +65,7 @@ const SelectFormStage1 = ({
             </Col>
             <Col>
                <Form.Select 
+                  style={{color:colors.darken}}
                   aria-label='Grado/Año' 
                   onChange={(event) => handleGradoChange(
                      event,
@@ -81,6 +86,7 @@ const SelectFormStage1 = ({
             </Col>
             <Col>
                <Form.Select 
+                  style={{color:colors.darken}}
                   aria-label='Division' 
                   onChange={(event) => handleDivisionChange(
                      event,
@@ -107,7 +113,7 @@ const SelectFormStage1 = ({
                >
                   <Button 
                      className='m-2'
-                     variant='outline-primary'
+                     variant='outline-success'
                      size='sm' 
                      onClick={()=> handleClickApplyFilter(
                         nivelState,
@@ -121,7 +127,7 @@ const SelectFormStage1 = ({
                   </Button>
                   <Button 
                      className='m-2' 
-                     variant='outline-primary' 
+                     variant='outline-success' 
                      size='sm' 
                      onClick={()=> handleClickLimpiarFiltrosStage1(
                         setIsFiltredStage1,

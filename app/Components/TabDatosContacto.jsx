@@ -20,6 +20,9 @@ const TabDatosContacto = ({
    updatedData,
    setShowModalUpdate,
    setUpdatedData,
+   context,
+   selectedAlumnoForEdit,
+   setDataAlumno,
 }) => { 
    return ( 
       <>
@@ -162,15 +165,17 @@ const TabDatosContacto = ({
             >
                {switchEdit ?
                   <Button
-                     variant='outline-primary'
+                     variant='outline-success'
                      size='sm'
                      onClick={() => handleSwitchEdit(setSwitchEdit)}
                   >Editar</Button>
                   :
                   <Button
-                     variant='outline-primary'
+                     variant='outline-success'
                      size='sm'
-                     onClick={() => handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)}
+                     onClick={() => {
+                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
+                           }}
                   >Actualizar</Button>
                }
             </Col>

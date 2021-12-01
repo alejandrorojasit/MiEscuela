@@ -6,6 +6,8 @@ import {
 
 import LoadingSpinner from './LoadingSpinner.jsx'
 
+import {colors} from '../Helpers/styleColors'
+
 const handleClickModal = (
    ratificacionesRef,
    setSelectedItems,
@@ -24,7 +26,6 @@ const handleClickModal = (
          setSelectedItems(selected)
       }
    }
-   console.log(selected)
    setIsRender(true)
    setShowModalItemsToPrint(false)
    setShowModalPdf(true)
@@ -49,10 +50,12 @@ const ModalSelectItemsToPrint = ({
          show={showModalItemsToPrint} 
          onHide={handleClose}
       >
-         <Modal.Header>
+         <Modal.Header
+         >
             <Modal.Title>Seleccionar que datos desea imprimir</Modal.Title>
          </Modal.Header>
-         <Modal.Body>
+         <Modal.Body
+         >
             {isRender ? 
                <LoadingSpinner/>
                :
@@ -61,8 +64,10 @@ const ModalSelectItemsToPrint = ({
                      className='form-check' 
                      key={dato.label} 
                      ref={(element) => {ratificacionesRef.current[index] = element}}
+
                   >
                      <input 
+                        style={{backgroundColor:colors.darken}}
                         className='form-check-input' 
                         type='checkbox' 
                         value='' 
@@ -77,9 +82,10 @@ const ModalSelectItemsToPrint = ({
                   </div>
                   )}
          </Modal.Body>
-         <Modal.Footer>
+         <Modal.Footer
+         >
             <Button 
-               variant='outline-primary' 
+               variant='outline-success' 
                size='sm'
                onClick={()=> handleClickModal(
                   ratificacionesRef,

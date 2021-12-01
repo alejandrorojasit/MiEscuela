@@ -1,6 +1,7 @@
 import {Modal,Form,FormControl,Button,Col} from 'react-bootstrap'
 import {handleClose,handleChange,handleClickAñadir} from './Logic/modalEditObservacionesLogic'
 import {updateObservacionesUrl} from '../Helpers/Urls.js'
+import { handleGetDataAlumno } from './Logic/matriculaLogic'
 
 const modalEditObservaciones = ({
    showModalEditObservaciones,
@@ -9,6 +10,8 @@ const modalEditObservaciones = ({
    nuevaObservacionState,
    dataAlumno,
    context,
+   selectedAlumnoForEdit,
+   setDataAlumno,
 }) => {
 
    return (
@@ -39,7 +42,15 @@ const modalEditObservaciones = ({
                className='mt-2'
                variant='outline-primary'
                size='sm'
-               onClick={() =>handleClickAñadir (nuevaObservacionState,dataAlumno._id,context,updateObservacionesUrl)}
+               onClick={() => {
+                  handleClickAñadir (nuevaObservacionState,dataAlumno._id,context,updateObservacionesUrl)
+                  handleGetDataAlumno(
+                     context,
+                     selectedAlumnoForEdit,
+                     setDataAlumno,
+                  )
+                  setShowModalEditObservaciones(false)
+               }}
             >
                Añadir
             </Button>

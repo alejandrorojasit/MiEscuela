@@ -26,6 +26,8 @@ import TabRegistroModificaciones from './TabRegistroModificaciones.jsx'
 
 import useAuth from '../Context/Store/useAuth.jsx'
 
+import {colors} from '../Helpers/styleColors.js'
+
 const ModalEditAlumno = ({
    alumnoEditModal,
    setAlumnoEditModal,
@@ -38,6 +40,7 @@ const ModalEditAlumno = ({
    setSwitchEdit,
    showModalEditObservaciones,
    setShowModalEditObservaciones,
+   selectedAlumnoForEdit,
 }) => { 
 
    const [fechaNacimiento,setFechaNacimiento] = useState()
@@ -53,6 +56,7 @@ const ModalEditAlumno = ({
 
    return ( 
       <Modal 
+         style={{color:colors.darken}}
          fullscreen={true}
          show={alumnoEditModal} 
          onHide={()=> handleShow(setAlumnoEditModal,setDataAlumno,setSelectedAlumnoForEdit)}
@@ -68,8 +72,10 @@ const ModalEditAlumno = ({
                </h4>      
             </Col>
          </Modal.Header>
-         <Modal.Body>
-            <Tabs>
+         <Modal.Body
+         >
+            <Tabs
+            >
                <Tab
                   eventKey='Datos Generales'
                   title='Datos Generales'
@@ -84,6 +90,8 @@ const ModalEditAlumno = ({
                      setShowModalUpdate={setShowModalUpdate}
                      setFechaNacimiento={setFechaNacimiento}
                      context={context}
+                     setDataAlumno={setDataAlumno}
+                     selectedAlumnoForEdit={selectedAlumnoForEdit}
                   />
                </Tab>
                <Tab
@@ -100,6 +108,8 @@ const ModalEditAlumno = ({
                      fechaNacimiento={fechaNacimiento}
                      setFechaNacimiento={setFechaNacimiento}
                      context={context}
+                     setDataAlumno={setDataAlumno}
+                     selectedAlumnoForEdit={selectedAlumnoForEdit}
 
                   />
                </Tab>
@@ -117,6 +127,8 @@ const ModalEditAlumno = ({
                      setShowModalUpdate={setShowModalUpdate}
                      setFechaNacimiento={setFechaNacimiento}
                      context={context}
+                     setDataAlumno={setDataAlumno}
+                     selectedAlumnoForEdit={selectedAlumnoForEdit}
                   />
                </Tab>
                <Tab
@@ -139,7 +151,10 @@ const ModalEditAlumno = ({
                </Tab>
             </Tabs>
          </Modal.Body>
-      </Modal>
+         <Modal.Footer>
+
+         </Modal.Footer>
+               </Modal>
    )
 }
 

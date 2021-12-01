@@ -38,6 +38,8 @@ const TabDatosGenerales = ({
    updatedData,
    setFechaNacimiento,
    context,
+   setDataAlumno,
+   selectedAlumnoForEdit,
 }) => { 
 
    registerLocale('es',es)
@@ -383,15 +385,17 @@ const TabDatosGenerales = ({
             >
                {switchEdit ?
                   <Button
-                     variant='outline-primary'
+                     variant='outline-success'
                      size='sm'
                      onClick={() => handleSwitchEdit(setSwitchEdit)}
                   >Editar</Button>
                   :
                   <Button
-                     variant='outline-primary'
+                     variant='outline-success'
                      size='sm'
-                     onClick={() => handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)}
+                     onClick={() => {
+                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
+                     }}
                   >Actualizar</Button>
                }
             </Col>

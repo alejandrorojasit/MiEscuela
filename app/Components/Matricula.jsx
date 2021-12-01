@@ -74,6 +74,8 @@ const Matricula = () => {
                   setSwitchEdit={setSwitchEdit}
                   showModalEditObservaciones={showModalEditObservaciones}
                   setShowModalEditObservaciones={setShowModalEditObservaciones}
+                  setDataAlumno={setDataAlumno}
+                  selectedAlumnoForEdit={selectedAlumnoForEdit}
                />
                <ModalEditObservaciones
                   setShowModalEditObservaciones={setShowModalEditObservaciones}
@@ -81,6 +83,8 @@ const Matricula = () => {
                   setNuevaObservacion={setNuevaObservacion}
                   nuevaObservacionState={nuevaObservacionState}
                   dataAlumno={dataAlumno}
+                  setDataAlumno={setDataAlumno}
+                  selectedAlumnoForEdit={selectedAlumnoForEdit}
                   context={context}
                />
                <ModalUpdate 
@@ -94,6 +98,8 @@ const Matricula = () => {
                   switchEdit={switchEdit}
                   setSwitchEdit={setSwitchEdit}
                   setSelectedAlumnoForEdit={setSelectedAlumnoForEdit}
+                  setDataAlumno={setDataAlumno}
+                  selectedAlumnoForEdit={selectedAlumnoForEdit}
                />
                <SelectFormStage1
                   context={context}

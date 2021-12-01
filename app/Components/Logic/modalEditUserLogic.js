@@ -30,7 +30,6 @@ export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,set
          }
       }
       ) 
-      handleClose()
    }
 
 

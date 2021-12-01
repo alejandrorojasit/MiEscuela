@@ -6,6 +6,7 @@ const usersSchema = new Schema({
    usuario: {type: String,require:true},
    password: {type: String, require:true},
    role:{type:String,require:true},
+   permisions:{type:Object,require:true}
 },{collection: 'Users'});
 
 module.exports = mongoose.model('Users', usersSchema)

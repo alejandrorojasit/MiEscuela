@@ -12,9 +12,13 @@ import {
    createDataRegistro,
 } from './Logic/modalupdateLogic.js'
 
+import {handleGetDataAlumno} from './Logic/matriculaLogic'
+
 import useAuth from '../Context/Store/useAuth.jsx'
 
 import {updateAlumnoUrl} from '../Helpers/Urls'
+
+import {colors} from '../Helpers/styleColors'
 
 const ModalUpdate = ({
    showModalUpdate,
@@ -25,6 +29,8 @@ const ModalUpdate = ({
    setAlumnoEditModal,
    setSwitchEdit,
    setSelectedAlumnoForEdit,
+   selectedAlumnoForEdit,
+   setDataAlumno,
 }) => { 
 
 
@@ -37,10 +43,12 @@ let dataRegistro = createDataRegistro(dataAlumno,updatedData,context.stateUser.u
             show={showModalUpdate}
             onHide={() => handleShow(setShowModalUpdate)}
          >
-         <Modal.Header>
+            <Modal.Header
+            >
             <h6>Datos a actualizar</h6>
          </Modal.Header>  
-            <Modal.Body>
+            <Modal.Body
+            >
                <Table striped bordered hover>
                   <thead>
                      <tr>
@@ -64,21 +72,31 @@ let dataRegistro = createDataRegistro(dataAlumno,updatedData,context.stateUser.u
                   </tbody>
                </Table>
             </Modal.Body> 
-            <Modal.Footer>
+            <Modal.Footer
+            >
                <Row
                   className='mt-2'
                >
                   <Col>
                      <Button 
-                        variant='outline-primary'
-                        onClick={() => handleClickAccept(updatedData,context.stateUser.token,updateAlumnoUrl,dataAlumno._id,dataRegistro,setAlumnoEditModal,setShowModalUpdate,setSwitchEdit,setSelectedAlumnoForEdit)}
+                        variant='outline-success'
+                        size='sm'
+                        onClick={() => {
+                           handleClickAccept(updatedData,context.stateUser.token,updateAlumnoUrl,dataAlumno._id,dataRegistro,setAlumnoEditModal,setShowModalUpdate,setSwitchEdit,setSelectedAlumnoForEdit)
+                           handleGetDataAlumno(
+                              context,
+                              selectedAlumnoForEdit,
+                              setDataAlumno,
+                           )
+                        }}
                      >
                         Aceptar
                      </Button>
                   </Col>
                   <Col>
                      <Button
-                        variant='outline-primary'
+                        variant='outline-success'
+                        size='sm'
                         onClick={() => handleShow(setShowModalUpdate)}
                      >
                         Cancelar

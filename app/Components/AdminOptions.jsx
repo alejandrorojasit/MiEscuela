@@ -46,7 +46,8 @@ const AdminOptions = () => {
                className='mt-3'
             >
                <Button 
-                  variant='primary' 
+                  variant='outline-success' 
+                  size='sm'
                   onClick={() => setUsuariosModal(true) }
                >
                   Usuarios

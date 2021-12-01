@@ -6,7 +6,7 @@ export const deleteFetchDeleteUser = async (
    usuario,
    apiUrl
 ) => {
-   const url= `http://${baseUrl}:3000${apiUrl}/${usuario}`
+   const url= `http://${baseUrl}:3000/${apiUrl}/${usuario}`
    const config = {
       headers: {                    
          "Accept": "application/json",                    

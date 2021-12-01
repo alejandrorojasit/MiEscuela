@@ -21,6 +21,8 @@ const TabDatosSalud = ({
    setShowModalUpdate,
    setUpdatedData,
    context,
+   setDataAlumno,
+   selectedAlumnoForEdit, 
 }) => { 
 
    const {vacunas}  = context.stateHardCodeData.hardCodeData
@@ -374,15 +376,17 @@ const TabDatosSalud = ({
             >
                {switchEdit ?
                   <Button
-                     variant='outline-primary'
+                     variant='outline-success'
                      size='sm'
                      onClick={() => handleSwitchEdit(setSwitchEdit)}
                   >Editar</Button>
                   :
                   <Button
-                     variant='outline-primary'
+                     variant='outline-success'
                      size='sm'
-                     onClick={() => handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)}
+                     onClick={() => {
+                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
+                     }}
                   >Actualizar</Button>
                }
             </Col>
@@ -390,7 +394,7 @@ const TabDatosSalud = ({
                className='mt-2 d-flex justify-content-end'
             >
                <Button
-                  variant='outline-primary'
+                  variant='outline-success'
                   size='sm'
                >Añadir Registro</Button>
             </Col>

@@ -18,6 +18,8 @@ import {
    handleClickDelete,
 } from './Logic/modalEditUserLogic' 
 
+import {userDeleteUrl} from '../Helpers/Urls'
+
 const ModalEditUser = ({
    userEditModal,
    setUserEditModal,
@@ -33,14 +35,16 @@ const ModalEditUser = ({
 
    const handleClickAccept = () => {
    }
-
    return ( 
       <Modal 
          show={userEditModal} 
          onHide={()=> handleClose(setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal)} 
-         onShow={()=> handleShow(setDataUser,context,selectedUser)}>
+         onShow={()=> handleShow(setDataUser,context,selectedUser)}
+         style={{display:'flex'}}
+      >
          <Modal.Header 
             closeButton
+            className='d-flex justify-content-center'
          >
             <h3>Editar Usuario</h3>
          </Modal.Header>
@@ -117,7 +121,7 @@ const ModalEditUser = ({
                               >
                                  {dataUser.role}
                               </option>
-                              {Role.map((dataMap)=> 
+                              {context.stateHardCodeData.hardCodeData.role.map((dataMap)=> 
                                  dataMap !== dataUser.role ? 
                                     <option 
                                        key={dataMap} 
@@ -145,7 +149,8 @@ const ModalEditUser = ({
                      className='d-flex justify-content-center'
                   >
                      <Button 
-                        variant='primary' 
+                        variant='outline-success' 
+                        size='sm'
                         onClick={()=> handleClickDelete(context,selectedUser,userDeleteUrl)}
                      >
                         Eliminar Usuario
@@ -158,7 +163,8 @@ const ModalEditUser = ({
                      className='d-flex justify-content-center'
                   >
                      <Button 
-                        variant='primary' 
+                        variant='outline-success' 
+                        size='sm'
                         onClick={()=> handleClickAccept()}
                      >
                         Aceptar cambios

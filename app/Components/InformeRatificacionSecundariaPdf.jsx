@@ -27,13 +27,14 @@ const styles = StyleSheet.create ({
    header:{
       width:'95vw',
       height:'8vh',
-      textAlign:'center',
       fontSize:14,
       flexDirection:'row',
       fontStyle:'bold',
+      justifyContent:'space-around',
    },
    headerText:{
       marginTop:20,
+      marginLeft:35,
    },
    headerTextUnderline:{
       marginTop:5,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create ({
       marginTop:10,
       fontSize:13,
       width:'95vw',
-      height:'17vh',
+      height:'80vh',
    },
    secondaryDataDirection:{
       margin:3,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create ({
       fontSize:10,
    },
    image:{
-      marginLeft:200,
+      marginTop:10,
       width:60,
       height:60,
    }
@@ -126,20 +127,20 @@ const InformeRatificacionSecundariaPDf = ({
                >
                   <View style={styles.content}>
                      <View style={styles.header}>
-                        <View>
-                           <Text style={styles.headerText}>
+                        <View
+                           style={{marginLeft:110,}}
+                        >  
+                            <Text style={styles.headerText}>
                               INSCRIPCIÓN CICLO LECTIVO 2022
                            </Text>
                            <Text style={styles.headerTextUnderline}>
                               ESCUELA PÚBLICA AUTOGESTIONADA Nº 9 "DR. HORACIO DE LA MOTA"
                            </Text>
                         </View>
-                        <View>
-                           <Image
+                                                      <Image
                               style={styles.image}
                               src={Logo}
                            />
-                        </View>
                      </View>
                      <View style={styles.princialData}>
                         <View style={styles.principalDataDirection}>

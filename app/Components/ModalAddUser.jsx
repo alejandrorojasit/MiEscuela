@@ -14,6 +14,8 @@ import {
 
 import useAuth from '../Context/Store/useAuth.jsx'
 
+import {colors} from '../Helpers/styleColors'
+
 import {
    handleClickRole,
    handleChangeUser,
@@ -40,29 +42,42 @@ const ModalAddUser = ({
 
    const context = useAuth()
 
+   console.log(context)
    const handleClose = () => setAddUserModal(false)
    const [usuario,setUsuario] = useState('')
    const [password,setPassword] = useState('')
    const [role,setRole] = useState('Seleccione tipo de usuario')
 
    return ( 
-      <Modal 
-         show={addUserModal} 
-         onHide={handleClose}
-      >
-         <Modal.Header 
-            closeButton
+         <Modal 
+            show={addUserModal} 
+            onHide={handleClose}
+            size='lg'
          >
-            <h3> 
-               Añadir usuaro nuevo
-            </h3>
-         </Modal.Header>
-         <Modal.Body>
-            <Container 
-               style={style.form} 
-               fluid
+            <Modal.Header 
+               closeButton
             >
-               <Col>
+               <Container
+                  fluid
+               >
+                <Row
+               >
+                  <Col className='d-flex justify-content-center'>
+               <h3> 
+                  Añadir usuaro nuevo
+               </h3>         
+                  </Col>
+               </Row>
+               </Container>
+                           </Modal.Header>
+            <Modal.Body
+            >
+               <Container
+                  fluid
+               >
+               <Row>
+               <Col
+               >
                   <Form> 
                      <Form.Group>
                         <Form.Label>Usuario</Form.Label>
@@ -89,38 +104,60 @@ const ModalAddUser = ({
                         >
                            Ingrese la contraseña.
                         </Form.Text>
+                        <Form.Select 
+                  className='mt-2'
+                  style={{color:colors.darken}}
+                  aria-label='Puesto Trabajo' 
+               >
+                  <option>Puesto Trabajo</option>
+                  {context?.stateHardCodeData?.hardCodeData?.puestoTrabajo?.map((dataMap)=>
+                  <option 
+                     value={dataMap} 
+                     key={dataMap}
+                  >
+                     {dataMap}
+                  </option>
+                  )}
+               </Form.Select>
                      </Form.Group>
-                     <Row>
-                        <DropdownButton 
-                           title={role}
-                           as={ButtonGroup}
-                        >    
-                           {Role.map(
-                              (item) =>
-                                 <Dropdown.Item 
-                                    key={item} 
-                                    onClick={ ()=> handleClickRole(item,setRole)}
-                                 >
-                                    {item}
-                                 </Dropdown.Item>
-                           )}
-                        </DropdownButton>
-                     </Row>
-                     <Row>
-                        <Button 
-                           variant='primary' 
-                           type='button' 
-                           style={style.button} 
-                           onClick={ ()=> handleClick(context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal)}
-                        >
-                           Añadir
-                        </Button> 
-                     </Row>
                   </Form>
                </Col>
-            </Container>
-         </Modal.Body>
-      </Modal>
+               <Col
+               >
+                  <h6>Privilegios:</h6>
+                  {
+                     context?.stateHardCodeData?.hardCodeData?.permisosUsuario?.map((dataMap)=> 
+                        <Form.Check
+                           type='checkbox'
+                           label={dataMap}
+                        />
+                     )
+                  }
+                  <h6>Generar Informes:</h6>
+                  {
+                     context?.stateHardCodeData?.hardCodeData?.generarReportes?.map((dataMap)=>
+                         <Form.Check
+                           type='checkbox'
+                           label={dataMap}
+                        />
+                     )
+                  }
+               </Col>
+               </Row>
+               </Container>
+            </Modal.Body>
+            <Modal.Footer>
+               <Button 
+                  variant='outline-success' 
+                  size='sm'
+                  type='button' 
+                  style={style.button} 
+                  onClick={ ()=> handleClick(context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal)}
+               >
+                  Añadir
+               </Button> 
+            </Modal.Footer>
+         </Modal>
    )
 }
 

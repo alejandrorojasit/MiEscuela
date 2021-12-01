@@ -9,6 +9,8 @@ import {
    handleAcceptModel,
 } from './Logic/ratificacionLogic'
 
+import {colors} from '../Helpers/styleColors'
+
 const ModalModelPdfSelecion = ({
    showModalPdfSelection,
    setShowModalPdfSelection,
@@ -25,13 +27,15 @@ const ModalModelPdfSelecion = ({
       <Modal 
          show={showModalPdfSelection} 
          onHide={handleClose}
+         style={{color:colors.darken}}
       >
          <Modal.Header 
             closeButton
          >
          <h6>Seleccione modelo de PDF</h6>
          </Modal.Header>
-         <Modal.Body>
+         <Modal.Body
+         >
             <Form.Select 
                   aria-label='Modelo' 
                   onChange={(event) => handleChangeModel(
@@ -50,9 +54,10 @@ const ModalModelPdfSelecion = ({
                   )}
                </Form.Select>
          </Modal.Body>
-         <Modal.Footer>
+         <Modal.Footer
+         >
             <Button 
-               variant='outline-primary'
+               variant='outline-success'
                size='sm'
                onClick={() => {handleAcceptModel(setShowModalPdfSelection,setShowModalItemsToPrint)}}
             >

@@ -3,6 +3,8 @@ import {
    Table,
 } from 'react-bootstrap'
 
+import {colors} from '../Helpers/styleColors.js'
+
 const TabRegistroModificaciones = ({
    dataAlumno,
 }) => { 
@@ -13,6 +15,7 @@ const TabRegistroModificaciones = ({
             striped
             bordered
             hover
+            style={{color:colors.darken}}
          >
             <thead>
                <tr>

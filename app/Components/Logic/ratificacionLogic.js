@@ -45,7 +45,7 @@ export const handleDelete = (dni,setFiltredDatosAlumnoStage1,filtredDatosAlumnoS
    const dataAlumnosSinFiltrar = filtredDatosAlumnoStage1
    let filtrado = []
    for (var i = 0; i < dataAlumnosSinFiltrar.length; i++){
-      if(dataAlumnosSinFiltrar[i].N_DNI_ALUMNO !== dni){
+      if(dataAlumnosSinFiltrar[i].nDniAlumno !== dni){
          filtrado = [...filtrado,dataAlumnosSinFiltrar[i]]
       }
    }
@@ -58,7 +58,7 @@ export const conditionalButtonReder = (selectedItems,filtredDatosAlumnoStage1,se
          return null
       case filtredDatosAlumnoStage1.length > 0 :
          return (<Button 
-            variant='outline-primary' 
+            variant='outline-success' 
             size='sm'
             onClick={()=> setShowModalPdfSelection(true)}
          >Generar Informe</Button>

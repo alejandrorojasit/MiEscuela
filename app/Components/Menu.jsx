@@ -10,6 +10,7 @@ import {logoutUser} from '../Context/Actions/autentication.action.js'
 import {DecodeToken} from './Logic/tokenhandler'
 
 import {Link} from 'react-router-dom'
+import {colors} from '../Helpers/styleColors.js'
 
 const Menu = () => {
 
@@ -17,7 +18,7 @@ const Menu = () => {
    return (
       <Navbar 
          variant='dark'
-         style={{background:'#000000'}}
+         style={{background:colors.darken}} 
       >
          <Navbar.Toggle 
             aria-controls="basic-navbar-nav" 

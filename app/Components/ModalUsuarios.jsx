@@ -18,6 +18,8 @@ import {
    upDateUsers,
 } from './Logic/modalUsuariosLogic'
 
+import {colors} from '../Helpers/styleColors'
+
 const ModalUsuarios = ({
    usuariosModal,
    setUsuariosModal,
@@ -52,6 +54,7 @@ const ModalUsuarios = ({
                   striped 
                   hover 
                   size="sm"
+                  style={{color:colors.darken}}
                >
                   <thead>
                      <tr>
@@ -68,6 +71,7 @@ const ModalUsuarios = ({
                            >
                               <th>
                                  <Button 
+                                    variant='outline-success'
                                     onClick={()=> handleEdit(
                                        dataMap,
                                        userEditModal,
@@ -89,6 +93,8 @@ const ModalUsuarios = ({
             </Modal.Body>
          <Modal.Footer>
             <Button 
+               variant='outline-success'
+               size='sm'
                onClick={()=> handleAddUser(setAddUserModal,setUsuariosModal)}
             >
                Nuevo Usuario
