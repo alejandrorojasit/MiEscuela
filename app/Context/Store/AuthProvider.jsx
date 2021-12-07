@@ -42,7 +42,6 @@ const AuthProvider = (props) => {
 
    const [stateUser,dispatch] = useReducer(authReducer,initialState)
    const [stateHardCodeData,dispatchHardCodeData] = useReducer(hardCodeDataReducer,initialHardCodeData)
-
    useEffect( ()=>{
       if(stateUser.token === ''){
          return null

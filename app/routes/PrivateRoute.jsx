@@ -15,7 +15,7 @@ export const AdminRoute = ({children}) => {
       case (stateUser.isAuthenticated === false):
          return <Navigate to='/LogIn'/>
       case (stateUser.isAuthenticated === true):
-         if(DecodeToken(1).usuario.role === 'admin'){
+         if(DecodeToken(1).usuario.role === 'Administrador Informatico'){
          return(
             children 
          )         

@@ -51,14 +51,15 @@ app.delete('/delete/:id',verificarToken,(req,res) => {
    )
 })
 
-app.post('/AddUser', verificarToken,(req,res) => {
+app.post('/addUser', verificarToken,(req,res) => {
    let sendData = new data({
       usuario: req.body.usuario,
       password: bcrypt.hashSync(
          req.body.password, 
          8
       ),
-      role: req.body.role
+      role: req.body.role,
+      permissions: req.body.permissions
    });
    sendData.save(
       (err,data)=>

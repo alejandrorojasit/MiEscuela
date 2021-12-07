@@ -13,7 +13,6 @@ import {Link} from 'react-router-dom'
 import {colors} from '../Helpers/styleColors.js'
 
 const Menu = () => {
-
    const context = useAuth()
    return (
       <Navbar 
@@ -30,25 +29,35 @@ const Menu = () => {
                className="me-auto"
             >
                <Nav.Link >Inicio</Nav.Link>
-               <Nav.Link 
-                  as={Link} 
-                  to='/Matricula'
-               >
-                  Matricula
-               </Nav.Link>
-               <NavDropdown 
+               {
+                  DecodeToken(1).usuario.permissions.leerMatricula || DecodeToken(1).usuario.permissions.editarMatricula ?
+                     <Nav.Link 
+                        as={Link} 
+                        to='/Matricula'
+                     >
+                        Matricula
+                     </Nav.Link>
+                     :
+                     null
+               }
+                              <NavDropdown 
                   title='Generar'
                >
-                  <NavDropdown.Item 
-                     as={Link} 
-                     to='/RatificacionInscripcion'
-                  >
-                     Ratificacion de Inscripcion
-                  </NavDropdown.Item>
+                  {
+                     DecodeToken(1).usuario.permissions.ratificacionInscripcion ?
+                        <NavDropdown.Item 
+                           as={Link} 
+                           to='/RatificacionInscripcion'
+                        >
+                           Ratificacion de Inscripcion
+                        </NavDropdown.Item>
+                        :
+                        null
+                  }
                </NavDropdown>
             </Nav>
             {
-               DecodeToken(1).usuario.role === 'admin' ? 
+               DecodeToken(1).usuario.role === 'Administrador Informatico' ? 
                <Nav>
                   <Nav.Link 
                      as={Link} 

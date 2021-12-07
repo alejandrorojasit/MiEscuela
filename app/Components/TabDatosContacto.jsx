@@ -10,6 +10,8 @@ import {
    handleSwitchEdit,
 } from './Logic/modaleditalumnoLogic.js' 
 
+import { DecodeToken } from './Logic/tokenhandler.js'
+
 const TabDatosContacto = ({
    dataAlumno,
    switchEdit,
@@ -163,20 +165,23 @@ const TabDatosContacto = ({
             <Col
                className='mt-2 d-flex justify-content-end' 
             >
-               {switchEdit ?
-                  <Button
-                     variant='outline-success'
-                     size='sm'
-                     onClick={() => handleSwitchEdit(setSwitchEdit)}
-                  >Editar</Button>
-                  :
-                  <Button
-                     variant='outline-success'
-                     size='sm'
-                     onClick={() => {
-                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
+               {DecodeToken(1).usuario.permissions.editarMatricula ?
+                     switchEdit ?
+                        <Button
+                           variant='outline-success'
+                           size='sm'
+                           onClick={() => handleSwitchEdit(setSwitchEdit)}
+                        >Editar</Button>
+                        :
+                        <Button
+                           variant='outline-success'
+                           size='sm'
+                           onClick={() => {
+                              handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
                            }}
-                  >Actualizar</Button>
+                        >Actualizar</Button>
+                        :
+                     null
                }
             </Col>
          </Row>

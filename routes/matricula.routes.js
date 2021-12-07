@@ -16,9 +16,9 @@ app.post('/Ratificacion',verificarToken,(req,res) => {
    )
 })
 
-app.get('/Activo',verificarToken,(req,res) => {
+app.get('/activo',verificarToken,(req,res) => {
 
-   data.find({estado:'Activo'},
+   data.find({estado:"Activo"},
       (err,data)=>
       res.json(data)
    )

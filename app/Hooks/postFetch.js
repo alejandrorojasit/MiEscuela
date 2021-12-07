@@ -71,6 +71,7 @@ export const postFetchAddUser = async (
    usuario,
    password,
    role,
+   addUserRef,
    apiUrl
 ) => {
    const url= `http://${baseUrl}:3000/${apiUrl}`  
@@ -78,7 +79,8 @@ export const postFetchAddUser = async (
    const dataPost = {
       usuario:usuario,
       password:password,
-      role:role
+      role:role,
+      permissions:addUserRef.current
    }
    const config = {
       headers: {                    

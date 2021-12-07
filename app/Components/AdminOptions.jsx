@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useRef} from 'react'
 
 import {
    Row,
@@ -11,12 +11,20 @@ import ModalUsuarios from './ModalUsuarios.jsx'
 import ModalAddUser from './ModalAddUser.jsx'
 import ModalEditUser from './ModalEditUser.jsx'
 
+import useAuth from '../Context/Store/useAuth.jsx'
+
 const AdminOptions = () => { 
 
    const [usuariosModal, setUsuariosModal] = useState(false)
    const [addUserModal,setAddUserModal] = useState(false)
    const [userEditModal,setUserEditModal] = useState(false)
    const [selectedUser,setSelectedUser] = useState('')
+   const addUserRef = useRef({})
+   const [reRender,setReRender] = useState(false)
+   const [switchAsistencia,setSwitchAsistencia] = useState(true)
+   const [switchCalificacionesLeer,setSwitchCalificacionesLeer] =  useState(true)
+   const [switchCalificacionesEditar,setSwitchCalificacionesEditar] = useState(true)
+   const context = useAuth()
 
    return ( 
       <Container>
@@ -26,6 +34,16 @@ const AdminOptions = () => {
             usuariosModal={usuariosModal}
             setUsuariosModal={setUsuariosModal}
             selectedUser={selectedUser}
+            addUserRef={addUserRef}
+            reRender={reRender}
+            setReRender={setReRender}
+            switchCalificacionesLeer={switchCalificacionesLeer}
+            setSwitchCalificacionesLeer={setSwitchCalificacionesLeer}
+            switchCalificacionesEditar={switchCalificacionesEditar}
+            setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
+            switchAsistencia={switchAsistencia}
+            setSwitchAsistencia={setSwitchAsistencia}
+            context={context}
          />
          <ModalUsuarios 
             usuariosModal={usuariosModal}
@@ -40,6 +58,16 @@ const AdminOptions = () => {
             setUsuariosModal={setUsuariosModal}
             addUserModal={addUserModal}
             setAddUserModal={setAddUserModal}
+            addUserRef={addUserRef}
+            reRender={reRender}
+            setReRender={setReRender}
+            switchCalificacionesLeer={switchCalificacionesLeer}
+            setSwitchCalificacionesLeer={setSwitchCalificacionesLeer}
+            switchCalificacionesEditar={switchCalificacionesEditar}
+            setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
+            switchAsistencia={switchAsistencia}
+            setSwitchAsistencia={setSwitchAsistencia}
+            context={context}
          />
          <Row>
             <Col 

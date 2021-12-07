@@ -10,6 +10,7 @@ import {
    handleSwitchEdit,
 } from './Logic/modaleditalumnoLogic.js' 
 
+import { DecodeToken } from './Logic/tokenhandler.js'
 
 const TabDatosSalud = ({
    dataAlumno,
@@ -374,29 +375,37 @@ const TabDatosSalud = ({
             <Col
                className='mt-2 d-flex justify-content-end'
             >
-               {switchEdit ?
-                  <Button
-                     variant='outline-success'
-                     size='sm'
-                     onClick={() => handleSwitchEdit(setSwitchEdit)}
-                  >Editar</Button>
-                  :
-                  <Button
-                     variant='outline-success'
-                     size='sm'
-                     onClick={() => {
-                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
-                     }}
-                  >Actualizar</Button>
+               {DecodeToken(1).usuario.permissions.editarMatricula ?
+                     switchEdit ?
+                        <Button
+                           variant='outline-success'
+                           size='sm'
+                           onClick={() => handleSwitchEdit(setSwitchEdit)}
+                        >Editar</Button>
+                        :
+                        <Button
+                           variant='outline-success'
+                           size='sm'
+                           onClick={() => {
+                              handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
+                           }}
+                        >Actualizar</Button>
+                        :
+                     null
                }
             </Col>
             <Col
                className='mt-2 d-flex justify-content-end'
             >
-               <Button
-                  variant='outline-success'
-                  size='sm'
-               >Añadir Registro</Button>
+               {
+                  DecodeToken(1).usuario.permissions.añadirRegistroSalud ?
+                     <Button
+                        variant='outline-success'
+                        size='sm'
+                     >Añadir Registro</Button>
+                     :
+                     null
+              }
             </Col>
          </Row>
       </>

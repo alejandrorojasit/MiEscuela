@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useRef} from 'react'
 
 import {
    Modal,
@@ -14,6 +14,8 @@ import {
 
 import useAuth from '../Context/Store/useAuth.jsx'
 
+import Permissions from './Permissions.jsx'
+
 import {colors} from '../Helpers/styleColors'
 
 import {
@@ -21,6 +23,7 @@ import {
    handleChangeUser,
    handleChangePassowrd,
    handleClick,
+   handleSwitchCheckbox,
 } from './Logic/modalAddUserLogic'
 
 import {addUserUrl} from '../Helpers/Urls'
@@ -37,45 +40,52 @@ const style = {
 const ModalAddUser = ({
    addUserModal,
    setAddUserModal,
-   setUsuariosModal
+   setUsuariosModal,
+   reRender,
+   setReRender,
+   switchCalificacionesLeer,
+   setSwitchCalificacionesLeer,
+   switchCalificacionesEditar,
+   setSwitchCalificacionesEditar,
+   switchAsistencia,
+   setSwitchAsistencia,
+   context,
+   addUserRef,
 }) => { 
 
-   const context = useAuth()
-
-   console.log(context)
    const handleClose = () => setAddUserModal(false)
    const [usuario,setUsuario] = useState('')
    const [password,setPassword] = useState('')
    const [role,setRole] = useState('Seleccione tipo de usuario')
-
+   
    return ( 
-         <Modal 
-            show={addUserModal} 
-            onHide={handleClose}
-            size='lg'
+      <Modal 
+         show={addUserModal} 
+         onHide={handleClose}
+         size='lg'
+         style={{color:colors.darken}}
+      >
+         <Modal.Header 
+            closeButton
          >
-            <Modal.Header 
-               closeButton
+            <Container
+               fluid
             >
-               <Container
-                  fluid
-               >
-                <Row
+               <Row
                >
                   <Col className='d-flex justify-content-center'>
-               <h3> 
-                  Añadir usuaro nuevo
-               </h3>         
+                     <h3> 
+                        Añadir nuevo usuario:
+                     </h3>         
                   </Col>
                </Row>
-               </Container>
-                           </Modal.Header>
-            <Modal.Body
+            </Container>
+         </Modal.Header>
+         <Modal.Body
+         >
+            <Container
+               fluid
             >
-               <Container
-                  fluid
-               >
-               <Row>
                <Col
                >
                   <Form> 
@@ -105,59 +115,53 @@ const ModalAddUser = ({
                            Ingrese la contraseña.
                         </Form.Text>
                         <Form.Select 
-                  className='mt-2'
-                  style={{color:colors.darken}}
-                  aria-label='Puesto Trabajo' 
-               >
-                  <option>Puesto Trabajo</option>
-                  {context?.stateHardCodeData?.hardCodeData?.puestoTrabajo?.map((dataMap)=>
-                  <option 
-                     value={dataMap} 
-                     key={dataMap}
-                  >
-                     {dataMap}
-                  </option>
-                  )}
-               </Form.Select>
+                           className='mt-2'
+                           style={{color:colors.darken}}
+                           aria-label='Puesto Trabajo' 
+                           onChange={(event)=> handleClickRole(event.target.value,setRole)}
+                        >
+                           <option>Puesto Trabajo</option>
+                           {context?.stateHardCodeData?.hardCodeData?.puestoTrabajo?.map((dataMap)=>
+                           <option 
+                              value={dataMap} 
+                              key={dataMap}
+                           >
+                              {dataMap}
+                           </option>
+                           )}
+                        </Form.Select>
                      </Form.Group>
                   </Form>
                </Col>
-               <Col
-               >
-                  <h6>Privilegios:</h6>
-                  {
-                     context?.stateHardCodeData?.hardCodeData?.permisosUsuario?.map((dataMap)=> 
-                        <Form.Check
-                           type='checkbox'
-                           label={dataMap}
-                        />
-                     )
-                  }
-                  <h6>Generar Informes:</h6>
-                  {
-                     context?.stateHardCodeData?.hardCodeData?.generarReportes?.map((dataMap)=>
-                         <Form.Check
-                           type='checkbox'
-                           label={dataMap}
-                        />
-                     )
-                  }
-               </Col>
-               </Row>
-               </Container>
-            </Modal.Body>
-            <Modal.Footer>
-               <Button 
-                  variant='outline-success' 
-                  size='sm'
-                  type='button' 
-                  style={style.button} 
-                  onClick={ ()=> handleClick(context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal)}
-               >
-                  Añadir
-               </Button> 
-            </Modal.Footer>
-         </Modal>
+               <Permissions
+                  context={context}
+                  switchAsistencia={switchAsistencia}
+                  reRender={reRender}
+                  setReRender={setReRender}
+                  addUserRef={addUserRef}
+                  switchAsistencia={switchAsistencia}
+                  setSwitchAsistencia={setSwitchAsistencia}
+                  setSwitchCalificacionesLeer={setSwitchCalificacionesLeer}
+                  switchCalificacionesLeer={switchCalificacionesLeer}
+                  switchCalificacionesEditar={switchCalificacionesEditar}
+                  setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
+               />
+            </Container>
+         </Modal.Body>
+         <Modal.Footer>
+            <Button 
+               variant='outline-success' 
+               size='sm'
+               type='button' 
+               style={style.button} 
+               onClick={ ()=> {
+                  handleClick(context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal,addUserRef)
+               }}
+            >
+               Añadir
+            </Button> 
+         </Modal.Footer>
+      </Modal>
    )
 }
 

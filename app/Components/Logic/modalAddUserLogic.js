@@ -12,16 +12,16 @@ export const handleChangePassowrd = (event,setPassword)=> {
       setPassword(event.target.value)
    }
 
-export const handleClick = (context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal)=>{
+export const handleClick = (context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal,addUserRef)=>{
       postFetchAddUser(
          context.stateUser.token,
          usuario,
          password,
          role,
+         addUserRef,
          addUserUrl
       ).then(res => {
          if(res.statusText === 'OK') {
-            alert('Usuario añadido con exito')
             setAddUserModal(false)
             setUsuariosModal(true)
          }else {
@@ -29,3 +29,16 @@ export const handleClick = (context,usuario,password,role,addUserUrl,setAddUserM
          }
       })
    }
+
+export const handleSwitchCheckbox = (checkboxBoolean1,checkboxBoolean2,setFunctionToSwitch) =>{
+   console.log(checkboxBoolean1)
+   console.log(checkboxBoolean2)
+   switch(true){
+      case checkboxBoolean1 || checkboxBoolean2 === true :
+         setFunctionToSwitch(false)
+         break
+      case checkboxBoolean1 || checkboxBoolean2 === false : 
+         setFunctionToSwitch(true)
+         break
+   } 
+}

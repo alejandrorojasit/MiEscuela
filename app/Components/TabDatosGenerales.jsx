@@ -19,6 +19,10 @@ import {
    splitDate
 } from './Logic/dateHandler'
 
+import CustomButtonEditMatricula from './CustomButtonEditMatricula.jsx'
+
+import {DecodeToken} from './Logic/tokenhandler'
+
 import DatePicker,{registerLocale,setDefaultLocale} from 'react-datepicker'
 
 import {dniCheck,cuilCheck} from './Logic/datosGeneralesLogic'
@@ -383,7 +387,8 @@ const TabDatosGenerales = ({
             <Col
                className='mt-2 d-flex justify-content-end'
             >
-               {switchEdit ?
+               {DecodeToken(1).usuario.permissions.editarMatricula ?
+               switchEdit ?
                   <Button
                      variant='outline-success'
                      size='sm'
@@ -397,7 +402,9 @@ const TabDatosGenerales = ({
                         handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
                      }}
                   >Actualizar</Button>
-               }
+                  :
+               null
+         }
             </Col>
          </Row>
       </>

@@ -10,7 +10,7 @@ import {
    Form
 } from 'react-bootstrap'
 
-import useAuth from '../Context/Store/useAuth.jsx'
+import { DecodeToken } from './Logic/tokenhandler.js'
 
 import {
    handleClose,
@@ -20,14 +20,25 @@ import {
 
 import {userDeleteUrl} from '../Helpers/Urls'
 
+import Permissions from './Permissions.jsx'
+
 const ModalEditUser = ({
    userEditModal,
    setUserEditModal,
    setUsuariosModal,
-   selectedUser
+   selectedUser,
+   context,
+   setSwitchCalificacionesLeer,
+   switchCalificacionesLeer,
+   setSwitchCalificacionesEditar,
+   switchCalificacionesEditar,
+   switchAsistencia,
+   setSwitchAsistencia,
+   reRender,
+   setReRender,
+   addUserRef,
 }) => { 
 
-   const context = useAuth()
    const [dataUser,setDataUser] = useState({})
    const [switchUsuario,setSwitchUsuario] = useState(true)
    const [switchPassword,setSwitchPassword] = useState(true)
@@ -35,12 +46,18 @@ const ModalEditUser = ({
 
    const handleClickAccept = () => {
    }
+   console.log(DecodeToken(1).usuario.permissions)
+   console.log(addUserRef)
    return ( 
       <Modal 
          show={userEditModal} 
          onHide={()=> handleClose(setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal)} 
-         onShow={()=> handleShow(setDataUser,context,selectedUser)}
+         onShow={()=> {
+            handleShow(setDataUser,context,selectedUser)
+            addUserRef.current.leerMatricula = true
+         }}
          style={{display:'flex'}}
+         size='lg'
       >
          <Modal.Header 
             closeButton
@@ -151,7 +168,7 @@ const ModalEditUser = ({
                      <Button 
                         variant='outline-success' 
                         size='sm'
-                        onClick={()=> handleClickDelete(context,selectedUser,userDeleteUrl)}
+                        onClick={()=> handleClickDelete(context,selectedUser,userDeleteUrl,setUserEditModal)}
                      >
                         Eliminar Usuario
                      </Button>
@@ -170,6 +187,21 @@ const ModalEditUser = ({
                         Aceptar cambios
                      </Button>
                   </Col>
+               </Row>
+               <Row>
+                     <Permissions
+                        context={context}
+                        switchAsistencia={switchAsistencia}
+                        reRender={reRender}
+                        setReRender={setReRender}
+                        addUserRef={addUserRef}
+                        switchAsistencia={switchAsistencia}
+                        setSwitchAsistencia={setSwitchAsistencia}
+                        setSwitchCalificacionesLeer={setSwitchCalificacionesLeer}
+                        switchCalificacionesLeer={switchCalificacionesLeer}
+                        switchCalificacionesEditar={switchCalificacionesEditar}
+                        setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
+                     />
                </Row>
             </Container>
          </Modal.Body>

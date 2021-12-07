@@ -19,7 +19,7 @@ export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,set
       )
    }
 
-   export const handleClickDelete = (context,selectedUser,userDeleteUrl) => {
+   export const handleClickDelete = (context,selectedUser,userDeleteUrl,setUserEditModal) => {
       deleteFetchDeleteUser(
          context.stateUser.token,
          selectedUser,
@@ -27,6 +27,7 @@ export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,set
       ).then((res) =>{
          if(res.status === 200){
             alert('Usuario eliminado con exito')
+            setUserEditModal(false)
          }
       }
       ) 

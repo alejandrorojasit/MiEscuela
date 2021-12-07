@@ -53,7 +53,6 @@ const Matricula = () => {
             setDataAlumno,
          )
    },[selectedAlumnoForEdit])
-
    return ( 
       <Container
       >

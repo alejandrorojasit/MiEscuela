@@ -7,6 +7,8 @@ import {
 
 import {colors} from '../Helpers/styleColors'
 
+import { DecodeToken } from './Logic/tokenhandler'
+
 const TabObservaciones = ({
    dataAlumno,
    setShowModalEditObservaciones,
@@ -18,11 +20,15 @@ const TabObservaciones = ({
             <Col
                className='mt-2 d-flex justify-content-center'
             >
-               <Button
-                  variant='outline-success'
-                  size='sm'
-                  onClick={() => setShowModalEditObservaciones(true)}
-               >Añadir Observacion</Button> 
+               {DecodeToken(1).usuario.permissions.añadirObservaciones ?
+                  <Button
+                     variant='outline-success'
+                     size='sm'
+                     onClick={() => setShowModalEditObservaciones(true)}
+                  >Añadir Observacion</Button> 
+                  :
+                     null
+               }
             </Col> 
          </Row>
          <Row>
