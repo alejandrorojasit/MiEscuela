@@ -37,6 +37,7 @@ const ModalEditUser = ({
    reRender,
    setReRender,
    addUserRef,
+   isNewUser,
 }) => { 
 
    const [dataUser,setDataUser] = useState({})
@@ -46,8 +47,6 @@ const ModalEditUser = ({
 
    const handleClickAccept = () => {
    }
-   console.log(DecodeToken(1).usuario.permissions)
-   console.log(addUserRef)
    return ( 
       <Modal 
          show={userEditModal} 
@@ -201,6 +200,7 @@ const ModalEditUser = ({
                         switchCalificacionesLeer={switchCalificacionesLeer}
                         switchCalificacionesEditar={switchCalificacionesEditar}
                         setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
+                        isNewUser={isNewUser}
                      />
                </Row>
             </Container>

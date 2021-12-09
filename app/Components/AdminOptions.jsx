@@ -24,11 +24,13 @@ const AdminOptions = () => {
    const [switchAsistencia,setSwitchAsistencia] = useState(true)
    const [switchCalificacionesLeer,setSwitchCalificacionesLeer] =  useState(true)
    const [switchCalificacionesEditar,setSwitchCalificacionesEditar] = useState(true)
+   const [isNewUser,setIsNewUser] = useState(false)
    const context = useAuth()
 
    return ( 
       <Container>
          <ModalEditUser
+            isNewUser={isNewUser}
             userEditModal={userEditModal}
             setUserEditModal={setUserEditModal}
             usuariosModal={usuariosModal}
@@ -53,8 +55,10 @@ const AdminOptions = () => {
             userEditModal={userEditModal}
             setUserEditModal={setUserEditModal}
             setSelectedUser={setSelectedUser}
+            setIsNewUser={setIsNewUser}
          />
          <ModalAddUser
+            isNewUser={isNewUser}
             setUsuariosModal={setUsuariosModal}
             addUserModal={addUserModal}
             setAddUserModal={setAddUserModal}

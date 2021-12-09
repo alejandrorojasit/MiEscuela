@@ -6,8 +6,23 @@ import {
 
 import {DecodeToken} from './Logic/tokenhandler'
 
-const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,switchCalificacionesLeer,setSwitchAsistencia,setSwitchCalificacionesLeer,switchCalificacionesEditar,setSwitchCalificacionesEditar}) => { 
-     
+const permissions = ({context,
+   switchAsistencia,
+   setReRender,
+   reRender,
+   addUserRef,
+   switchCalificacionesLeer,
+   setSwitchAsistencia,
+   setSwitchCalificacionesLeer,
+   switchCalificacionesEditar,
+   setSwitchCalificacionesEditar,
+   isNewUser 
+}) => { 
+   let permissions = {} 
+   isNewUser ?
+      permissions = {}
+      :
+      permissions = DecodeToken(1).usuario.permissions     
    return ( 
       <Col>
          <h6>Privilegios:</h6>
@@ -15,11 +30,13 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
             Object.values(context?.stateHardCodeData?.hardCodeData?.permisosUsuario).map((dataMap,index)=> 
                <Form.Check
                   key={dataMap}
+
                   type='checkbox'
                   label={dataMap}
                   ref={(element)=> {addUserRef.current[Object.keys(context?.stateHardCodeData?.hardCodeData?.permisosUsuario)[index]] = element?.checked}}
 
                   onChange={()=>setReRender(!reRender)}
+                  defaultChecked={permissions[Object.keys(context?.stateHardCodeData?.hardCodeData?.permisosUsuario)[index]]}
                />
             )
          }
@@ -32,6 +49,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                   label={dataMap}
                   ref={(element)=> {addUserRef.current[Object.keys(context?.stateHardCodeData?.hardCodeData?.generarReportes)[index]]=element?.checked}}
                   onChange={()=>setReRender(!reRender)}
+                  defaultChecked={permissions[Object.keys(context?.stateHardCodeData?.hardCodeData?.generarReportes)[index]]}
                />
             )
          }
@@ -41,6 +59,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
             label='Tomar Asistencia'
             ref={(element)=> {addUserRef.current.tomarAsistencia=element?.checked}}
             onChange={()=>setSwitchAsistencia(!switchAsistencia)}
+            defaultChecked={permissions.tomarAsistencia}
          />
          <Row>
             <Col
@@ -58,6 +77,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current.asisInicial4a = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchAsistencia}
+                        defaultChecked={permissions.asisInicial4a}
                      />              
                   </Col>
                   <Col>
@@ -67,6 +87,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current.asisInicial4b = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchAsistencia}
+                        defaultChecked={permissions.asisInicial4b}
                      />              
                   </Col>
                </Row>
@@ -81,6 +102,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current.asisInicial5a = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchAsistencia}
+                        defaultChecked={permissions.asisInicial5a}
                      />              
                   </Col>
                   <Col>
@@ -90,6 +112,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current.asisInicial5b = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchAsistencia}
+                        defaultChecked={permissions.asisInicial5b}
                      />              
                   </Col>
                </Row>
@@ -114,6 +137,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                               ref={(element)=> {addUserRef.current[`asisPrimario${dataMap}a`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchAsistencia}
+                              defaultChecked={permissions[`asisPrimario${dataMap}a`]}
                            />              
                         </Col>
                         <Col>
@@ -123,6 +147,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                               ref={(element)=> {addUserRef.current[`asisPrimario${dataMap}b`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchAsistencia}
+                              defaultChecked={permissions[`asisPrimario${dataMap}b`]}
                            />              
                         </Col>
                      </Row>
@@ -148,15 +173,17 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                               ref={(element)=> {addUserRef.current[`asisSecundario${dataMap}a`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchAsistencia}
+                              defaultChecked={permissions[`asisSecundario${dataMap}a`]}
                            />              
                         </Col>
                         <Col>
                            <Form.Check
                               type='checkbox'
                               label='B'
-                              ref={(element)=> {addUserRef.current[`asisSecundario${dataMap}a`] = element?.checked}}
+                              ref={(element)=> {addUserRef.current[`asisSecundario${dataMap}b`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchAsistencia}
+                              defaultChecked={permissions[`asisSecundario${dataMap}b`]}
                            />              
                         </Col>
                      </Row>
@@ -172,11 +199,10 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                   type='checkbox'
                   label='Leer Calificaciones'
                   ref={(element)=> {addUserRef.current.leerCalificaciones = element?.checked}}
-                  onChange={(element)=>{
-                        console.log(element.target.checked)
+                  onChange={(element)=>
                         setSwitchCalificacionesLeer(!element.target.checked)
                   }
-                  }
+                  defaultChecked={permissions.leerCalificaciones}
                />         
             </Col>
             <Col> 
@@ -196,18 +222,20 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                      <Form.Check
                         type='checkbox'
                         label='A'
-                        ref={(element)=> {addUserRef.current[`caliInicial4a`] = element?.checked}}
+                        ref={(element)=> {addUserRef.current[`caliLeerInicial4a`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesLeer}
+                        defaultChecked={permissions[`caliLeerInicial4a`]}
                      />              
                   </Col>
                   <Col>
                      <Form.Check
                         type='checkbox'
                         label='B'
-                        ref={(element)=> {addUserRef.current[`caliInicial4b`] = element?.checked}}
+                        ref={(element)=> {addUserRef.current[`caliLeerInicial4b`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesLeer}
+                        defaultChecked={permissions[`caliLeerInicial4b`]}
                      />              
                   </Col>
                </Row>
@@ -219,18 +247,20 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                      <Form.Check
                         type='checkbox'
                         label='A'
-                        ref={(element)=> {addUserRef.current[`caliInicial5a`] = element?.checked}}
+                        ref={(element)=> {addUserRef.current[`caliLeerInicial5a`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesLeer}
+                        defaultChecked={permissions[`caliLeerInicial5a`]}
                      />              
                   </Col>
                   <Col>
                      <Form.Check
                         type='checkbox'
                         label='B'
-                        ref={(element)=> {addUserRef.current[`caliInicial5b`] = element?.checked}}
+                        ref={(element)=> {addUserRef.current[`caliLeerInicial5b`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesLeer}
+                        defaultChecked={permissions[`caliLeerInicial5b`]}
                      />              
                   </Col>
                </Row>
@@ -252,18 +282,20 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                            <Form.Check
                               type='checkbox'
                               label='A'
-                              ref={(element)=> {addUserRef.current[`caliPrimario${dataMap}a`] = element?.checked}}
+                              ref={(element)=> {addUserRef.current[`caliLeerPrimario${dataMap}a`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesLeer}
+                              defaultChecked={permissions[`caliLeerPrimario${dataMap}a`]}
                            />              
                         </Col>
                         <Col>
                            <Form.Check
                               type='checkbox'
                               label='B'
-                              ref={(element)=> {addUserRef.current[`caliPrimario${dataMap}b`] = element?.checked}}
+                              ref={(element)=> {addUserRef.current[`caliLeerPrimario${dataMap}b`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesLeer}
+                              defaultChecked={permissions[`caliLeerPrimario${dataMap}b`]}
                            />              
                         </Col>
                      </Row>
@@ -286,18 +318,20 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                            <Form.Check
                               type='checkbox'
                               label='A'
-                              ref={(element)=> {addUserRef.current[`caliSecundario${dataMap}a`] = element?.checked}}
+                              ref={(element)=> {addUserRef.current[`caliLeerSecundario${dataMap}a`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesLeer}
+                              defaultChecked={permissions[`caliLeerSecundario${dataMap}a`]}
                            />              
                         </Col>
                         <Col>
                            <Form.Check
                               type='checkbox'
                               label='B'
-                              ref={(element)=> {addUserRef.current[`caliSecundario${dataMap}b`] = element?.checked}}
+                              ref={(element)=> {addUserRef.current[`caliLeerSecundario${dataMap}b`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesLeer}
+                              defaultChecked={permissions[`caliLeerSecundario${dataMap}b`]}
                            />              
                         </Col>
                      </Row>
@@ -313,6 +347,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                   onChange={(element)=>
                         setSwitchCalificacionesEditar(!element.target.checked)
                   }
+                  defaultChecked={permissions.editarCalificaciones}
                />      
                </Col>
             </Row>
@@ -333,6 +368,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current[`caliInicial4a`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesEditar}
+                        defaultChecked={permissions[`caliInicial4a`]}
                      />              
                   </Col>
                   <Col>
@@ -342,6 +378,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current[`caliInicial4b`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesEditar}
+                        defaultChecked={permissions[`caliInicial4b`]}
                      />              
                   </Col>
                </Row>
@@ -356,6 +393,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current[`caliInicial5a`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesEditar}
+                        defaultChecked={permissions[`caliInicial5a`]}
                      />              
                   </Col>
                   <Col>
@@ -365,6 +403,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                         ref={(element)=> {addUserRef.current[`caliInicial5b`] = element?.checked}}
                         onChange={()=>setReRender(!reRender)}
                         disabled={switchCalificacionesEditar}
+                        defaultChecked={permissions[`caliInicial5b`]}
                      />              
                   </Col>
                </Row>
@@ -389,6 +428,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                               ref={(element)=> {addUserRef.current[`caliPrimario${dataMap}a`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesEditar}
+                              defaultChecked={permissions[`caliPrimario${dataMap}a`]}
                            />              
                         </Col>
                         <Col>
@@ -398,6 +438,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                               ref={(element)=> {addUserRef.current[`caliPrimario${dataMap}b`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesEditar}
+                              defaultChecked={permissions[`caliPrimario${dataMap}b`]}
                            />              
                         </Col>
                      </Row>
@@ -423,6 +464,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                               ref={(element)=> {addUserRef.current[`caliSecundario${dataMap}a`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesEditar}
+                              defaultChecked={permissions[`caliSecundario${dataMap}a`]}
                            />              
                         </Col>
                         <Col>
@@ -432,6 +474,7 @@ const permissions = ({context,switchAsistencia,setReRender,reRender,addUserRef,s
                               ref={(element)=> {addUserRef.current[`caliSecundario${dataMap}b`] = element?.checked}}
                               onChange={()=>setReRender(!reRender)}
                               disabled={switchCalificacionesEditar}
+                              defaultChecked={permissions[`caliSecundario${dataMap}b`]}
                            />              
                         </Col>
                      </Row>

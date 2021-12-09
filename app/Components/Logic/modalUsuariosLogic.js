@@ -5,8 +5,10 @@ export const handleEdit = (
    userEditModal,
    setUserEditModal,
    setUsuariosModal,
-   setSelectedUser
+   setSelectedUser,
+   setIsNewUser
 ) =>{
+   setIsNewUser(false)
    setUsuariosModal(false) 
    setUserEditModal(true)
    setSelectedUser(dataMap.usuario)
@@ -14,10 +16,12 @@ export const handleEdit = (
 
 export const handleAddUser = (
    setAddUserModal,
-   setUsuariosModal
+   setUsuariosModal,
+   setIsNewUser
 ) =>{
    setUsuariosModal(false)
    setAddUserModal(true) 
+   setIsNewUser(true)
 }
 
 export const upDateUsers = (

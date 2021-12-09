@@ -51,6 +51,7 @@ const ModalAddUser = ({
    setSwitchAsistencia,
    context,
    addUserRef,
+   isNewUser,
 }) => { 
 
    const handleClose = () => setAddUserModal(false)
@@ -134,6 +135,7 @@ const ModalAddUser = ({
                   </Form>
                </Col>
                <Permissions
+                  isNewUser={isNewUser}
                   context={context}
                   switchAsistencia={switchAsistencia}
                   reRender={reRender}

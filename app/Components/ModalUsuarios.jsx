@@ -26,7 +26,8 @@ const ModalUsuarios = ({
    setAddUserModal,
    userEditModal,
    setUserEditModal,
-   setSelectedUser
+   setSelectedUser,
+   setIsNewUser
 }) => { 
 
    const context = useAuth()
@@ -77,7 +78,8 @@ const ModalUsuarios = ({
                                        userEditModal,
                                        setUserEditModal,
                                        setUsuariosModal,
-                                       setSelectedUser
+                                       setSelectedUser,
+                                       setIsNewUser,
                                     )}
                                  >
                                     <FaUserEdit/>
@@ -95,7 +97,7 @@ const ModalUsuarios = ({
             <Button 
                variant='outline-success'
                size='sm'
-               onClick={()=> handleAddUser(setAddUserModal,setUsuariosModal)}
+               onClick={()=> handleAddUser(setAddUserModal,setUsuariosModal,setIsNewUser)}
             >
                Nuevo Usuario
             </Button>
