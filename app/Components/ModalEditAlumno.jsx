@@ -41,6 +41,7 @@ const ModalEditAlumno = ({
    showModalEditObservaciones,
    setShowModalEditObservaciones,
    selectedAlumnoForEdit,
+   setShowModalAñadirRegistroSalud,
 }) => { 
 
    const [fechaNacimiento,setFechaNacimiento] = useState()
@@ -129,6 +130,7 @@ const ModalEditAlumno = ({
                      context={context}
                      setDataAlumno={setDataAlumno}
                      selectedAlumnoForEdit={selectedAlumnoForEdit}
+                     setShowModalAñadirRegistroSalud={setShowModalAñadirRegistroSalud}
                   />
                </Tab>
                <Tab

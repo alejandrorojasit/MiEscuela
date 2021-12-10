@@ -1,5 +1,7 @@
 import {postFetchUpdateAlumno} from '../../Hooks/postFetch'
 
+import { handleGetDataAlumno } from '../Logic/matriculaLogic'
+
 export const handleClose = (setShowModalEditObservaciones) => {
    setShowModalEditObservaciones(false)
 }
@@ -8,7 +10,7 @@ export const handleChange = (event,setNuevaObservacion) => {
    setNuevaObservacion(event.target.value)
 }
 
-export const handleClickAñadir = (nuevaObservacionState,id,context,apiUrl) => {
+export const handleClickAñadir = (nuevaObservacionState,id,context,apiUrl,selectedAlumnoForEdit,setDataAlumno) => {
    let updatedData = {
       user: context.stateUser.user,
       fecha: new Date().toLocaleString(),
@@ -19,5 +21,13 @@ export const handleClickAñadir = (nuevaObservacionState,id,context,apiUrl) => {
       fecha: new Date().toLocaleString(),
       cambios: [`Observacion: ${nuevaObservacionState}`]
    }
-   postFetchUpdateAlumno(context.stateUser.token,updatedData,apiUrl,id,dataRegistro)   
-   }
+   postFetchUpdateAlumno(context.stateUser.token,updatedData,apiUrl,id,dataRegistro).then((res)=>{
+      if(res.status === 200){
+         handleGetDataAlumno(
+            context,
+            selectedAlumnoForEdit,
+            setDataAlumno,
+         )
+      }
+   })
+}

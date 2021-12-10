@@ -3,12 +3,15 @@ import {
    Row,
    Col,
    Form,
+   Table,
 } from 'react-bootstrap'
 
 import {
    handleUpdateData,
    handleSwitchEdit,
 } from './Logic/modaleditalumnoLogic.js' 
+
+import {colors} from '../Helpers/styleColors.js'
 
 import { DecodeToken } from './Logic/tokenhandler.js'
 
@@ -24,6 +27,7 @@ const TabDatosSalud = ({
    context,
    setDataAlumno,
    selectedAlumnoForEdit, 
+   setShowModalAñadirRegistroSalud,
 }) => { 
 
    const {vacunas}  = context.stateHardCodeData.hardCodeData
@@ -369,6 +373,55 @@ const TabDatosSalud = ({
                className='mt-2 border'
             >
                <h6>Registro historico de salud:</h6>       
+               <Table
+                  striped
+                  bordered
+                  hover
+                  style={{color:colors.darken}}
+               >
+                  <thead>
+                     <tr>
+                        <th>
+                           #
+                        </th>
+                        <th>
+                           Usuario:
+                        </th>
+                        <th>
+                           Fecha:
+                        </th>
+                        <th>
+                           Detalle:
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {dataAlumno.registroSalud?.map((dataMap,index)=>
+                     <tr
+                        key={index}
+                     >
+                        <td>
+                           {index}
+                        </td>
+                        <td>
+                           {dataMap?.usuario}
+                        </td>
+                        <td>
+                           {dataMap?.fecha}
+                        </td>
+                        <td>
+                           <Row
+                              key={index}
+                              style={{marginLeft:10}
+                              }
+                           >
+                              {dataMap.data}    
+                           </Row>
+                        </td>
+                     </tr>
+                     )}
+                  </tbody>
+               </Table>
             </Col>
          </Row>
          <Row>
@@ -402,10 +455,11 @@ const TabDatosSalud = ({
                      <Button
                         variant='outline-success'
                         size='sm'
+                        onClick={()=> setShowModalAñadirRegistroSalud(true)}
                      >Añadir Registro</Button>
                      :
                      null
-              }
+               }
             </Col>
          </Row>
       </>

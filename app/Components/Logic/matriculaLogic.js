@@ -13,6 +13,7 @@ export const handleGetDataAlumno = (
       selectedAlumnoForEdit
    ).then((res)=>{
       res.data?.registro?.reverse()
+      res.data?.registroSalud?.reverse()
       setDataAlumno(res.data)
    }
    )

@@ -13,12 +13,17 @@ export const handleChangePassowrd = (event,setPassword)=> {
    }
 
 export const handleClick = (context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal,addUserRef)=>{
+   let permissions = {
+   }
+   Object.keys(addUserRef.current).map((dataMap,index)=>{
+      permissions = {...permissions , [dataMap]:addUserRef.current[dataMap].checked}
+   })
       postFetchAddUser(
          context.stateUser.token,
          usuario,
          password,
          role,
-         addUserRef,
+         permissions,
          addUserUrl
       ).then(res => {
          if(res.statusText === 'OK') {
@@ -31,8 +36,6 @@ export const handleClick = (context,usuario,password,role,addUserUrl,setAddUserM
    }
 
 export const handleSwitchCheckbox = (checkboxBoolean1,checkboxBoolean2,setFunctionToSwitch) =>{
-   console.log(checkboxBoolean1)
-   console.log(checkboxBoolean2)
    switch(true){
       case checkboxBoolean1 || checkboxBoolean2 === true :
          setFunctionToSwitch(false)

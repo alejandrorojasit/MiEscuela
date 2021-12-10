@@ -23,3 +23,7 @@ export const hardCodeData = 'api/hardCodeData'
 export const updateWholeDB = 'api/matricula/updateWholeDB'
 
 export const updateObservacionesUrl = 'api/matricula/updateObservaciones'
+
+export const updateUser = 'api/usuarios/updateUsuario'
+
+export const updateRegistroSaludUrl = 'api/matricula/updateRegistroSalud'

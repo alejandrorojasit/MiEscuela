@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {
    Modal,
    Col,
@@ -16,11 +16,14 @@ import {
    handleClose,
    handleShow,
    handleClickDelete,
+   handleClickAccept,
 } from './Logic/modalEditUserLogic' 
 
 import {userDeleteUrl} from '../Helpers/Urls'
 
 import Permissions from './Permissions.jsx'
+
+import {updateUser} from '../Helpers/Urls.js' 
 
 const ModalEditUser = ({
    userEditModal,
@@ -44,100 +47,113 @@ const ModalEditUser = ({
    const [switchUsuario,setSwitchUsuario] = useState(true)
    const [switchPassword,setSwitchPassword] = useState(true)
    const [switchRole,setSwitchRole] = useState(true)
+   const [user,setUser] = useState(null)
+   const [password,setPassword] = useState(null)
+   const [role,setRole] = useState(null)
 
-   const handleClickAccept = () => {
-   }
+   useEffect(()=>{
+      setUser(dataUser.usuario)
+      setRole(dataUser.role)
+   },[dataUser.usuario,dataUser.role])
    return ( 
       <Modal 
          show={userEditModal} 
          onHide={()=> handleClose(setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal)} 
          onShow={()=> {
             handleShow(setDataUser,context,selectedUser)
-            addUserRef.current.leerMatricula = true
          }}
-         style={{display:'flex'}}
          size='lg'
       >
          <Modal.Header 
             closeButton
-            className='d-flex justify-content-center'
          >
-            <h3>Editar Usuario</h3>
+               <Col
+                  style={{display:'flex',justifyContent:'center'}}
+               >
+                  <h3>Editar Usuario</h3>
+               </Col>
          </Modal.Header>
-
          <Modal.Body>
             <Container>
                <Row>
-                  <Col>
+                  <Col
+                     md={4}
+                  >
                      <Row 
                         className="mb-3 mt-2"
                      > 
-                        <h4>Usuario:</h4>     
+                        <h6>Usuario:</h6>     
                      </Row>
                      <Row 
                         className="mb-3 mt-2"
                      >
-                        <h4>Password:</h4> 
+                        <h6>Password:</h6> 
                      </Row>
                      <Row 
                         className="mb-3 mt-2"
                      >
-                        <h4>Role:</h4> 
+                        <h6>Role:</h6> 
                      </Row>
                   </Col>
                   <Col>
                      <Row> 
-                        <InputGroup 
-                           className="mb-3"
+                        <Form.Group 
+                           className='d-flex mt-2'
                         >
-                           <FormControl
+                           <Form.Control
+                              size='sm'
                               placeholder={dataUser?.usuario}
                               aria-label="usuario"
-                              aria-describedby="basic-addon2"
                               readOnly={switchUsuario}
+                              onChange={(element)=>setUser(element.target.value)}
                            />
                            <Button 
+                              size='sm'
                               variant="outline-secondary" 
-                              id="button-addon2" 
                               onClick={()=> setSwitchUsuario(false)}
                            >
                               Editar
                            </Button>
-                        </InputGroup> 
+                        </Form.Group> 
                      </Row>
                      <Row>
-                        <InputGroup 
-                           className="mb-3">
-                           <FormControl
-                              placeholder={dataUser?.password}
-                              aria-label="password"
-                              aria-describedby="basic-addon2"
+                        <Col>
+                        <Form.Group 
+                           className='d-flex mt-2'
+                        >
+                           <Form.Control
+                              type='password'
+                              size='sm'
+                              placeholder={'Ingrese nuevo password'}
                               readOnly={switchPassword}
+                              onChange={(element)=>setPassword(element.target.value)}
                            />
                            <Button 
+                              size='sm'
                               variant="outline-secondary" 
-                              id="button-addon2" 
                               onClick={()=> setSwitchPassword(false)}
                            >
                               Editar
                            </Button>
-                        </InputGroup>
+                        </Form.Group>      
+                        </Col>
                      </Row>
                      <Row>
                         <InputGroup 
-                           className="mb-3"
+                           className='d-flex mt-2'
                         >
                            <Form.Select
+                              size='sm'
                               placeholder={dataUser?.role}
-                              aria-label="role"
                               disabled={switchRole}
+                              onChange={(element)=>setRole(element.target.value)}
                            >
                               <option 
                                  value={dataUser.role}
                               >
                                  {dataUser.role}
                               </option>
-                              {context.stateHardCodeData.hardCodeData.role.map((dataMap)=> 
+                              {context.stateHardCodeData.hardCodeData.puestoTrabajo.map((dataMap)=> 
                                  dataMap !== dataUser.role ? 
                                     <option 
                                        key={dataMap} 
@@ -150,8 +166,8 @@ const ModalEditUser = ({
                               )}
                            </Form.Select>
                            <Button 
+                              size='sm'
                               variant="outline-secondary" 
-                              id="button-addon2" 
                               onClick={()=> setSwitchRole(false)}
                            >
                               Editar
@@ -173,23 +189,11 @@ const ModalEditUser = ({
                      </Button>
                   </Col>
                </Row>
-               <Row 
-                  className='mt-3'>
-                  <Col 
-                     className='d-flex justify-content-center'
-                  >
-                     <Button 
-                        variant='outline-success' 
-                        size='sm'
-                        onClick={()=> handleClickAccept()}
-                     >
-                        Aceptar cambios
-                     </Button>
-                  </Col>
-               </Row>
+               
                <Row>
                      <Permissions
                         context={context}
+                        dataUser={dataUser}
                         switchAsistencia={switchAsistencia}
                         reRender={reRender}
                         setReRender={setReRender}
@@ -205,6 +209,22 @@ const ModalEditUser = ({
                </Row>
             </Container>
          </Modal.Body>
+         <Modal.Footer>
+            <Row 
+                  className='mt-3'>
+                  <Col 
+                     className='d-flex justify-content-center'
+                  >
+                     <Button 
+                        variant='outline-success' 
+                        size='sm'
+                        onClick={()=> handleClickAccept(user,password,role,addUserRef,context,updateUser,dataUser._id)}
+                     >
+                        Aceptar cambios
+                     </Button>
+                  </Col>
+               </Row>
+         </Modal.Footer>
       </Modal>
    )
 }

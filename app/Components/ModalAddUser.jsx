@@ -58,7 +58,6 @@ const ModalAddUser = ({
    const [usuario,setUsuario] = useState('')
    const [password,setPassword] = useState('')
    const [role,setRole] = useState('Seleccione tipo de usuario')
-   
    return ( 
       <Modal 
          show={addUserModal} 

@@ -49,6 +49,7 @@ const matriculaSchema = new Schema({
    egreso: {type:String,require:true},
    observaciones: {type:Array,require:true},
    registro: {type:Array,require:true},
+   registroSalud: {type:Array,require:true},
 },{collection: 'Matricula'});
 
 module.exports = mongoose.model('Matricula', matriculaSchema)

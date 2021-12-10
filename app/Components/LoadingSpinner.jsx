@@ -14,7 +14,8 @@ const LoadingSpinner = () => {
                <Spinner
                   className='mt-2'
                   animation='border'
-                  variant='primary'
+                  variant='success'
+                  size='lg'
                />   
             </Col>
                 )

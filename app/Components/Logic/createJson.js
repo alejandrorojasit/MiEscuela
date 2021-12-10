@@ -13,7 +13,6 @@ import {
 
 export function createJson (){
    let jsonData = {
-
    }
    jsonData = {...jsonData , Nivel,Sexo,Vacunas,Division,Grado,datosRatificacion,datosRatificacion2,Role,ModelPdf,Denominacion}
 

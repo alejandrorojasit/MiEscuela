@@ -22,25 +22,6 @@ app.get('/:usuario',verificarToken,(req,res) => {
    )
 })
 
-{/*
-app.post('/Delete', verificarToken,async (req,res) => {
-   let body = req.body
-   data.findOneAndRemove(
-      {
-         usuario:body.usuario
-      },
-      (err,data)=>
-      {
-      if(err) return res.status(500).send(err)
-      const response = {
-      message: 'Usuario Eliminado con exito'
-      } 
-      return res.status(200).send(response)
-      }
-   )
-})
-*/}
-
 app.delete('/delete/:id',verificarToken,(req,res) => {
    console.log(req.params.id)
    data.findOneAndRemove({
@@ -64,6 +45,27 @@ app.post('/addUser', verificarToken,(req,res) => {
    sendData.save(
       (err,data)=>
       res.json(data)     
+   )
+})
+
+app.post('/updateUsuario', verificarToken,(req,res) => {
+
+   let id = req.body._id
+   let dataToSend = req.body.data
+   console.log(dataToSend.password)
+   dataToSend.password !== undefined ?
+      dataToSend.password = bcrypt.hashSync(
+         dataToSend.password,
+         8
+      )
+      :
+      null
+   data.findOneAndUpdate(
+      {_id : id},
+      dataToSend,
+      (err,data)=> {
+         res.json(data)
+      }
    )
 })
 

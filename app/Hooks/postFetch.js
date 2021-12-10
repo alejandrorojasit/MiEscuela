@@ -1,7 +1,39 @@
 import axios from 'axios'
 import {baseUrl} from '../Context/Store/AuthProvider.jsx'
 
+export const postFetchUpdateRegistroSalud = async (
+   token,
+   dataToSend,
+   apiUrl,
+   id,
+) => {
+   let objetToSend = {
+      _id : id,
+      data: dataToSend,
+   }
+   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }           
+   }
+   try{
+      const resData = await axios.post(
+         url,
+         objetToSend,
+         config
+      )
+      return resData
+   }
+   catch(err) {
+      return(err.response)
+   }
+}
+
 export const postFetchUpdateAlumno = async (
+
    token,
    updatedData,
    apiUrl,
@@ -13,6 +45,37 @@ export const postFetchUpdateAlumno = async (
       _id : id, 
       data : updatedData,
       dataRegistro: dataRegistro,
+   }
+   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }           
+   }
+   try{
+      const resData = await axios.post(
+         url,
+         objetToSend,
+         config
+      )
+      return resData
+   }
+   catch(err) {
+      return(err.response)
+   }
+}
+
+export const postFetchUpdateUser = async (
+   token,
+   updatedData,
+   apiUrl,
+   _id,
+) =>  {
+   let objetToSend = {
+      _id : _id, 
+      data : updatedData,
    }
    const url= `http://${baseUrl}:3000/${apiUrl}`  
    const config = {
@@ -71,16 +134,16 @@ export const postFetchAddUser = async (
    usuario,
    password,
    role,
-   addUserRef,
+   permissions,
    apiUrl
 ) => {
    const url= `http://${baseUrl}:3000/${apiUrl}`  
 
    const dataPost = {
-      usuario:usuario,
-      password:password,
-      role:role,
-      permissions:addUserRef.current
+      usuario,
+      password,
+      role,
+      permissions
    }
    const config = {
       headers: {                    
