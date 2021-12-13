@@ -18,9 +18,9 @@ import {
    updateRegistroSaludUrl
 } from '../Helpers/Urls.js'
 
-const ModalAñadirRegistroSalud = ({
-   setShowModalAñadirRegistroSalud,
-   showModalAñadirRegistroSalud,
+const ModalEditRegistroSalud = ({
+   setShowModalEditRegistroSalud,
+   showModalEditRegistroSalud,
    nuevoRegistroSalud,
    setNuevoRegistroSalud,
    dataAlumno,
@@ -31,8 +31,8 @@ const ModalAñadirRegistroSalud = ({
 
    return ( 
       <Modal
-         show={showModalAñadirRegistroSalud}
-         onHide={()=> setShowModalAñadirRegistroSalud(false)}
+         show={showModalEditRegistroSalud}
+         onHide={()=> setShowModalEditRegistroSalud(false)}
       >
          <Modal.Header
             closeButton
@@ -58,7 +58,7 @@ const ModalAñadirRegistroSalud = ({
                size='sm'
                onClick={() => {
                   handleClickAñadir (nuevoRegistroSalud,dataAlumno._id,context,updateRegistroSaludUrl,setDataAlumno,selectedAlumnoForEdit)
-                  setShowModalAñadirRegistroSalud(false)
+                  setShowModalEditRegistroSalud(false)
                }}
             >
                Añadir
@@ -68,4 +68,4 @@ const ModalAñadirRegistroSalud = ({
    )
 }
 
-export default ModalAñadirRegistroSalud
+export default ModalEditRegistroSalud

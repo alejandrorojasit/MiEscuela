@@ -5,7 +5,7 @@ import {
 } from 'react'
 import ModalEditAlumno from './ModalEditAlumno.jsx'
 import ModalEditObservaciones from './ModalEditObservaciones.jsx'
-import ModalAñadirRegistroSalud from './ModalAñadirRegistroSalud.jsx'
+import ModalEditRegistroSalud from './ModalEditRegistroSalud.jsx'
 import SelectFormStage1 from './SelectFormStage1.jsx'
 import SelectFormStage2 from './SelectFormStage2.jsx'
 import TableAlumnosMatricula from './TableAlumnosMatricula.jsx'
@@ -37,7 +37,7 @@ const Matricula = () => {
    const [switchEdit,setSwitchEdit] = useState(true)
    const [nuevaObservacionState,setNuevaObservacion] = useState('')
    const [showModalEditObservaciones,setShowModalEditObservaciones] = useState(false)
-   const [showModalAñadirRegistroSalud,setShowModalAñadirRegistroSalud] = useState(false)
+   const [showModalEditRegistroSalud,setShowModalEditRegistroSalud] = useState(false)
    const [nuevoRegistroSalud,setNuevoRegistroSalud] = useState('')
    const matriculaRef = useRef([]) 
    const context  =  useAuth()
@@ -80,16 +80,16 @@ const Matricula = () => {
                   selectedAlumnoForEdit={selectedAlumnoForEdit}
                   setShowModalAñadirRegistroSalud={setShowModalAñadirRegistroSalud}
                />
-                  <ModalAñadirRegistroSalud
-               setShowModalAñadirRegistroSalud={setShowModalAñadirRegistroSalud}
-               showModalAñadirRegistroSalud={showModalAñadirRegistroSalud}
-               nuevoRegistroSalud={nuevoRegistroSalud}
-               setNuevoRegistroSalud={setNuevoRegistroSalud}
-               context={context}
-               dataAlumno={dataAlumno}
-               selectedAlumnoForEdit={selectedAlumnoForEdit}
-               setDataAlumno={setDataAlumno}
-            />
+               <ModalEditRegistroSalud
+                  nuevoRegistroSalud={nuevoRegistroSalud}
+                  setNuevoRegistroSalud={setNuevoRegistroSalud}
+                  context={context}
+                  dataAlumno={dataAlumno}
+                  selectedAlumnoForEdit={selectedAlumnoForEdit}
+                  setDataAlumno={setDataAlumno}
+                  showModalEditRegistroSalud={showModalEditRegistroSalud}
+                  setShowModalEditRegistroSalud={setShowModalEditRegistroSalud}
+               />
                <ModalEditObservaciones
                   setShowModalEditObservaciones={setShowModalEditObservaciones}
                   showModalEditObservaciones={showModalEditObservaciones}
@@ -100,57 +100,57 @@ const Matricula = () => {
                   selectedAlumnoForEdit={selectedAlumnoForEdit}
                   context={context}
                />
-                  <ModalUpdate 
-                     dataAlumno={dataAlumno}
-                     datosAlumno={datosAlumno}
-                     showModalUpdate={showModalUpdate}
-                     updatedData={updatedData}
-                     setShowModalUpdate={setShowModalUpdate}
-                     alumnoEditModal={alumnoEditModal}
-                     setAlumnoEditModal={setAlumnoEditModal}
-                     switchEdit={switchEdit}
-                     setSwitchEdit={setSwitchEdit}
-                     setSelectedAlumnoForEdit={setSelectedAlumnoForEdit}
-                     setDataAlumno={setDataAlumno}
-                     selectedAlumnoForEdit={selectedAlumnoForEdit}
-                  />
-                     <SelectFormStage1
-                        context={context}
-                        setGrado={setGrado}                     
-                        gradoState={gradoState}
-                        setDivision={setDivision}
-                        divisionState={divisionState}
-                        setNivel={setNivel}
-                        nivelState={nivelState}
-                        matriculaRef={matriculaRef}
-                        datosAlumno={datosAlumno}
-                        setIsFiltredStage1={setIsFiltredStage1}
-                        setFiltredDatosAlumnoStage1={setFiltredDatosAlumnoStage1}
-                        setIsFiltredStage2={setIsFiltredStage2}
-                        setFiltredDatosAlumnoStage2={setFiltredDatosAlumnoStage2}
-                     />
-                        <SelectFormStage2
-                           datosAlumno={datosAlumno}
-                           setIsFiltredStage1={setIsFiltredStage1}
-                           setFiltredDatosAlumnoStage1={setFiltredDatosAlumnoStage1}
-                           isFiltredStage1={isFiltredStage1}
-                           filtredDatosAlumnoStage1={filtredDatosAlumnoStage1}
-                           setFiltredDatosAlumnoStage2={setFiltredDatosAlumnoStage2}
-                           filtredDatosAlumnoStage2={filtredDatosAlumnoStage2}
-                           setIsFiltredStage2={setIsFiltredStage2}
-                           matriculaRef={matriculaRef}
-                        />
-                           <TableAlumnosMatricula
-                              setSelectedAlumnoForEdit={setSelectedAlumnoForEdit}
-                              selectedAlumnoForEdit={selectedAlumnoForEdit}
-                              setAlumnoEditModal={setAlumnoEditModal}
-                              isFiltredStage2={isFiltredStage2}
-                              filtredDatosAlumnoStage1={filtredDatosAlumnoStage1}
-                              filtredDatosAlumnoStage2={filtredDatosAlumnoStage2}
-                              switchEdit={switchEdit}
-                              setSwitchEdit={setSwitchEdit}
-                           />
-               </>
+               <ModalUpdate 
+                  dataAlumno={dataAlumno}
+                  datosAlumno={datosAlumno}
+                  showModalUpdate={showModalUpdate}
+                  updatedData={updatedData}
+                  setShowModalUpdate={setShowModalUpdate}
+                  alumnoEditModal={alumnoEditModal}
+                  setAlumnoEditModal={setAlumnoEditModal}
+                  switchEdit={switchEdit}
+                  setSwitchEdit={setSwitchEdit}
+                  setSelectedAlumnoForEdit={setSelectedAlumnoForEdit}
+                  setDataAlumno={setDataAlumno}
+                  selectedAlumnoForEdit={selectedAlumnoForEdit}
+               />
+               <SelectFormStage1
+                  context={context}
+                  setGrado={setGrado}                     
+                  gradoState={gradoState}
+                  setDivision={setDivision}
+                  divisionState={divisionState}
+                  setNivel={setNivel}
+                  nivelState={nivelState}
+                  matriculaRef={matriculaRef}
+                  datosAlumno={datosAlumno}
+                  setIsFiltredStage1={setIsFiltredStage1}
+                  setFiltredDatosAlumnoStage1={setFiltredDatosAlumnoStage1}
+                  setIsFiltredStage2={setIsFiltredStage2}
+                  setFiltredDatosAlumnoStage2={setFiltredDatosAlumnoStage2}
+               />
+               <SelectFormStage2
+                  datosAlumno={datosAlumno}
+                  setIsFiltredStage1={setIsFiltredStage1}
+                  setFiltredDatosAlumnoStage1={setFiltredDatosAlumnoStage1}
+                  isFiltredStage1={isFiltredStage1}
+                  filtredDatosAlumnoStage1={filtredDatosAlumnoStage1}
+                  setFiltredDatosAlumnoStage2={setFiltredDatosAlumnoStage2}
+                  filtredDatosAlumnoStage2={filtredDatosAlumnoStage2}
+                  setIsFiltredStage2={setIsFiltredStage2}
+                  matriculaRef={matriculaRef}
+               />
+               <TableAlumnosMatricula
+                  setSelectedAlumnoForEdit={setSelectedAlumnoForEdit}
+                  selectedAlumnoForEdit={selectedAlumnoForEdit}
+                  setAlumnoEditModal={setAlumnoEditModal}
+                  isFiltredStage2={isFiltredStage2}
+                  filtredDatosAlumnoStage1={filtredDatosAlumnoStage1}
+                  filtredDatosAlumnoStage2={filtredDatosAlumnoStage2}
+                  switchEdit={switchEdit}
+                  setSwitchEdit={setSwitchEdit}
+               />
+            </>
          }
       </Container>
    )
