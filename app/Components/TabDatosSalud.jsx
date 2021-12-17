@@ -27,7 +27,9 @@ const TabDatosSalud = ({
    context,
    setDataAlumno,
    selectedAlumnoForEdit, 
-   setShowModalAñadirRegistroSalud,
+   setShowModalEditRegistroSalud,
+   fechaIngreso,
+   fechaEgreso,
 }) => { 
 
    const {vacunas}  = context.stateHardCodeData.hardCodeData
@@ -291,18 +293,18 @@ const TabDatosSalud = ({
                   <Col>
                      <h6>Examen visual:</h6>
                      <Form.Select
-                        placeholder={dataAlumno?.examenVisual}
+                        placeholder={dataAlumno?.examenvisual}
                         aria-label="examenVisual"
                         disabled={switchEdit}
                         ref={(element) => modalEditRef.current[31] = element}
                      >
                         <option 
-                           value={dataAlumno.examenVisual}
+                           value={dataAlumno.examenvisual}
                         >
-                           {dataAlumno.examenVisual}
+                           {dataAlumno.examenvisual}
                         </option>
                         {vacunas.map((dataMap)=> 
-                           dataMap !== dataAlumno.examenVisual ? 
+                           dataMap !== dataAlumno.examenvisual ? 
                               <option 
                                  key={dataMap} 
                                  value={dataMap}
@@ -368,6 +370,40 @@ const TabDatosSalud = ({
                      </Form.Select>
                   </Col>
                </Row>
+               <Row>
+            <Col
+               className='mt-2 d-flex justify-content-end'
+            >
+               {DecodeToken(1).usuario.permissions.editarMatricula ?
+                     switchEdit ?
+                        <Button
+                           variant='outline-success'
+                           size='sm'
+                           onClick={() => handleSwitchEdit(setSwitchEdit)}
+                        >Editar</Button>
+                        :
+                        <Button
+                           variant='outline-success'
+                           size='sm'
+                           onClick={() => {
+                              handleUpdateData(
+                                 modalEditRef,
+                                 fechaNacimiento,
+                                 dataAlumno,
+                                 setSwitchEdit,
+                                 updatedData,
+                                 setShowModalUpdate,
+                                 setUpdatedData,
+                                 fechaIngreso,
+                                 fechaEgreso,
+                              )
+                           }}
+                        >Actualizar</Button>
+                        :
+                     null
+               }
+            </Col>         
+               </Row>
             </Col>
             <Col
                className='mt-2 border'
@@ -425,28 +461,7 @@ const TabDatosSalud = ({
             </Col>
          </Row>
          <Row>
-            <Col
-               className='mt-2 d-flex justify-content-end'
-            >
-               {DecodeToken(1).usuario.permissions.editarMatricula ?
-                     switchEdit ?
-                        <Button
-                           variant='outline-success'
-                           size='sm'
-                           onClick={() => handleSwitchEdit(setSwitchEdit)}
-                        >Editar</Button>
-                        :
-                        <Button
-                           variant='outline-success'
-                           size='sm'
-                           onClick={() => {
-                              handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
-                           }}
-                        >Actualizar</Button>
-                        :
-                     null
-               }
-            </Col>
+            
             <Col
                className='mt-2 d-flex justify-content-end'
             >
@@ -455,7 +470,7 @@ const TabDatosSalud = ({
                      <Button
                         variant='outline-success'
                         size='sm'
-                        onClick={()=> setShowModalAñadirRegistroSalud(true)}
+                        onClick={()=> setShowModalEditRegistroSalud(true)}
                      >Añadir Registro</Button>
                      :
                      null

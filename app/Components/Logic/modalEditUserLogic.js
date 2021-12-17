@@ -4,7 +4,8 @@ import {getFetchUsuarioSingle} from '../../Hooks/getFetch.js'
 
 import {postFetchUpdateUser} from '../../Hooks/postFetch'
 
-export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal) => {
+export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal,setDataUser) => {
+   setDataUser({})
    setSwitchRole(true)
    setSwitchPassword(true)
    setSwitchUsuario(true)

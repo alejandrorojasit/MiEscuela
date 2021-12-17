@@ -41,18 +41,28 @@ const ModalEditAlumno = ({
    showModalEditObservaciones,
    setShowModalEditObservaciones,
    selectedAlumnoForEdit,
-   setShowModalAñadirRegistroSalud,
+   setShowModalEditRegistroSalud,
 }) => { 
 
    const [fechaNacimiento,setFechaNacimiento] = useState()
+   const [fechaIngreso,setFechaIngreso] = useState('')
+   const [fechaEgreso,setFechaEgreso] = useState('')
    const modalEditRef = useRef([])
    const context = useAuth()
-
    useEffect (()=> {
-      dataAlumno.fechaNacimiento !== undefined ? 
+      if(dataAlumno.fechaNacimiento !== undefined ){
          setFechaNacimiento(createISODate(dataAlumno.fechaNacimiento))
-         :
-         null
+      }
+      if(dataAlumno.egreso === 'Sin datos'){
+         setFechaEgreso('')
+      }else{
+         setFechaEgreso(createISODate(dataAlumno.egreso))
+      }
+      if(dataAlumno.ingreso === 'Sin datos'){
+         setFechaIngreso('')
+      }else{
+         setFechaIngreso(createISODate(dataAlumno.ingreso))
+      }
    },[dataAlumno])
 
    return ( 
@@ -93,6 +103,10 @@ const ModalEditAlumno = ({
                      context={context}
                      setDataAlumno={setDataAlumno}
                      selectedAlumnoForEdit={selectedAlumnoForEdit}
+                     fechaIngreso={fechaIngreso}
+                     setFechaIngreso={setFechaIngreso}
+                     fechaEgreso={fechaEgreso}
+                     setFechaEgreso={setFechaEgreso}
                   />
                </Tab>
                <Tab
@@ -111,7 +125,8 @@ const ModalEditAlumno = ({
                      context={context}
                      setDataAlumno={setDataAlumno}
                      selectedAlumnoForEdit={selectedAlumnoForEdit}
-
+                     fechaIngreso={fechaIngreso}
+                     fechaEgreso={fechaEgreso}
                   />
                </Tab>
                <Tab
@@ -130,7 +145,9 @@ const ModalEditAlumno = ({
                      context={context}
                      setDataAlumno={setDataAlumno}
                      selectedAlumnoForEdit={selectedAlumnoForEdit}
-                     setShowModalAñadirRegistroSalud={setShowModalAñadirRegistroSalud}
+                     setShowModalEditRegistroSalud={setShowModalEditRegistroSalud}
+                     fechaIngreso={fechaIngreso}
+                     fechaEgreso={fechaEgreso}
                   />
                </Tab>
                <Tab

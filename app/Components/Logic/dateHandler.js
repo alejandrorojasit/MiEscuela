@@ -50,9 +50,11 @@ export const ageCalculate3006 = (date) => {
 
 
 export const createISODate = (date) => {
-   const splitedDate = splitDate(date,3)
-   const ISOdate = new Date(splitedDate[2],splitedDate[1] - 1,splitedDate[0])
-   return ISOdate
+   if (date !== undefined){
+      const splitedDate = splitDate(date,3)
+      const ISOdate = new Date(splitedDate[2],splitedDate[1] - 1,splitedDate[0])
+      return ISOdate
+   }
 }
 
 export const createStringDate = (date) => {

@@ -1,3 +1,4 @@
+
 import {useState} from 'react'
 import {
    Button,
@@ -31,6 +32,8 @@ import "react-datepicker/dist/react-datepicker.css"
 
 import es from 'date-fns/locale/es'
 
+import {createISODate} from './Logic/dateHandler'
+
 const TabDatosGenerales = ({
    dataAlumno,
    switchEdit,
@@ -44,6 +47,10 @@ const TabDatosGenerales = ({
    context,
    setDataAlumno,
    selectedAlumnoForEdit,
+   fechaIngreso,
+   setFechaIngreso,
+   fechaEgreso,
+   setFechaEgreso,
 }) => { 
 
    registerLocale('es',es)
@@ -367,19 +374,26 @@ const TabDatosGenerales = ({
             <Col>
                <h6>Ingreso:</h6>
                <FormControl
-                  defaultValue={dataAlumno.ingreso} 
-                  aria-label='ingreso'
-                  readOnly={switchEdit}
                   ref={(element) => modalEditRef.current[43] = element}
+                  as={DatePicker}
+                  selected={fechaIngreso}
+                  locale='es'
+                  onChange={(value) => setFechaIngreso(value)}
+                  dateFormat='dd/MM/yyyy'
+                  readOnly={switchEdit}
+
                />  
             </Col>
             <Col>
                <h6>Egreso:</h6>
                <FormControl
-                  defaultValue={dataAlumno.egreso} 
-                  aria-label='egreso'
-                  readOnly={switchEdit}
                   ref={(element) => modalEditRef.current[44] = element}
+                  selected={fechaEgreso}
+                  as={DatePicker}
+                  locale='es'
+                  onChange={(value) => setFechaEgreso(value)}
+                  dateFormat='dd/MM/yyyy'
+                  readOnly={switchEdit}
                />  
             </Col>
          </Row>
@@ -399,7 +413,7 @@ const TabDatosGenerales = ({
                      variant='outline-success'
                      size='sm'
                      onClick={() => {
-                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
+                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData,fechaIngreso,fechaEgreso)
                      }}
                   >Actualizar</Button>
                   :

@@ -10,12 +10,15 @@ import SelectFormStage1 from './SelectFormStage1.jsx'
 import SelectFormStage2 from './SelectFormStage2.jsx'
 import TableAlumnosMatricula from './TableAlumnosMatricula.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
-import ModalUpdate from './ModalUpdate.jsx'
+import ModalConfirmUpdateData from './ModalConfirmUpdateData.jsx'
 
 import {Container} from 'react-bootstrap'
 
 import {getMatricula,getHardCodeData} from '../Hooks/getFetch.js'
-import {handleGetDataAlumno} from './Logic/matriculaLogic.js'
+import {
+   handleGetDataAlumno,
+   changeEntireDataBaseToLowerCase
+} from './Logic/matriculaLogic.js'
 
 import useAuth from '../Context/Store/useAuth.jsx'
 
@@ -78,7 +81,7 @@ const Matricula = () => {
                   setShowModalEditObservaciones={setShowModalEditObservaciones}
                   setDataAlumno={setDataAlumno}
                   selectedAlumnoForEdit={selectedAlumnoForEdit}
-                  setShowModalAñadirRegistroSalud={setShowModalAñadirRegistroSalud}
+                  setShowModalEditRegistroSalud={setShowModalEditRegistroSalud}
                />
                <ModalEditRegistroSalud
                   nuevoRegistroSalud={nuevoRegistroSalud}
@@ -100,7 +103,7 @@ const Matricula = () => {
                   selectedAlumnoForEdit={selectedAlumnoForEdit}
                   context={context}
                />
-               <ModalUpdate 
+               <ModalConfirmUpdateData 
                   dataAlumno={dataAlumno}
                   datosAlumno={datosAlumno}
                   showModalUpdate={showModalUpdate}

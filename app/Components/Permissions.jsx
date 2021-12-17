@@ -28,24 +28,22 @@ const permissions = ({
    isNewUser 
 }) => { 
    let permissions = {} 
-
    isNewUser ?
       permissions = {}
       :
       permissions = dataUser?.permissions     
 
    useEffect(()=>{
-      if(addUserRef.current.tomarAsistencia === true){
+      if(addUserRef.current.tomarAsistencia?.checked === true){
          setSwitchAsistencia(false)
       } 
-      if(addUserRef.current.leerCalificaciones === true){
+      if(addUserRef.current.leerCalificaciones?.checked === true){
          setSwitchCalificacionesLeer(false)
       }
-      if(addUserRef.current.editarCalificaciones === true){
+      if(addUserRef.current.editarCalificaciones?.checked === true){
          setSwitchCalificacionesEditar(false)
       }
-   },[])
-
+   },[dataUser])
    return ( 
       <>
          {permissions === undefined ? 

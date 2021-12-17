@@ -27,7 +27,7 @@ const ModalUsuarios = ({
    userEditModal,
    setUserEditModal,
    setSelectedUser,
-   setIsNewUser
+   setIsNewUser,
 }) => { 
 
    const context = useAuth()

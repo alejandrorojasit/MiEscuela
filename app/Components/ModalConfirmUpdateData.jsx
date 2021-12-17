@@ -12,8 +12,6 @@ import {
    createDataRegistro,
 } from './Logic/modalupdateLogic.js'
 
-import {handleGetDataAlumno} from './Logic/matriculaLogic'
-
 import useAuth from '../Context/Store/useAuth.jsx'
 
 import {updateAlumnoUrl} from '../Helpers/Urls'
@@ -82,12 +80,7 @@ let dataRegistro = createDataRegistro(dataAlumno,updatedData,context.stateUser.u
                         variant='outline-success'
                         size='sm'
                         onClick={() => {
-                           handleClickAccept(updatedData,context.stateUser.token,updateAlumnoUrl,dataAlumno._id,dataRegistro,setAlumnoEditModal,setShowModalUpdate,setSwitchEdit,setSelectedAlumnoForEdit)
-                           handleGetDataAlumno(
-                              context,
-                              selectedAlumnoForEdit,
-                              setDataAlumno,
-                           )
+                           handleClickAccept(updatedData,context.stateUser.token,updateAlumnoUrl,dataAlumno._id,dataRegistro,setAlumnoEditModal,setShowModalUpdate,setSwitchEdit,setSelectedAlumnoForEdit,context,selectedAlumnoForEdit,setDataAlumno)
                         }}
                      >
                         Aceptar

@@ -50,6 +50,18 @@ const matriculaSchema = new Schema({
    observaciones: {type:Array,require:true},
    registro: {type:Array,require:true},
    registroSalud: {type:Array,require:true},
+   apellidoTutor2: {type:String,require:true},
+   nombreTutor2: {type:String,require:true},
+   dniTutor2: {type:String,require:true},
+   profesionTutor2: {type:String,require:true},
+   calle2: {type:String,require:true},
+   nro2: {type:String,require:true},
+   barrio2: {type:String,require:true},
+   localidad2: {type:String,require:true},
+   provincia2: {type:String,require:true}, 
+   telFijo2: {type:String,require:true},
+   telCelular: {type:String,require:true},
+   emailTutor2: {type:String,require:true},
 },{collection: 'Matricula'});
 
 module.exports = mongoose.model('Matricula', matriculaSchema)

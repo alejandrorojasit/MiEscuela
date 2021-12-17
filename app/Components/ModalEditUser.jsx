@@ -58,7 +58,7 @@ const ModalEditUser = ({
    return ( 
       <Modal 
          show={userEditModal} 
-         onHide={()=> handleClose(setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal)} 
+         onHide={()=> handleClose(setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal,setDataUser)} 
          onShow={()=> {
             handleShow(setDataUser,context,selectedUser)
          }}

@@ -6,12 +6,12 @@ export const handleEdit = (
    setUserEditModal,
    setUsuariosModal,
    setSelectedUser,
-   setIsNewUser
+   setIsNewUser,
 ) =>{
    setIsNewUser(false)
    setUsuariosModal(false) 
-   setUserEditModal(true)
    setSelectedUser(dataMap.usuario)
+   setUserEditModal(true)
 }
 
 export const handleAddUser = (

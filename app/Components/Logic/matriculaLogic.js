@@ -14,6 +14,7 @@ export const handleGetDataAlumno = (
    ).then((res)=>{
       res.data?.registro?.reverse()
       res.data?.registroSalud?.reverse()
+      res.data?.observaciones?.reverse()
       setDataAlumno(res.data)
    }
    )
@@ -253,10 +254,11 @@ export const toOwnName = (string) => {
 export const cleanEmptyStringArray = (dataArray) => {
    let returnArray=[]
    dataArray.map((dataMap,index)=>{
-      if(dataMap.length !== 0){
+      if(dataMap !== 'Sin Datos'){
          returnArray = [...returnArray,dataMap]
       }
    })
+   console.log(returnArray)
    return returnArray
 }
 
