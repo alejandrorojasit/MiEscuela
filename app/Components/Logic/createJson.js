@@ -13,8 +13,16 @@ import {
 
 export function createJson (){
    let jsonData = {
+      ...jsonData,
+      Nivel,
+      Sexo,
+      Vacunas,
+      Division,
+      Grado,
+      datosRatificacion,
+      datosRatificacion2,
+      Role,
+      ModelPdf,
+      Denominacion
    }
-   jsonData = {...jsonData , Nivel,Sexo,Vacunas,Division,Grado,datosRatificacion,datosRatificacion2,Role,ModelPdf,Denominacion}
-
-   console.log(jsonData)
 }

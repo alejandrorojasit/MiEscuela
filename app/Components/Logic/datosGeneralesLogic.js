@@ -1,4 +1,9 @@
-export const dniCheck = (ref,setIsValid,setIsInvalid,oldDNI) => {
+export const dniCheck = (
+   ref,
+   setIsValid,
+   setIsInvalid,
+   oldDNI
+) => {
 
    if(oldDNI){
       if(ref.current[2].value.length === 9){
@@ -40,7 +45,6 @@ export const dniCheck = (ref,setIsValid,setIsInvalid,oldDNI) => {
          if(newArray[1].length < 3 || newArray[2].length < 3){
          }
       }
-
       if(newArray[2] !== undefined){
          if(newArray[0].length === 2 && newArray[1].length === 3 && newArray[2].length === 3 ){
             setIsInvalid(false)
@@ -49,11 +53,14 @@ export const dniCheck = (ref,setIsValid,setIsInvalid,oldDNI) => {
       }else{
          setIsInvalid(true)
       }
-
    }
 }
 
-export const cuilCheck = (sexo,dni) => {
+export const cuilCheck = (
+   sexo,
+   dni
+) => {
+
    const factorNum = [5,4,3,2,7,6,5,4,3,2]
    let newArray = dni?.split('.')
    let dniWithOutDots = []
@@ -85,10 +92,7 @@ export const cuilCheck = (sexo,dni) => {
          }else{
             cuil = cuil + dataMap
          } 
-
       })
    }
-   
    return cuil 
-
 }

@@ -401,7 +401,7 @@ const TabDatosGenerales = ({
             <Col
                className='mt-2 d-flex justify-content-end'
             >
-               {DecodeToken(1).usuario.permissions.editarMatricula ?
+               {DecodeToken(context).usuario.permissions.editarMatricula ?
                switchEdit ?
                   <Button
                      variant='outline-success'

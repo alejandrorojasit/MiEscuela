@@ -374,7 +374,7 @@ const TabDatosSalud = ({
             <Col
                className='mt-2 d-flex justify-content-end'
             >
-               {DecodeToken(1).usuario.permissions.editarMatricula ?
+               {DecodeToken(context).usuario.permissions.editarMatricula ?
                      switchEdit ?
                         <Button
                            variant='outline-success'
@@ -466,7 +466,7 @@ const TabDatosSalud = ({
                className='mt-2 d-flex justify-content-end'
             >
                {
-                  DecodeToken(1).usuario.permissions.añadirRegistroSalud ?
+                  DecodeToken(context).usuario.permissions.añadirRegistroSalud ?
                      <Button
                         variant='outline-success'
                         size='sm'

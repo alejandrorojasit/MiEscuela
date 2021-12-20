@@ -28,6 +28,8 @@ import useAuth from '../Context/Store/useAuth.jsx'
 
 import {colors} from '../Helpers/styleColors.js'
 
+import {DecodeToken} from './Logic/tokenhandler'
+
 const ModalEditAlumno = ({
    alumnoEditModal,
    setAlumnoEditModal,
@@ -150,24 +152,34 @@ const ModalEditAlumno = ({
                      fechaEgreso={fechaEgreso}
                   />
                </Tab>
-               <Tab
-                  eventKey='Observaciones'
-                  title='Observaciones'
-               >
-                  <TabObservaciones
-                     dataAlumno={dataAlumno}
-                     setShowModalEditObservaciones={setShowModalEditObservaciones}
-                     showModalEditObservaciones={showModalEditObservaciones}
-                  />
-               </Tab>
-               <Tab
-                  eventKey='Registro modificaciones'
-                  title='Registro modificaciones'
-               >
-                  <TabRegistroModificaciones
-                     dataAlumno={dataAlumno}
-                  />
-               </Tab>
+            {
+               DecodeToken(context).usuario.permissions.leerObservaciones ? 
+                  <Tab
+                     eventKey='Observaciones'
+                     title='Observaciones'
+                  >
+                     <TabObservaciones
+                        dataAlumno={dataAlumno}
+                        setShowModalEditObservaciones={setShowModalEditObservaciones}
+                        showModalEditObservaciones={showModalEditObservaciones}
+                     />
+                  </Tab>
+                  :
+                  null
+            }
+            {
+               DecodeToken(context).usuario.permissions.leerRegistro ?
+                  <Tab
+                     eventKey='Registro modificaciones'
+                     title='Registro modificaciones'
+                  >
+                     <TabRegistroModificaciones
+                        dataAlumno={dataAlumno}
+                     />
+                  </Tab>
+                  :
+                  null
+            }
             </Tabs>
          </Modal.Body>
          <Modal.Footer>

@@ -9,13 +9,13 @@ import {DecodeToken} from '../Components/Logic/tokenhandler.js'
 
 export const AdminRoute = ({children}) => {
 
-   const {stateUser} = useAuth()
+   const context = useAuth()
 
    switch(true){
-      case (stateUser.isAuthenticated === false):
+      case (context.stateUser.isAuthenticated === false):
          return <Navigate to='/LogIn'/>
-      case (stateUser.isAuthenticated === true):
-         if(DecodeToken(1).usuario.role === 'Administrador Informatico'){
+      case (context.stateUser.isAuthenticated === true):
+         if(DecodeToken(context).usuario.role === 'Administrador Informatico'){
          return(
             children 
          )         

@@ -30,7 +30,7 @@ const Menu = () => {
             >
                <Nav.Link >Inicio</Nav.Link>
                {
-                  DecodeToken(1).usuario.permissions.leerMatricula || DecodeToken(1).usuario.permissions.editarMatricula ?
+                  DecodeToken(context).usuario.permissions.leerMatricula || DecodeToken(context).usuario.permissions.editarMatricula ?
                      <Nav.Link 
                         as={Link} 
                         to='/Matricula'
@@ -44,7 +44,7 @@ const Menu = () => {
                   title='Generar'
                >
                   {
-                     DecodeToken(1).usuario.permissions.ratificacionInscripcion ?
+                     DecodeToken(context).usuario.permissions.ratificacionInscripcion ?
                         <NavDropdown.Item 
                            as={Link} 
                            to='/RatificacionInscripcion'
@@ -57,7 +57,7 @@ const Menu = () => {
                </NavDropdown>
             </Nav>
             {
-               DecodeToken(1).usuario.role === 'Administrador Informatico' ? 
+               DecodeToken(context).usuario.role === 'Administrador Informatico' ? 
                <Nav>
                   <Nav.Link 
                      as={Link} 

@@ -97,6 +97,19 @@ const permissions = ({
                />
             )
          }
+         <h6>Filtro de Observaciones:</h6>
+               {
+                  Object.values(context?.stateHardCodeData?.hardCodeData?.filtroObservaciones).map((dataMap,index)=>
+                     <Form.Check
+                        key={dataMap}
+                        type='checkbox'
+                        label={dataMap}
+                        ref={(element)=> {addUserRef.current[Object.keys(context?.stateHardCodeData?.hardCodeData?.filtroObservaciones)[index]]=element}}
+                        onChange={()=>setReRender(!reRender)}
+                        defaultChecked={permissions[Object.keys(context?.stateHardCodeData?.hardCodeData?.filtroObservaciones)[index]]}
+                     />
+                  )
+               }
          <h6>Asistencia:</h6>
          <Form.Check
             type='checkbox'

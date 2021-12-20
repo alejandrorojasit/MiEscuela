@@ -1,5 +1,17 @@
-import {Modal,Form,FormControl,Button,Col} from 'react-bootstrap'
-import {handleClose,handleChange,handleClickAñadir} from './Logic/modalEditObservacionesLogic'
+import {
+   Modal,
+   Form,
+   FormControl,
+   Button,
+   Col
+} from 'react-bootstrap'
+
+import {
+   handleClose,
+   handleChange,
+   handleClickAñadir
+} from './Logic/modalEditObservacionesLogic'
+
 import {updateObservacionesUrl} from '../Helpers/Urls.js'
 
 const modalEditObservaciones = ({
@@ -33,7 +45,10 @@ const modalEditObservaciones = ({
                as='textarea'
                rows={3}
                aria-label='nuevaObservacion'
-               onChange={(event) => handleChange(event,setNuevaObservacion)}
+               onChange={(event) => handleChange(
+                  event,
+                  setNuevaObservacion
+               )}
             />
          </Modal.Body>
          <Modal.Footer>
@@ -42,8 +57,13 @@ const modalEditObservaciones = ({
                variant='outline-primary'
                size='sm'
                onClick={() => {
-                  handleClickAñadir (nuevaObservacionState,dataAlumno._id,context,updateObservacionesUrl,selectedAlumnoForEdit,setDataAlumno)
-                  
+                  handleClickAñadir (
+                     nuevaObservacionState,
+                     dataAlumno._id,context,
+                     updateObservacionesUrl,
+                     selectedAlumnoForEdit,
+                     setDataAlumno
+                  )
                   setShowModalEditObservaciones(false)
                }}
             >
