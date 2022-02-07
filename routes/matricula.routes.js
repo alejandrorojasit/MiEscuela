@@ -85,7 +85,7 @@ app.get('/activo',verificarToken,(req,res) => {
 
 app.get('/Single',verificarToken,(req,res)=> {
 
-   res.json({message: 'Peticion sin identificador de _id'})
+   res.json([])
 })
 
 app.get('/Single/:_id',verificarToken,(req,res) => {

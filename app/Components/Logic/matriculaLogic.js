@@ -185,7 +185,7 @@ export const handleClickLimpiarFiltros = (
    setDivision,
 )=> {
    setNivel('Nivel')
-   setGrado('Grado')
+   setGrado('Grado/Año')
    setDivision('Division')
    setIsFiltredStage1(false)
    setIsFiltredStage2(false)
@@ -211,7 +211,7 @@ setIsFiltredStage1,
    setDivision,
 )=> {
    setNivel('Nivel')
-   setGrado('Grado')
+   setGrado('Grado/Año')
    setDivision('Division')
    setIsFiltredStage1(false)
    setIsFiltredStage2(false);

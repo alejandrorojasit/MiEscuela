@@ -1,3 +1,5 @@
+import { useState,useEffect } from 'react'
+
 import {
    Button,
    Row,
@@ -12,14 +14,22 @@ import { DecodeToken } from './Logic/tokenhandler'
 
 import useAuth from '../Context/Store/useAuth.jsx'
 
+import { handleFilter } from './Logic/tabObservacionesLogic'
+
 const TabObservaciones = ({
+
    dataAlumno,
    setShowModalEditObservaciones,
    showModalEditObservaciones,
-}) => { 
 
+}) => { 
    const context  = useAuth()
-   const filtredObservaciones = []
+   const [filtredData,setFiltredData] = useState([]) 
+
+   useEffect(()=>{
+      setFiltredData(dataAlumno?.observaciones)
+   },[dataAlumno])
+
    return ( 
       <>
          <Row>
@@ -41,9 +51,11 @@ const TabObservaciones = ({
             >
                <Form.Select
                   aria-label='Filtro' 
+                  onChange={(event)=>setFiltredData(handleFilter(event,dataAlumno))}
                >
                   <option>Filtrar</option>
                   {Object.keys(DecodeToken(context).usuario.permissions).map((dataMap,index)=>{
+                     console.log(dataMap)
                      switch(true){
                         case dataMap === 'filterPreceptoria' && DecodeToken(context).usuario.permissions[dataMap]:
                            return(
@@ -136,7 +148,7 @@ const TabObservaciones = ({
                   </thead>
                   <tbody>
                      {
-                        dataAlumno.observaciones?.filter(dataFilter => 
+                        filtredData?.filter(dataFilter => 
                               dataFilter.puesto === 'Auxiliar Sec. Administrativo/a' && DecodeToken(context).usuario.permissions.filterSecretariaAdministrativa
                            ||
                               dataFilter.puesto === 'Coordinacion Pedagogica Nivel Inicial' && DecodeToken(context).usuario.permissions.filterCoordinacionPedagogica
