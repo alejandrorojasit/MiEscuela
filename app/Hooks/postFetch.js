@@ -11,7 +11,7 @@ export const postFetchUpdateRegistroSalud = async (
       _id : id,
       data: dataToSend,
    }
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
    const config = {
       headers: {                    
          "Accept": "application/json",                    
@@ -46,7 +46,7 @@ export const postFetchUpdateAlumno = async (
       data : updatedData,
       dataRegistro: dataRegistro,
    }
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
    const config = {
       headers: {                    
          "Accept": "application/json",                    
@@ -77,7 +77,7 @@ export const postFetchUpdateUser = async (
       _id : _id, 
       data : updatedData,
    }
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
    const config = {
       headers: {                    
          "Accept": "application/json",                    
@@ -108,7 +108,7 @@ export const postUpdateWholeDB = async (
       _id : id, 
       data : updatedData,
    }
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
    const config = {
       headers: {                    
          "Accept": "application/json",                    
@@ -137,7 +137,7 @@ export const postFetchAddUser = async (
    permissions,
    apiUrl
 ) => {
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
 
    const dataPost = {
       usuario,
@@ -170,7 +170,7 @@ export const postFetchLogIn = async (
    password,
    apiUrl
 ) => {
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
    const dataPost = {
       usuario:usuario,
       password:password
@@ -194,7 +194,7 @@ export const postFetchRatificacion = async (
    division,
    apiUrl
 ) => {
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
    const dataPost = {
       NIVEL:nivel,
       GRADO:grado,
@@ -224,7 +224,7 @@ export const postFetchVerifyToken = async (
    token,
    apiUrl
 ) => {
-   const url= `http://${baseUrl}:3000/${apiUrl}`  
+   const url= `${baseUrl}/${apiUrl}`  
    const dataPost = {}
    const config = {
       headers: {                    

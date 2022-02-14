@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-let jwtSignature = process.env.JWT_SIGNATURE
+let jwtSignature = 'nemesisSignature'
 let verificarToken = (
    req, 
    res, 

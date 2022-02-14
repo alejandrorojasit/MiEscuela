@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const {verificarToken} = require('../autentication')
 const login = require('../models/login')
 
-let jwtSignature = process.env.JWT_SIGNATURE
+let jwtSignature = 'nemesisSignature'
 
 app.post('/',(req,res)=>{
     let body = req.body

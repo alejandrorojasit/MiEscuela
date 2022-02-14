@@ -22,7 +22,7 @@ import {getHardCodeData} from '../../Hooks/getFetch'
 
 export const AuthContext = createContext()
 
-export const baseUrl = window.location.hostname
+export const baseUrl = 'https://us-central1-miescuela-5e8d6.cloudfunctions.net/app' 
 
 window.addEventListener('beforeunload' ,(ev) => {
    logoutUser()
@@ -54,7 +54,7 @@ const AuthProvider = (props) => {
                if(res.statusText === 'Unauthorized'){
                   dispatch(setCurrentUser(''))
                }
-               if(res.statusText === 'OK'){
+               if(res.data.verification){
                   getHardCodeData(stateUser.token)
                      .then(res => {
                         dispatchHardCodeData(setHardCodeData(res.data[0]))         

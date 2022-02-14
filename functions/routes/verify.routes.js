@@ -12,6 +12,7 @@ app.get('/', verificarToken,(req,res) => {
 app.post('/', verificarToken,(req,res) => {
         res.json({
             ok:true,
+            verification:true
         })
 })
 

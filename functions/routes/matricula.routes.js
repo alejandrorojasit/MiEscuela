@@ -75,7 +75,7 @@ app.post('/updateWholeDB', verificarToken,(req,res) => {
    )
 })
 
-app.get('/activo',verificarToken,(req,res) => {
+app.get('/activo',(req,res) => {
 
    data.find({estado:"Activo"},
       (err,data)=>

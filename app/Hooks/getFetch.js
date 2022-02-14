@@ -15,7 +15,7 @@ export const getFetchUsuarios = async (token) => {
          "Authorization": token                
       }           
    } 
-   const url= `http://${baseUrl}:3000/${usuariosUrl}` 
+   const url= `${baseUrl}/${usuariosUrl}` 
    try{
    const dataRes = await axios.get(
       url,
@@ -41,7 +41,7 @@ export const getFetchUsuarioSingle = async (
          "Authorization": token                
       }           
    } 
-   const url= `http://${baseUrl}:3000/${usuariosUrl}/${usuario}` 
+   const url= `${baseUrl}/${usuariosUrl}/${usuario}` 
    try{
 const dataRes = await axios.get(
       url,
@@ -63,7 +63,7 @@ export const getMatricula = async (token) => {
          "Authorization": token                
       }           
    } 
-   const url= `http://${baseUrl}:3000/${matriculaUrlActivo}` 
+   const url= `${baseUrl}/${matriculaUrlActivo}` 
    try{
    const dataRes = await axios.get(
       url,
@@ -86,7 +86,7 @@ export const getMatriculaSingle = async (token,DNI) => {
          "Authorization": token                
       }           
    } 
-   const url= `http://${baseUrl}:3000/${matriculaUrlSingle}/${DNI}` 
+   const url= `${baseUrl}/${matriculaUrlSingle}/${DNI}` 
    try{
    const dataRes = await axios.get(
       url,
@@ -107,7 +107,7 @@ export const getHardCodeData = async (token) => {
          "Authorization": token                
       }           
    } 
-   const url= `http://${baseUrl}:3000/${hardCodeData}` 
+   const url= `${baseUrl}/${hardCodeData}` 
    try{
    const dataRes = await axios.get(
       url,

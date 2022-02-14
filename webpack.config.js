@@ -5,11 +5,6 @@ module.exports = {
    devServer: {
       open: true,
       port: 3001,
-      proxy:{
-         '*': 'http://[::1]:3000/',
-         "secure": false,
-         "changeOrigin":true,
-      },
    },
    entry:['react-hot-loader/patch','./app/index'],
    output: {
