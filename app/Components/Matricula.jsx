@@ -14,7 +14,8 @@ import ModalConfirmUpdateData from './ModalConfirmUpdateData.jsx'
 
 import {Container} from 'react-bootstrap'
 
-import {getMatricula,getHardCodeData} from '../Hooks/getFetch.js'
+import {getMatriculaActivo,getHardCodeData} from '../Hooks/getFetch.js'
+
 import {
    handleGetDataAlumno,
    changeEntireDataBaseToLowerCase
@@ -46,7 +47,7 @@ const Matricula = () => {
    const context  =  useAuth()
 
    useEffect(()=> {
-      getMatricula(context.stateUser.token).then((res) =>{
+      getMatriculaActivo(context.stateUser.token).then((res) =>{
          setDatosAlumno(res.data)
       }
       ); 

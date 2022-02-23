@@ -1,32 +1,46 @@
-import {Modal} from 'react-bootstrap'
+import {Modal,Button} from 'react-bootstrap'
 
-import LoadingSpinner from './LoadingSpinner.jsx'
+const ModalAlert = ({stateShow,setStateShow,message,type,callBack}) => { 
 
-const modalAlert = ({
-   selectedItems,
-   showModalPdf,
-   setShowModalPdf,
-   filtredDatosAlumnoStage1,
-   isRender,
-   setIsRender,
-}) => {
+   const handleCancel = () => {
+      setStateShow(false)
+      callBack(false)
+   }
 
-   const handleClose = () => isRender(false)
-
-   return (
-      <Modal 
-         show={isRender} 
-         onHide={handleClose}
-      >
-         <Modal.Header 
-            closeButton
+   const handleAccept = () => {
+      setStateShow(false)
+      callBack(true)
+   }
+      return ( 
+         <Modal
+            show={stateShow}
          >
-         <h6>Generando pdf por favor espere...</h6>
+         <Modal.Header
+            className='d-flex justify-content-center'
+         >
+            <h6>Mensaje de alerta</h6>
          </Modal.Header>
          <Modal.Body>
-            <LoadingSpinner/>
+            {message}
          </Modal.Body>
-      </Modal>
-   )
+         <Modal.Footer>
+            <Button
+               variant='outline-success'
+               size='sm'
+               onClick={()=> handleAccept()}
+            >
+                 Aceptar 
+            </Button>
+            <Button
+               variant='outline-success'
+               size='sm'
+               onClick={()=> handleCancel()}
+            >
+                 Cancelar 
+            </Button>
+         </Modal.Footer>
+         </Modal>
+                )
 }
-export default modalAlert
+
+export default ModalAlert

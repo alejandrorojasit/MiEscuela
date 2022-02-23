@@ -2,8 +2,10 @@ import axios from 'axios'
 import {baseUrl} from '../Context/Store/AuthProvider.jsx'
 import {
    usuariosUrl,
+   matriculaUrlCompleta,
    matriculaUrlSingle,
    matriculaUrlActivo,
+   matriculaUrlBaja,
    hardCodeData,
 } from '../Helpers/Urls'
 
@@ -55,7 +57,9 @@ const dataRes = await axios.get(
    
 }
 
-export const getMatricula = async (token) => {
+export const getMatriculaActivo = async (
+   token,
+) => {
    const config = {
       headers: {                    
          "Accept": "application/json",                    
@@ -75,7 +79,54 @@ export const getMatricula = async (token) => {
    {
       return(err.response)
    }
-   
+}
+
+export const getMatriculaCompleta = async (
+   token,
+) => {
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }           
+   } 
+   const url= `${baseUrl}/${matriculaUrlCompleta}` 
+   try{
+   const dataRes = await axios.get(
+      url,
+      config,
+   )
+   return dataRes
+   }
+   catch(err)
+   {
+      return(err.response)
+   }
+}
+
+export const getMatriculaBaja = async (
+   token,
+) => {
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }           
+   } 
+   const url= `${baseUrl}/${matriculaUrlBaja}` 
+   try{
+   const dataRes = await axios.get(
+      url,
+      config,
+   )
+   return dataRes
+   }
+   catch(err)
+   {
+      return(err.response)
+   }
 }
 
 export const getMatriculaSingle = async (token,DNI) => {

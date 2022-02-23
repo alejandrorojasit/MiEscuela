@@ -1,8 +1,13 @@
+const mongoose = require('mongoose')
+const {Schema} = mongoose
+
+const matriculaSchemaObject = require('../models/matriculaSchemaObject')
+const matriculaSchema = new Schema(matriculaSchemaObject)
+const data = require('../models/matricula')
+const modelToBackUpDb = mongoose.model('2020',matriculaSchema)
 const express = require('express')
 const app = express.Router()
 const {verificarToken} = require('../autentication')
-
-const data = require('../models/matricula')
 
 app.post('/Ratificacion',verificarToken,(req,res) => {
    let body =  req.body
@@ -75,6 +80,17 @@ app.post('/updateWholeDB', verificarToken,(req,res) => {
    )
 })
 
+app.post('/copywholedb',verificarToken,async(req,res) => {
+   await modelToBackUpDb.create(req.body.data,(err,result)=>{
+      if(err){
+         res.json(err)
+      }else{
+         res.json(result)
+      }
+   })
+      }
+)
+
 app.get('/activo',(req,res) => {
 
    data.find({estado:"Activo"},
@@ -83,12 +99,27 @@ app.get('/activo',(req,res) => {
    )
 })
 
-app.get('/Single',verificarToken,(req,res)=> {
+app.get('/completa',(req,res) => {
 
+   data.find(
+      (err,data)=>
+      res.json(data)
+   )
+})
+
+app.get('/baja',(req,res) => {
+
+   data.find({estado:"Baja"},
+      (err,data)=>
+      res.json(data)
+   )
+})
+
+app.get('/single',verificarToken,(req,res)=> {
    res.json([])
 })
 
-app.get('/Single/:_id',verificarToken,(req,res) => {
+app.get('/single/:_id',verificarToken,(req,res) => {
 
    data.findOne(
    {

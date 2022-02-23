@@ -129,6 +129,34 @@ export const postUpdateWholeDB = async (
    }
 }
 
+export const postCopyWholeDb = async (
+   token,
+   dataDb,
+   apiUrl,
+) => {
+   let objetToSend = {
+      data : dataDb,
+   }
+   const url= `${baseUrl}/${apiUrl}`  
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }           
+   }
+   try{
+      const resData = await axios.post(
+         url,
+         objetToSend,
+         config
+      )
+      return resData
+   }
+   catch(err) {
+      return(err.response)
+   }
+}
 export const postFetchAddUser = async (
    token,
    usuario,

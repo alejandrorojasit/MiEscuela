@@ -31,12 +31,38 @@ const Menu = () => {
                <Nav.Link >Inicio</Nav.Link>
                {
                   DecodeToken(context).usuario.permissions.leerMatricula || DecodeToken(context).usuario.permissions.editarMatricula ?
-                     <Nav.Link 
+                     <NavDropdown
+                        title='Administracion'
+                     >
+                     <NavDropdown.Item 
+                        as={Link} 
+                        to='/NuevoCicloLectivo'
+                     >
+                        Nuevo Ciclo Lectivo
+                     </NavDropdown.Item>
+                     <NavDropdown.Item 
                         as={Link} 
                         to='/Matricula'
                      >
-                        Matricula
-                     </Nav.Link>
+                        Fin de Ciclo Lectivo
+                     </NavDropdown.Item>
+                     </NavDropdown>
+                     :
+                     null
+               }
+
+               {
+                  DecodeToken(context).usuario.permissions.leerMatricula || DecodeToken(context).usuario.permissions.editarMatricula ?
+                     <NavDropdown
+                        title='Matricula'
+                     >
+                     <NavDropdown.Item 
+                        as={Link} 
+                        to='/Matricula'
+                     >
+                        Matricula General
+                     </NavDropdown.Item>
+                     </NavDropdown>
                      :
                      null
                }

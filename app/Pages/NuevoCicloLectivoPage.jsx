@@ -5,10 +5,11 @@ import {
 
 import Header from '../Components/Header.jsx'
 import Menu from '../Components/Menu.jsx'
+import NuevoCicloLectivo from '../Components/NuevoCicloLectivo.jsx'
 
 import { colors } from '../Helpers/styleColors.js'
 
-const HomePage = () => {
+const NuevoCicloLectivoPage = () => {
    return (
       <Container 
          fluid
@@ -21,9 +22,10 @@ const HomePage = () => {
             <Menu/>
          </Row>
          <Row> 
+            <NuevoCicloLectivo/>
          </Row>
       </Container>
    )
 }
 
-export default HomePage
+export default NuevoCicloLectivoPage

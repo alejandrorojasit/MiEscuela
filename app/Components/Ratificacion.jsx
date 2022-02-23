@@ -9,7 +9,7 @@ import SelectFormStage1 from './SelectFormStage1.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
 import ModalModelPdfSelection from './ModalModelPdfSelection.jsx'
 
-import {getMatricula} from '../Hooks/getFetch.js'
+import {getMatriculaActivo} from '../Hooks/getFetch.js'
 
 import useAuth from '../Context/Store/useAuth.jsx'
 
@@ -32,7 +32,7 @@ const Ratificacion = () => {
    const context = useAuth()
 
    useEffect(()=> {
-      getMatricula(context.stateUser.token).then((res)=> 
+      getMatriculaActivo(context.stateUser.token).then((res)=> 
          setDatosAlumno(res.data)
       ) 
    },[])

@@ -12,6 +12,7 @@ import RatificacionInscripcionPage from '../Pages/RatificacionInscripcionPage.js
 import AdminPannelPage from '../Pages/AdminPannelPage.jsx'
 import ForbiddenPage from '../Pages/ForbiddenPage.jsx'
 import MatriculaPage from '../Pages/MatriculaPage.jsx'
+import NuevoCicloLectivoPage from '../Pages/NuevoCicloLectivoPage.jsx'
 
 import useAuth from '../Context/Store/useAuth.jsx'
 
@@ -76,6 +77,17 @@ const AppRouter = () => {
                         <Navigate 
                            to='/LogIn'
                         />
+               }
+            />
+            <Route
+               path='/NuevoCicloLectivo'
+               element={
+                  stateUser.isAuthenticated ? 
+                     <NuevoCicloLectivoPage/>
+                     :
+                     <Navigate 
+                  to='/LogIn'
+                     />
                }
             />
             <Route
