@@ -1,6 +1,6 @@
 import {
    setCurrentUser,
-   logoutUser
+   logOutCurrentUser
 } from '../../Context/Actions/autentication.action.js'
 
 import {postFetchLogIn} from '../../Hooks/postFetch.js'
@@ -24,8 +24,10 @@ export const handleChangePassowrd =(
 export const handleClick = (
    usuario,
    password,
-   context
+   context,
+   setShowModalAlertSpinner
 ) => {
+   setShowModalAlertSpinner(true)
    postFetchLogIn(
       usuario,
       password,
@@ -35,10 +37,9 @@ export const handleClick = (
          jwtToken(res.data.token,context)
       }else {
          alert(res.data.err.message)
-         logoutUser(context.dispatch)
+         logOutCurrentUser()
       }
    })
-   
 }
 
 const jwtToken = (token,context) => {

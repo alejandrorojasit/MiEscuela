@@ -168,6 +168,7 @@ export const handleClickApplyFilter = (
          break
       case nivelState !== 'Nivel' && gradoState !== 'Grado/Año' && divisionState !== 'Division':
          newArray = datosAlumno.filter((dataFilter) => dataFilter.nivel === nivelState && dataFilter.grado === parseInt(gradoState) && dataFilter.division === divisionState)
+         console.log(newArray)
          setIsFiltredStage1(true)
          setFiltredDatosAlumnoStage1(newArray)
          break

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {baseUrl} from '../Context/Store/AuthProvider.jsx'
+import {baseUrl} from '../Context/Store/AuthProvider'
 
 export const postFetchUpdateRegistroSalud = async (
    token,
@@ -7,6 +7,7 @@ export const postFetchUpdateRegistroSalud = async (
    apiUrl,
    id,
 ) => {
+
    let objetToSend = {
       _id : id,
       data: dataToSend,
@@ -268,6 +269,7 @@ export const postFetchVerifyToken = async (
          config
       )
       return resData
+
    }catch(err){
       return(err.response)
    }
