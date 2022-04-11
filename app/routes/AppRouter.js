@@ -14,6 +14,7 @@ import ForbiddenPage from '../Pages/ForbiddenPage'
 import MatriculaPage from '../Pages/MatriculaPage'
 import NuevoCicloLectivoPage from '../Pages/NuevoCicloLectivoPage'
 import NuevoIngresoPage from '../Pages/NuevoIngresoPage'
+import NuevaDenominacionPage from '../Pages/NuevaDenominacionPage'
 
 import useAuth from '../Context/Store/useAuth'
 
@@ -85,6 +86,17 @@ const AppRouter = () => {
                element={
                      stateUser.isAuthenticated ? 
                         <NuevoIngresoPage/> 
+                        : 
+                        <Navigate 
+                           to='/LogIn'
+                        />
+               }
+            />
+            <Route 
+               path='/NuevaDenominacion'
+               element={
+                     stateUser.isAuthenticated ? 
+                        <NuevaDenominacionPage/> 
                         : 
                         <Navigate 
                            to='/LogIn'

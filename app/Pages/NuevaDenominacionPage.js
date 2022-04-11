@@ -1,18 +1,15 @@
 import { useEffect } from 'react'
 import {
    Container,
-   Row,
-   Button
+   Row
 } from 'react-bootstrap'
 
-import Header from '../Components/Header'
 import Menu from '../Components/Menu'
 import WebFont from 'webfontloader'
+import NuevaDenominacionForm from '../Components/NuevaDenominacionForm'
 
-import { colors } from '../Helpers/styleColors.js'
-
-const HomePage = () => {
-
+const NuevaDenominacionPage = () => {
+   
    useEffect(()=>{
       WebFont.load({
          google:{
@@ -23,16 +20,18 @@ const HomePage = () => {
 
    return (
       <Container 
+         style={{fontFamily:'Droid Sans'}}
       >
          <Row>
          </Row>
          <Row>
             <Menu/>
          </Row>
-         <Row> 
+         <Row>
+            <NuevaDenominacionForm/>
          </Row>
       </Container>
    )
 }
 
-export default HomePage
+export default NuevaDenominacionPage

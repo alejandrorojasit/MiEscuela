@@ -17,7 +17,6 @@ import {colors} from '../Helpers/styleColors'
 const style = {
    form: {
       height: '100vh',
-      background:colors.background,
       color:colors.darken,
 
    },
@@ -95,6 +94,16 @@ const LoginForm = ({
                   <Form.Group>
                      <Form.Label>Contraseña</Form.Label>
                      <Form.Control 
+                        onKeyPress={(event) => {
+                           if(event.code === 'Enter'){
+                              handleClick(
+                                 usuario,
+                                 password,
+                                 context,
+                                 setShowModalAlertSpinner
+                              )
+                        }
+                        }}
                         placeholder='Ingrese Contraseña' 
                         type='password' 
                         onChange={(event) => handleChangePassowrd(

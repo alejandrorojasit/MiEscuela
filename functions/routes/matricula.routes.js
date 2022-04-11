@@ -21,6 +21,15 @@ app.post('/Ratificacion',verificarToken,(req,res) => {
    )
 })
 
+app.post('/nuevoAlumno',verificarToken,(req,res)=> {
+
+   sendData = new data ({...req.body,estado:'Activo'})
+   sendData.save(
+      (err,data)=>
+         res.json(data)
+   )
+})
+
 app.post('/UpdateAlumno', verificarToken,(req,res) => {
 
    let _id = req.body._id

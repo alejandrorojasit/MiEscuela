@@ -13,7 +13,7 @@ const LogInPage = () => {
    useEffect(()=>{
       WebFont.load({
          google:{
-            families:['Lato']
+            families:['Droid Sans']
          }
       })
    },[])
@@ -22,7 +22,7 @@ const LogInPage = () => {
 
    return (
       <Container 
-         style={{fontFamily:'Lato'}}
+         style={{fontFamily:'Droid Sans'}}
       >
          <ModalAlertSpinner
             message={`Conectando al servidor de login.Por favor espere`}

@@ -101,7 +101,7 @@ const TabDatosGenerales = ({
                   aria-label='nDniAlumno'
                   readOnly={switchEdit}
                   ref={(element) => modalEditRef.current[2] = element}
-                  onChange={() => dniCheck(modalEditRef,setIsValid,setIsInvalid,false)}
+                  onChange={() => dniCheck(modalEditRef,2,setIsValid,setIsInvalid,false)}
                   isValid={isValid}
                   isInvalid={isInvalid}
                /> 

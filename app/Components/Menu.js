@@ -74,10 +74,18 @@ const Menu = () => {
                         >
                            Nuevo Ingreso
                         </NavDropdown.Item>
+                        <NavDropdown.Item 
+                           as={Link} 
+                           to='/NuevaDenominacion'
+                        >
+                           Nueva Denominacion
+                        </NavDropdown.Item>
+
                      </NavDropdown>
                      :
                      null
                }
+
                <NavDropdown 
                   title='Generar'
                >

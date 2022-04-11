@@ -49,15 +49,15 @@ const NuevoCicloLectivo = () => {
    }
 
    return (
-      <Container className="mt-2 d-flex">
+      <Container 
+         fluid
+         className="mt-2 d-flex border border-success p-2"
+      >
          <Row>
-            <Col>
                <ModalAlertSpinner
                   stateShow={showModalAlertSpinner}
                   message={messageAlertSpinner}
                />
-            </Col>
-            <Col>
                <ModalAlert
                   stateShow={showModalAlert}
                   setStateShow={setShowModalAlert}
@@ -65,14 +65,13 @@ const NuevoCicloLectivo = () => {
                   type={"alert"}
                   callBack={callBack}
                />
-            </Col>
-            <Col>
                <ModalPromocionarMasivamente
                   stateShow={showModalPromocionarMasivamente}
                   setStateShow={setShowModalPromocionarMasivamente}
                />
-            </Col>
-            <Col>
+            <Col
+               className='justify-content-start'
+            >
                <Button
                   variant="outline-success"
                   size="sm"

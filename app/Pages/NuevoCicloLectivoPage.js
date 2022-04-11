@@ -16,14 +16,14 @@ const NuevoCicloLectivoPage = () => {
    useEffect(()=>{
          WebFont.load({
             google:{
-               families:['Lato']
+               families:['Droid Sans']
             }
          })
       },[])
    
    return (
       <Container 
-         style={{fontFamily:'Lato'}} 
+         style={{fontFamily:'Droid Sans'}} 
       >
          <Row>
          </Row>

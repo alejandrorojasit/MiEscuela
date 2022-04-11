@@ -13,6 +13,8 @@ const hardCodeDataSchema =  new Schema({
    role: {type:Array,require:true},
    sexo: {type:Array,require:true},
    vacunas: {type:Array,require:true},
+   denominacion: {type:Array,require:true},
+   ultimoLegajo: {type:Number,require:true}
 },{collection: 'HardCodeData'})
 
 module.exports = mongoose.model('HardCodeData',hardCodeDataSchema)

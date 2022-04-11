@@ -31,3 +31,7 @@ export const updateObservacionesUrl = 'api/matricula/updateObservaciones'
 export const updateUser = 'api/usuarios/updateUsuario'
 
 export const updateRegistroSaludUrl = 'api/matricula/updateRegistroSalud'
+
+export const nuevaDenominacionUrl = 'api/hardCodeData/nuevaDenominacion'
+
+export const nuevoAlumnoUrl = 'api/matricula/nuevoAlumno'

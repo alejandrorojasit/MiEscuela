@@ -11,10 +11,10 @@ const ModalAlert = ({stateShow,setStateShow,message,type,callBack}) => {
       setStateShow(false)
       callBack(true)
    }
-      return ( 
-         <Modal
-            show={stateShow}
-         >
+   return ( 
+      <Modal
+         show={stateShow}
+      >
          <Modal.Header
             className='d-flex justify-content-center'
          >
@@ -24,23 +24,38 @@ const ModalAlert = ({stateShow,setStateShow,message,type,callBack}) => {
             {message}
          </Modal.Body>
          <Modal.Footer>
-            <Button
-               variant='outline-success'
-               size='sm'
-               onClick={()=> handleAccept()}
-            >
-                 Aceptar 
-            </Button>
-            <Button
-               variant='outline-success'
-               size='sm'
-               onClick={()=> handleCancel()}
-            >
-                 Cancelar 
-            </Button>
+            {
+               type === 'AcceptCancel' ?
+                  <>
+                     <Button
+                        variant='outline-success'
+                        size='sm'
+                        onClick={()=> handleAccept()}
+                     >
+                        Aceptar 
+                     </Button>
+                     <Button
+                        variant='outline-success'
+                        size='sm'
+                        onClick={()=> handleCancel()}
+                     >
+                        Cancelar 
+                     </Button>
+                  </>
+                  :
+                  <>
+                     <Button
+                        variant='outline-success'
+                        size='sm'
+                        onClick={()=> handleAccept()}
+                     >
+                        Aceptar 
+                     </Button>
+                  </>
+            }
          </Modal.Footer>
-         </Modal>
-                )
+      </Modal>
+   )
 }
 
 export default ModalAlert

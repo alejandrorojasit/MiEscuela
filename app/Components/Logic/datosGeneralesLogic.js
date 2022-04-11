@@ -1,13 +1,40 @@
+export const celularCheck = (
+   numberValue, 
+   setIsValid,
+   setIsInvalid
+) => {
+   if(numberValue.length === 10){
+      setIsValid(true)
+      setIsInvalid(false)
+   }else{
+      setIsValid(false)
+      setIsInvalid(true)
+   } 
+}
+export const telFijoCheck = (
+   numberValue,
+   setIsValid,
+   setIsInvalid
+) => {
+   if(numberValue.length === 6){
+      setIsValid(true)
+      setIsInvalid(false)
+   }else{
+      setIsValid(false)
+      setIsInvalid(true)
+   }
+}
 export const dniCheck = (
    ref,
+   numberOfRef,
    setIsValid,
    setIsInvalid,
    oldDNI
 ) => {
 
    if(oldDNI){
-      if(ref.current[2].value.length === 9){
-         let newArray = ref.current[2].value.split('.')
+      if(ref.current[numberOfRef].value.length === 9){
+         let newArray = ref.current[numberOfRef].value.split('.')
          if(newArray[0].length < 1){
             setIsInvalid(true)
          }
@@ -27,17 +54,17 @@ export const dniCheck = (
       }
    }
 
-   if(ref.current[2].value.length < 9){
+   if(ref.current[numberOfRef].value.length < 9){
       setIsValid(false)
       setIsInvalid(true)
    }
 
-   if (ref.current[2].value.length > 10){
+   if (ref.current[numberOfRef].value.length > 10){
       setIsInvalid(true)
    }
 
-   if(ref.current[2].value.length === 10){
-      let newArray = ref.current[2].value.split('.')
+   if(ref.current[numberOfRef].value.length === 10){
+      let newArray = ref.current[numberOfRef].value.split('.')
       if(newArray[0].length < 2){
          setIsInvalid(true)
       }

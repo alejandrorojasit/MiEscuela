@@ -31,6 +31,9 @@ export const handleLastName = (
    setIsFiltredStage2
 )=> {
    let newArray = []
+   console.log(event.target.value.length)
+   console.log(isFiltredStage1)
+   console.log(datosAlumno)
    if(event.target.value.length >= 3 && isFiltredStage1 === true){
       newArray = filtredDatosAlumnoStage1.filter((dataFilter) => dataFilter.apellido.indexOf(toOwnName(event.target.value)) > -1)
       setIsFiltredStage2(true)

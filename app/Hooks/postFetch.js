@@ -274,3 +274,62 @@ export const postFetchVerifyToken = async (
       return(err.response)
    }
 }
+
+export const postFetchNuevaDenominacion = async (
+   token,
+   apiUrl,
+   denominacion
+
+) => {
+   const url = `${baseUrl}/${apiUrl}`
+
+   const dataPost = {
+      denominacion
+   }
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }           
+   }
+   try{
+      const resData = await axios.post(
+         url,
+         dataPost,
+         config
+      )
+      return resData
+   }
+   catch(err) {
+      return(err.response)
+   }
+}
+
+export const postFetchNuevoAlumno = async (
+   token,
+   apiUrl,
+   dataPost
+) => {
+
+const url = `${baseUrl}/${apiUrl}`
+
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }           
+   }
+   try{
+      const resData = await axios.post(
+         url,
+         dataPost,
+         config
+      )
+      return resData
+   }
+   catch(err) {
+      return(err.response)
+   }
+}
