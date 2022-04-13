@@ -55,7 +55,6 @@ const TabObservaciones = ({
                >
                   <option>Filtrar</option>
                   {Object.keys(DecodeToken(context).usuario.permissions).map((dataMap,index)=>{
-                     console.log(dataMap)
                      switch(true){
                         case dataMap === 'filterPreceptoria' && DecodeToken(context).usuario.permissions[dataMap]:
                            return(

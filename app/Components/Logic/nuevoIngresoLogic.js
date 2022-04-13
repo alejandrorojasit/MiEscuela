@@ -45,7 +45,10 @@ export const handleClick = async (token,dataAlumno) => {
       otras1:'No',
       otras2:'No',
    }
-   postFetchNuevoAlumno(token,nuevoAlumnoUrl,dataAlumno)
+   const res = await postFetchNuevoAlumno(token,nuevoAlumnoUrl,dataAlumno)
+   if(res.status === 200){
+      return res
+   }
 }
 
 

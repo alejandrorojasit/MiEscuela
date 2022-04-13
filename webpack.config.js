@@ -50,7 +50,13 @@ module.exports = {
          stream: "stream-browserify",
          zlib: "browserify-zlib",
          'react-dom': '@hot-loader/react-dom'
+      },
+      fallback:{
+         "http": require.resolve("stream-http"),
+         "https": require.resolve("https-browserify"),
+         "url": require.resolve("url/")
       }
+
    },
    plugins: [
       new webpack.ProvidePlugin({

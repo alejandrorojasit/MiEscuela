@@ -31,9 +31,6 @@ export const handleLastName = (
    setIsFiltredStage2
 )=> {
    let newArray = []
-   console.log(event.target.value.length)
-   console.log(isFiltredStage1)
-   console.log(datosAlumno)
    if(event.target.value.length >= 3 && isFiltredStage1 === true){
       newArray = filtredDatosAlumnoStage1.filter((dataFilter) => dataFilter.apellido.indexOf(toOwnName(event.target.value)) > -1)
       setIsFiltredStage2(true)
@@ -171,7 +168,6 @@ export const handleClickApplyFilter = (
          break
       case nivelState !== 'Nivel' && gradoState !== 'Grado/Año' && divisionState !== 'Division':
          newArray = datosAlumno.filter((dataFilter) => dataFilter.nivel === nivelState && dataFilter.grado === parseInt(gradoState) && dataFilter.division === divisionState)
-         console.log(newArray)
          setIsFiltredStage1(true)
          setFiltredDatosAlumnoStage1(newArray)
          break
@@ -262,14 +258,12 @@ export const cleanEmptyStringArray = (dataArray) => {
          returnArray = [...returnArray,dataMap]
       }
    })
-   console.log(returnArray)
    return returnArray
 }
 
 export const changeEntireDataBaseToLowerCase = (data,token) => {
    let updatedData = {}
    let id = ""
-   console.log(data)
    data.map((dataMap,index)=> {
       Object.keys(dataMap).map((dataMapKeys,indexKeys)=> {
          switch(dataMapKeys){
@@ -321,6 +315,5 @@ export const changeEntireDataBaseToLowerCase = (data,token) => {
             postUpdateWholeDB(token,updatedData,updateWholeDB,id)
       })   
    }) 
-   console.log(updatedData)
 }
 

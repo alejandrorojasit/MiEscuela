@@ -8,6 +8,7 @@ import {
 import Header from '../Components/Header'
 import Menu from '../Components/Menu'
 import WebFont from 'webfontloader'
+import ChartsPannelHomePage from '../Components/ChartsPannelHomePage'
 
 import { colors } from '../Helpers/styleColors.js'
 
@@ -30,6 +31,7 @@ const HomePage = () => {
             <Menu/>
          </Row>
          <Row> 
+            <ChartsPannelHomePage/>
          </Row>
       </Container>
    )

@@ -22,6 +22,7 @@ import useAuth from '../Context/Store/useAuth'
 import {DniPopOver,TelFijoPopOver,TelCelularPopOver} from './PopsOvers/PopOver'
 import { findLastFile } from './Logic/findLastFile'
 import ModalAlert from './ModalAlert'
+import ModalAlertSpinner from './ModalAlertSpinner'
 
 import es from 'date-fns/locale/es'
 
@@ -29,15 +30,26 @@ registerLocale('es',es)
 
 const NuevoIngresoForm = () => { 
 
-   const handleSubmit = (event) => {
+   const handleSubmit = async (event) => {
       const form = event.currentTarget
       event.preventDefault()
       event.stopPropagation()
       if(form.checkValidity() === true){
-         handleClick(context.stateUser.token,dataAlumno)
-         setMessage('Alumno añadido con exito.Recuerde que por cualquier modificacion sobre el legajo o para cambiar el estado de las vacunas debe dirigirse a matricula general y luego buscar el alumno. ')
-         setStateShow(true)
-         setDataAlumno({})
+         setSpinnerStateShow(true)
+         const res = await handleClick(context.stateUser.token,dataAlumno)
+         if(res.status === 200){
+            setSpinnerStateShow(false)
+            setMessage('Alumno añadido con exito')
+            setStateShow(true)
+            setDataAlumno(initialStateDataAlumno)
+            setIsInvalidDniAlumno(true)
+            setIsInvalidDniTutor1(true)
+            setIsInvalidDniTutor2(true)
+            setIsInvalidCelularTutor1(true)
+            setIsInvalidCelularTutor2(true)
+            setIsInvalidTelFijoTutor1(true)
+            setIsInvalidTelFijoTutor2(true)
+         }
       }else{
          setMessage('Hay campos sin definir, por favor verifique la informacion.')
          setStateShow(true)
@@ -56,8 +68,48 @@ const NuevoIngresoForm = () => {
    let arrayOfCallesTutor2 = []
 
    const initialStateDataAlumno = {
-      nombre:'',
       apellido:'',
+      apellidoTutor:'',
+      apellidoTutor2:'',
+      barrio:'',
+      barrio2:'',
+      calle:'',
+      calle2:'',
+      denominacion:'Denominacion',
+      division:'Division',
+      dniTutor:'',
+      dniTutor2:'',
+      email:'',
+      emailTutor:'',
+      emailTutor2:'',
+      fechaNacimiento:'',
+      nDniAlumno:'',
+      grado:'Grado/Año',
+      ingreso:'',
+      localidad:'Municipio',
+      localidad2:'Municipio',
+      lugarNacmiento:'',
+      nacionalidad:'Nacionalidad',
+      nivel:'Nivel',
+      nombre:'',
+      nombreTutor:'',
+      nombreTutor2:'',
+      nro:'',
+      nro2:'',
+      profesionTutor:'',
+      profesionTutor2:'',
+      provincia:'Provincia',
+      provincia2:'Provincia',
+      provinciaNacimiento:'',
+      relacionTutor:'',
+      relacionTutor2:'',
+      sexo:'Sexo',
+      telCelular:'',
+      telCelular2:'',
+      telFijo:'',
+      telFijo2:'',
+      lugarNacimiento:'Lugar nacimiento',
+
    }
 
    const {Group,Label,Control,Text,Select} = Form
@@ -96,6 +148,8 @@ const NuevoIngresoForm = () => {
    const [ stateShow,setStateShow ] = useState(false);
    const [ message,setMessage ] = useState('');
 
+   const [ spinnerStateShow,setSpinnerStateShow ] = useState(false);
+
    const [dataAlumno,setDataAlumno] = useState(initialStateDataAlumno)
    const [dataGeoRef,setDataGeoRef] =  useState({
       arrayOfProvinciasArg:[],
@@ -126,6 +180,9 @@ const NuevoIngresoForm = () => {
             message={message}
             callBack={handleCallBack}
          />
+         <ModalAlertSpinner
+            stateShow={spinnerStateShow}
+         />
          <Form onSubmit={handleSubmit} noValidate autoComplete='new-password' >
             <Container
                fluid
@@ -151,6 +208,7 @@ const NuevoIngresoForm = () => {
                         Apellido:
                      </Label>
                      <Control
+                        value={dataAlumno.apellido}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -164,9 +222,9 @@ const NuevoIngresoForm = () => {
                         Sexo:
                      </Label>
                      <Select
+                        value={dataAlumno.sexo}
                         autoComplete='new-password'
                         required
-                        value={dataAlumno.sexo}
                         onChange={(value)=> setDataAlumno({...dataAlumno,sexo:value.target.value})}
                      >
                         <option>
@@ -188,6 +246,7 @@ const NuevoIngresoForm = () => {
                      </Label>
                      <OverlayTrigger trigger='focus' placement='top' overlay={DniPopOver}>
                         <Control
+                           value={dataAlumno.nDniAlumno}
                            autoComplete='new-password'
                            required
                            type='text'
@@ -208,6 +267,7 @@ const NuevoIngresoForm = () => {
                         Fecha de Nacimiento:
                      </Label>
                      <Control
+                        value={dataAlumno.fechaNacimiento}
                         autoComplete='new-password'
                         required
                         selected={fechaNacimiento}
@@ -370,6 +430,7 @@ const NuevoIngresoForm = () => {
                         Fecha de ingreso:
                      </Label>
                      <Control
+                        value={dataAlumno.ingreso}
                         autoComplete='new-password'
                         required
                         as={DatePicker} 
@@ -452,10 +513,12 @@ const NuevoIngresoForm = () => {
                            </Select>
                            :
                            <Control
+                              value={dataAlumno.provinciaNacimiento}
                               autoComplete='new-password'
                               type='text'
                               required
                               placeholder='Ingrese provincia de nacimiento de alumno'
+                              onChange={(value)=> setDataAlumno({...dataAlumno,provinciaNacimiento:value.target.value})}
                            />        
                      }
                   </Col>
@@ -488,6 +551,7 @@ const NuevoIngresoForm = () => {
                            </Select>
                            :
                            <Control
+                              value={dataAlumno.lugarNacmiento}
                               autoComplete='new-password'
                               required
                               type='text'
@@ -504,6 +568,7 @@ const NuevoIngresoForm = () => {
                            Email alumno:
                         </Label>
                         <Control
+                           value={dataAlumno.email}
                            autoComplete='new-password'
                            required
                            type='text'
@@ -525,6 +590,7 @@ const NuevoIngresoForm = () => {
                         Nombre tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.nombreTutor}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -538,6 +604,7 @@ const NuevoIngresoForm = () => {
                         Apellido tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.apellidoTutor}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -551,6 +618,7 @@ const NuevoIngresoForm = () => {
                         Relacion tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.relacionTutor}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -565,6 +633,7 @@ const NuevoIngresoForm = () => {
                      </Label>
                      <OverlayTrigger trigger='focus' placement='top' overlay={DniPopOver} >
                         <Control
+                           value={dataAlumno.dniTutor}
                            required
                            autoComplete='new-password'
                            type='text'
@@ -589,6 +658,7 @@ const NuevoIngresoForm = () => {
                         Profesion Tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.profesionTutor}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -605,6 +675,7 @@ const NuevoIngresoForm = () => {
                      </Label>
                      <OverlayTrigger trigger='focus' placement='top' overlay={TelFijoPopOver}>
                         <Control
+                           value={dataAlumno.telFijo}
                            autoComplete='new-password'
                            required
                            type='text'
@@ -625,11 +696,12 @@ const NuevoIngresoForm = () => {
                      </Label>
                      <OverlayTrigger trigger='focus' placement='top' overlay={TelCelularPopOver}>
                         <Control
+                           value={dataAlumno.telCelular}
                            autoComplete='new-password'
                            required
                            type='text'
                            placeholder='Ingrese Tel celular'
-                           name='telCeluar'
+                           name='telCelular'
                            isValid={isValidCelularTutor1}
                            isInvalid={isInvalidCelularTutor1}
                            onChange={(element)=> {
@@ -650,7 +722,7 @@ const NuevoIngresoForm = () => {
                      <Select
                         autoComplete='new-password'
                         required
-                        value={dataAlumno.provinciaTutor}
+                        value={dataAlumno.provincia}
                         onChange={(value) => {
                            setDataAlumno({...dataAlumno,provincia:value.target.value})
                            getDataArg(`municipios?provincia=${value.target.value}&max=100&campos=nombre`).then((res) => 
@@ -683,7 +755,7 @@ const NuevoIngresoForm = () => {
                      <Select
                         autoComplete='new-password'
                         required
-                        value={dataAlumno.municipiosTutor}
+                        value={dataAlumno.localidad}
                         onChange={(value)=>{
                            setDataAlumno({...dataAlumno,localidad:value.target.value})
                            getDataArg(`calles?provincia=${dataAlumno.provincia}&localidad_censal=${value.target.value}&max=1000&campos=nombre`).then((res)=>
@@ -740,6 +812,7 @@ const NuevoIngresoForm = () => {
                            </Select>
                            :
                            <Control
+                              value={dataAlumno.calle}
                               autoComplete='new-password'
                               required
                               type='text'
@@ -755,6 +828,7 @@ const NuevoIngresoForm = () => {
                         Nro:
                      </Label>
                      <Control
+                        value={dataAlumno.nro}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -768,6 +842,7 @@ const NuevoIngresoForm = () => {
                         Barrio:
                      </Label>
                      <Control
+                        value={dataAlumno.barrio}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -784,6 +859,7 @@ const NuevoIngresoForm = () => {
                            Email tutor:
                         </Label>
                         <Control
+                           value={dataAlumno.emailTutor}
                            autoComplete='new-password'
                            required
                            type='text'
@@ -806,6 +882,7 @@ const NuevoIngresoForm = () => {
                         Nombre tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.nombreTutor2}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -819,6 +896,7 @@ const NuevoIngresoForm = () => {
                         Apellido tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.apellidoTutor2}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -832,6 +910,7 @@ const NuevoIngresoForm = () => {
                         Relacion tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.relacionTutor2}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -846,6 +925,7 @@ const NuevoIngresoForm = () => {
                      </Label>
                      <OverlayTrigger trigger='focus' placement='top' overlay={DniPopOver}>
                         <Control
+                           value={dataAlumno.dniTutor2}
                            autoComplete='new-password'
                            required
                            type='text'
@@ -870,6 +950,7 @@ const NuevoIngresoForm = () => {
                         Profesion Tutor:
                      </Label>
                      <Control
+                        value={dataAlumno.profesionTutor2}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -886,6 +967,7 @@ const NuevoIngresoForm = () => {
                      </Label>
                      <OverlayTrigger trigger='focus' placement='top' overlay={TelFijoPopOver}>
                         <Control
+                           value={dataAlumno.telFijo2}
                            autoComplete='new-password'
                            required
                            type='text'
@@ -906,11 +988,12 @@ const NuevoIngresoForm = () => {
                      </Label>
                      <OverlayTrigger trigger='focus' placement='top' overlay={TelCelularPopOver}>
                         <Control
+                           value={dataAlumno.telCelular2}
                            autoComplete='new-password'
                            required
                            type='text'
                            placeholder='Ingrese Tel celular'
-                           name='telCeluar2'
+                           name='telCelular2'
                            isValid={isValidCelularTutor2}
                            isInvalid={isInvalidCelularTutor2}
                            onChange={(element)=> {
@@ -932,7 +1015,7 @@ const NuevoIngresoForm = () => {
                      <Select
                         autoComplete='new-password'
                         required
-                        value={dataAlumno.provinciaTutor}
+                        value={dataAlumno.provincia2}
                         onChange={(value) => {
                            setDataAlumno({...dataAlumno,provincia2:value.target.value})
                            getDataArg(`municipios?provincia=${value.target.value}&max=100&campos=nombre`).then((res) => 
@@ -965,7 +1048,7 @@ const NuevoIngresoForm = () => {
                      <Select
                         autoComplete='new-password'
                         required
-                        value={dataAlumno.municipiosTutor}
+                        value={dataAlumno.localidad2}
                         onChange={(value)=>{
                            setDataAlumno({...dataAlumno,localidad2:value.target.value})
                            getDataArg(`calles?provincia=${dataAlumno.provincia2}&localidad_censal=${value.target.value}&max=1000&campos=nombre`).then((res)=>
@@ -1021,11 +1104,12 @@ const NuevoIngresoForm = () => {
                            </Select>
                            :
                            <Control
+                              value={dataAlumno.calle2}
                               autoComplete='new-password'
                               required
                               type='text'
                               placeholder='Calle'
-                              name='nro2'
+                              name='calle2'
                               onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.vale})}
                            />
                      }
@@ -1036,6 +1120,7 @@ const NuevoIngresoForm = () => {
                         Nro:
                      </Label>
                      <Control
+                        value={dataAlumno.nro2}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -1049,6 +1134,7 @@ const NuevoIngresoForm = () => {
                         Barrio:
                      </Label>
                      <Control
+                        value={dataAlumno.barrio2}
                         autoComplete='new-password'
                         required
                         type='text'
@@ -1065,6 +1151,7 @@ const NuevoIngresoForm = () => {
                            Email tutor:
                         </Label>
                         <Control
+                           value={dataAlumno.emailTutor2}
                            autoComplete='new-password'
                            required
                            type='text'
