@@ -36,8 +36,8 @@ const ChartsPannelHomePage = () => {
 
    const dataMatriculaCompleta = [
       ["Sexo","Cantidad"],
+      ["Mujeres", mujeresMatriculaCompleta.length],
       ["Varones", varonesMatriculaCompleta.length],
-      ["Mujeres", mujeresMatriculaCompleta.length]
    ]
    const optionsMatriculaCompleta = {
       title:`Cantidad de alumnos en total: ${data.length}`,
@@ -47,8 +47,8 @@ const ChartsPannelHomePage = () => {
 
    const dataMatriculaInicial = [
       ["Sexo","Cantidad"],
+      ["Mujeres", mujeresMatriculaInicial.length],
       ["Varones", varonesMatriculaInicial.length],
-      ["Mujeres", mujeresMatriculaInicial.length]
    ]
    const optionsMatriculaInicial = {
       title:`Cantidad de alumnos en total inicial: ${totalNivelInicial.length}`,
@@ -58,8 +58,8 @@ const ChartsPannelHomePage = () => {
 
    const dataMatriculaPrimario = [
       ["Sexo","Cantidad"],
+      ["Mujeres", mujeresMatriculaPrimario.length],
       ["Varones", varonesMatriculaPrimario.length],
-      ["Mujeres", mujeresMatriculaPrimario.length]
    ]
    const optionsMatriculaPrimario = {
       title:`Cantidad de alumnos en total primario: ${totalNivelPrimario.length}`,
@@ -69,8 +69,8 @@ const ChartsPannelHomePage = () => {
 
    const dataMatriculaSecundario = [
       ["Sexo","Cantidad"],
+      ["Mujeres", mujeresMatriculaSecundario.length],
       ["Varones", varonesMatriculaSecundario.length],
-      ["Mujeres", mujeresMatriculaSecundario.length]
    ]
    const optionsMatriculaSecundario = {
       title:`Cantidad de alumnos en total secundario: ${totalNivelSecundario.length}`,

@@ -18,6 +18,8 @@ from './Logic/matriculaLogic'
 
 import {colors} from '../Helpers/styleColors.js'
 
+import SelectGradoAñoSala from './SelectGradoAñoSala'
+
 const SelectFormStage1 = ({
    nivelState,
    gradoState,
@@ -34,7 +36,7 @@ const SelectFormStage1 = ({
    context,
 }) => { 
 
-   const {grado,nivel,division} = context.stateHardCodeData.hardCodeData
+   const {grado,nivel,division,sala} = context.stateHardCodeData.hardCodeData
 
    return ( 
       <Form
@@ -64,25 +66,13 @@ const SelectFormStage1 = ({
                </Form.Select>
             </Col>
             <Col>
-               <Form.Select 
-                  style={{color:colors.darken}}
-                  aria-label='Grado/Año' 
-                  onChange={(event) => handleGradoChange(
-                     event,
-                     setGrado
-                  )} 
-                  ref={(element) => matriculaRef.current[1] = element}
-               >
-                  <option>Grado/Año</option>
-                  {grado.map((dataMap)=>
-                  <option 
-                     value={dataMap} 
-                     key={dataMap}
-                  >
-                     {dataMap}
-                  </option>
-                  )}
-               </Form.Select>
+            <SelectGradoAñoSala
+               nivel={nivelState}
+               grado={grado}
+               sala={sala}
+               setGrado={setGrado}
+               matriculaRef={matriculaRef}
+            />
             </Col>
             <Col>
                <Form.Select 
