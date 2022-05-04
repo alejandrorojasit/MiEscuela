@@ -37,7 +37,7 @@ const initialHardCodeData = {
 
 const AuthProvider = (props) => {
 
-   const [stateUser,dispatch] = useReducer(authReducer,initialState)
+   const [stateUser,dispatchStateUser] = useReducer(authReducer,initialState)
    const [stateHardCodeData,dispatchHardCodeData] = useReducer(hardCodeDataReducer,initialHardCodeData)
 
    useEffect( ()=>{
@@ -50,7 +50,7 @@ const AuthProvider = (props) => {
          ).then((res)=>
             {
                if(res.statusText === 'Unauthorized'){
-                  dispatch(logOutCurrentUser())
+                  dispatchStateUser(logOutCurrentUser())
                }
                if(res.data.verification){
                   getHardCodeData(stateUser.token)
@@ -68,7 +68,7 @@ const AuthProvider = (props) => {
          value={{
             stateUser,
             stateHardCodeData,
-            dispatch,
+            dispatchStateUser,
             dispatchHardCodeData,
          }}>
          {props.children}

@@ -43,6 +43,6 @@ export const handleClick = (
 }
 
 const jwtToken = (token,context) => {
-   context.dispatch(setCurrentUser(token))
+   context.dispatchStateUser(setCurrentUser(token))
 }
 
