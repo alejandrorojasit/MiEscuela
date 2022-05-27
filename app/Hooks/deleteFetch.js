@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {baseUrl} from '../Context/Store/AuthProvider'
+import {baseUrl} from '../context/store/AuthProvider'
 
 export const deleteFetchDeleteUser = async (
    token,

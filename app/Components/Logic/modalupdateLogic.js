@@ -1,12 +1,24 @@
-import {postFetchUpdateAlumno} from '../../Hooks/postFetch'
-import {handleGetDataAlumno} from './../Logic/matriculaLogic'
+import {postFetchUpdateAlumno} from '../../hooks/postFetch'
+import {handleGetDataAlumno} from './../logic/matriculaLogic'
 
 export const handleShow = (setShowModalUpdate) => {
    setShowModalUpdate(false)
 }
 
-export const handleClickAccept = (updatedData,token,apiUrl,id,dataRegistro,setAlumnoEditModal,setShowModalUpdate,setSwitchEdit,setSelectedAlumnoForEdit,context,selectedAlumnoForEdit,setDataAlumno) => {
-   postFetchUpdateAlumno(token,updatedData,apiUrl,id,dataRegistro)
+export const handleClickAccept = (
+   updatedData,
+   context,
+   apiUrl,
+   id,
+   dataRegistro,
+   setAlumnoEditModal,
+   setShowModalUpdate,
+   setSwitchEdit,
+   setSelectedAlumnoForEdit,
+   selectedAlumnoForEdit,
+   setDataAlumno
+) => {
+   postFetchUpdateAlumno(context.token,updatedData,apiUrl,id,dataRegistro)
       .then((res)=> {
          if(res.status === 200){
             handleGetDataAlumno(

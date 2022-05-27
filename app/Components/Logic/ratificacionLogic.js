@@ -2,9 +2,9 @@ import {
    Button,
 } from 'react-bootstrap'
 
-import { postFetchRatificacion } from "../../Hooks/postFetch"
+import { postFetchRatificacion } from "../../hooks/postFetch"
 
-import { ratificacionUrl } from "../../Helpers/Urls"
+import { ratificacionUrl } from "../../helpers/Urls"
 
 export const handleClickNivel = (item,setNivel) => {
    setNivel(item)

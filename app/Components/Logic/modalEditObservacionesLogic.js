@@ -1,8 +1,8 @@
-import {postFetchUpdateAlumno} from '../../Hooks/postFetch'
+import {postFetchUpdateAlumno} from '../../hooks/postFetch'
 
-import { handleGetDataAlumno } from '../Logic/matriculaLogic'
+import { handleGetDataAlumno } from '../logic/matriculaLogic'
 
-import {DecodeToken} from './../Logic/tokenhandler'
+import {DecodeToken} from './../logic/tokenhandler'
 
 export const handleClose = (setShowModalEditObservaciones) => {
    setShowModalEditObservaciones(false)
@@ -26,18 +26,18 @@ export const handleClickAñadir = (
 ) => {
 
    let updatedData = {
-      user: context.stateUser.user,
+      user: context.user,
       puesto: DecodeToken(context).usuario.role,
       fecha: new Date().toLocaleString(),
       observacion: nuevaObservacionState
    }
    let dataRegistro = {
-      user: context.stateUser.user,
+      user: context.user,
       fecha: new Date().toLocaleString(),
       cambios: [`Observacion: ${nuevaObservacionState}`]
    }
    postFetchUpdateAlumno(
-      context.stateUser.token,
+      context.token,
       updatedData,
       apiUrl,
       id,

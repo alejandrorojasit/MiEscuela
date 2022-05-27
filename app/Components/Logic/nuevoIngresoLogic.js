@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { postFetchNuevoAlumno } from '../../Hooks/postFetch'
-import { nuevoAlumnoUrl } from '../../Helpers/Urls'
+import { postFetchNuevoAlumno } from '../../hooks/postFetch'
+import { nuevoAlumnoUrl } from '../../helpers/Urls'
 import { findLastFile } from './findLastFile'
 
 const baseApiUrl = 'https://apis.datos.gob.ar/georef/api/'

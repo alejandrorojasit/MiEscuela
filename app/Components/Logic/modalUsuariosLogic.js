@@ -1,4 +1,4 @@
-import {getFetchUsuarios} from '../../Hooks/getFetch.js'
+import {getFetchUsuarios} from '../../hooks/getFetch.js'
 
 export const handleEdit = (
    dataMap,

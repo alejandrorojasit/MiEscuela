@@ -3,18 +3,18 @@ import {
    Navigate
 } from 'react-router-dom'
 
-import useAuth from '../Context/Store/useAuth'
+import {useSelector} from 'react-redux'
 
-import {DecodeToken} from '../Components/Logic/tokenhandler.js'
+import {DecodeToken} from '../components/logic/tokenhandler.js'
 
 export const AdminRoute = ({children}) => {
 
-   const context = useAuth()
+   const context = useSelector(state => state.authReducer)
 
    switch(true){
-      case (context.stateUser.isAuthenticated === false):
+      case (context.isAuthenticated === false):
          return <Navigate to='/LogIn'/>
-      case (context.stateUser.isAuthenticated === true):
+      case (context.isAuthenticated === true):
          if(DecodeToken(context).usuario.role === 'Administrador Informatico'){
          return(
             children 

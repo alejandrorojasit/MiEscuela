@@ -1,48 +1,62 @@
 import {
    setCurrentUser,
    logOutCurrentUser
-} from '../../Context/Actions/autentication.action.js'
+} from '../../redux/actions/autentication.action.js'
 
-import {postFetchLogIn} from '../../Hooks/postFetch.js'
+import {
+   setHardCodeData
+} from '../../redux/actions/hardCodeData.action'
 
-import {logInUrl} from '../../Helpers/Urls.js'
+import {
+   showHideAlert
+} from '../../redux/actions/modalAlertSpinner.action'
+
+import{
+   logInFormChangeUser,
+   logInFormChangePassword
+} from '../../redux/actions/logInForm.action'
+
+import {postFetchLogIn} from '../../hooks/postFetch.js'
+import {getHardCodeData} from '../../hooks/getFetch'
+
+import {logInUrl} from '../../helpers/Urls.js'
 
 export const handleChangeUser =(
    event,
-   setUsuario
+   dispatch
 ) => {
-   setUsuario(event.target.value)
+   dispatch(logInFormChangeUser(event.target.value))
 }
 
 export const handleChangePassowrd =(
    event,
-   setPassword
+   dispatch
 ) => {
-   setPassword(event.target.value)
+   dispatch(logInFormChangePassword(event.target.value))
 }
 
 export const handleClick = (
-   usuario,
+   user,
    password,
-   context,
-   setShowModalAlertSpinner
+   dispatch
 ) => {
-   setShowModalAlertSpinner(true)
+   dispatch(showHideAlert())
    postFetchLogIn(
-      usuario,
+      user,
       password,
       logInUrl
    ).then(res => {
       if(res.data.ok === true) {
-         jwtToken(res.data.token,context)
+         dispatch(setCurrentUser(res.data.token))
+         getHardCodeData(res.data.token)
+            .then(res => {
+               dispatch(setHardCodeData(res.data[0]))
+            })
       }else {
          alert(res.data.err.message)
-         logOutCurrentUser()
+         dispatch(logOutCurrentUser())
       }
    })
 }
 
-const jwtToken = (token,context) => {
-   context.dispatchStateUser(setCurrentUser(token))
-}
 

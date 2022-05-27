@@ -1,24 +1,10 @@
-import {useState }from 'react'
+import LoginForm from './forms/LoginForm'
 
-import useAuth from '../Context/Store/useAuth'
-
-import LoginForm from './LoginForm'
-
-const Login = ({setShowModalAlertSpinner}) => { 
-
-   const context = useAuth()
-   const [usuario,setUsuario] = useState('')
-   const [password,setPassword] = useState('')
+const Login = () => { 
 
    return ( 
       <>
          <LoginForm
-            context={context}
-            usuario={usuario}
-            password={password}
-            setUsuario={setUsuario}
-            setPassword={setPassword}
-            setShowModalAlertSpinner={setShowModalAlertSpinner}
          />
       </>
 

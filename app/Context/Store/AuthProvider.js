@@ -1,44 +1,23 @@
 import {
-   useReducer,
    useEffect
 }from 'react'
 
-import authReducer from '../Reducers/autentication.reducer'
-import hardCodeDataReducer from '../Reducers/hardCodeData.reducer'
-
-import {
-   setCurrentUser,
-   logOutCurrentUser
-} from '../Actions/autentication.action'
-
 import {createContext} from 'react'
 
-import {postFetchVerifyToken} from '../../Hooks/postFetch.js'
-import {verifyTokenUrl} from '../../Helpers/Urls.js'
+import {postFetchVerifyToken} from '../../hooks/postFetch.js'
 
-import {setHardCodeData} from '../Actions/hardCodeData.action'
+import {verifyTokenUrl} from '../../helpers/Urls.js'
 
-import {getHardCodeData} from '../../Hooks/getFetch'
+import {setHardCodeData} from '../../redux/actions/hardCodeData.action'
+
+import {getHardCodeData} from '../../hooks/getFetch'
 
 export const AuthContext = createContext()
 
 //export const baseUrl = 'https://us-central1-miescuela-5e8d6.cloudfunctions.net/app' 
 export const baseUrl = 'http://localhost:5001/miescuela-5e8d6/us-central1/app'
 
-const initialState = {
-   isAuthenticated : false,
-   token: '',
-   user: {},
-}
-
-const initialHardCodeData = {
-   hardCodeData:{},
-}
-
 const AuthProvider = (props) => {
-
-   const [stateUser,dispatchStateUser] = useReducer(authReducer,initialState)
-   const [stateHardCodeData,dispatchHardCodeData] = useReducer(hardCodeDataReducer,initialHardCodeData)
 
    useEffect( ()=>{
       if(stateUser.token === ''){
@@ -64,14 +43,8 @@ const AuthProvider = (props) => {
    },[stateUser])
 
    return (
-      <AuthContext.Provider 
-         value={{
-            stateUser,
-            stateHardCodeData,
-            dispatchStateUser,
-            dispatchHardCodeData,
-         }}>
-         {props.children}
+      <AuthContext.Provider>
+          {props.children}
       </AuthContext.Provider>
    )
 }

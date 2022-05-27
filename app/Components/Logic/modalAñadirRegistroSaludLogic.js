@@ -1,20 +1,31 @@
-import {postFetchUpdateRegistroSalud} from '../../Hooks/postFetch'
+import {postFetchUpdateRegistroSalud} from '../../hooks/postFetch'
 
 import {
    handleGetDataAlumno,
-} from '../Logic/matriculaLogic'
+} from '../logic/matriculaLogic'
 
 
-export const handleClickAñadir = (nuevoRegistroSalud,dataAlumno,context,updateRegistroSaludUrl,setDataAlumno,selectedAlumnoForEdit) => {
+export const handleClickAñadir = (
+   nuevoRegistroSalud,
+   dataAlumno,
+   userState,
+   updateRegistroSaludUrl,
+   dispatch
+) => {
    let dataToSend = {
-      usuario: context.stateUser.user,
+      usuario: userState.user,
       fecha: new Date().toLocaleString(),
       data: nuevoRegistroSalud
    }
    
-   postFetchUpdateRegistroSalud(context.stateUser.token,dataToSend,updateRegistroSaludUrl,dataAlumno).then((res)=>{
+   postFetchUpdateRegistroSalud(
+      userState.token,
+      dataToSend,
+      updateRegistroSaludUrl,
+      dataAlumno
+   ).then((res)=>{
       if(res.status === 200){
-         handleGetDataAlumno(context,selectedAlumnoForEdit,setDataAlumno,selectedAlumnoForEdit)
+         handleGetDataAlumno(userState,dataAlumno,dispatch)
       }
    })
 }

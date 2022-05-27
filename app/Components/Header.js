@@ -7,10 +7,10 @@ import {Container,
 } from 'react-bootstrap'
 
 import Lottie from 'lottie-react'
-import HeaderAnimation from '../Assets/Header/Header.json'
+import HeaderAnimation from '../assets/header/Header.json'
 import WebFont from 'webfontloader'
-import LogoEscuela from '../Assets/jpg/LogoEPAt.png'
-import {colors} from '../Helpers/styleColors'
+import LogoEscuela from '../assets/jpg/LogoEPAt.png'
+import {colors} from '../helpers/styleColors'
 
 const style = {
 

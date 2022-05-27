@@ -3,9 +3,9 @@ import {
    Row
 } from 'react-bootstrap'
 
-import Header from '../Components/Header'
-import Menu from '../Components/Menu'
-import Matricula from '../Components/Matricula'
+import Header from '../components/Header'
+import Menu from '../components/Menu'
+import Matricula from '../components/Matricula'
 
 const MatriculaPage = () => {
    

@@ -1,21 +1,34 @@
 import {ageCalculate,splitDate,ageCalculate3006} from './dateHandler'
-import {postUpdateWholeDB} from '../../Hooks/postFetch'
-import {getMatriculaSingle} from '../../Hooks/getFetch'
-import { updateWholeDB } from '../../Helpers/Urls'
+import {postUpdateWholeDB} from '../../hooks/postFetch'
+import {updateWholeDB} from '../../helpers/Urls'
+import { getMatriculaSingle } from '../../hooks/getFetch'
+import {
+   updateAlumnoForEdit,
+   updateDataAlumno
+} from '../../redux/actions/matricula.action'
+
+import {
+   updateNivel,
+   updateGrado,
+   updateDivision,
+   updateIsFiltredState1,
+   updateFiltredDatosStage1,
+   resetState
+} from '../../redux/actions/selectFormStage1&2.actions'
 
 export const handleGetDataAlumno = (
-   context,
+   userState,
    selectedAlumnoForEdit,
-   setDataAlumno
+   dispatch
 ) => {
    getMatriculaSingle(
-      context.stateUser.token,
+      userState.token,
       selectedAlumnoForEdit
    ).then((res)=>{
       res.data?.registro?.reverse()
       res.data?.registroSalud?.reverse()
       res.data?.observaciones?.reverse()
-      setDataAlumno(res.data)
+      dispatch(updateDataAlumno(res.data))
    }
    )
 }
@@ -74,16 +87,16 @@ export const handleFirstName = (
    }
 }
 
-export const handleNivelChange =(event,setNivel) => {
-   setNivel(event.nativeEvent.target.value)
+export const handleNivelChange =(event,dispatch) => {
+   dispatch(updateNivel(event.nativeEvent.target.value))
 }
 
-export const handleGradoChange =(event,setGrado) => {
-   setGrado(event.nativeEvent.target.value)
+export const handleGradoChange =(event,dispatch) => {
+   dispatch(updateGrado(event.nativeEvent.target.value))
 }
 
-export const handleDivisionChange =(event,setDivision) => {
-   setDivision(event.nativeEvent.target.value)
+export const handleDivisionChange =(event,dispatch) => {
+   dispatch(updateDivision(event.nativeEvent.target.value))
 }
 
 export const handleEdad = (
@@ -141,8 +154,14 @@ export const handleEdad3006 = (
 }
 
 
-export const handleEdit = (data,setAlumnoEditModal,setSelectedAlumnoForEdit) => {
-   setSelectedAlumnoForEdit(data)
+export const handleEdit = (
+   data,
+   setAlumnoEditModal,
+   dispatch,
+   context,
+) => {
+   dispatch(updateAlumnoForEdit(data))
+   handleGetDataAlumno(context,data,dispatch)
    setAlumnoEditModal(true)
 }
 
@@ -150,47 +169,34 @@ export const handleClickApplyFilter = (
    nivelState,
    gradoState,
    divisionState,
-   datosAlumno,
-   setIsFiltredStage1,
-   setFiltredDatosAlumnoStage1
+   alumnosFullList,
+   dispatch
 )=> {
    let newArray = []     
    switch(true){
       case nivelState !== 'Nivel' && gradoState === 'Grado/Año' && divisionState === 'Division':
-         newArray = datosAlumno.filter((dataFilter) => dataFilter.nivel === nivelState)
-         setIsFiltredStage1(true)
-         setFiltredDatosAlumnoStage1(newArray)  
+         newArray = alumnosFullList.filter((dataFilter) => dataFilter.nivel === nivelState)
+         dispatch(updateIsFiltredState1())
+         dispatch(updateFiltredDatosStage1(newArray))
          break
       case nivelState !== 'Nivel' && gradoState !== 'Grado/Año' && divisionState === 'Division':
-         newArray = datosAlumno.filter((dataFilter) => dataFilter.nivel === nivelState && dataFilter.grado === parseInt(gradoState))
-         setIsFiltredStage1(true)
-         setFiltredDatosAlumnoStage1(newArray)
+         newArray = alumnosFullList.filter((dataFilter) => dataFilter.nivel === nivelState && dataFilter.grado === parseInt(gradoState))
+         dispatch(updateIsFiltredState1())
+         dispatch(updateFiltredDatosStage1(newArray))
          break
       case nivelState !== 'Nivel' && gradoState !== 'Grado/Año' && divisionState !== 'Division':
-         newArray = datosAlumno.filter((dataFilter) => dataFilter.nivel === nivelState && dataFilter.grado === parseInt(gradoState) && dataFilter.division === divisionState)
-         setIsFiltredStage1(true)
-         setFiltredDatosAlumnoStage1(newArray)
+         newArray = alumnosFullList.filter((dataFilter) => dataFilter.nivel === nivelState && dataFilter.grado === parseInt(gradoState) && dataFilter.division === divisionState)
+         dispatch(updateIsFiltredState1())
+         dispatch(updateFiltredDatosStage1(newArray))
          break
    }
 }
 
 export const handleClickLimpiarFiltros = (
-   setIsFiltredStage1,
-   setIsFiltredStage2,
-   setFiltredDatosAlumnoStage1,
-   setFiltredDatosAlumnoStage2,
    matriculaRef,
-   setNivel,
-   setGrado,
-   setDivision,
+   dispatch
 )=> {
-   setNivel('Nivel')
-   setGrado('Grado/Año')
-   setDivision('Division')
-   setIsFiltredStage1(false)
-   setIsFiltredStage2(false)
-   setFiltredDatosAlumnoStage1([])
-   setFiltredDatosAlumnoStage2([])
+   dispatch(resetState())
    matriculaRef.current[0].options.selectedIndex = 0
    matriculaRef.current[1].options.selectedIndex = 0
    matriculaRef.current[2].options.selectedIndex = 0
@@ -201,22 +207,10 @@ export const handleClickLimpiarFiltros = (
 }
 
 export const handleClickLimpiarFiltrosStage1 = (
-setIsFiltredStage1,
-   setIsFiltredStage2,
-   setFiltredDatosAlumnoStage1,
-   setFiltredDatosAlumnoStage2,
    matriculaRef,
-   setNivel,
-   setGrado,
-   setDivision,
+   dispatch
 )=> {
-   setNivel('Nivel')
-   setGrado('Grado/Año')
-   setDivision('Division')
-   setIsFiltredStage1(false)
-   setIsFiltredStage2(false);
-   setFiltredDatosAlumnoStage1([])
-   setFiltredDatosAlumnoStage2([])
+   dispatch(resetState())
    matriculaRef.current[0].options.selectedIndex = 0
    matriculaRef.current[1].options.selectedIndex = 0
    matriculaRef.current[2].options.selectedIndex = 0

@@ -2,15 +2,11 @@ import { useEffect } from 'react'
 import {
    Container,
    Row,
-   Button
 } from 'react-bootstrap'
 
-import Header from '../Components/Header'
-import Menu from '../Components/Menu'
+import Menu from '../components/Menu'
 import WebFont from 'webfontloader'
-import ChartsPannelHomePage from '../Components/ChartsPannelHomePage'
-
-import { colors } from '../Helpers/styleColors.js'
+import ChartsPannelHomePage from '../components/pannels/ChartsPannelHomePage'
 
 const HomePage = () => {
 

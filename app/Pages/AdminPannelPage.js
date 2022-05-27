@@ -1,6 +1,6 @@
-import Header from '../Components/Header'
-import Menu from '../Components/Menu'
-import Footer from '../Components/Footer'
+import Header from '../components/Header'
+import Menu from '../components/Menu'
+import Footer from '../components/Footer'
 
 import {
    Container,
@@ -8,7 +8,7 @@ import {
    Row
 } from 'react-bootstrap'
 
-import AdminOptions from '../Components/AdminOptions'
+import AdminOptions from '../components/AdminOptions'
 
 const AdminPannelPage = () => {
    return(

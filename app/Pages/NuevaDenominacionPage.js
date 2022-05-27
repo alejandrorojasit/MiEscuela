@@ -4,9 +4,9 @@ import {
    Row
 } from 'react-bootstrap'
 
-import Menu from '../Components/Menu'
+import Menu from '../components/Menu'
 import WebFont from 'webfontloader'
-import NuevaDenominacionForm from '../Components/NuevaDenominacionForm'
+import NuevaDenominacionForm from '../components/forms/NuevaDenominacionForm'
 
 const NuevaDenominacionPage = () => {
    

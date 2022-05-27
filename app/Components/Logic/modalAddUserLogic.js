@@ -1,4 +1,4 @@
-import {postFetchAddUser} from '../../Hooks/postFetch.js'
+import {postFetchAddUser} from '../../hooks/postFetch.js'
 
 export const handleClickRole = (item,setRole)=>{
       setRole(item)
@@ -12,14 +12,14 @@ export const handleChangePassowrd = (event,setPassword)=> {
       setPassword(event.target.value)
    }
 
-export const handleClick = (context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal,addUserRef)=>{
+export const handleClick = (userState,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal,addUserRef)=>{
    let permissions = {
    }
    Object.keys(addUserRef.current).map((dataMap,index)=>{
       permissions = {...permissions , [dataMap]:addUserRef.current[dataMap].checked}
    })
       postFetchAddUser(
-         context.stateUser.token,
+         userState.token,
          usuario,
          password,
          role,

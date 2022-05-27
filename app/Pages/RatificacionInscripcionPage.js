@@ -2,8 +2,8 @@ import {
    Container,
    Row
 } from 'react-bootstrap'
-import Menu from '../Components/Menu'
-import Ratificacion from '../Components/Ratificacion'
+import Menu from '../components/Menu'
+import Ratificacion from '../components/Ratificacion'
 
 const RatificacionInscripcionPage = () => {
    return (

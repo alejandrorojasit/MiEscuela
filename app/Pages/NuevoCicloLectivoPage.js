@@ -4,12 +4,12 @@ import {
    Row
 } from 'react-bootstrap'
 
-import Header from '../Components/Header'
-import Menu from '../Components/Menu'
-import NuevoCicloLectivo from '../Components/NuevoCicloLectivo'
+import Header from '../components/Header'
+import Menu from '../components/Menu'
+import NuevoCicloLectivo from '../components/NuevoCicloLectivo'
 import WebFont from 'webfontloader'
 
-import { colors } from '../Helpers/styleColors.js'
+import { colors } from '../helpers/styleColors.js'
 
 const NuevoCicloLectivoPage = () => {
 

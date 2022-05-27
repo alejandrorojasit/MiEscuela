@@ -1,5 +1,11 @@
 import {createStringDate} from './dateHandler'
 
+import {
+   updateAlumnoForEdit,
+   updateAlumnoFullList,
+   updateDataAlumno,
+} from '../../redux/actions/matricula.action'
+
 export const handleSwitchEdit = (
    setSwitchEdit
 ) => {
@@ -54,8 +60,11 @@ export const handleChangeCalendar = (value,setFechaNacimiento) => {
    setFechaNacimiento(value)
 }
 
-export const handleShow = (setAlumnoEditModal,setDataAlumno,setSelectedAlumnoForEdit) => {
+export const handleShow = (
+   setAlumnoEditModal,
+   dispatch
+) => {
    setAlumnoEditModal(false)
-   setDataAlumno({})
-   setSelectedAlumnoForEdit('')
+   dispatch(updateDataAlumno({}))
+   dispatch(updateAlumnoForEdit(''))
 }

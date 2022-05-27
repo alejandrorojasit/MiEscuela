@@ -9,7 +9,7 @@ import {
    Role,
    ModelPdf,
    Denominacion,
-} from '../Helpers/HardCodeData'
+} from '../helpers/HardCodeData'
 
 export function createJson (){
    let jsonData = {

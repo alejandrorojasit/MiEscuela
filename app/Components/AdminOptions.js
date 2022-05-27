@@ -7,11 +7,11 @@ import {
    Button
 } from 'react-bootstrap'
 
-import ModalUsuarios from './ModalUsuarios'
-import ModalAddUser from './ModalAddUser'
-import ModalEditUser from './ModalEditUser'
+import ModalUsuarios from './modals/ModalUsuarios'
+import ModalAddUser from './modals/ModalAddUser'
+import ModalEditUser from './modals/ModalEditUser'
 
-import useAuth from '../Context/Store/useAuth'
+import useAuth from '../context/store/useAuth'
 
 const AdminOptions = () => { 
 
@@ -45,7 +45,6 @@ const AdminOptions = () => {
             setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
             switchAsistencia={switchAsistencia}
             setSwitchAsistencia={setSwitchAsistencia}
-            context={context}
          />
          <ModalUsuarios 
             usuariosModal={usuariosModal}
@@ -71,7 +70,6 @@ const AdminOptions = () => {
             setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
             switchAsistencia={switchAsistencia}
             setSwitchAsistencia={setSwitchAsistencia}
-            context={context}
          />
          <Row>
             <Col 

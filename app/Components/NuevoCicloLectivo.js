@@ -7,16 +7,16 @@ import {
    Container
 } from 'react-bootstrap'
 
-import {handleClickPromocionarMasivamente} from './Logic/administracionLogic.js'
-import ModalAlert from './ModalAlert'
-import ModalAlertSpinner from './ModalAlertSpinner'
-import ModalPromocionarMasivamente from './ModalPromocionarMasivamente'
+import {handleClickPromocionarMasivamente} from './logic/administracionLogic.js'
+import ModalAlert from './modals/ModalAlert'
+import ModalAlertSpinner from './modals/ModalAlertSpinner'
+import ModalPromocionarMasivamente from './modals/ModalPromocionarMasivamente'
 
-import { getMatriculaCompleta } from '../Hooks/getFetch.js'
-import {postCopyWholeDb} from '../Hooks/postFetch.js'
-import useAuth from '../Context/Store/useAuth'
+import { getMatriculaCompleta } from '../hooks/getFetch.js'
+import {postCopyWholeDb} from '../hooks/postFetch.js'
+import useAuth from '../context/store/useAuth'
 
-import {copyWholeDb} from '../Helpers/Urls.js'
+import {copyWholeDb} from '../helpers/Urls.js'
 
 const NuevoCicloLectivo = () => { 
 

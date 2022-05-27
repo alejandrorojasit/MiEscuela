@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {baseUrl} from '../Context/Store/AuthProvider'
+import {baseUrl} from '../context/store/AuthProvider'
 import {
    usuariosUrl,
    matriculaUrlCompleta,
@@ -7,7 +7,7 @@ import {
    matriculaUrlActivo,
    matriculaUrlBaja,
    hardCodeData,
-} from '../Helpers/Urls'
+} from '../helpers/Urls'
 
 export const getFetchUsuarios = async (token) => {
    const config = {

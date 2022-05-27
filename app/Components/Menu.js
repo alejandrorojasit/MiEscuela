@@ -5,14 +5,15 @@ import {
    Image
 } from 'react-bootstrap'
 
-import useAuth from '../Context/Store/useAuth'
-import {logOutCurrentUser} from '../Context/Actions/autentication.action.js'
-import {DecodeToken} from './Logic/tokenhandler'
+import {logOutCurrentUser} from '../redux/actions/autentication.action.js'
+import {DecodeToken} from './logic/tokenhandler'
 import {Link} from 'react-router-dom'
-import LogoEPAt from '../Assets/jpg/LogoEPAt.png'
+import LogoEPAt from '../assets/jpg/LogoEPAt.png'
+import {useSelector,useDispatch} from 'react-redux'
 
 const Menu = () => {
-   const context = useAuth()
+   const userState = useSelector(state => state.authReducer)
+   const dispatch = useDispatch()
    return (
       <Navbar 
       >
@@ -36,7 +37,7 @@ const Menu = () => {
                   to='/'
                >Inicio</Nav.Link>
                {
-                  DecodeToken(context)?.usuario?.permissions?.leerMatricula || DecodeToken(context)?.usuario?.permissions?.editarMatricula ?
+                  DecodeToken(userState)?.usuario?.permissions?.leerMatricula || DecodeToken(userState)?.usuario?.permissions?.editarMatricula ?
                      <NavDropdown
                         title='Administracion'
                      >
@@ -58,7 +59,7 @@ const Menu = () => {
                }
 
                {
-                  DecodeToken(context)?.usuario?.permissions?.leerMatricula || DecodeToken(context)?.usuario?.permissions?.editarMatricula ?
+                  DecodeToken(userState)?.usuario?.permissions?.leerMatricula || DecodeToken(userState)?.usuario?.permissions?.editarMatricula ?
                      <NavDropdown
                         title='Matricula'
                      >
@@ -90,7 +91,7 @@ const Menu = () => {
                   title='Generar'
                >
                   {
-                     DecodeToken(context)?.usuario?.permissions?.ratificacionInscripcion ?
+                     DecodeToken(userState)?.usuario?.permissions?.ratificacionInscripcion ?
                         <NavDropdown.Item 
                            as={Link} 
                            to='/RatificacionInscripcion'
@@ -103,7 +104,7 @@ const Menu = () => {
                </NavDropdown>
             </Nav>
             {
-               DecodeToken(context)?.usuario?.role === 'Administrador Informatico' ? 
+               DecodeToken(userState)?.usuario?.role === 'Administrador Informatico' ? 
                   <Nav>
                      <Nav.Link 
                         as={Link} 
@@ -119,7 +120,7 @@ const Menu = () => {
                className = 'justify-content-end'
             >
                <Nav.Link  
-                  onClick={() => context.dispatch(logOutCurrentUser())}
+                  onClick={() => dispatch(logOutCurrentUser())}
                >
                   Salir
                </Nav.Link>

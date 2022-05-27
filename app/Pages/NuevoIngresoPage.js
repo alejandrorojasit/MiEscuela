@@ -4,9 +4,9 @@ import {
    Row
 } from 'react-bootstrap'
 
-import Menu from '../Components/Menu'
+import Menu from '../components/Menu'
 import WebFont from 'webfontloader'
-import NuevoIngresoForm from '../Components/NuevoIngresoForm'
+import NuevoIngresoForm from '../components/forms/NuevoIngresoForm'
 
 const NuevoIngresoPage = () => {
    

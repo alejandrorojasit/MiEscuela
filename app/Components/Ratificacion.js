@@ -2,16 +2,16 @@ import {useState,useRef,useEffect}  from "react";
 
 import {Container} from 'react-bootstrap'
 
-import ModalSelectItemsToPrint from './ModalSelectItemsToPrint'
-import ModalPdf from './ModalPdf'
-import TableRatificacion from './TableRatificacion'
-import SelectFormStage1 from './SelectFormStage1'
-import LoadingSpinner from './LoadingSpinner'
-import ModalModelPdfSelection from './ModalModelPdfSelection'
+import ModalSelectItemsToPrint from './modals/ModalSelectItemsToPrint'
+import ModalPdf from './modals/ModalPdf'
+import TableRatificacion from './tabs/TableRatificacion'
+import SelectFormStage1 from './selects/SelectFormStage1'
+import LoadingSpinner from './spinners/LoadingSpinner'
+import ModalModelPdfSelection from './modals/ModalModelPdfSelection'
 
-import {getMatriculaActivo} from '../Hooks/getFetch.js'
+import {getMatriculaActivo} from '../hooks/getFetch.js'
 
-import useAuth from '../Context/Store/useAuth'
+import {useSelector} from 'react-redux'
 
 const Ratificacion = () => { 
    const [grado,setGrado] = useState('Grado/Año')
@@ -29,10 +29,10 @@ const Ratificacion = () => {
    const matriculaRef = useRef([]) 
    const [modelo,setModelo] = useState('')
    const [isRender , setIsRender] = useState(false)
-   const context = useAuth()
+   const context = useSelector(state => state.authReducer)
 
    useEffect(()=> {
-      getMatriculaActivo(context.stateUser.token).then((res)=> 
+      getMatriculaActivo(context.token).then((res)=> 
          setDatosAlumno(res.data)
       ) 
    },[])

@@ -6,23 +6,24 @@ import {
    Navigate
 } from 'react-router-dom'
 
-import HomePage from '../Pages/HomePage'
-import LogInPage from '../Pages/LogInPage'
-import RatificacionInscripcionPage from '../Pages/RatificacionInscripcionPage'
-import AdminPannelPage from '../Pages/AdminPannelPage'
-import ForbiddenPage from '../Pages/ForbiddenPage'
-import MatriculaPage from '../Pages/MatriculaPage'
-import NuevoCicloLectivoPage from '../Pages/NuevoCicloLectivoPage'
-import NuevoIngresoPage from '../Pages/NuevoIngresoPage'
-import NuevaDenominacionPage from '../Pages/NuevaDenominacionPage'
+import HomePage from '../pages/HomePage'
+import LogInPage from '../pages/LogInPage'
+import RatificacionInscripcionPage from '../pages/RatificacionInscripcionPage'
+import AdminPannelPage from '../pages/AdminPannelPage'
+import ForbiddenPage from '../pages/ForbiddenPage'
+import MatriculaPage from '../pages/MatriculaPage'
+import NuevoCicloLectivoPage from '../pages/NuevoCicloLectivoPage'
+import NuevoIngresoPage from '../pages/NuevoIngresoPage'
+import NuevaDenominacionPage from '../pages/NuevaDenominacionPage'
 
-import useAuth from '../Context/Store/useAuth'
+import useAuth from '../context/store/useAuth'
+import {useSelector} from 'react-redux'
 
 import {AdminRoute} from './PrivateRoute'
 
 const AppRouter = () => {
 
-   const {stateUser} = useAuth()
+   const stateUser = useSelector(state => state.authReducer)
 
    return (
       <BrowserRouter>

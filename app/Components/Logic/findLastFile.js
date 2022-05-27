@@ -1,4 +1,4 @@
-import { getMatriculaCompleta } from '../../Hooks/getFetch'
+import { getMatriculaCompleta } from '../../hooks/getFetch'
 
 export const findLastFile = async (token) => {
    let lastNumber = ''

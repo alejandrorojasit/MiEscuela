@@ -1,14 +1,14 @@
 import {hot} from 'react-hot-loader/root'
 import AppRouter from './routes/AppRouter'
-import AuthProvider from './Context/Store/AuthProvider'
+import {Provider} from 'react-redux'
+import {globalStore} from './redux/store/globalStore'
 function App () {
 
    return (
-      <AuthProvider
-      >
-         <AppRouter
-         />
-      </AuthProvider>
+      <Provider store={globalStore}>  
+      <AppRouter
+      />
+      </Provider>
    )
 }
 

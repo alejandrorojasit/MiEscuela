@@ -1,8 +1,8 @@
-import {deleteFetchDeleteUser} from '../../Hooks/deleteFetch'
+import {deleteFetchDeleteUser} from '../../hooks/deleteFetch'
 
-import {getFetchUsuarioSingle} from '../../Hooks/getFetch.js'
+import {getFetchUsuarioSingle} from '../../hooks/getFetch.js'
 
-import {postFetchUpdateUser} from '../../Hooks/postFetch'
+import {postFetchUpdateUser} from '../../hooks/postFetch'
 
 export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal,setDataUser) => {
    setDataUser({})
@@ -15,16 +15,16 @@ export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,set
 
 export const handleShow = (setDataUser,context,selectedUser) => {
    getFetchUsuarioSingle(
-      context.stateUser.token,
+      context.token,
       selectedUser
    ).then((res) => 
       setDataUser(res.data)
    )
 }
 
-export const handleClickDelete = (context,selectedUser,userDeleteUrl,setUserEditModal) => {
+export const handleClickDelete = (userState,selectedUser,userDeleteUrl,setUserEditModal) => {
    deleteFetchDeleteUser(
-      context.stateUser.token,
+      userState.token,
       selectedUser,
       userDeleteUrl
    ).then((res) =>{
@@ -37,7 +37,7 @@ export const handleClickDelete = (context,selectedUser,userDeleteUrl,setUserEdit
 }
 
 
-export const handleClickAccept = (user,password,role,addUserRef,context,apiUrl,_id) =>{
+export const handleClickAccept = (user,password,role,addUserRef,userState,apiUrl,_id) =>{
    let permissions = {}
    let dataToSend = {}
    Object.keys(addUserRef.current).map((dataMap,index)=> {
@@ -58,6 +58,6 @@ export const handleClickAccept = (user,password,role,addUserRef,context,apiUrl,_
             usuario:user
          }
       }
-   postFetchUpdateUser(context.stateUser.token,dataToSend,apiUrl,_id)
+   postFetchUpdateUser(userState.token,dataToSend,apiUrl,_id)
 }
 

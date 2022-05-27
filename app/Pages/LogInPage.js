@@ -1,11 +1,11 @@
-import {useState,useEffect} from 'react'
+import {useEffect} from 'react'
 import {
    Container,
    Row
 } from 'react-bootstrap'
 
-import ModalAlertSpinner from '../Components/ModalAlertSpinner'
-import Login from '../Components/Login'
+import ModalAlertSpinner from '../components/modals/ModalAlertSpinner'
+import Login from '../components/Login'
 import WebFont from 'webfontloader'
 
 const LogInPage = () => {
@@ -18,21 +18,17 @@ const LogInPage = () => {
       })
    },[])
 
-   const [showModalAlertSpinner,setShowModalAlertSpinner] = useState(false)
-
    return (
       <Container 
          style={{fontFamily:'Droid Sans'}}
       >
          <ModalAlertSpinner
             message={`Conectando al servidor de login.Por favor espere`}
-            stateShow={showModalAlertSpinner}
          />
          <Row>
          </Row>
          <Row>
             <Login
-               setShowModalAlertSpinner={setShowModalAlertSpinner}
             />
          </Row>
          <Row>
