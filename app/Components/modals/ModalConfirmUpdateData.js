@@ -7,41 +7,44 @@ import {
 } from 'react-bootstrap'
 
 import {
-   handleShow,
    handleClickAccept,
    createDataRegistro,
 } from '../logic/modalupdateLogic.js'
 
-import useAuth from '../../context/store/useAuth'
-import {useSelector} from 'react-redux'
+import {
+   useSelector,
+   useDispatch
+} from 'react-redux'
 
 import {updateAlumnoUrl} from '../../helpers/Urls'
 
 const ModalUpdate = ({
-   showModalUpdate,
-   updatedData,
-   setShowModalUpdate,
-   dataAlumno,
-   alumnoEditModal,
-   setAlumnoEditModal,
-   setSwitchEdit,
-   setSelectedAlumnoForEdit,
-   selectedAlumnoForEdit,
-   setDataAlumno,
 }) => { 
 
-   const context = useSelector(state => state.authReducer)
+   const dispatch = useDispatch()
+
+   const userState = useSelector(state => state.authReducer)
+
+   const {
+      dataAlumno,
+      selectedAlumnoForEdit,
+   } = useSelector(state => state.matriculaReducer)
+
+   const {
+      updatedData,
+      showModalUpdate
+   } = useSelector(state => state.modalEditAlumnoReducer)
 
    let dataRegistro = createDataRegistro (
       dataAlumno,
       updatedData,
-      context.user
+      userState.user
    )
 
    return ( 
       <Modal
          show={showModalUpdate}
-         onHide={() => handleShow(setShowModalUpdate)}
+         onHide={() => dispatch(show_ModalUpdate())}
       >
          <Modal.Header
          >
@@ -84,16 +87,12 @@ const ModalUpdate = ({
                      onClick={() => {
                         handleClickAccept(
                            updatedData,
-                           context,
+                           userState,
                            updateAlumnoUrl,
                            dataAlumno._id,
                            dataRegistro,
-                           setAlumnoEditModal,
-                           setShowModalUpdate,
-                           setSwitchEdit,
-                           setSelectedAlumnoForEdit,
                            selectedAlumnoForEdit,
-                           setDataAlumno
+                           dispatch
                         )
                      }}
                   >
@@ -104,7 +103,7 @@ const ModalUpdate = ({
                   <Button
                      variant='outline-success'
                      size='sm'
-                     onClick={() => handleShow(setShowModalUpdate)}
+                     onClick={() => dispatch(show_ModalUpdate())}
                   >
                      Cancelar
                   </Button> 

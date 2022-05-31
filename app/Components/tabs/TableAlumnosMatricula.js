@@ -95,7 +95,6 @@ const TableAlumnosMatricula = ({
                                           variant='outline-success'
                                           onClick={()=> handleEdit(
                                              dataMap._id,
-                                             setAlumnoEditModal,
                                              dispatch,
                                              context
                                           )}

@@ -2,7 +2,6 @@ import {
    Button,
    Modal,
    Col,
-   Row,
    FormControl,
 } from 'react-bootstrap'
 
@@ -11,12 +10,13 @@ import {
 } from '../logic/modalAñadirRegistroSaludLogic'
 
 import {
-   handleGetDataAlumno,
-} from '../logic/matriculaLogic'
-
-import {
    updateRegistroSaludUrl
 } from '../../helpers/Urls.js'
+
+import {
+   show_ModalEditRegistroSalud,
+   updateNuevoRegistroSalud,
+} from '../../redux/actions/modalEditAlumno.action'
 
 import {
    useSelector,
@@ -24,20 +24,20 @@ import {
 } from 'react-redux'
 
 const ModalEditRegistroSalud = ({
-   setShowModalEditRegistroSalud,
-   showModalEditRegistroSalud,
-   nuevoRegistroSalud,
-   setNuevoRegistroSalud,
 }) => { 
 
    const userState = useSelector(state => state.authReducer)
    const {dataAlumno} = useSelector(state => state.matriculaReducer)
+   const {
+      showModalEditRegistroSalud,
+      nuevoRegistroSalud,
+   } = useSelector(state=> state.modalEditAlumnoReducer)
    const dispatch =  useDispatch()
 
    return ( 
       <Modal
          show={showModalEditRegistroSalud}
-         onHide={()=> setShowModalEditRegistroSalud(false)}
+         onHide={()=> dispatch(show_ModalEditRegistroSalud())}
       >
          <Modal.Header
             closeButton
@@ -53,7 +53,7 @@ const ModalEditRegistroSalud = ({
                as='textarea'
                rows={3}
                aria-label='nuevaObservacion'
-               onChange={(event) => setNuevoRegistroSalud(event.target.value)}
+               onChange={(event) => dispatch(updateNuevoRegistroSalud(event.target.value))}
             />
          </Modal.Body>
          <Modal.Footer>
@@ -69,7 +69,7 @@ const ModalEditRegistroSalud = ({
                      updateRegistroSaludUrl,
                      dispatch
                   )
-                  setShowModalEditRegistroSalud(false)
+                 dispatch(show_ModalEditRegistroSalud()) 
                }}
             >
                Añadir

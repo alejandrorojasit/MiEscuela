@@ -7,24 +7,26 @@ export const handleShow = (setShowModalUpdate) => {
 
 export const handleClickAccept = (
    updatedData,
-   context,
+   userState,
    apiUrl,
    id,
    dataRegistro,
-   setAlumnoEditModal,
-   setShowModalUpdate,
-   setSwitchEdit,
-   setSelectedAlumnoForEdit,
    selectedAlumnoForEdit,
-   setDataAlumno
+   dispatch
 ) => {
-   postFetchUpdateAlumno(context.token,updatedData,apiUrl,id,dataRegistro)
+   postFetchUpdateAlumno(
+      userState.token,
+      updatedData,
+      apiUrl,
+      id,
+      dataRegistro
+   )
       .then((res)=> {
          if(res.status === 200){
             handleGetDataAlumno(
-               context,
+               userState,
                selectedAlumnoForEdit,
-               setDataAlumno,
+               dispatch,
             )
          }
       } 

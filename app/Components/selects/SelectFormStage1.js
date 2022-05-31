@@ -24,10 +24,8 @@ const SelectFormStage1 = ({
 }) => { 
    
    const {
-      grado,
       nivel,
       division,
-      sala
    } = useSelector(state => state.hardCodeDataReducer.hardCodeData)
 
    const {

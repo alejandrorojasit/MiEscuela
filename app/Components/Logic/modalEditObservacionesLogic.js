@@ -17,27 +17,27 @@ export const handleChange = (
 }
 
 export const handleClickAñadir = (
-   nuevaObservacionState,
+   userState,
+   nuevaObservacion,
    id,
-   context,
    apiUrl,
    selectedAlumnoForEdit,
-   setDataAlumno
+   dispatch
 ) => {
 
    let updatedData = {
-      user: context.user,
-      puesto: DecodeToken(context).usuario.role,
+      user: userState.user,
+      puesto: DecodeToken(userState).usuario.role,
       fecha: new Date().toLocaleString(),
-      observacion: nuevaObservacionState
+      observacion: nuevaObservacion
    }
    let dataRegistro = {
-      user: context.user,
+      user: userState.user,
       fecha: new Date().toLocaleString(),
-      cambios: [`Observacion: ${nuevaObservacionState}`]
+      cambios: [`Observacion: ${nuevaObservacion}`]
    }
    postFetchUpdateAlumno(
-      context.token,
+      userState.token,
       updatedData,
       apiUrl,
       id,
@@ -45,9 +45,9 @@ export const handleClickAñadir = (
    ).then((res)=>{
       if(res.status === 200){
          handleGetDataAlumno(
-            context,
+            userState,
             selectedAlumnoForEdit,
-            setDataAlumno,
+            dispatch,
          )
       }
    })

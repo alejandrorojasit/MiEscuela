@@ -1,5 +1,4 @@
 import {
-   useState,
    useRef,
    useEffect,
 } from 'react'
@@ -30,150 +29,120 @@ import {colors} from '../../helpers/styleColors.js'
 
 import {DecodeToken} from '../logic/tokenhandler'
 
+import {
+   updateFechaIngreso,
+   updateFechaEgreso,
+   updateFechaNacimiento,
+} from '../../redux/actions/modalEditAlumno.action'
+
 const ModalEditAlumno = ({
-   alumnoEditModal,
-   setAlumnoEditModal,
-   setShowModalUpdate,
-   setUpdatedData,
-   switchEdit,
-   setSwitchEdit,
-   showModalEditObservaciones,
-   setShowModalEditObservaciones,
-   setShowModalEditRegistroSalud,
 }) => { 
 
-   const [fechaNacimiento,setFechaNacimiento] = useState()
-   const [fechaIngreso,setFechaIngreso] = useState('')
-   const [fechaEgreso,setFechaEgreso] = useState('')
    const modalEditRef = useRef([])
 
    const userState = useSelector(state => state.authReducer)
+
    const dataAlumno = useSelector(state => state.matriculaReducer)
+
+   const {showModalEditAlumno} = useSelector(state => state.modalEditAlumnoReducer)
+
    const dispatch =  useDispatch()
-   
+
    useEffect (()=> {
       if(dataAlumno.fechaNacimiento !== undefined ){
-         setFechaNacimiento(createISODate(dataAlumno.fechaNacimiento))
-      }
+         dispatch(updateFechaNacimiento(createISODate(dataAlumno.fechaNacimiento))
+         )      }
       if(dataAlumno.egreso === 'Sin datos'){
-         setFechaEgreso('')
+         dispatch(updateFechaIngreso(''))
       }else{
-         setFechaEgreso(createISODate(dataAlumno.egreso))
+         dispatch(updateFechaEgreso(createISODate(dataAlumno.egreso))
+         )
       }
       if(dataAlumno.ingreso === 'Sin datos'){
-         setFechaIngreso('')
+         dispatch(updateFechaIngreso(''))
       }else{
-         setFechaIngreso(createISODate(dataAlumno.ingreso))
+         dispatch(updateFechaIngreso(createISODate(dataAlumno.ingreso))
+         )
       }
    },[dataAlumno])
 
    return ( 
       <Modal 
-         style={{color:colors.darken}}
-         fullscreen={true}
-         show={alumnoEditModal} 
-         onHide={()=> handleShow(
-            setAlumnoEditModal,
-            dispatch)}
+      style={{color:colors.darken}}
+      fullscreen={true}
+      show={showModalEditAlumno} 
+      onHide={()=> handleShow(
+         dispatch)}
       >
-         <Modal.Header 
-            closeButton
+      <Modal.Header 
+      closeButton
+      >
+      <Col
+      className='d-flex justify-content-center'
+      >
+      <h4>
+      {dataAlumno.nombre} {dataAlumno.apellido}
+      </h4>      
+      </Col>
+      </Modal.Header>
+      <Modal.Body
+      >
+      <Tabs
+      >
+      <Tab
+      eventKey='Datos Generales'
+      title='Datos Generales'
+      >
+      <TabDatosGenerales
+      modalEditRef={modalEditRef}
+      />
+      </Tab>
+      <Tab
+      eventKey='Datos de Contacto'
+      title='Datos de Contacto'
+      >
+      <TabDatosContacto
+      modalEditRef={modalEditRef}
+      />
+      </Tab>
+      <Tab
+      eventKey='Datos de Salud'
+      title='Datos de Salud'
+      >
+      <TabDatosSalud 
+      modalEditRef={modalEditRef}
+      />
+      </Tab>
+      {
+         DecodeToken(userState).usuario.permissions.leerObservaciones ? 
+         <Tab
+         eventKey='Observaciones'
+         title='Observaciones'
          >
-            <Col
-               className='d-flex justify-content-center'
+         <TabObservaciones
+         />
+         </Tab>
+         :
+         null
+      }
+      {
+         DecodeToken(userState).usuario.permissions.leerRegistro ?
+            <Tab
+         eventKey='Registro modificaciones'
+         title='Registro modificaciones'
             >
-               <h4>
-                  {dataAlumno.nombre} {dataAlumno.apellido}
-               </h4>      
-            </Col>
-         </Modal.Header>
-         <Modal.Body
-         >
-            <Tabs
-            >
-               <Tab
-                  eventKey='Datos Generales'
-                  title='Datos Generales'
-               >
-                  <TabDatosGenerales
-                     switchEdit={switchEdit}
-                     setSwitchEdit={setSwitchEdit}
-                     modalEditRef={modalEditRef}
-                     fechaNacimiento={fechaNacimiento}
-                     setUpdatedData={setUpdatedData}
-                     setShowModalUpdate={setShowModalUpdate}
-                     setFechaNacimiento={setFechaNacimiento}
-                     fechaIngreso={fechaIngreso}
-                     setFechaIngreso={setFechaIngreso}
-                     fechaEgreso={fechaEgreso}
-                     setFechaEgreso={setFechaEgreso}
-                  />
-               </Tab>
-               <Tab
-                  eventKey='Datos de Contacto'
-                  title='Datos de Contacto'
-               >
-                  <TabDatosContacto
-                     switchEdit={switchEdit}
-                     setSwitchEdit={setSwitchEdit}
-                     modalEditRef={modalEditRef}
-                     setUpdatedData={setUpdatedData}
-                     setShowModalUpdate={setShowModalUpdate}
-                     fechaNacimiento={fechaNacimiento}
-                     setFechaNacimiento={setFechaNacimiento}
-                     fechaIngreso={fechaIngreso}
-                     fechaEgreso={fechaEgreso}
-                  />
-               </Tab>
-               <Tab
-                  eventKey='Datos de Salud'
-                  title='Datos de Salud'
-               >
-                  <TabDatosSalud 
-                     switchEdit={switchEdit}
-                     setSwitchEdit={setSwitchEdit}
-                     modalEditRef={modalEditRef}
-                     fechaNacimiento={fechaNacimiento}
-                     setUpdatedData={setUpdatedData}
-                     setShowModalUpdate={setShowModalUpdate}
-                     setFechaNacimiento={setFechaNacimiento}
-                     setShowModalEditRegistroSalud={setShowModalEditRegistroSalud}
-                     fechaIngreso={fechaIngreso}
-                     fechaEgreso={fechaEgreso}
-                  />
-               </Tab>
-            {
-               DecodeToken(userState).usuario.permissions.leerObservaciones ? 
-                  <Tab
-                     eventKey='Observaciones'
-                     title='Observaciones'
-                  >
-                     <TabObservaciones
-                        setShowModalEditObservaciones={setShowModalEditObservaciones}
-                        showModalEditObservaciones={showModalEditObservaciones}
-                     />
-                  </Tab>
-                  :
-                  null
-            }
-            {
-               DecodeToken(userState).usuario.permissions.leerRegistro ?
-                  <Tab
-                     eventKey='Registro modificaciones'
-                     title='Registro modificaciones'
-                  >
-                     <TabRegistroModificaciones
-                     />
-                  </Tab>
-                  :
-                  null
-            }
-            </Tabs>
-         </Modal.Body>
-         <Modal.Footer>
+            <TabRegistroModificaciones
+            />
+            </Tab>
+            :
+            null
+      }
+      </Tabs>
+      </Modal.Body>
+      <Modal.Footer>
 
-         </Modal.Footer>
-               </Modal>
+      </Modal.Footer>
+      </Modal>
    )
 }
 

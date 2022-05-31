@@ -24,19 +24,6 @@ import {useSelector,useDispatch} from 'react-redux'
 
 const Matricula = () => { 
 
-   const [alumnoEditModal,setAlumnoEditModal] = useState(false)
-   const [showModalUpdate,setShowModalUpdate] = useState(false)
-
-   const [updatedData,setUpdatedData] = useState({})
-
-   const [switchEdit,setSwitchEdit] = useState(true)
-
-   const [nuevaObservacionState,setNuevaObservacion] = useState('')
-
-   const [showModalEditObservaciones,setShowModalEditObservaciones] = useState(false)
-   const [showModalEditRegistroSalud,setShowModalEditRegistroSalud] = useState(false)
-   const [nuevoRegistroSalud,setNuevoRegistroSalud] = useState('')
-
    const matriculaRef = useRef([]) 
    const dispatch = useDispatch() 
    const userState  =  useSelector(state => state.authReducer)
@@ -59,49 +46,17 @@ const Matricula = () => {
             <LoadingSpinner/>
             :
             <>
-               <ModalEditAlumno
-                  alumnoEditModal={alumnoEditModal}
-                  setAlumnoEditModal={setAlumnoEditModal}
-                  setShowModalUpdate={setShowModalUpdate}
-                  setUpdatedData={setUpdatedData}
-                  switchEdit={switchEdit}
-                  setSwitchEdit={setSwitchEdit}
-                  showModalEditObservaciones={showModalEditObservaciones}
-                  setShowModalEditObservaciones={setShowModalEditObservaciones}
-                  setShowModalEditRegistroSalud={setShowModalEditRegistroSalud}
-               />
-               <ModalEditRegistroSalud
-                  nuevoRegistroSalud={nuevoRegistroSalud}
-                  setNuevoRegistroSalud={setNuevoRegistroSalud}
-                  showModalEditRegistroSalud={showModalEditRegistroSalud}
-                  setShowModalEditRegistroSalud={setShowModalEditRegistroSalud}
-               />
-               <ModalEditObservaciones
-                  setShowModalEditObservaciones={setShowModalEditObservaciones}
-                  showModalEditObservaciones={showModalEditObservaciones}
-                  setNuevaObservacion={setNuevaObservacion}
-                  nuevaObservacionState={nuevaObservacionState}
-               />
-               <ModalConfirmUpdateData 
-                  showModalUpdate={showModalUpdate}
-                  updatedData={updatedData}
-                  setShowModalUpdate={setShowModalUpdate}
-                  alumnoEditModal={alumnoEditModal}
-                  setAlumnoEditModal={setAlumnoEditModal}
-                  switchEdit={switchEdit}
-                  setSwitchEdit={setSwitchEdit}
-               />
+               <ModalEditAlumno/>
+               <ModalEditRegistroSalud/>
+               <ModalEditObservaciones/>
+               <ModalConfirmUpdateData/>
                <SelectFormStage1
                   matriculaRef={matriculaRef}
                />
                <SelectFormStage2
                   matriculaRef={matriculaRef}
                />
-               <TableAlumnosMatricula
-                  setAlumnoEditModal={setAlumnoEditModal}
-                  switchEdit={switchEdit}
-                  setSwitchEdit={setSwitchEdit}
-               />
+               <TableAlumnosMatricula/>
             </>
          }
       </Container>

@@ -2,10 +2,15 @@ import {ageCalculate,splitDate,ageCalculate3006} from './dateHandler'
 import {postUpdateWholeDB} from '../../hooks/postFetch'
 import {updateWholeDB} from '../../helpers/Urls'
 import { getMatriculaSingle } from '../../hooks/getFetch'
+
 import {
    updateAlumnoForEdit,
    updateDataAlumno
 } from '../../redux/actions/matricula.action'
+
+import {
+   show_ModalEditAlumno
+} from '../../redux/actions/modalEditAlumno.action'
 
 import {
    updateNivel,
@@ -156,13 +161,12 @@ export const handleEdad3006 = (
 
 export const handleEdit = (
    data,
-   setAlumnoEditModal,
    dispatch,
    context,
 ) => {
    dispatch(updateAlumnoForEdit(data))
    handleGetDataAlumno(context,data,dispatch)
-   setAlumnoEditModal(true)
+   dispatch(show_ModalEditAlumno())
 }
 
 export const handleClickApplyFilter = (

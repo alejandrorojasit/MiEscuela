@@ -1,34 +1,45 @@
 import {
    Modal,
-   Form,
    FormControl,
    Button,
    Col
 } from 'react-bootstrap'
 
 import {
-   handleClose,
-   handleChange,
    handleClickAñadir
 } from '../logic/modalEditObservacionesLogic'
 
 import {updateObservacionesUrl} from '../../helpers/Urls.js'
 
+import {useSelector,useDispatch} from 'react-redux'
+
+import { 
+   show_ModalEditObservaciones ,
+   updateNuevaObservacion,
+} from '../../redux/actions/modalEditAlumno.action'
+
 const modalEditObservaciones = ({
-   showModalEditObservaciones,
-   setShowModalEditObservaciones,
-   setNuevaObservacion,
-   nuevaObservacionState,
-   dataAlumno,
-   context,
-   selectedAlumnoForEdit,
-   setDataAlumno,
 }) => {
+
+
+   const dispatch = useDispatch()
+
+   const {
+      showModalEditObservaciones,
+      nuevaObservacion,
+   } = useSelector(state => state.modalEditAlumnoReducer)
+   
+   const {
+      dataAlumno,
+      selectedAlumnoForEdit,
+   } = useSelector(state => state.matriculaReducer)
+
+   const {userState} = useSelector(state => state.authReducer)
 
    return (
       <Modal 
          show={showModalEditObservaciones} 
-         onHide={()=> handleClose(setShowModalEditObservaciones)}
+         onHide={()=> dispatch(show_ModalEditObservaciones())}
       >
          <Modal.Header 
             closeButton
@@ -45,9 +56,8 @@ const modalEditObservaciones = ({
                as='textarea'
                rows={3}
                aria-label='nuevaObservacion'
-               onChange={(event) => handleChange(
-                  event,
-                  setNuevaObservacion
+               onChange={(event) => dispatch(
+                  updateNuevaObservacion(event.target.value) 
                )}
             />
          </Modal.Body>
@@ -58,13 +68,14 @@ const modalEditObservaciones = ({
                size='sm'
                onClick={() => {
                   handleClickAñadir (
-                     nuevaObservacionState,
-                     dataAlumno._id,context,
+                     userState,
+                     nuevaObservacion,
+                     dataAlumno._id,
                      updateObservacionesUrl,
                      selectedAlumnoForEdit,
-                     setDataAlumno
+                     dispatch
                   )
-                  setShowModalEditObservaciones(false)
+                  dispatch(show_ModalEditObservaciones())
                }}
             >
                Añadir

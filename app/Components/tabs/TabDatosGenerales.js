@@ -37,28 +37,22 @@ import {createISODate} from '../logic/dateHandler'
 import {useSelector} from 'react-redux'
 
 const TabDatosGenerales = ({
-   dataAlumno,
-   switchEdit,
    modalEditRef,
-   fechaNacimiento,
-   setSwitchEdit,
-   setShowModalUpdate,
-   setUpdatedData,
-   updatedData,
-   setFechaNacimiento,
-   context,
-   setDataAlumno,
-   selectedAlumnoForEdit,
-   fechaIngreso,
-   setFechaIngreso,
-   fechaEgreso,
-   setFechaEgreso,
 }) => { 
 
    registerLocale('es',es)
 
 
-   const {nivel,grado,division,sexo,estado,denominacion,tipoDNI} = useSelector(state => state.hardCodeDataReducer.hardCodeData)
+   const {
+      nivel,
+      grado,
+      division,
+      sexo,
+      estado,
+      denominacion,
+      tipoDNI
+   } = useSelector(state => state.hardCodeDataReducer.hardCodeData)
+
    const [isValid,setIsValid] = useState(true)
    const [isInvalid,setIsInvalid] = useState(false)
 
@@ -415,7 +409,17 @@ const TabDatosGenerales = ({
                      variant='outline-success'
                      size='sm'
                      onClick={() => {
-                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData,fechaIngreso,fechaEgreso)
+                        handleUpdateData(
+                           modalEditRef,
+                           fechaNacimiento,
+                           dataAlumno,
+                           setSwitchEdit,
+                           updatedData,
+                           setShowModalUpdate,
+                           setUpdatedData,
+                           fechaIngreso,
+                           fechaEgreso
+                        )
                      }}
                   >Actualizar</Button>
                   :
