@@ -12,20 +12,25 @@ import {colors} from '../../helpers/styleColors'
 
 import { DecodeToken } from '../logic/tokenhandler'
 
-import useAuth from '../../context/store/useAuth'
-
 import { handleFilter } from '../logic/tabObservacionesLogic'
 
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+
+import {
+   show_ModalEditObservaciones
+} from '../../redux/actions/modalEditAlumno.action'
 
 const TabObservaciones = ({
-
-   dataAlumno,
-   setShowModalEditObservaciones,
-   showModalEditObservaciones,
-
 }) => { 
-   const context  = useSelector(state => state.authReducer)
+
+   const dispatch = useDispatch()
+
+   const userState  = useSelector(state => state.authReducer)
+
+   const {
+      dataAlumno
+   } = useSelector(state => state.matriculaReducer)
+
    const hardCodeData =  useSelector (state => state.hardCodeDataReducer.hardCodeData)
 
    const [filtredData,setFiltredData] = useState([]) 
@@ -40,11 +45,11 @@ const TabObservaciones = ({
             <Col
                className='mt-2 d-flex justify-content-center'
             >
-               {DecodeToken(context).usuario.permissions.añadirObservaciones ?
+               {DecodeToken(userState).usuario.permissions.añadirObservaciones ?
                   <Button
                      variant='outline-success'
                      size='sm'
-                     onClick={() => setShowModalEditObservaciones(true)}
+                     onClick={() => dispatch(show_ModalEditObservaciones())}
                   >Añadir Observacion</Button> 
                   :
                      null
@@ -58,9 +63,9 @@ const TabObservaciones = ({
                   onChange={(event)=>setFiltredData(handleFilter(event,dataAlumno))}
                >
                   <option>Filtrar</option>
-                  {Object.keys(DecodeToken(context).usuario.permissions).map((dataMap,index)=>{
+                  {Object.keys(DecodeToken(userState).usuario.permissions).map((dataMap,index)=>{
                      switch(true){
-                        case dataMap === 'filterPreceptoria' && DecodeToken(context).usuario.permissions[dataMap]:
+                        case dataMap === 'filterPreceptoria' && DecodeToken(userState).usuario.permissions[dataMap]:
                            return(
                               <option 
                                  value={dataMap} 
@@ -69,7 +74,7 @@ const TabObservaciones = ({
                                  {hardCodeData.filtroObservaciones[dataMap]}
                               </option>
                            )
-                        case dataMap === 'filterCoordinacionAdministrativa' && DecodeToken(context).usuario.permissions[dataMap]:
+                        case dataMap === 'filterCoordinacionAdministrativa' && DecodeToken(userState).usuario.permissions[dataMap]:
                            return(
                               <option 
                                  value={dataMap} 
@@ -78,7 +83,7 @@ const TabObservaciones = ({
                                  {hardCodeData.filtroObservaciones[dataMap]}
                               </option>
                            )
-                        case dataMap === 'filterCoordinacionPedagogica' && DecodeToken(context).usuario.permissions[dataMap]:
+                        case dataMap === 'filterCoordinacionPedagogica' && DecodeToken(userState).usuario.permissions[dataMap]:
                            return(
                               <option 
                                  value={dataMap} 
@@ -87,7 +92,7 @@ const TabObservaciones = ({
                                  {hardCodeData.filtroObservaciones[dataMap]}
                               </option>
                            )
-                        case dataMap === 'filterTutoria' && DecodeToken(context).usuario.permissions[dataMap]:
+                        case dataMap === 'filterTutoria' && DecodeToken(userState).usuario.permissions[dataMap]:
                            return(
                               <option 
                                  value={dataMap} 
@@ -96,7 +101,7 @@ const TabObservaciones = ({
                                  {hardCodeData.filtroObservaciones[dataMap]}
                               </option>
                            )
-                        case dataMap === 'filterSecretariaAdministrativa' && DecodeToken(context).usuario.permissions[dataMap]:
+                        case dataMap === 'filterSecretariaAdministrativa' && DecodeToken(userState).usuario.permissions[dataMap]:
                            return(
                               <option 
                                  value={dataMap} 
@@ -105,7 +110,7 @@ const TabObservaciones = ({
                                  {hardCodeData.filtroObservaciones[dataMap]}
                               </option>
                            )
-                        case dataMap === 'filterPsicopedagogia' && DecodeToken(context).usuario.permissions[dataMap]:
+                        case dataMap === 'filterPsicopedagogia' && DecodeToken(userState).usuario.permissions[dataMap]:
                            return(
                               <option 
                                  value={dataMap} 
@@ -152,19 +157,19 @@ const TabObservaciones = ({
                   <tbody>
                      {
                         filtredData?.filter(dataFilter => 
-                              dataFilter.puesto === 'Auxiliar Sec. Administrativo/a' && DecodeToken(context).usuario.permissions.filterSecretariaAdministrativa
+                              dataFilter.puesto === 'Auxiliar Sec. Administrativo/a' && DecodeToken(userState).usuario.permissions.filterSecretariaAdministrativa
                            ||
-                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Inicial' && DecodeToken(context).usuario.permissions.filterCoordinacionPedagogica
+                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Inicial' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
                            ||
-                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Primario' && DecodeToken(context).usuario.permissions.filterCoordinacionPedagogica
+                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Primario' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
                            ||
-                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Secundario' && DecodeToken(context).usuario.permissions.filterCoordinacionPedagogica
+                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
                            ||
-                              dataFilter.puesto === 'Coordinacion Administrativa Nivel Primario' && DecodeToken(context).usuario.permissions.filterCoordinacionAdministrativa
+                              dataFilter.puesto === 'Coordinacion Administrativa Nivel Primario' && DecodeToken(userState).usuario.permissions.filterCoordinacionAdministrativa
                            ||
-                              dataFilter.puesto === 'Coordinacion Administrativa Nivel Secundario' && DecodeToken(context).usuario.permissions.filterCoordinacionAdministrativa
+                              dataFilter.puesto === 'Coordinacion Administrativa Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterCoordinacionAdministrativa
                            ||
-                              dataFilter.puesto === 'Preceptor/a' && DecodeToken(context).usuario.permissions.filterPreceptoria
+                              dataFilter.puesto === 'Preceptor/a' && DecodeToken(userState).usuario.permissions.filterPreceptoria
                         ).map((dataMap,index) =>
                            <tr
                               key={index}

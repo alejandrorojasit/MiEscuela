@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react'
+import {useEffect} from 'react'
 import {Chart} from 'react-google-charts'
 import {getMatriculaActivo} from '../../hooks/getFetch'
 import {
@@ -7,34 +7,47 @@ import {
    Row
 } from 'react-bootstrap'
 
-import {useSelector} from 'react-redux'
+import {
+   useSelector,
+   useDispatch
+} from 'react-redux'
+
+import PieChartContentLoader from '../contetnLoaders/PieChartContentLoader'
+
+import {
+   updateAlumnoFullList
+} from '../../redux/actions/matricula.action'
 
 const ChartsPannelHomePage = () => { 
-   const context = useSelector(state => state.authReducer)
 
-   const [ data,setData ] = useState([]);
+   const dispatch =  useDispatch()
+
+   const userState = useSelector(state => state.authReducer)
+
+   const {alumnosFullList} =  useSelector(state => state.matriculaReducer)
 
    useEffect(async ()=>{
-      const res = await getMatriculaActivo(context.token) 
+      const res = await getMatriculaActivo(userState.token) 
       if(res.status === 200){
-         setData(res.data) 
+         dispatch(updateAlumnoFullList(res.data))
       }
    },[])
 
-   const varonesMatriculaCompleta = data.filter((valor)=> valor.sexo === "Masculino")
-   const mujeresMatriculaCompleta =  data.filter((valor)=> valor.sexo === "Femenino")
+   const varonesMatriculaCompleta = alumnosFullList.filter((valor)=> valor.sexo === "Masculino")
 
-   const varonesMatriculaInicial =  data.filter((valor)=> valor.sexo === "Masculino" && valor.nivel === "Inicial")
-   const mujeresMatriculaInicial =  data.filter((valor)=> valor.sexo === "Femenino" && valor.nivel === "Inicial")
-   const totalNivelInicial = data.filter((valor)=> valor.nivel === "Inicial")
+   const mujeresMatriculaCompleta =  alumnosFullList.filter((valor)=> valor.sexo === "Femenino")
 
-   const varonesMatriculaPrimario =  data.filter((valor)=> valor.sexo === "Masculino" && valor.nivel === "Primario")
-   const mujeresMatriculaPrimario =  data.filter((valor)=> valor.sexo === "Femenino" && valor.nivel === "Primario")
-   const totalNivelPrimario = data.filter((valor)=> valor.nivel === "Primario")
+   const varonesMatriculaInicial =  alumnosFullList.filter((valor)=> valor.sexo === "Masculino" && valor.nivel === "Inicial")
+   const mujeresMatriculaInicial =  alumnosFullList.filter((valor)=> valor.sexo === "Femenino" && valor.nivel === "Inicial")
+   const totalNivelInicial = alumnosFullList.filter((valor)=> valor.nivel === "Inicial")
 
-   const varonesMatriculaSecundario =  data.filter((valor)=> valor.sexo === "Masculino" && valor.nivel === "Secundario")
-   const mujeresMatriculaSecundario =  data.filter((valor)=> valor.sexo === "Femenino" && valor.nivel === "Secundario")
-   const totalNivelSecundario = data.filter((valor)=> valor.nivel === "Secundario")
+   const varonesMatriculaPrimario =  alumnosFullList.filter((valor)=> valor.sexo === "Masculino" && valor.nivel === "Primario")
+   const mujeresMatriculaPrimario =  alumnosFullList.filter((valor)=> valor.sexo === "Femenino" && valor.nivel === "Primario")
+   const totalNivelPrimario = alumnosFullList.filter((valor)=> valor.nivel === "Primario")
+
+   const varonesMatriculaSecundario =  alumnosFullList.filter((valor)=> valor.sexo === "Masculino" && valor.nivel === "Secundario")
+   const mujeresMatriculaSecundario =  alumnosFullList.filter((valor)=> valor.sexo === "Femenino" && valor.nivel === "Secundario")
+   const totalNivelSecundario = alumnosFullList.filter((valor)=> valor.nivel === "Secundario")
 
    const dataMatriculaCompleta = [
       ["Sexo","Cantidad"],
@@ -42,7 +55,7 @@ const ChartsPannelHomePage = () => {
       ["Varones", varonesMatriculaCompleta.length],
    ]
    const optionsMatriculaCompleta = {
-      title:`Cantidad de alumnos en total: ${data.length}`,
+      title:`Cantidad de alumnos en total: ${alumnosFullList.length}`,
       pieHole:0.4,
       is3D:false,
    }
@@ -81,47 +94,79 @@ const ChartsPannelHomePage = () => {
    }
 
    return ( 
-      <Container
-         className={'border border-success mb-4'}
-      >
-         <Row>
-            <Col>
-               <Chart
-                  chartType='PieChart'
-                  height='400px'
-                  data={dataMatriculaCompleta}
-                  options={optionsMatriculaCompleta}
-               />           
+      <>
+         <Row
+         >
+            <Col
+               className='d-flex justify-content-center'
+            >
+               {
+               alumnosFullList.length === 0 ?
+                  <PieChartContentLoader/>
+                  :
+                  <Chart
+                     width='99%'
+                     height='400px'
+                     chartType='PieChart'
+                     data={dataMatriculaCompleta}
+                     options={optionsMatriculaCompleta}
+                     /> 
+            }
             </Col>
-            <Col>   
-               <Chart
-                  chartType='PieChart'
-                  height='400px'
-                  data={dataMatriculaInicial}
-                  options={optionsMatriculaInicial}
-               />  
+            <Col
+               className='d-flex justify-content-center'
+            >
+               {
+               alumnosFullList.length === 0 ?
+                  <PieChartContentLoader/>
+                  :
+                  <Chart
+                     height='400px'
+                     width='99%'
+                     chartType='PieChart'
+                     data={dataMatriculaInicial}
+                     options={optionsMatriculaInicial}
+                     /> 
+            }
             </Col>
          </Row>
-         <Row>
-            <Col>
-               <Chart
-                  chartType='PieChart'
-                  height='400px'
-                  data={dataMatriculaPrimario}
-                  options={optionsMatriculaPrimario}
-               />           
-            </Col>
-            <Col>   
-               <Chart
-                  chartType='PieChart'
-                  height='400px'
-                  data={dataMatriculaSecundario}
-                  options={optionsMatriculaSecundario}
-               />  
-            </Col>
+         <Row
+         >
+            <Col
+               className='d-flex justify-content-center'
+            >
+               {
+               alumnosFullList.length === 0 ?
 
+                  <PieChartContentLoader/>
+                  :
+                  <Chart
+                     width='99%'
+                     height='400px'
+                     chartType='PieChart'
+                     data={dataMatriculaPrimario}
+                     options={optionsMatriculaPrimario}
+                     /> 
+            }
+            </Col>
+            <Col
+               className='d-flex justify-content-center'
+            >
+               {
+               alumnosFullList.length === 0 ?
+                  <PieChartContentLoader/>
+                  :
+                  <Chart
+                     width='99%'
+                     height='400px'
+                     chartType='PieChart'
+                     data={dataMatriculaSecundario}
+                     options={optionsMatriculaSecundario}
+                     /> 
+            }
+            </Col>
          </Row>
-      </Container>
+      </>
    )
 }
 

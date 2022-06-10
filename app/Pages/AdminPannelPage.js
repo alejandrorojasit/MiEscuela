@@ -13,6 +13,7 @@ import AdminOptions from '../components/AdminOptions'
 const AdminPannelPage = () => {
    return(
       <Container 
+         fluid
       >
          <Row>
          </Row>

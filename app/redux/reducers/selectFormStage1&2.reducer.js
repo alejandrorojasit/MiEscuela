@@ -11,6 +11,10 @@ import {
    UPDATE_FILTREDDATOSSTAGE1,
    UPDATE_FILTREDDATOSSTAGE2, 
    RESET_STATE,
+   UPDATE_APELLIDOFILTER,
+   UPDATE_NOMOBREFILTER,
+   UPDATE_EDADFILTER,
+   UPDATE_EDAD3006FILTER,
 } from '../actions/selectFormStage1&2.actions'
 
 export const selectFormStagesReducer = (
@@ -18,6 +22,26 @@ export const selectFormStagesReducer = (
    action
 ) => {
    switch (action.type) {
+      case UPDATE_EDAD3006FILTER:
+         return {
+            ...state,
+            edad3006Filter: action.payload
+         }
+      case UPDATE_EDADFILTER:
+         return {
+            ...state,
+            edadFilter: action.payload
+         }
+      case UPDATE_NOMOBREFILTER:
+         return {
+            ...state,
+            nombreFilter: action.payload
+         }
+      case UPDATE_APELLIDOFILTER:
+         return {
+            ...state,
+            apellidoFilter: action.payload
+         }
       case UPDATE_GRADO:
          return {
             ...state,

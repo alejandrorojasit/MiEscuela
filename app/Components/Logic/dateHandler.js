@@ -55,7 +55,6 @@ export const ageCalculate3006 = (date) => {
 
 
 export const createISODate = (date) => {
-
    if (date !== undefined){
       const splitedDate = splitDate(date,3)
       const ISOdate = new Date(splitedDate[2],splitedDate[1] - 1,splitedDate[0])
@@ -64,7 +63,6 @@ export const createISODate = (date) => {
 }
 
 export const createStringDate = (date) => {
-
    const stringDate = 
       `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
 

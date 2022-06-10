@@ -24,7 +24,7 @@ export const matriculaReducer = (
       case UPDATE_ALUMNO_FOR_EDIT:
          return {
             ...state,
-            selecteAlumnoForEdit:action. payload
+            selectedAlumnoForEdit: action.payload
          }
       default:
          return state

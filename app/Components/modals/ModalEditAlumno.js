@@ -33,6 +33,7 @@ import {
    updateFechaIngreso,
    updateFechaEgreso,
    updateFechaNacimiento,
+   show_ModalEditAlumno,
 } from '../../redux/actions/modalEditAlumno.action'
 
 const ModalEditAlumno = ({
@@ -42,7 +43,7 @@ const ModalEditAlumno = ({
 
    const userState = useSelector(state => state.authReducer)
 
-   const dataAlumno = useSelector(state => state.matriculaReducer)
+   const {dataAlumno} = useSelector(state => state.matriculaReducer)
 
    const {showModalEditAlumno} = useSelector(state => state.modalEditAlumnoReducer)
 
@@ -51,9 +52,10 @@ const ModalEditAlumno = ({
    useEffect (()=> {
       if(dataAlumno.fechaNacimiento !== undefined ){
          dispatch(updateFechaNacimiento(createISODate(dataAlumno.fechaNacimiento))
-         )      }
+         )
+      }
       if(dataAlumno.egreso === 'Sin datos'){
-         dispatch(updateFechaIngreso(''))
+         dispatch(updateFechaEgreso(''))
       }else{
          dispatch(updateFechaEgreso(createISODate(dataAlumno.egreso))
          )
@@ -65,83 +67,84 @@ const ModalEditAlumno = ({
          )
       }
    },[dataAlumno])
+   
 
    return ( 
       <Modal 
-      style={{color:colors.darken}}
-      fullscreen={true}
-      show={showModalEditAlumno} 
-      onHide={()=> handleShow(
-         dispatch)}
+         style={{color:colors.darken}}
+         fullscreen={true}
+         show={showModalEditAlumno} 
+         onHide={()=> handleShow(
+            dispatch)}
       >
-      <Modal.Header 
-      closeButton
-      >
-      <Col
-      className='d-flex justify-content-center'
-      >
-      <h4>
-      {dataAlumno.nombre} {dataAlumno.apellido}
-      </h4>      
-      </Col>
-      </Modal.Header>
-      <Modal.Body
-      >
-      <Tabs
-      >
-      <Tab
-      eventKey='Datos Generales'
-      title='Datos Generales'
-      >
-      <TabDatosGenerales
-      modalEditRef={modalEditRef}
-      />
-      </Tab>
-      <Tab
-      eventKey='Datos de Contacto'
-      title='Datos de Contacto'
-      >
-      <TabDatosContacto
-      modalEditRef={modalEditRef}
-      />
-      </Tab>
-      <Tab
-      eventKey='Datos de Salud'
-      title='Datos de Salud'
-      >
-      <TabDatosSalud 
-      modalEditRef={modalEditRef}
-      />
-      </Tab>
-      {
-         DecodeToken(userState).usuario.permissions.leerObservaciones ? 
-         <Tab
-         eventKey='Observaciones'
-         title='Observaciones'
+         <Modal.Header 
+            closeButton
          >
-         <TabObservaciones
-         />
-         </Tab>
-         :
-         null
-      }
-      {
-         DecodeToken(userState).usuario.permissions.leerRegistro ?
-            <Tab
-         eventKey='Registro modificaciones'
-         title='Registro modificaciones'
+            <Col
+               className='d-flex justify-content-center'
             >
-            <TabRegistroModificaciones
-            />
-            </Tab>
-            :
-            null
-      }
-      </Tabs>
-      </Modal.Body>
-      <Modal.Footer>
+               <h4>
+                  {dataAlumno.nombre} {dataAlumno.apellido}
+               </h4>      
+            </Col>
+         </Modal.Header>
+         <Modal.Body
+         >
+            <Tabs
+            >
+               <Tab
+                  eventKey='Datos Generales'
+                  title='Datos Generales'
+               >
+                  <TabDatosGenerales
+                     modalEditRef={modalEditRef}
+                     />
+               </Tab>
+               <Tab
+                  eventKey='Datos de Contacto'
+                  title='Datos de Contacto'
+               >
+                  <TabDatosContacto
+                     modalEditRef={modalEditRef}
+                     />
+               </Tab>
+               <Tab
+                  eventKey='Datos de Salud'
+                  title='Datos de Salud'
+               >
+                  <TabDatosSalud 
+                     modalEditRef={modalEditRef}
+                     />
+               </Tab>
+               {
+               DecodeToken(userState).usuario.permissions.leerObservaciones ? 
+                  <Tab
+                     eventKey='Observaciones'
+                     title='Observaciones'
+                  >
+                     <TabObservaciones
+                        />
+                  </Tab>
+                  :
+                  null
+            }
+               {
+               DecodeToken(userState).usuario.permissions.leerRegistro ?
+                  <Tab
+                     eventKey='Registro modificaciones'
+                     title='Registro modificaciones'
+                  >
+                     <TabRegistroModificaciones
+                        />
+                  </Tab>
+                  :
+                  null
+            }
+            </Tabs>
+         </Modal.Body>
+<Modal.Footer>
 
-      </Modal.Footer>
+         </Modal.Footer>
       </Modal>
    )
 }

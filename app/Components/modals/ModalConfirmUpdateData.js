@@ -16,6 +16,10 @@ import {
    useDispatch
 } from 'react-redux'
 
+import {
+show_ModalUpdate
+} from '../../redux/actions/modalEditAlumno.action'
+
 import {updateAlumnoUrl} from '../../helpers/Urls'
 
 const ModalUpdate = ({

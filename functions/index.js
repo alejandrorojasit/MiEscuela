@@ -19,5 +19,7 @@ app.use('/api/matricula',require('./routes/matricula.routes'))
 app.use('/api/usuarios',require('./routes/usuarios.routes'))
 app.use('/api/verifyToken',require('./routes/verify.routes'))
 app.use('/api/hardCodeData',require('./routes/hardCodeData.routes'))
+app.use('/api/municipiosArg',require('./routes/municipiosArg.routes'))
+app.use('/api/callesArg',require('./routes/callesArg.routes'))
 
 exports.app = functions.https.onRequest(app)

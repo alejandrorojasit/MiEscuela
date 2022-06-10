@@ -15,22 +15,30 @@ import { DecodeToken } from '../logic/tokenhandler.js'
 
 import DatosTutor from '../forms/DatosTutorForm'
 
+import {useSelector,useDispatch} from 'react-redux'
+
+import {updateSwitchEdit} from '../../redux/actions/modalEditAlumno.action'
+
 const TabDatosContacto = ({
-   dataAlumno,
-   switchEdit,
-   setSwitchEdit,
    modalEditRef,
-   fechaNacimiento,
-   setFechaNacimiento,
-   updatedData,
-   setShowModalUpdate,
-   setUpdatedData,
-   context,
-   selectedAlumnoForEdit,
-   setDataAlumno,
-   fechaIngreso,
-   fechaEgreso,
 }) => { 
+
+   const dispatch = useDispatch()
+
+   const {
+      dataAlumno
+   } = useSelector(state => state.matriculaReducer)
+
+   const {
+      switchEdit,
+      fechaIngreso,
+      fechaEgreso,
+      fechaNacimiento,
+      updatedData,
+   } = useSelector(state => state.modalEditAlumnoReducer)
+
+   const userState = useSelector(state => state.authReducer)
+
    return ( 
       <>
          <DatosTutor
@@ -38,9 +46,6 @@ const TabDatosContacto = ({
             switchEdit={switchEdit}
             modalEditRef={modalEditRef}
          />
-         <Container
-            fluid
-         >
          <Row
             className='border border-success p-2 mt-2'
          >
@@ -54,24 +59,30 @@ const TabDatosContacto = ({
                />  
             </Col>   
          </Row>
-         </Container>
          <Row>
             <Col
                className='mt-2 d-flex justify-content-end' 
             >
-               {DecodeToken(context).usuario.permissions.editarMatricula ?
+               {DecodeToken(userState).usuario.permissions.editarMatricula ?
                      switchEdit ?
                         <Button
                            variant='outline-success'
                            size='sm'
-                           onClick={() => handleSwitchEdit(setSwitchEdit)}
+                           onClick={() => dispatch(updateSwitchEdit())}
                         >Editar</Button>
                         :
                         <Button
                            variant='outline-success'
                            size='sm'
                            onClick={() => {
-                              handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData,fechaIngreso,fechaEgreso)
+                              handleUpdateData(
+                                 modalEditRef,
+                                 fechaNacimiento,
+                                 dataAlumno,
+                                 fechaIngreso,
+                                 fechaEgreso,
+                                 dispatch
+                              )
                            }}
                         >Actualizar</Button>
                         :

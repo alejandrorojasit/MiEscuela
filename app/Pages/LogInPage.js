@@ -21,9 +21,10 @@ const LogInPage = () => {
    return (
       <Container 
          style={{fontFamily:'Droid Sans'}}
+         fluid
       >
          <ModalAlertSpinner
-            message={`Conectando al servidor de login.Por favor espere`}
+            message={`Conectando al servidor de login. Por favor espere`}
          />
          <Row>
          </Row>

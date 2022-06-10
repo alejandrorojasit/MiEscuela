@@ -15,26 +15,33 @@ import {colors} from '../../helpers/styleColors.js'
 
 import { DecodeToken } from '../logic/tokenhandler.js'
 
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+
+import {
+   show_ModalEditRegistroSalud,
+   updateSwitchEdit,
+} from '../../redux/actions/modalEditAlumno.action'
 
 const TabDatosSalud = ({
-   dataAlumno,
-   setSwitchEdit,
-   switchEdit,
    modalEditRef,
-   fechaNacimiento,
-   updatedData,
-   setShowModalUpdate,
-   setUpdatedData,
-   setDataAlumno,
-   selectedAlumnoForEdit, 
-   setShowModalEditRegistroSalud,
-   fechaIngreso,
-   fechaEgreso,
 }) => { 
 
+   const dispatch = useDispatch()
+
    const {vacunas} = useSelector(state => state.hardCodeDataReducer.hardCodeData)
-   const context = useSelector(state => state.authReducer)
+   const userState = useSelector(state => state.authReducer)
+
+   const {
+      dataAlumno
+   } = useSelector(state => state.matriculaReducer)
+
+   const {
+      switchEdit,
+      fechaNacimiento,
+      fechaIngreso,
+      fechaEgreso,
+      updatedData,
+   } = useSelector(state => state.modalEditAlumnoReducer)
 
    return ( 
       <>
@@ -377,12 +384,12 @@ const TabDatosSalud = ({
             <Col
                className='mt-2 d-flex justify-content-end'
             >
-               {DecodeToken(context).usuario.permissions.editarMatricula ?
+               {DecodeToken(userState).usuario.permissions.editarMatricula ?
                      switchEdit ?
                         <Button
                            variant='outline-success'
                            size='sm'
-                           onClick={() => handleSwitchEdit(setSwitchEdit)}
+                           onClick={() => dispatch(updateSwitchEdit())}
                         >Editar</Button>
                         :
                         <Button
@@ -393,12 +400,9 @@ const TabDatosSalud = ({
                                  modalEditRef,
                                  fechaNacimiento,
                                  dataAlumno,
-                                 setSwitchEdit,
-                                 updatedData,
-                                 setShowModalUpdate,
-                                 setUpdatedData,
                                  fechaIngreso,
                                  fechaEgreso,
+                                 dispatch
                               )
                            }}
                         >Actualizar</Button>
@@ -469,11 +473,11 @@ const TabDatosSalud = ({
                className='mt-2 d-flex justify-content-end'
             >
                {
-                  DecodeToken(context).usuario.permissions.añadirRegistroSalud ?
+                  DecodeToken(userState).usuario.permissions.añadirRegistroSalud ?
                      <Button
                         variant='outline-success'
                         size='sm'
-                        onClick={()=> setShowModalEditRegistroSalud(true)}
+                        onClick={()=> dispatch(show_ModalEditRegistroSalud())}
                      >Añadir Registro</Button>
                      :
                      null

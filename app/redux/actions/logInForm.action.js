@@ -1,4 +1,4 @@
-export const LOGINFORM_CHANGEUSER = "LOGINFORM_CHANGEUSER"
+export const LOGINFORM_CHANGEUSER     = "LOGINFORM_CHANGEUSER"
 export const LOGINFORM_CHANGEPASSWORD = "LOGINFORM_CHANGEPASSWORD"
 
 export const  logInFormChangeUser = (payload) => {

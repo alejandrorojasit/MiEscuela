@@ -1,5 +1,5 @@
 export const matriculaState = {
-   dataAlumno:{},
-   alumnosFullList:[],
-   selectedAlumnoForEdit:'',
+   dataAlumno                   : {},
+   alumnosFullList              : [],
+   selectedAlumnoForEdit        : '',
 }

@@ -21,12 +21,11 @@ import {colors} from '../../helpers/styleColors.js'
 import {useDispatch,useSelector} from 'react-redux'
 
 const TableAlumnosMatricula = ({
-   setAlumnoEditModal,
 }) => { 
 
    const dispatch = useDispatch()
 
-   const context =  useSelector(state => state.authReducer)
+   const userState =  useSelector(state => state.authReducer)
 
    const {
       isFiltredStage2,
@@ -37,8 +36,8 @@ const TableAlumnosMatricula = ({
    return ( 
       <>
          <Row 
-            className='mt-2 p-1 border border-success'
             style={{color:colors.darken}}
+            className='mt-2'
          >
             <Col 
                className='d-flex justify-content-center'
@@ -57,7 +56,7 @@ const TableAlumnosMatricula = ({
             </Col>
          </Row>
          <Row 
-            style={{marginTop:10}}
+            className='mt-2'
          >
             <Col
             >
@@ -67,6 +66,7 @@ const TableAlumnosMatricula = ({
                   hover 
                   size="sm"
                   style={{color:colors.darken}}
+                  className='mt-2'
                >
                   <thead
                   >
@@ -96,7 +96,7 @@ const TableAlumnosMatricula = ({
                                           onClick={()=> handleEdit(
                                              dataMap._id,
                                              dispatch,
-                                             context
+                                             userState
                                           )}
                                        >
                                           <FaUserEdit/>
@@ -127,9 +127,8 @@ const TableAlumnosMatricula = ({
                                           variant='outline-success'
                                           onClick={()=> handleEdit(
                                              dataMap._id,
-                                             setAlumnoEditModal,
                                              dispatch,
-                                             context
+                                             userState
                                           )}
                                        >
                                           <FaUserEdit/>

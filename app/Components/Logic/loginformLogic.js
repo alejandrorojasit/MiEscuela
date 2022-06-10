@@ -47,6 +47,7 @@ export const handleClick = (
       logInUrl
    ).then(res => {
       if(res.data.ok === true) {
+         dispatch(showHideAlert())
          dispatch(setCurrentUser(res.data.token))
          getHardCodeData(res.data.token)
             .then(res => {

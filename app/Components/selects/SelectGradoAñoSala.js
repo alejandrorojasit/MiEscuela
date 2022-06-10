@@ -27,53 +27,57 @@ const SelectGradoAñoSala = ({
       sala,
    } = useSelector(state => state.hardCodeDataReducer.hardCodeData)
 
+   const {
+      gradoState
+   } = useSelector(state => state.selectFormStagesReducer)
+
    const dispatch = useDispatch()
 
    return ( 
       <>
          {
-            nivel !== 'Inicial' ?
-               <Select
-                  style={{color:colors.darken}}
-                  aria-label='Grado/Año'
-                  onChange={(event) => handleGradoChange(
-                     event,
-                     dispatch
-                  )}
-                  ref={(element) => matriculaRef.current[1] = element}
-               >
-                  <option>Grado/Año</option>
-                  {grado.map((dataMap)=>
+         nivel !== 'Inicial' ?
+            <Select
+               style={{color:colors.darken}}
+               aria-label='Grado/Año'
+               onChange={(event) => handleGradoChange(
+                  event,
+                  dispatch
+               )}
+               value={gradoState}
+            >
+               <option>Grado/Año</option>
+               {grado.map((dataMap)=>
                   <option 
                      value={dataMap} 
                      key={dataMap}
                   >
                      {dataMap}
                   </option>
-                  )} 
-               </Select>
-               :
-               <Select
-                  style={{color:colors.darken}}
-                  aria-label='Sala'
-                  onChange={(event) => handleGradoChange(
-                     event,
-                     dispatch
-                  )}
-                  ref={(element) => matriculaRef.current[1] = element}
-               >
-                  <option>Sala</option>
-                  {sala.map((dataMap)=>
+               )} 
+            </Select>
+            :
+            <Select
+               style={{color:colors.darken}}
+               aria-label='Sala'
+               onChange={(event) => handleGradoChange(
+                  event,
+                  dispatch
+               )}
+               value={gradoState}
+            >
+               <option>Sala</option>
+               {sala.map((dataMap)=>
                   <option 
                      value={dataMap} 
                      key={dataMap}
                   >
                      {dataMap}
                   </option>
-                  )} 
-               </Select>
-            }
-      </>
+               )} 
+            </Select>
+      }
+         </>
    )
 }
 

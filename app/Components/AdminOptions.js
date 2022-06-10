@@ -28,7 +28,7 @@ const AdminOptions = () => {
    const context = useAuth()
 
    return ( 
-      <Container>
+      <>
          <ModalEditUser
             isNewUser={isNewUser}
             userEditModal={userEditModal}
@@ -45,7 +45,7 @@ const AdminOptions = () => {
             setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
             switchAsistencia={switchAsistencia}
             setSwitchAsistencia={setSwitchAsistencia}
-         />
+            />
          <ModalUsuarios 
             usuariosModal={usuariosModal}
             setUsuariosModal={setUsuariosModal}
@@ -55,7 +55,7 @@ const AdminOptions = () => {
             setUserEditModal={setUserEditModal}
             setSelectedUser={setSelectedUser}
             setIsNewUser={setIsNewUser}
-         />
+            />
          <ModalAddUser
             isNewUser={isNewUser}
             setUsuariosModal={setUsuariosModal}
@@ -70,7 +70,7 @@ const AdminOptions = () => {
             setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
             switchAsistencia={switchAsistencia}
             setSwitchAsistencia={setSwitchAsistencia}
-         />
+            />
          <Row>
             <Col 
                className='mt-3'
@@ -84,7 +84,7 @@ const AdminOptions = () => {
                </Button>
             </Col>
          </Row>
-      </Container>
+         </>
    )
 }
 

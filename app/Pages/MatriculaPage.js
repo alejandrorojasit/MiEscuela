@@ -11,6 +11,7 @@ const MatriculaPage = () => {
    
    return (
       <Container 
+         fluid
       >
          <Row>
          </Row>

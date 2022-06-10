@@ -5,6 +5,10 @@ import { findLastFile } from './findLastFile'
 
 const baseApiUrl = 'https://apis.datos.gob.ar/georef/api/'
 
+export const handleCallBack = (boolean) => {
+   
+}
+
 export const getDataArg = async (apiUrl) => {
    const dataArg = {}
    try{
@@ -31,7 +35,7 @@ export const handleClick = async (token,dataAlumno) => {
       registroSalud:[],
       registro:[],
       observaciones:[],
-      egreso:'Sin Datos',
+      egreso:'Sin datos',
       examenVisual:'No',
       certSalud:'No',
       certBucoDental:'No',

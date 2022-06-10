@@ -20,6 +20,7 @@ const HomePage = () => {
 
    return (
       <Container 
+         fluid
       >
          <Row>
          </Row>

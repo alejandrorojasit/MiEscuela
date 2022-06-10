@@ -1,5 +1,5 @@
 export const modalEditAlumnoState = {
-   switchEdit                         : false,
+   switchEdit                         : true,
    showModalEditObservaciones         : false,
    showModalEditRegistroSalud         : false,
    showModalUpdate                    : false,

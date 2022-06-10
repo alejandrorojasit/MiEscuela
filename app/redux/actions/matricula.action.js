@@ -1,6 +1,6 @@
 export const UPDATE_ALUMNOS_FULL_LIST = "UPDATE_ALUMNOS_FULL_LIST"
-export const UPDATE_DATA_ALUMNO = "UPDATE_DATA_ALUMNO"
-export const UPDATE_ALUMNO_FOR_EDIT = "UPDATE_ALUMNO_FOR_EDIT"
+export const UPDATE_DATA_ALUMNO       = "UPDATE_DATA_ALUMNO"
+export const UPDATE_ALUMNO_FOR_EDIT   = "UPDATE_ALUMNO_FOR_EDIT"
 
 export const updateAlumnoFullList = (payload) => {
    return {

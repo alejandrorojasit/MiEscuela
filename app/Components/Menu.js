@@ -13,19 +13,22 @@ import {useSelector,useDispatch} from 'react-redux'
 
 const Menu = () => {
    const userState = useSelector(state => state.authReducer)
+   const hardCodeData = useSelector(state => state.hardCodeDataReducer)
+   const {alumnosFullList} = useSelector(state => state.matriculaReducer)
    const dispatch = useDispatch()
    return (
+      <>
       <Navbar 
       >
          <Navbar.Brand>
             <Image
                src={LogoEPAt}
                style={{height:60}}
-            />
+               />
          </Navbar.Brand>
          <Navbar.Toggle 
             aria-controls="basic-navbar-nav" 
-         />
+            />
          <Navbar.Collapse 
             id="basic-navbar-nav"
          >
@@ -36,86 +39,88 @@ const Menu = () => {
                   as={Link}
                   to='/'
                >Inicio</Nav.Link>
+               {/*
+DecodeToken(userState)?.usuario?.permissions?.leerMatricula || DecodeToken(userState)?.usuario?.permissions?.editarMatricula ?
+<NavDropdown
+title='Administracion'
+>
+<NavDropdown.Item 
+as={Link} 
+to='/NuevoCicloLectivo'
+>
+Nuevo Ciclo Lectivo
+</NavDropdown.Item>
+<NavDropdown.Item 
+as={Link} 
+to='/Matricula'
+>
+Fin de Ciclo Lectivo
+</NavDropdown.Item>
+</NavDropdown>
+:
+null
+*/}
                {
-                  DecodeToken(userState)?.usuario?.permissions?.leerMatricula || DecodeToken(userState)?.usuario?.permissions?.editarMatricula ?
-                     <NavDropdown
-                        title='Administracion'
-                     >
-                        <NavDropdown.Item 
-                           as={Link} 
-                           to='/NuevoCicloLectivo'
-                        >
-                           Nuevo Ciclo Lectivo
-                        </NavDropdown.Item>
-                        <NavDropdown.Item 
-                           as={Link} 
-                           to='/Matricula'
-                        >
-                           Fin de Ciclo Lectivo
-                        </NavDropdown.Item>
-                     </NavDropdown>
-                     :
-                     null
-               }
-
-               {
-                  DecodeToken(userState)?.usuario?.permissions?.leerMatricula || DecodeToken(userState)?.usuario?.permissions?.editarMatricula ?
-                     <NavDropdown
-                        title='Matricula'
-                     >
-                        <NavDropdown.Item 
-                           as={Link} 
-                           to='/Matricula'
-                        >
-                           Matricula General
-                        </NavDropdown.Item>
-                        <NavDropdown.Item 
-                           as={Link} 
-                           to='/NuevoIngreso'
-                        >
-                           Nuevo Ingreso
-                        </NavDropdown.Item>
-                        <NavDropdown.Item 
-                           as={Link} 
-                           to='/NuevaDenominacion'
-                        >
-                           Nueva Denominacion
-                        </NavDropdown.Item>
-
-                     </NavDropdown>
-                     :
-                     null
-               }
-
-               <NavDropdown 
-                  title='Generar'
-               >
-                  {
-                     DecodeToken(userState)?.usuario?.permissions?.ratificacionInscripcion ?
-                        <NavDropdown.Item 
-                           as={Link} 
-                           to='/RatificacionInscripcion'
-                        >
-                           Ratificacion de Inscripcion
-                        </NavDropdown.Item>
-                        :
-                        null
-                  }
-               </NavDropdown>
-            </Nav>
-            {
-               DecodeToken(userState)?.usuario?.role === 'Administrador Informatico' ? 
-                  <Nav>
-                     <Nav.Link 
+               DecodeToken(userState)?.usuario?.permissions?.leerMatricula || DecodeToken(userState)?.usuario?.permissions?.editarMatricula ?
+                  <NavDropdown
+                     title='Matricula'
+                     disabled={hardCodeData.length === 0 | alumnosFullList.length === 0}
+                  >
+                     <NavDropdown.Item 
                         as={Link} 
-                        to='/AdminPannel'
+                        to='/Matricula'
                      >
-                        Adm.Panel
-                     </Nav.Link>
-                  </Nav> 
-                  : 
+                        Matricula General
+                     </NavDropdown.Item>
+                     <NavDropdown.Item 
+                        as={Link} 
+                        to='/NuevoIngreso'
+                     >
+                        Nuevo Ingreso
+                     </NavDropdown.Item>
+                     <NavDropdown.Item 
+                        as={Link} 
+                        to='/NuevaDenominacion'
+                     >
+                        Nueva Denominacion
+                     </NavDropdown.Item>
+
+                  </NavDropdown>
+                  :
                   null
             }
+               {/*
+<NavDropdown 
+title='Generar'
+>
+{
+DecodeToken(userState)?.usuario?.permissions?.ratificacionInscripcion ?
+<NavDropdown.Item 
+as={Link} 
+to='/RatificacionInscripcion'
+>
+Ratificacion de Inscripcion
+</NavDropdown.Item>
+:
+null
+}
+</NavDropdown>
+
+*/}
+            </Nav>
+            {
+            DecodeToken(userState)?.usuario?.role === 'Administrador Informatico' ? 
+               <Nav>
+                  <Nav.Link 
+                     as={Link} 
+                     to='/AdminPannel'
+                  >
+                     Adm.Panel
+                  </Nav.Link>
+               </Nav> 
+               : 
+               null
+         }
             <Nav 
                className = 'justify-content-end'
             >
@@ -127,6 +132,7 @@ const Menu = () => {
             </Nav>
          </Navbar.Collapse>
       </Navbar>
+      </>
    )
 }
 

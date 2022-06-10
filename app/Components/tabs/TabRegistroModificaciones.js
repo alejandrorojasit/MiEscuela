@@ -5,9 +5,17 @@ import {
 
 import {colors} from '../../helpers/styleColors.js'
 
+import {
+   useSelector
+} from 'react-redux'
+
 const TabRegistroModificaciones = ({
-   dataAlumno,
 }) => { 
+
+   const {
+      dataAlumno
+   } = useSelector(state => state.matriculaReducer)
+
    return ( 
       <
       >

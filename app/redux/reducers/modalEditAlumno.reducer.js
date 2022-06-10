@@ -8,7 +8,8 @@ import {
    SHOW_MODALEDITALUMNO,
    UPDATE_FECHANACIMIENTO,
    UPDATE_FECHAINGRESO,
-   UPDATE_FECHAEGRESO 
+   UPDATE_FECHAEGRESO,
+   UPDATE_UPDATEDDATA,
 } from '../actions/modalEditAlumno.action'
 
 import { modalEditAlumnoState } from '../states/modalEditAlumno.state'
@@ -59,6 +60,7 @@ export const modalEditAlumnoReducer = (
             fechaNacimiento: action.payload
          }
       case UPDATE_FECHAINGRESO:
+         console.log(action.payload)
          return {
             ...state,
             fechaIngreso: action.payload
@@ -67,6 +69,11 @@ export const modalEditAlumnoReducer = (
          return {
             ...state,
             fechaEgreso: action.payload
+         }
+      case UPDATE_UPDATEDDATA:
+         return {
+            ...state,
+            updatedData: action.payload
          }
       default:
          return state

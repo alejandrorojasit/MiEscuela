@@ -1,7 +1,6 @@
 import {
    useRef,
    useState,
-   useEffect
 } from 'react'
 
 import {
@@ -11,34 +10,71 @@ import {
    Form,
    Button,
    OverlayTrigger,
-   Popover
 } from 'react-bootstrap'
 
-import {dniCheck,celularCheck,telFijoCheck} from '../logic/datosGeneralesLogic'
-import {yearsDatePicker,monthsDatePicker} from '../logic/customHeaderDatePicker'
-import {getDataArg,handleClick} from '../logic/nuevoIngresoLogic'
-import DatePicker,{registerLocale,setDefaultLocale} from 'react-datepicker'
+import {
+   dniCheck,
+   celularCheck,
+   telFijoCheck
+} from '../logic/datosGeneralesLogic'
+
+import {
+   yearsDatePicker,
+   monthsDatePicker
+} from '../logic/customHeaderDatePicker'
+
+import {
+   handleClick,
+   handleCallBack
+} from '../logic/nuevoIngresoLogic'
+
+import 
+DatePicker,
+{
+   registerLocale,
+} from 'react-datepicker'
+
+import {
+   getFetchMunicipiosArg,
+   getFetchCallesArg,
+} from '../../hooks/getFetch'
+
+import 
+   ModalAlert
+ from '../modals/ModalAlert'
+
 import {useSelector} from 'react-redux'
-import {DniPopOver,TelFijoPopOver,TelCelularPopOver} from '../popsOvers/PopOver'
-import { findLastFile } from '../logic/findLastFile'
-import ModalAlert from '../modals/ModalAlert'
-import ModalAlertSpinner from '../modals/ModalAlertSpinner'
+
+import {
+   DniPopOver,
+   TelFijoPopOver,
+   TelCelularPopOver
+} from '../popsOvers/PopOver'
 
 import es from 'date-fns/locale/es'
+
+import {
+   toFirstUpperCase,
+   toOwnName
+} from '../logic/matriculaLogic'
 
 registerLocale('es',es)
 
 const NuevoIngresoForm = () => { 
 
    const handleSubmit = async (event) => {
+
       const form = event.currentTarget
+
       event.preventDefault()
+
       event.stopPropagation()
+
       if(form.checkValidity() === true){
-         setSpinnerStateShow(true)
+
          const res = await handleClick(context.token,dataAlumno)
+
          if(res.status === 200){
-            setSpinnerStateShow(false)
             setMessage('Alumno añadido con exito')
             setStateShow(true)
             setDataAlumno(initialStateDataAlumno)
@@ -56,16 +92,7 @@ const NuevoIngresoForm = () => {
       }
    }
 
-   const handleCallBack = (option) => {
-   }
-
-   const date = new Date()
    let arrayOfProvincias = []
-   let arrayOfMunicipiosAlumno = []
-   let arrayOfMunicipiosTutor = []
-   let arrayOfCallesTutor = []
-   let arrayOfMunicipiosTutor2 = []
-   let arrayOfCallesTutor2 = []
 
    const initialStateDataAlumno = {
       apellido:'',
@@ -109,10 +136,9 @@ const NuevoIngresoForm = () => {
       telFijo:'',
       telFijo2:'',
       lugarNacimiento:'Lugar nacimiento',
-
    }
 
-   const {Group,Label,Control,Text,Select} = Form
+   const {Label,Control,Select} = Form
 
    const nuevoIngresoRef = useRef([])
 
@@ -149,11 +175,33 @@ const NuevoIngresoForm = () => {
    const [ stateShow,setStateShow ] = useState(false);
    const [ message,setMessage ] = useState('');
 
-   const [ spinnerStateShow,setSpinnerStateShow ] = useState(false);
-
    const [dataAlumno,setDataAlumno] = useState(initialStateDataAlumno)
    const [dataGeoRef,setDataGeoRef] =  useState({
-      arrayOfProvinciasArg:[],
+      arrayOfProvinciasArg:[
+         "Buenos Aires",
+         "Ciudad Autónoma de Buenos Aires",
+         "Catamarca",
+         "Chaco",
+         "Chubut",
+         "Córdoba",
+         "Corrientes",
+         "Entre Ríos",
+         "Formosa",
+         "Jujuy",
+         "La Pampa",
+         "La Rioja",
+         "Mendoza",
+         "Misiones",
+         "Neuquén",
+         "Río Negro",
+         "Salta",
+         "San Luis",
+         "Santa Cruz",
+         "Santa Fe",
+         "Santiago del Estero",
+         "Tierra del Fuego",
+         "Tucumán"
+      ],
       municipiosAlumno:[],
       provinciasAlumno:[],
       municipiosTutor:[],
@@ -164,31 +212,16 @@ const NuevoIngresoForm = () => {
       calleTutor2:[]
    })
 
-   useEffect(()=>{
-      getDataArg('provincias').then((res)=>
-         {
-            res.provincias.data.provincias.forEach((element) => arrayOfProvincias.push(element.nombre) )
-            setDataGeoRef({...dataGeoRef,arrayOfProvinciasArg:arrayOfProvincias})
-         }
-      ) 
-   },[])
-
    return ( 
       <>
          <ModalAlert
-            stateShow={stateShow}
+            stateShow={stateShow}  
             setStateShow={setStateShow}
             message={message}
+            type='AcceptOnly'
             callBack={handleCallBack}
          />
-         <ModalAlertSpinner
-            stateShow={spinnerStateShow}
-         />
          <Form onSubmit={handleSubmit} noValidate autoComplete='new-password' >
-            <Container
-               fluid
-               className={'border border-success p-4'}
-            >
                <Row>
                   <Col>
                      <Label>
@@ -201,8 +234,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese nombre de alumno'
                         name='nombre'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -215,8 +248,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese Apellido de alumno'
                         name='apellido'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -232,12 +265,12 @@ const NuevoIngresoForm = () => {
                            Sexo
                         </option>
                         {hardCodeData.sexo.map((element)=> 
-                        <option
-                           key={element}
-                           value={element}
-                        >
-                           {element} 
-                        </option>
+                           <option
+                              key={element}
+                              value={element}
+                           >
+                              {element} 
+                           </option>
                         )}
                      </Select>
                   </Col>
@@ -259,8 +292,8 @@ const NuevoIngresoForm = () => {
                               dniCheck(nuevoIngresoRef,2,setIsValidDniAlumno,setIsInvalidDniAlumno,false)
                               setDataAlumno({...dataAlumno,nDniAlumno:element.target.value})
                            }
-                           }
-                        />      
+                        }
+                           />      
                      </OverlayTrigger>
                   </Col>
                   <Col>
@@ -283,52 +316,52 @@ const NuevoIngresoForm = () => {
                         dateFormat='dd/MM/yyyy'
                         renderCustomHeader={({
                         }) => (
-                           <div
-                              style={{
-                                 margin: 10,
-                                 display: "flex",
-                                 justifyContent: "center",
-                              }}
-                           >
-                              <Select
-                                 size='sm'
-                                 onChange={({target: {value}}) => setYear(value)}
+                              <div
+                                 style={{
+                                    margin: 10,
+                                    display: "flex",
+                                    justifyContent: "center",
+                                 }}
                               >
-                                 <option
-                                    value={'Año'}
+                                 <Select
+                                    size='sm'
+                                    onChange={({target: {value}}) => setYear(value)}
                                  >
-                                    Año
-                                 </option>
-                                 {yearsDatePicker.map((element) =>
-                                 <option
-                                    key={element}
-                                    value={element}
+                                    <option
+                                       value={'Año'}
+                                    >
+                                       Año
+                                    </option>
+                                    {yearsDatePicker.map((element) =>
+                                       <option
+                                          key={element}
+                                          value={element}
+                                       >
+                                          {element}
+                                       </option>
+                                    )}
+                                 </Select>
+                                 <Select
+                                    size='sm'
+                                    onChange={(value) => setMoth((value.target.selectedIndex - 1))}
                                  >
-                                    {element}
-                                 </option>
-                                 )}
-                              </Select>
-                              <Select
-                                 size='sm'
-                                 onChange={(value) => setMoth((value.target.selectedIndex - 1))}
-                              >
-                                 <option
-                                    value={'Mes'}
-                                 >
-                                    Mes
-                                 </option>
-                                 {monthsDatePicker.map((element)=>
-                                 <option
-                                    key={element}
-                                    value={element}
-                                 >
-                                    {element} 
-                                 </option>
-                                 )} 
-                              </Select>
-                           </div>
-                        )}
-                     />
+                                    <option
+                                       value={'Mes'}
+                                    >
+                                       Mes
+                                    </option>
+                                    {monthsDatePicker.map((element)=>
+                                       <option
+                                          key={element}
+                                          value={element}
+                                       >
+                                          {element} 
+                                       </option>
+                                    )} 
+                                 </Select>
+                              </div>
+                           )}
+                        />
                   </Col>
                </Row>
                <Row
@@ -348,12 +381,12 @@ const NuevoIngresoForm = () => {
                            Nivel
                         </option>
                         {hardCodeData.nivel.map((element)=> 
-                        <option
-                           key={element}
-                           value={element}
-                        >
-                           {element} 
-                        </option>
+                           <option
+                              key={element}
+                              value={element}
+                           >
+                              {element} 
+                           </option>
                         )}
                      </Select>
                   </Col>
@@ -371,12 +404,12 @@ const NuevoIngresoForm = () => {
                            Grado/Año
                         </option>
                         {hardCodeData.grado.map((element)=> 
-                        <option
-                           key={element}
-                           value={element}
-                        >
-                           {element} 
-                        </option>
+                           <option
+                              key={element}
+                              value={element}
+                           >
+                              {element} 
+                           </option>
                         )}
                      </Select>
                   </Col>
@@ -394,12 +427,12 @@ const NuevoIngresoForm = () => {
                            Division
                         </option>
                         {hardCodeData.division.map((element)=> 
-                        <option
-                           key={element}
-                           value={element}
-                        >
-                           {element} 
-                        </option>
+                           <option
+                              key={element}
+                              value={element}
+                           >
+                              {element} 
+                           </option>
                         )}
                      </Select>
                   </Col>
@@ -417,12 +450,12 @@ const NuevoIngresoForm = () => {
                            Denominacion
                         </option>
                         {hardCodeData.denominacion.map((element)=> 
-                        <option
-                           key={element}
-                           value={element}
-                        >
-                           {element} 
-                        </option>
+                           <option
+                              key={element}
+                              value={element}
+                           >
+                              {element} 
+                           </option>
                         )}
                      </Select>
                   </Col>
@@ -444,7 +477,7 @@ const NuevoIngresoForm = () => {
                            setFechaIngreso(date)
                            setDataAlumno({...dataAlumno,ingreso:date.toLocaleDateString()})
                         }}
-                     />
+                        />
                   </Col>
                </Row>
                <Row
@@ -470,12 +503,12 @@ const NuevoIngresoForm = () => {
                            Nacionalidad
                         </option>
                         {hardCodeData.paises.map((element)=> 
-                        <option
-                           key={element}
-                           value={element}
-                        >
-                           {element} 
-                        </option>
+                           <option
+                              key={element}
+                              value={element}
+                           >
+                              {element} 
+                           </option>
                         )}
                      </Select>
                   </Col>
@@ -484,82 +517,77 @@ const NuevoIngresoForm = () => {
                         Provincia de nacimiento:
                      </Label>
                      {
-                        dataAlumno.nacionalidad === 'Argentina' ?
-                           <Select
-                              autoComplete='new-password'
-                              required
-                              value={dataAlumno.provinciaNacimiento}
-                              onChange={(value) => {
-                                 setDataAlumno({...dataAlumno,provinciaNacimiento:value.target.value})
-                                 getDataArg(`municipios?provincia=${value.target.value}&max=100&campos=nombre`).then((res) => 
-                                    {
-                                       res.provincias.data.municipios.forEach(element => arrayOfMunicipiosAlumno.push(element.nombre))
-                                       setDataGeoRef({...dataGeoRef,municipiosAlumno:arrayOfMunicipiosAlumno})
-                                    }
-                                 )
-                              } 
-                              }
-                           >
-                              <option>     
-                                 Provincia
-                              </option>
-                              {dataGeoRef.arrayOfProvinciasArg.sort().map((element) => 
+                     dataAlumno.nacionalidad === 'Argentina' ?
+                        <Select
+                           autoComplete='new-password'
+                           required
+                           value={dataAlumno.provinciaNacimiento}
+                           onChange={(value) => {
+                              setDataAlumno({...dataAlumno,provinciaNacimiento:value.target.value})
+                              getFetchMunicipiosArg(context.token,value.target.value).then( res => setDataGeoRef({...dataGeoRef,municipiosAlumno: res.data}) )
+                           }
+                        }
+                        >
+                           <option>     
+                              Provincia
+                           </option>
+                           {dataGeoRef.arrayOfProvinciasArg.sort().map((element) => 
                               <option
                                  key={element}
                               >
                                  {element}
                               </option>
-                              )
-                              }                              
-                           </Select>
-                           :
-                           <Control
-                              value={dataAlumno.provinciaNacimiento}
-                              autoComplete='new-password'
-                              type='text'
-                              required
-                              placeholder='Ingrese provincia de nacimiento de alumno'
-                              onChange={(value)=> setDataAlumno({...dataAlumno,provinciaNacimiento:value.target.value})}
+                           )
+                        }                              
+                        </Select>
+                        :
+                        <Control
+                           value={dataAlumno.provinciaNacimiento}
+                           autoComplete='new-password'
+                           type='text'
+                           required
+                           placeholder='Ingrese provincia de nacimiento de alumno'
+                           onChange={(element)=> setDataAlumno({...dataAlumno,provinciaNacimiento:toOwnName(element.target.value)})}
                            />        
-                     }
+                  }
                   </Col>
                   <Col>
                      <Label>
                         Lugar de nacimiento:
                      </Label>
                      {
-                        dataGeoRef.municipiosAlumno.length > 0 ? 
-                           <Select
-                              autoComplete='new-password'
-                              required
-                              value={dataAlumno.lugarNacimiento}
-                              onChange={(value) => {
-                                 setDataAlumno({...dataAlumno,lugarNacimiento:value.target.value})
-                              }}
-                           >
-                              <option>     
-                                 Lugar nacimiento
+                     dataGeoRef.municipiosAlumno.length > 0 ? 
+                        <Select
+                           autoComplete='new-password'
+                           required
+                           value={dataAlumno.lugarNacimiento}
+                           onChange={(value) => {
+                              setDataAlumno({...dataAlumno,lugarNacimiento:value.target.value})
+                           }}
+                        >
+                           <option>     
+                              Lugar nacimiento
+                           </option>
+                           {
+                           dataGeoRef.municipiosAlumno.sort().map((element) => 
+                              <option
+                                 key={element.id}
+                              >
+                                 {element.nombre}
                               </option>
-                              {
-                                 dataGeoRef.municipiosAlumno.sort().map((element) => 
-                                    <option
-                                       key={element}
-                                    >
-                                       {element}
-                                    </option>
-                                 )
-                              }                              
-                           </Select>
-                           :
-                           <Control
-                              value={dataAlumno.lugarNacmiento}
-                              autoComplete='new-password'
-                              required
-                              type='text'
-                              placeholder='Ingrese lugar de nacimiento de alumno'
-                              onChange={((value) => setDataAlumno({...dataAlumno,lugarNacimiento:value.target.value}))}
+                           )
+                        }                              
+                        </Select>
+                        :
+                        <Control
+                           value={dataAlumno.lugarNacimiento}
+                           autoComplete='new-password'
+                           required
+                           type='text'
+                           placeholder='Ingrese lugar de nacimiento de alumno'
+                           onChange={((element) => setDataAlumno({...dataAlumno,lugarNacimiento:toOwnName(element.target.value)}))}
                            />
-                     }
+                  }
                   </Col>
                   <Row
                      className='mt-2'
@@ -575,15 +603,11 @@ const NuevoIngresoForm = () => {
                            type='text'
                            placeholder='Ingrese email alumno'
                            name='email'
-                           onChange={(element) => setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                        />
+                           onChange={(element) => setDataAlumno({...dataAlumno,[element.target.name]:element.target.value.toLowerCase()})}
+                           />
                      </Col>
                   </Row>
                </Row>
-            </Container>
-            <Container
-               className={'mt-2 border border-success p-4'}
-            >
                <Row
                >         
                   <Col>
@@ -597,8 +621,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese nombre de tutor'
                         name='nombreTutor'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -611,8 +635,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese apellido de tutor'
                         name='apellidoTutor'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -625,8 +649,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese relacion de tutor'
                         name='relacionTutor'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toFirstUpperCase(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -647,7 +671,7 @@ const NuevoIngresoForm = () => {
                               dniCheck(nuevoIngresoRef,3,setIsValidDniTutor1,setIsInvalidDniTutor1,true)
                               setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
                            }}
-                        />
+                           />
                      </OverlayTrigger>
                   </Col>
                </Row>
@@ -666,9 +690,9 @@ const NuevoIngresoForm = () => {
                         placeholder='Ingrese Profesion'
                         name='profesionTutor'
                         onChange={(element) => {
-                           setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
+                           setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})
                         }}
-                     />
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -688,7 +712,7 @@ const NuevoIngresoForm = () => {
                               telFijoCheck(element.target.value,setIsValidTelFijoTutor1,setIsInvalidTelFijoTutor1)
                               setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
                            }}
-                        />
+                           />
                      </OverlayTrigger>
                   </Col>  
                   <Col>
@@ -709,7 +733,7 @@ const NuevoIngresoForm = () => {
                               celularCheck(element.target.value,setIsValidCelularTutor1,setIsInvalidCelularTutor1)
                               setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
                            }}
-                        />
+                           />
                      </OverlayTrigger>
                   </Col>
                </Row>
@@ -726,12 +750,7 @@ const NuevoIngresoForm = () => {
                         value={dataAlumno.provincia}
                         onChange={(value) => {
                            setDataAlumno({...dataAlumno,provincia:value.target.value})
-                           getDataArg(`municipios?provincia=${value.target.value}&max=100&campos=nombre`).then((res) => 
-                              {
-                                 res.provincias.data.municipios.forEach(element => arrayOfMunicipiosTutor.push(element.nombre))
-                                 setDataGeoRef({...dataGeoRef,municipiosTutor:arrayOfMunicipiosTutor})
-                              }
-                           )
+                           getFetchMunicipiosArg(context.token,value.target.value).then( res => setDataGeoRef({...dataGeoRef,municipiosTutor:res.data}) )
 
                         }}
                      >
@@ -739,13 +758,13 @@ const NuevoIngresoForm = () => {
                            Provincia
                         </option>
                         {dataGeoRef.arrayOfProvinciasArg.sort().map((element) => 
-                        <option
-                           key={element}
-                        >
-                           {element}
-                        </option>
+                           <option
+                              key={element}
+                           >
+                              {element}
+                           </option>
                         )
-                        }                              
+                     }                              
 
                      </Select>
                   </Col>
@@ -759,27 +778,22 @@ const NuevoIngresoForm = () => {
                         value={dataAlumno.localidad}
                         onChange={(value)=>{
                            setDataAlumno({...dataAlumno,localidad:value.target.value})
-                           getDataArg(`calles?provincia=${dataAlumno.provincia}&localidad_censal=${value.target.value}&max=1000&campos=nombre`).then((res)=>
-                              {
-                                 res.provincias.data.calles.forEach(element => arrayOfCallesTutor.push(element.nombre))
-                                 setDataGeoRef({...dataGeoRef,calleTutor:arrayOfCallesTutor})
-                              }
-                           )
+                           getFetchCallesArg(context.token,value.target.value).then( res => setDataGeoRef({...dataGeoRef,calleTutor:res.data}) )
                         }
-                        } 
+                     } 
                      > 
                         <option> 
                            Municipio
                         </option>
                         {
-                           dataGeoRef.municipiosTutor.sort().map((element,index) => 
-                              <option
-                                 key={element}
-                              >
-                                 {element}                            
-                              </option>
-                           ) 
-                        }
+                        dataGeoRef.municipiosTutor.sort().map((element,index) => 
+                           <option
+                              key={element.id}
+                           >
+                              {element.nombre}                            
+                           </option>
+                        ) 
+                     }
                      </Select>
                   </Col>
                   <Col>
@@ -787,42 +801,41 @@ const NuevoIngresoForm = () => {
                         Calle:
                      </Label>
                      {
-                        dataGeoRef.calleTutor.length > 0 ?
-                           <Select
-                              autoComplete='new-password'
-                              required
-                              value={dataAlumno.calle}
-                              onChange={(value)=>{
-                                 setDataAlumno({...dataAlumno,calle:value.target.value})
-
-                              }
-                              } 
-                           > 
-                              <option> 
-                                 Calle
+                     dataGeoRef.calleTutor.length > 0 ?
+                        <Select
+                           autoComplete='new-password'
+                           required
+                           value={dataAlumno.calleTutor}
+                           onChange={(value)=>{
+                              setDataAlumno({...dataAlumno,calle:value.target.value})
+                           }
+                        } 
+                        > 
+                           <option> 
+                              Calle
+                           </option>
+                           {
+                           dataGeoRef.calleTutor.sort().map((element,index) => 
+                              <option
+                                 key={element.id}
+                              >
+                                 {toOwnName(element.nombre)}                            
                               </option>
-                              {
-                                 dataGeoRef.calleTutor.sort().map((element,index) => 
-                                    <option
-                                       key={index}
-                                    >
-                                       {element}                            
-                                    </option>
-                                 ) 
-                              }
-                           </Select>
-                           :
-                           <Control
-                              value={dataAlumno.calle}
-                              autoComplete='new-password'
-                              required
-                              type='text'
-                              placeholder='Calle'
-                              name='calle'
-                              onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-
+                           ) 
+                        }
+                        </Select>
+                        :
+                        <Control
+                           value={dataAlumno.calle}
+                           autoComplete='new-password'
+                           required
+                           type='text'
+                           placeholder='Calle'
+                           name='calle'
+                           onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
                            />
-                     }
+                  }
+
                   </Col>
                   <Col>
                      <Label>
@@ -836,7 +849,7 @@ const NuevoIngresoForm = () => {
                         placeholder='Nro de calle'
                         name='nro'
                         onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -849,8 +862,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese barrio del tutor'
                         name='barrio'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>  
                   <Row
                      className='mt-2'
@@ -866,16 +879,12 @@ const NuevoIngresoForm = () => {
                            type='text'
                            placeholder='Ingrese email tutor'
                            name='emailTutor'
-                           onChange={(element) => setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                        />
+                           onChange={(element) => setDataAlumno({...dataAlumno,[element.target.name]:element.target.value.toLowerCase()})}
+                           />
                      </Col>      
                   </Row>
 
                </Row>
-            </Container>
-            <Container
-               className={'mt-2 border border-success p-4 mb-2'}
-            >
                <Row
                >         
                   <Col>
@@ -889,8 +898,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese nombre de tutor'
                         name='nombreTutor2'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -903,8 +912,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese apellido de tutor'
                         name='apellidoTutor2'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -917,8 +926,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese relacion de tutor'
                         name='relacionTutor2'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toFirstUpperCase(element.target.value)})}
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -939,7 +948,7 @@ const NuevoIngresoForm = () => {
                               dniCheck(nuevoIngresoRef,4,setIsValidDniTutor2,setIsInvalidDniTutor2,true)
                               setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
                            }}
-                        />
+                           />
                      </OverlayTrigger>
                   </Col>
                </Row>
@@ -958,9 +967,9 @@ const NuevoIngresoForm = () => {
                         placeholder='Ingrese Profesion'
                         name='profesionTutor2'
                         onChange={(element) => {
-                           setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
+                           setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})
                         }}
-                     />
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -980,7 +989,7 @@ const NuevoIngresoForm = () => {
                               telFijoCheck(element.target.value,setIsValidTelFijoTutor2,setIsInvalidTelFijoTutor2)
                               setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
                            }}
-                        />      
+                           />      
                      </OverlayTrigger>
                   </Col>  
                   <Col>
@@ -1001,7 +1010,7 @@ const NuevoIngresoForm = () => {
                               celularCheck(element.target.value,setIsValidCelularTutor2,setIsInvalidCelularTutor2) 
                               setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})
                            }}
-                        />      
+                           />      
                      </OverlayTrigger>
 
                   </Col>
@@ -1019,26 +1028,20 @@ const NuevoIngresoForm = () => {
                         value={dataAlumno.provincia2}
                         onChange={(value) => {
                            setDataAlumno({...dataAlumno,provincia2:value.target.value})
-                           getDataArg(`municipios?provincia=${value.target.value}&max=100&campos=nombre`).then((res) => 
-                              {
-                                 res.provincias.data.municipios.forEach(element => arrayOfMunicipiosTutor2.push(element.nombre))
-                                 setDataGeoRef({...dataGeoRef,municipiosTutor2:arrayOfMunicipiosTutor2})
-                              }
-                           )
-
+                           getFetchMunicipiosArg(context.token,value.target.value).then( res => setDataGeoRef({...dataGeoRef,municipiosTutor2:res.data}) )
                         }}
                      >
                         <option>     
                            Provincia
                         </option>
                         {dataGeoRef.arrayOfProvinciasArg.sort().map((element) => 
-                        <option
-                           key={element}
-                        >
-                           {element}
-                        </option>
+                           <option
+                              key={element}
+                           >
+                              {element}
+                           </option>
                         )
-                        }                              
+                     }                              
 
                      </Select>
                   </Col>
@@ -1052,27 +1055,22 @@ const NuevoIngresoForm = () => {
                         value={dataAlumno.localidad2}
                         onChange={(value)=>{
                            setDataAlumno({...dataAlumno,localidad2:value.target.value})
-                           getDataArg(`calles?provincia=${dataAlumno.provincia2}&localidad_censal=${value.target.value}&max=1000&campos=nombre`).then((res)=>
-                              {
-                                 res.provincias.data.calles.forEach(element => arrayOfCallesTutor2.push(element.nombre))
-                                 setDataGeoRef({...dataGeoRef,calleTutor2:arrayOfCallesTutor2})
-                              }
-                           )
+                           getFetchCallesArg(context.token,value.target.value).then(res => setDataGeoRef({...dataGeoRef,calleTutor2:res.data}))
                         }
-                        } 
+                     } 
                      > 
                         <option> 
                            Municipio
                         </option>
                         {
-                           dataGeoRef.municipiosTutor2.sort().map((element,index) => 
-                              <option
-                                 key={element}
-                              >
-                                 {element}                            
-                              </option>
-                           ) 
-                        }
+                        dataGeoRef.municipiosTutor2.sort().map((element,index) => 
+                           <option
+                              key={element.id}
+                           >
+                              {element.nombre}                            
+                           </option>
+                        ) 
+                     }
                      </Select>
                   </Col>
                   <Col>
@@ -1080,41 +1078,40 @@ const NuevoIngresoForm = () => {
                         Calle:
                      </Label>
                      {
-                        dataGeoRef.calleTutor2.length > 0 ?
-                           <Select
-                              autoComplete='new-password'
-                              required
-                              value={dataAlumno.calle2}
-                              onChange={(value)=>{
-                                 setDataAlumno({...dataAlumno,calle2:value.target.value})
-                              }
-                              } 
-                           > 
-                              <option> 
-                                 Calle
+                     dataGeoRef.calleTutor2.length > 0 ?
+<Select
+   autoComplete='new-password'
+required
+value={dataAlumno.calle2}
+                           onChange={(value)=>{
+                              setDataAlumno({...dataAlumno,calle2:value.target.value})
+                           }
+                        } 
+                        > 
+                           <option> 
+                              Calle
+                           </option>
+                           {
+                           dataGeoRef.calleTutor2.sort().map((element,index) => 
+                              <option
+                                 key={element.id}
+                              >
+                                 {toOwnName(element.nombre)}                            
                               </option>
-                              {
-                                 dataGeoRef.calleTutor2.sort().map((element,index) => 
-                                    <option
-                                       key={index}
-                                    >
-                                       {element}                            
-                                    </option>
-                                 ) 
-                              }
-                           </Select>
-                           :
-                           <Control
-                              value={dataAlumno.calle2}
-                              autoComplete='new-password'
-                              required
-                              type='text'
-                              placeholder='Calle'
-                              name='calle2'
-                              onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.vale})}
+                           ) 
+                        }
+                        </Select>
+                        :
+                        <Control
+                           value={dataAlumno.calle2}
+                           autoComplete='new-password'
+                           required
+                           type='text'
+                           placeholder='Calle'
+                           name='calle2'
+                           onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
                            />
-                     }
-
+                  }
                   </Col>
                   <Col>
                      <Label>
@@ -1128,7 +1125,7 @@ const NuevoIngresoForm = () => {
                         placeholder='Nro de calle'
                         name='nro2'
                         onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        />
                   </Col>
                   <Col>
                      <Label>
@@ -1141,8 +1138,8 @@ const NuevoIngresoForm = () => {
                         type='text'
                         placeholder='Ingrese barrio del tutor'
                         name='barrio2'
-                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                     />
+                        onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
+                        />
                   </Col>  
                   <Row
                      className='mt-2'
@@ -1158,16 +1155,11 @@ const NuevoIngresoForm = () => {
                            type='text'
                            placeholder='Ingrese email tutor'
                            name='emailTutor2'
-                           onChange={(element) => setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
-                        />
+                           onChange={(element) => setDataAlumno({...dataAlumno,[element.target.name]:element.target.value.toLowerCase()})}
+                           />
                      </Col>      
                   </Row>
                </Row>
-            </Container>
-            <Container
-               fluid
-               className={'border border-success p-2 mb-2'}
-            >
                <Row>
                   <Col
                      className={'d-flex justify-content-end'}
@@ -1181,9 +1173,8 @@ const NuevoIngresoForm = () => {
                      </Button>      
                   </Col>
                </Row>              
-            </Container>
          </Form>
-      </>
+         </>
    )
 }
 

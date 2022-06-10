@@ -7,7 +7,64 @@ import {
    matriculaUrlActivo,
    matriculaUrlBaja,
    hardCodeData,
+   municipiosArgUrl,
+   callesArgUrl,
 } from '../helpers/Urls'
+
+export const getFetchCallesArg =  async (
+   token,
+   municipio
+) => {
+   const config = {
+      headers: {
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }
+   }
+
+   const url = `${baseUrl}/${callesArgUrl}/${municipio}`
+
+   try{
+      const dataRes = await axios.get(
+         url,
+         config
+      )
+
+      return dataRes
+   }
+   catch(err){
+      return (err.response)
+   }
+}
+
+export const getFetchMunicipiosArg =  async (
+   token,
+   provincia
+) => {
+
+   const config = {
+      headers: {
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": token                
+      }
+   }
+
+   const url = `${baseUrl}/${municipiosArgUrl}/${provincia}`
+
+   try{
+      const dataRes = await axios.get(
+         url,
+         config
+      )
+
+      return dataRes
+   }
+   catch(err){
+      return (err.response)
+   }
+}
 
 export const getFetchUsuarios = async (token) => {
    const config = {

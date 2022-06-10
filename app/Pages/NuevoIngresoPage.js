@@ -21,6 +21,7 @@ const NuevoIngresoPage = () => {
    return (
       <Container 
          style={{fontFamily:'Droid Sans'}}
+         fluid
       >
          <Row>
          </Row>

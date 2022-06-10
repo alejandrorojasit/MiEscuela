@@ -1,6 +1,11 @@
 import {postFetchUpdateAlumno} from '../../hooks/postFetch'
 import {handleGetDataAlumno} from './../logic/matriculaLogic'
 
+import {
+   show_ModalUpdate,
+   updateSwitchEdit
+} from '../../redux/actions/modalEditAlumno.action'
+
 export const handleShow = (setShowModalUpdate) => {
    setShowModalUpdate(false)
 }
@@ -32,8 +37,8 @@ export const handleClickAccept = (
       } 
       
    )
-   setShowModalUpdate(false)
-   setSwitchEdit(true)
+   dispatch(show_ModalUpdate())
+   dispatch(updateSwitchEdit())
 }
 
 export const createDataRegistro = (dataAlumno,updatedData,usuario) => {

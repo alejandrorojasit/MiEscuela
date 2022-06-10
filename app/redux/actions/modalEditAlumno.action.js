@@ -8,8 +8,16 @@ export const SHOW_MODALEDITALUMNO        = "SHOW_MODALEDITALUMNO"
 export const UPDATE_FECHANACIMIENTO      = "UPDATE_FECHANACIMIENTO"
 export const UPDATE_FECHAINGRESO         = "UPDATE_FECHAINGRESO"
 export const UPDATE_FECHAEGRESO          = "UPDATE_FECHAEGRESO"
+export const UPDATE_UPDATEDDATA          = "UPDATE_UPDATEDDATA"
 
-export const switchEdit = () => {
+export const updateUpdatedData = (payload) => {
+   return {
+      type: UPDATE_UPDATEDDATA,
+      payload
+   }
+}
+
+export const updateSwitchEdit = () => {
    return {
       type: SWITCH_EDIT,
    }
@@ -53,20 +61,23 @@ export const show_ModalEditAlumno = () => {
    }
 }
 
-export const updateFechaNacimiento = () => {
+export const updateFechaNacimiento = (payload) => {
    return {
-      type: UPDATE_FECHANACIMIENTO
+      type: UPDATE_FECHANACIMIENTO,
+      payload
    }
 }
 
-export const updateFechaIngreso = () => {
+export const updateFechaIngreso = (payload) => {
    return {
-      type: UPDATE_FECHAINGRESO
+      type: UPDATE_FECHAINGRESO,
+      payload
    }
 }
 
-export const updateFechaEgreso = () => {
+export const updateFechaEgreso = (payload) => {
    return {
-      type: UPDATE_FECHAEGRESO
+      type: UPDATE_FECHAEGRESO,
+      payload
    }
 }

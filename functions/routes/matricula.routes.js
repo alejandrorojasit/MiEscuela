@@ -22,7 +22,6 @@ app.post('/Ratificacion',verificarToken,(req,res) => {
 })
 
 app.post('/nuevoAlumno',verificarToken,(req,res)=> {
-
    sendData = new data ({...req.body,estado:'Activo'})
    sendData.save(
       (err,data)=>

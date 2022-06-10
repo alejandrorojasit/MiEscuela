@@ -1,5 +1,4 @@
 import {
-   useState,
    useEffect,
    useRef
 } from 'react'
@@ -32,16 +31,14 @@ const Matricula = () => {
       alumnosFullList,
    } = useSelector(state => state.matriculaReducer)
 
-   useEffect(()=> {
+   if(alumnosFullList === 0){
       getMatriculaActivo(userState.token).then((res) =>{
          dispatch(updateAlumnoFullList(res.data))
-      }
-      ); 
-   },[])
+      })
+   }
 
    return ( 
-      <Container
-      >
+      <>
          {alumnosFullList.length === 0 ? 
             <LoadingSpinner/>
             :
@@ -52,14 +49,14 @@ const Matricula = () => {
                <ModalConfirmUpdateData/>
                <SelectFormStage1
                   matriculaRef={matriculaRef}
-               />
+                  />
                <SelectFormStage2
                   matriculaRef={matriculaRef}
-               />
+                  />
                <TableAlumnosMatricula/>
             </>
          }
-      </Container>
+      </>
    )
 }
 export default Matricula

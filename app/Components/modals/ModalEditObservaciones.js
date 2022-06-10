@@ -34,7 +34,7 @@ const modalEditObservaciones = ({
       selectedAlumnoForEdit,
    } = useSelector(state => state.matriculaReducer)
 
-   const {userState} = useSelector(state => state.authReducer)
+   const userState = useSelector(state => state.authReducer)
 
    return (
       <Modal 

@@ -1,4 +1,3 @@
-
 import {useState} from 'react'
 import {
    Button,
@@ -11,7 +10,6 @@ import {
 import {
    handleChangeCalendar,
    handleUpdateData,
-   handleSwitchEdit,
 } from '../logic/modaleditalumnoLogic.js' 
 
 import {
@@ -20,11 +18,9 @@ import {
    splitDate
 } from '../logic/dateHandler'
 
-import CustomButtonEditMatricula from '../customComponents/CustomButtonEditMatricula'
-
 import {DecodeToken} from '../logic/tokenhandler'
 
-import DatePicker,{registerLocale,setDefaultLocale} from 'react-datepicker'
+import DatePicker,{registerLocale} from 'react-datepicker'
 
 import {dniCheck,cuilCheck} from '../logic/datosGeneralesLogic'
 
@@ -32,9 +28,13 @@ import "react-datepicker/dist/react-datepicker.css"
 
 import es from 'date-fns/locale/es'
 
-import {createISODate} from '../logic/dateHandler'
+import {useSelector,useDispatch} from 'react-redux'
 
-import {useSelector} from 'react-redux'
+import {
+   updateFechaIngreso,
+   updateFechaEgreso,
+   updateSwitchEdit,
+} from '../../redux/actions/modalEditAlumno.action'
 
 const TabDatosGenerales = ({
    modalEditRef,
@@ -42,6 +42,19 @@ const TabDatosGenerales = ({
 
    registerLocale('es',es)
 
+   const dispatch = useDispatch()
+
+   const {
+      dataAlumno
+   } = useSelector(state => state.matriculaReducer)
+
+   const {
+      switchEdit,
+      fechaNacimiento,
+      fechaIngreso,
+      fechaEgreso,
+      updatedData
+   } = useSelector(state => state.modalEditAlumnoReducer)
 
    const {
       nivel,
@@ -53,14 +66,17 @@ const TabDatosGenerales = ({
       tipoDNI
    } = useSelector(state => state.hardCodeDataReducer.hardCodeData)
 
+   const userState =  useSelector(state => state.authReducer)
+
    const [isValid,setIsValid] = useState(true)
    const [isInvalid,setIsInvalid] = useState(false)
 
    return ( 
       <> 
-         <Row>
-            <Col
+         <Row
                className='mt-2'
+         >
+            <Col
             >
                <h6>Tipo:</h6>
                <Form.Select
@@ -111,7 +127,7 @@ const TabDatosGenerales = ({
                   as={DatePicker}
                   selected={fechaNacimiento}
                   locale='es'
-                  onChange={(value) => handleChangeCalendar(value,setFechaNacimiento)}
+                  onChange={(value) => handleChangeCalendar(value,dispatch)}
                   dateFormat='dd/MM/yyyy'
                   readOnly={switchEdit}
                />
@@ -370,11 +386,10 @@ const TabDatosGenerales = ({
             <Col>
                <h6>Ingreso:</h6>
                <FormControl
-                  ref={(element) => modalEditRef.current[43] = element}
                   as={DatePicker}
                   selected={fechaIngreso}
                   locale='es'
-                  onChange={(value) => setFechaIngreso(value)}
+                  onChange={(value) => dispatch(updateFechaIngreso(value))}
                   dateFormat='dd/MM/yyyy'
                   readOnly={switchEdit}
 
@@ -383,11 +398,10 @@ const TabDatosGenerales = ({
             <Col>
                <h6>Egreso:</h6>
                <FormControl
-                  ref={(element) => modalEditRef.current[44] = element}
                   selected={fechaEgreso}
                   as={DatePicker}
                   locale='es'
-                  onChange={(value) => setFechaEgreso(value)}
+                  onChange={(value) => dispatch(updateFechaEgreso(value))}
                   dateFormat='dd/MM/yyyy'
                   readOnly={switchEdit}
                />  
@@ -397,12 +411,12 @@ const TabDatosGenerales = ({
             <Col
                className='mt-2 d-flex justify-content-end'
             >
-               {DecodeToken(context).usuario.permissions.editarMatricula ?
+               {DecodeToken(userState).usuario.permissions.editarMatricula ?
                switchEdit ?
                   <Button
                      variant='outline-success'
                      size='sm'
-                     onClick={() => handleSwitchEdit(setSwitchEdit)}
+                     onClick={() => dispatch(updateSwitchEdit())}
                   >Editar</Button>
                   :
                   <Button
@@ -413,12 +427,9 @@ const TabDatosGenerales = ({
                            modalEditRef,
                            fechaNacimiento,
                            dataAlumno,
-                           setSwitchEdit,
-                           updatedData,
-                           setShowModalUpdate,
-                           setUpdatedData,
                            fechaIngreso,
-                           fechaEgreso
+                           fechaEgreso,
+                           dispatch
                         )
                      }}
                   >Actualizar</Button>
