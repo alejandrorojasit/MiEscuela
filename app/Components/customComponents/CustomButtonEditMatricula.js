@@ -4,7 +4,18 @@ import {
    Button,
 } from 'react-bootstrap'
 
-const CustomButtonEditMatricula = ({switchEdit,handleSwitchEdit,handleUpdateData,modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData}) => { 
+const CustomButtonEditMatricula = ({
+   switchEdit,
+   handleSwitchEdit,
+   handleUpdateData,
+   modalEditRef,
+   fechaNacimiento,
+   dataAlumno,
+   setSwitchEdit,
+   updatedData,
+   setShowModalUpdate,
+   setUpdatedData
+}) => { 
 
    return ( 
       <>
@@ -20,7 +31,15 @@ const CustomButtonEditMatricula = ({switchEdit,handleSwitchEdit,handleUpdateData
                      variant='outline-success'
                      size='sm'
                      onClick={() => {
-                        handleUpdateData(modalEditRef,fechaNacimiento,dataAlumno,setSwitchEdit,updatedData,setShowModalUpdate,setUpdatedData)
+                        handleUpdateData(
+                        modalEditRef,
+                        fechaNacimiento,
+                        dataAlumno,
+                        setSwitchEdit,
+                        updatedData,
+                        setShowModalUpdate,
+                        setUpdatedData
+                     )
                      }}
                   >Actualizar</Button>
                   :

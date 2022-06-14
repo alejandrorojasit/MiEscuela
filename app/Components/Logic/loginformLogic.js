@@ -56,6 +56,7 @@ export const handleClick = (
       }else {
          alert(res.data.err.message)
          dispatch(logOutCurrentUser())
+         dispatch(showHideAlert())
       }
    })
 }

@@ -4,7 +4,6 @@ import {
 } from 'react'
 
 import {
-   Container,
    Col,
    Row,
    Form,
@@ -72,7 +71,10 @@ const NuevoIngresoForm = () => {
 
       if(form.checkValidity() === true){
 
-         const res = await handleClick(context.token,dataAlumno)
+         const res = await handleClick(
+            context.token,
+            dataAlumno
+         )
 
          if(res.status === 200){
             setMessage('Alumno añadido con exito')
@@ -221,7 +223,12 @@ const NuevoIngresoForm = () => {
             type='AcceptOnly'
             callBack={handleCallBack}
          />
-         <Form onSubmit={handleSubmit} noValidate autoComplete='new-password' >
+         <Form 
+            onSubmit={handleSubmit} 
+            noValidate 
+            autoComplete='new-password' 
+            className='border border-success m-2 p-4'
+         >
                <Row>
                   <Col>
                      <Label>
@@ -589,6 +596,7 @@ const NuevoIngresoForm = () => {
                            />
                   }
                   </Col>
+               </Row>
                   <Row
                      className='mt-2'
                   >
@@ -607,8 +615,8 @@ const NuevoIngresoForm = () => {
                            />
                      </Col>
                   </Row>
-               </Row>
                <Row
+                  className='mt-2'
                >         
                   <Col>
                      <Label>
@@ -851,7 +859,8 @@ const NuevoIngresoForm = () => {
                         onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:element.target.value})}
                         />
                   </Col>
-                  <Col>
+                  <Col
+               >
                      <Label>
                         Barrio:
                      </Label>
@@ -865,10 +874,12 @@ const NuevoIngresoForm = () => {
                         onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
                         />
                   </Col>  
+                  </Row>
                   <Row
                      className='mt-2'
                   >
-                     <Col>
+                     <Col
+                  >
                         <Label>
                            Email tutor:
                         </Label>
@@ -883,9 +894,8 @@ const NuevoIngresoForm = () => {
                            />
                      </Col>      
                   </Row>
-
-               </Row>
                <Row
+                  className='mt-2'
                >         
                   <Col>
                      <Label>
@@ -1141,6 +1151,7 @@ value={dataAlumno.calle2}
                         onChange={(element)=> setDataAlumno({...dataAlumno,[element.target.name]:toOwnName(element.target.value)})}
                         />
                   </Col>  
+               </Row>
                   <Row
                      className='mt-2'
                   >
@@ -1159,8 +1170,9 @@ value={dataAlumno.calle2}
                            />
                      </Col>      
                   </Row>
-               </Row>
-               <Row>
+               <Row
+                     className='mt-4'
+               >
                   <Col
                      className={'d-flex justify-content-end'}
                   >

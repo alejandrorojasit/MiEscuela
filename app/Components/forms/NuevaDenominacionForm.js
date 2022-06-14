@@ -46,7 +46,11 @@ const NuevaDenominacionForm = () => {
                   style={{position:'relative',top:'30px'}}
                   size='sm'
                   variant='outline-success'
-                  onClick={() => postFetchNuevaDenominacion(context.token,nuevaDenominacionUrl,denominacion).then( res => {
+                  onClick={() => postFetchNuevaDenominacion(
+                     context.token,
+                     nuevaDenominacionUrl,
+                     denominacion
+                  ).then( res => {
                      if(res.status === 200){
                         getHardCodeData(context.token)
                            .then( res => {

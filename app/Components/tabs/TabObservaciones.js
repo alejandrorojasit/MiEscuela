@@ -170,6 +170,11 @@ const TabObservaciones = ({
                               dataFilter.puesto === 'Coordinacion Administrativa Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterCoordinacionAdministrativa
                            ||
                               dataFilter.puesto === 'Preceptor/a' && DecodeToken(userState).usuario.permissions.filterPreceptoria
+                           || dataFilter.puesto === 'Psicopedagoga/o' && DecodeToken(userState).usuario.permissions.filterPsicopedagogia
+                           || dataFilter.puesto === 'Tutora Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterTutoria
+
+                           || dataFilter.puesto === 'Auxiliar N. Inicial' && DecodeToken(userState).usuario.permissions.filterSecretariaAdministrativa
+                           || dataFilter.puesto === 'E.T.I.' && DecodeToken(userState).usuario.permissions.filterPsicopedagogia 
                         ).map((dataMap,index) =>
                            <tr
                               key={index}

@@ -60,7 +60,6 @@ export const modalEditAlumnoReducer = (
             fechaNacimiento: action.payload
          }
       case UPDATE_FECHAINGRESO:
-         console.log(action.payload)
          return {
             ...state,
             fechaIngreso: action.payload

@@ -37,7 +37,16 @@ export const handleClickDelete = (userState,selectedUser,userDeleteUrl,setUserEd
 }
 
 
-export const handleClickAccept = (user,password,role,addUserRef,userState,apiUrl,_id) =>{
+export const handleClickAccept = (
+   user,
+   password,
+   role,
+   addUserRef,
+   userState,
+   apiUrl,_id,
+   setUserEditModal,
+   setUsuariosModal,
+) =>{
    let permissions = {}
    let dataToSend = {}
    Object.keys(addUserRef.current).map((dataMap,index)=> {
@@ -58,6 +67,14 @@ export const handleClickAccept = (user,password,role,addUserRef,userState,apiUrl
             usuario:user
          }
       }
-   postFetchUpdateUser(userState.token,dataToSend,apiUrl,_id)
+   postFetchUpdateUser(
+      userState.token,
+      dataToSend,
+      apiUrl,_id
+   ).then(res => {
+         if(res.status === 200){
+            setUserEditModal(false)         
+            setUsuariosModal(true)
+         }
+})
 }
-

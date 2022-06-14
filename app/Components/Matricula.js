@@ -1,5 +1,4 @@
 import {
-   useEffect,
    useRef
 } from 'react'
 import ModalEditAlumno from './modals/ModalEditAlumno'
@@ -10,8 +9,6 @@ import SelectFormStage2 from './selects/SelectFormStage2'
 import TableAlumnosMatricula from './tabs/TableAlumnosMatricula'
 import LoadingSpinner from './spinners/LoadingSpinner'
 import ModalConfirmUpdateData from './modals/ModalConfirmUpdateData'
-
-import {Container} from 'react-bootstrap'
 
 import {getMatriculaActivo} from '../hooks/getFetch.js'
 

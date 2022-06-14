@@ -61,7 +61,11 @@ const permissions = ({
                <Button
                   variant='outline-success'
                   size='sm'
-                  onClick={() => handleClickSeleccionarTodo(addUserRef,reRender,setReRender)}
+                  onClick={() => handleClickSeleccionarTodo(
+                           addUserRef,
+                           reRender,
+                           setReRender
+                        )}
                >
                     Seleccionar Todo 
                </Button>

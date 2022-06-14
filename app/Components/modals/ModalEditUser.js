@@ -5,12 +5,9 @@ import {
    Row,
    Container,
    InputGroup,
-   FormControl,
    Button,
    Form
 } from 'react-bootstrap'
-
-import { DecodeToken } from '../logic/tokenhandler.js'
 
 import {
    handleClose,
@@ -26,7 +23,6 @@ import Permissions from '../forms/PermissionsForm'
 import {updateUser} from '../../helpers/Urls.js' 
 
 import {useSelector} from 'react-redux'
-
 
 const ModalEditUser = ({
    userEditModal,
@@ -63,9 +59,20 @@ const ModalEditUser = ({
    return ( 
       <Modal 
          show={userEditModal} 
-         onHide={()=> handleClose(setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal,setDataUser)} 
+         onHide={()=> handleClose(
+            setSwitchRole,
+            setSwitchPassword,
+            setSwitchUsuario,
+            setUserEditModal,
+            setUsuariosModal,
+            setDataUser
+         )} 
          onShow={()=> {
-            handleShow(setDataUser,userState,selectedUser)
+            handleShow(
+               setDataUser,
+               userState,
+               selectedUser
+            )
          }}
          size='lg'
       >
@@ -188,13 +195,17 @@ const ModalEditUser = ({
                      <Button 
                         variant='outline-success' 
                         size='sm'
-                        onClick={()=> handleClickDelete(userState,selectedUser,userDeleteUrl,setUserEditModal)}
+                        onClick={()=> handleClickDelete(
+                           userState,
+                           selectedUser,
+                           userDeleteUrl,
+                           setUserEditModal
+                        )}
                      >
                         Eliminar Usuario
                      </Button>
                   </Col>
                </Row>
-               
                <Row>
                      <Permissions
                         dataUser={dataUser}
@@ -222,7 +233,17 @@ const ModalEditUser = ({
                      <Button 
                         variant='outline-success' 
                         size='sm'
-                        onClick={()=> handleClickAccept(user,password,role,addUserRef,userState,updateUser,dataUser._id)}
+                        onClick={()=> handleClickAccept(
+                        user,
+                        password,
+                        role,
+                        addUserRef,
+                        userState,
+                        updateUser,
+                        dataUser._id,
+                        setUserEditModal,
+                        setUsuariosModal
+                     )}
                      >
                         Aceptar cambios
                      </Button>

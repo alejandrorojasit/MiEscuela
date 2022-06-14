@@ -12,7 +12,16 @@ export const handleChangePassowrd = (event,setPassword)=> {
       setPassword(event.target.value)
    }
 
-export const handleClick = (userState,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal,addUserRef)=>{
+export const handleClick = (
+   userState,
+   usuario,
+   password,
+   role,
+   addUserUrl,
+   setAddUserModal,
+   setUsuariosModal,
+   addUserRef
+)=>{
    let permissions = {
    }
    Object.keys(addUserRef.current).map((dataMap,index)=>{
@@ -26,7 +35,8 @@ export const handleClick = (userState,usuario,password,role,addUserUrl,setAddUse
          permissions,
          addUserUrl
       ).then(res => {
-         if(res.statusText === 'OK') {
+         console.log(res)
+         if(res.status === 200) {
             setAddUserModal(false)
             setUsuariosModal(true)
          }else {

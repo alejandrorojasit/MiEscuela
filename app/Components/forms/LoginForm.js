@@ -7,7 +7,11 @@ import {
    Image
 } from 'react-bootstrap'
 
-import {handleChangeUser,handleChangePassowrd,handleClick} from '../logic/loginformLogic'
+import {
+   handleChangeUser,
+   handleChangePassowrd,
+   handleClick
+} from '../logic/loginformLogic'
 import Lottie from 'lottie-react'
 import HeaderAnimation from '../../assets/header/Header.json'
 import LogoEscuela from '../../assets/jpg/LogoEPAt.png'
@@ -45,8 +49,7 @@ const style = {
    }
 }
 
-const LoginForm = ({
-}) => {
+const LoginForm = () => {
 
    const dispatch = useDispatch()
    const {user,password} = useSelector(state => state.logInFormReducer)

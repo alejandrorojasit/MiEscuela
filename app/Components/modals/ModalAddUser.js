@@ -156,7 +156,16 @@ const ModalAddUser = ({
                type='button' 
                style={style.button} 
                onClick={ ()=> {
-                  handleClick(context,usuario,password,role,addUserUrl,setAddUserModal,setUsuariosModal,addUserRef)
+                  handleClick(
+                     stateUser,
+                     usuario,
+                     password,
+                     role,
+                     addUserUrl,
+                     setAddUserModal,
+                     setUsuariosModal,
+                     addUserRef
+                  )
                }}
             >
                Añadir
