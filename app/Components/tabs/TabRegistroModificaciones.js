@@ -1,4 +1,5 @@
 import {
+   Container,
    Row,
    Table,
 } from 'react-bootstrap'
@@ -17,7 +18,8 @@ const TabRegistroModificaciones = ({
    } = useSelector(state => state.matriculaReducer)
 
    return ( 
-      <
+      <Container
+        className='border border-success p-3 mt-4' 
       >
          <Table
             striped
@@ -70,7 +72,7 @@ const TabRegistroModificaciones = ({
                )}
             </tbody>
          </Table>
-      </>
+      </Container>
    )
 }
 

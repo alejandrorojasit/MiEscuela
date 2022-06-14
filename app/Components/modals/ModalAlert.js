@@ -1,6 +1,12 @@
 import {Modal,Button} from 'react-bootstrap'
 
-const ModalAlert = ({stateShow,setStateShow,message,type,callBack}) => { 
+const ModalAlert = ({
+   stateShow,
+   setStateShow,
+   message,
+   type,
+   callBack
+}) => { 
 
    const handleCancel = () => {
       setStateShow(false)

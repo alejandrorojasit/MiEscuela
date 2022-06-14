@@ -1,4 +1,5 @@
 import {
+   Container,
    Button,
    Row,
    Col,
@@ -44,7 +45,9 @@ const TabDatosSalud = ({
    } = useSelector(state => state.modalEditAlumnoReducer)
 
    return ( 
-      <>
+      <Container
+         className='border border-success p-3 mt-4'
+      >
          <Row>
             <Col 
             >
@@ -382,7 +385,7 @@ const TabDatosSalud = ({
                </Row>
                <Row>
             <Col
-               className='mt-2 d-flex justify-content-end'
+               className='mt-3 d-flex justify-content-end'
             >
                {DecodeToken(userState).usuario.permissions.editarMatricula ?
                      switchEdit ?
@@ -413,7 +416,7 @@ const TabDatosSalud = ({
                </Row>
             </Col>
             <Col
-               className='mt-2 border'
+               className='mt-2'
             >
                <h6>Registro historico de salud:</h6>       
                <Table
@@ -470,7 +473,7 @@ const TabDatosSalud = ({
          <Row>
             
             <Col
-               className='mt-2 d-flex justify-content-end'
+               className='mt-1 d-flex justify-content-end'
             >
                {
                   DecodeToken(userState).usuario.permissions.añadirRegistroSalud ?
@@ -484,7 +487,7 @@ const TabDatosSalud = ({
                }
             </Col>
          </Row>
-      </>
+      </Container>
    )
 }
 

@@ -45,7 +45,7 @@ const TableAlumnosMatricula = ({
                Cantidad de registros:
             </Col>
             <Col 
-               className='d-flex justify-content-center'
+               className='d-flex justify-content-center text-danger'
             >
                {
                   !isFiltredStage2 ? 

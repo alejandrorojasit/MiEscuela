@@ -4,6 +4,7 @@ import {
 } from 'react'
 
 import {
+   Container,
    Col,
    Row,
    Form,
@@ -215,7 +216,7 @@ const NuevoIngresoForm = () => {
    })
 
    return ( 
-      <>
+      <Container>
          <ModalAlert
             stateShow={stateShow}  
             setStateShow={setStateShow}
@@ -223,12 +224,15 @@ const NuevoIngresoForm = () => {
             type='AcceptOnly'
             callBack={handleCallBack}
          />
+         <Container>
          <Form 
             onSubmit={handleSubmit} 
             noValidate 
             autoComplete='new-password' 
-            className='border border-success m-2 p-4'
          >
+               <Row
+                  className='border border-success p-3'
+               >
                <Row>
                   <Col>
                      <Label>
@@ -615,6 +619,10 @@ const NuevoIngresoForm = () => {
                            />
                      </Col>
                   </Row>
+               </Row>
+               <Row
+                  className='border border-success p-3 mt-3'
+               >
                <Row
                   className='mt-2'
                >         
@@ -894,6 +902,10 @@ const NuevoIngresoForm = () => {
                            />
                      </Col>      
                   </Row>
+               </Row>
+               <Row
+                  className='border border-success p-3 mt-3'
+               >
                <Row
                   className='mt-2'
                >         
@@ -1170,6 +1182,7 @@ value={dataAlumno.calle2}
                            />
                      </Col>      
                   </Row>
+               </Row>
                <Row
                      className='mt-4'
                >
@@ -1180,13 +1193,15 @@ value={dataAlumno.calle2}
                         size='sm'
                         variant='outline-success'
                         type='submit'
+                        className='mb-4'
                      >
                         Aceptar
                      </Button>      
                   </Col>
                </Row>              
          </Form>
-         </>
+         </Container>
+         </Container>
    )
 }
 

@@ -15,13 +15,13 @@ const DatosTutor = ({
    return ( 
       <>
 <Container
-         className='border border-success p-2 mt-2'
-         fluid
+         className='border border-success p-3 mt-4'
       >
       <Row
          className='mt-2'
       >
-         <Col>
+         <Col
+               >
             <h6>Apellido Tutor:</h6>
             <FormControl
                defaultValue={dataAlumno.apellidoTutor}
@@ -144,8 +144,7 @@ const DatosTutor = ({
       </Row>
    </Container>
       <Container
-         className='border border-success p-2 mt-2'
-         fluid
+         className='border border-success p-3 mt-2'
       >
       <Row
          className='mt-2'

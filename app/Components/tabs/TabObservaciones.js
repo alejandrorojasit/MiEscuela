@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 
 import {
+   Container,
    Button,
    Row,
    Col,
@@ -40,10 +41,12 @@ const TabObservaciones = ({
    },[dataAlumno])
 
    return ( 
-      <>
+      <Container
+         className='border border-success p-3 mt-4'
+      >
          <Row>
             <Col
-               className='mt-2 d-flex justify-content-center'
+               className='mt-2 d-flex justify-content-start'
             >
                {DecodeToken(userState).usuario.permissions.añadirObservaciones ?
                   <Button
@@ -127,7 +130,7 @@ const TabObservaciones = ({
          </Row>
          <Row>
             <Col
-               className='mt-2 border'
+               className='mt-2'
             >
                <Table
                   striped
@@ -197,30 +200,11 @@ const TabObservaciones = ({
                            </tr>
                         )
                      }
-                     {/*<tr
-                        key={index}
-                     >
-                        <td>
-                           {index}
-                        </td>
-                        <td>
-                           {dataMap?.user}
-                        </td>
-                        <td>
-                           {dataMap?.puesto}
-                        </td>
-                        <td>
-                           {dataMap?.fecha}
-                        </td>
-                        <td>
-                           {dataMap?.observacion}
-                        </td>
-                     </tr>*/} 
                   </tbody>
                </Table>
             </Col>
          </Row>
-      </>
+      </Container>
    )
 }
 

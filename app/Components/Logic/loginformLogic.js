@@ -38,7 +38,8 @@ export const handleChangePassowrd =(
 export const handleClick = (
    user,
    password,
-   dispatch
+   dispatch,
+   setStateShow
 ) => {
    dispatch(showHideAlert())
    postFetchLogIn(
@@ -54,7 +55,7 @@ export const handleClick = (
                dispatch(setHardCodeData(res.data[0]))
             })
       }else {
-         alert(res.data.err.message)
+         setStateShow(true)
          dispatch(logOutCurrentUser())
          dispatch(showHideAlert())
       }

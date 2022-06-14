@@ -46,6 +46,7 @@ const TabDatosContacto = ({
             switchEdit={switchEdit}
             modalEditRef={modalEditRef}
          />
+         <Container>
          <Row
             className='border border-success p-2 mt-2'
          >
@@ -59,9 +60,13 @@ const TabDatosContacto = ({
                />  
             </Col>   
          </Row>
+         </Container>
+         <Container
+            className='border border-success p-2 mt-3'
+         >
          <Row>
             <Col
-               className='mt-2 d-flex justify-content-end' 
+               className='d-flex justify-content-end' 
             >
                {DecodeToken(userState).usuario.permissions.editarMatricula ?
                      switchEdit ?
@@ -90,6 +95,7 @@ const TabDatosContacto = ({
                }
             </Col>
          </Row>
+         </Container>
       </>
    )
 }

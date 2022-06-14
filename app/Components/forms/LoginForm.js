@@ -1,3 +1,5 @@
+import {useState} from 'react'
+
 import {
    Container,
    Col,
@@ -17,6 +19,10 @@ import HeaderAnimation from '../../assets/header/Header.json'
 import LogoEscuela from '../../assets/jpg/LogoEPAt.png'
 import {colors} from '../../helpers/styleColors'
 
+
+import 
+   ModalAlert
+ from '../modals/ModalAlert'
 
 import {useDispatch,useSelector} from 'react-redux'
 
@@ -54,6 +60,8 @@ const LoginForm = () => {
    const dispatch = useDispatch()
    const {user,password} = useSelector(state => state.logInFormReducer)
 
+   const [stateShow,setStateShow] = useState(false)
+
    return (
       <Container 
          style={style.form}
@@ -74,6 +82,13 @@ const LoginForm = () => {
             <Col
                style={{display:'flex',margin:'auto'}}
             >
+               <ModalAlert
+                  stateShow={stateShow} 
+                  setStateShow={setStateShow}
+                  message='Usuario o clave incorrecta. Por favor verifique los datos ingresados.'
+                  type=''
+                  callBack={()=>{}}
+               />
                <Form
                > 
                   <Form.Group>
@@ -124,7 +139,8 @@ const LoginForm = () => {
                            handleClick(
                            user,
                            password,
-                           dispatch
+                           dispatch,
+                           setStateShow
                         )
                         }
                      }

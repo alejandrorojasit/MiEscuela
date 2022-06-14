@@ -25,10 +25,12 @@ const AdminOptions = () => {
    const [switchCalificacionesLeer,setSwitchCalificacionesLeer] =  useState(true)
    const [switchCalificacionesEditar,setSwitchCalificacionesEditar] = useState(true)
    const [isNewUser,setIsNewUser] = useState(false)
-   const context = useAuth()
 
    return ( 
-      <>
+      <Container>
+         <Container
+            className='border border-success p-3'
+         >
          <ModalEditUser
             isNewUser={isNewUser}
             userEditModal={userEditModal}
@@ -84,7 +86,8 @@ const AdminOptions = () => {
                </Button>
             </Col>
          </Row>
-         </>
+            </Container>
+         </Container>
    )
 }
 

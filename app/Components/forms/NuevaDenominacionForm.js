@@ -24,7 +24,10 @@ const NuevaDenominacionForm = () => {
    const {Group,Label,Control,Text,Select} = Form
 
    return ( 
-      <>
+      <Container>
+         <Container
+            className='border border-success p-3'
+         >
          <Row> 
             <Col>
                <Label>
@@ -64,7 +67,8 @@ const NuevaDenominacionForm = () => {
                </Button>
             </Col>
          </Row>
-      </>
+         </Container>
+      </Container>
    )
 }
 

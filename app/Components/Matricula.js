@@ -1,6 +1,7 @@
 import {
-   useRef
+   useRef,
 } from 'react'
+
 import ModalEditAlumno from './modals/ModalEditAlumno'
 import ModalEditObservaciones from './modals/ModalEditObservaciones'
 import ModalEditRegistroSalud from './modals/ModalEditRegistroSalud'
@@ -9,6 +10,10 @@ import SelectFormStage2 from './selects/SelectFormStage2'
 import TableAlumnosMatricula from './tabs/TableAlumnosMatricula'
 import LoadingSpinner from './spinners/LoadingSpinner'
 import ModalConfirmUpdateData from './modals/ModalConfirmUpdateData'
+
+import {
+   Container
+} from 'react-bootstrap'
 
 import {getMatriculaActivo} from '../hooks/getFetch.js'
 
@@ -35,11 +40,13 @@ const Matricula = () => {
    }
 
    return ( 
-      <>
+      <Container>
          {alumnosFullList.length === 0 ? 
             <LoadingSpinner/>
             :
-            <>
+            <Container
+               className='border border-success p-3 mb-3'
+            >
                <ModalEditAlumno/>
                <ModalEditRegistroSalud/>
                <ModalEditObservaciones/>
@@ -51,9 +58,9 @@ const Matricula = () => {
                   matriculaRef={matriculaRef}
                   />
                <TableAlumnosMatricula/>
-            </>
+            </Container>
          }
-      </>
+      </Container>
    )
 }
 export default Matricula

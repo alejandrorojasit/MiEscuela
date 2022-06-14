@@ -5,6 +5,7 @@ import {
    Col,
    FormControl,
    Form,
+   Container,
 } from 'react-bootstrap'
 
 import {
@@ -72,7 +73,9 @@ const TabDatosGenerales = ({
    const [isInvalid,setIsInvalid] = useState(false)
 
    return ( 
-      <> 
+      <Container
+         className='border border-success p-3 mt-4'
+      > 
          <Row
                className='mt-2'
          >
@@ -409,7 +412,7 @@ const TabDatosGenerales = ({
          </Row>
          <Row>
             <Col
-               className='mt-2 d-flex justify-content-end'
+               className='mt-3 d-flex justify-content-end'
             >
                {DecodeToken(userState).usuario.permissions.editarMatricula ?
                switchEdit ?
@@ -438,7 +441,7 @@ const TabDatosGenerales = ({
          }
             </Col>
          </Row>
-      </>
+      </Container>
    )
 }
 
