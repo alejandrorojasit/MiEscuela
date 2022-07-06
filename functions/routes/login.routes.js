@@ -4,8 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {verificarToken} = require('../autentication')
 const login = require('../models/login')
-
-let jwtSignature = 'nemesisSignature'
+const {jwtSignature} = require('../variables')
 
 app.post('/',(req,res)=>{
     let body = req.body

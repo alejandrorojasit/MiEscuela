@@ -1,3 +1,9 @@
+export const finDeCicloLectivoUrl = 'api/sealedDatabase/finCicloLectivo'
+
+export const sealedDatabaseSingle = 'api/sealedDatabase/single'
+
+export const currentYear = 'api/matricula/getYear'
+
 export const userDeleteUrl = 'api/usuarios/delete'
 
 export const logInUrl = 'api/logIn'
@@ -28,7 +34,7 @@ export const copyWholeDb = 'api/matricula/copywholedb'
 
 export const updateObservacionesUrl = 'api/matricula/updateObservaciones'
 
-export const updateUser = 'api/usuarios/updateUsuario'
+export const updateUserUrl = 'api/usuarios/updateUsuario'
 
 export const updateRegistroSaludUrl = 'api/matricula/updateRegistroSalud'
 

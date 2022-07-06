@@ -1,4 +1,3 @@
-import {useState,useRef} from 'react'
 
 import {
    Modal,
@@ -7,12 +6,9 @@ import {
    Col,
    Form,
    Button,
-   DropdownButton,
-   ButtonGroup,
-   Dropdown
 } from 'react-bootstrap'
 
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 
 import Permissions from '../forms/PermissionsForm'
 
@@ -23,10 +19,13 @@ import {
    handleChangeUser,
    handleChangePassowrd,
    handleClick,
-   handleSwitchCheckbox,
 } from '../logic/modalAddUserLogic'
 
 import {addUserUrl} from '../../helpers/Urls'
+
+import {
+   updateAddUserModal,
+} from '../../redux/actions/adminOptions.actions'
 
 const style = {
    form: {
@@ -37,28 +36,25 @@ const style = {
    }
 }
 
-const ModalAddUser = ({
-   addUserModal,
-   setAddUserModal,
-   setUsuariosModal,
-   reRender,
-   setReRender,
-   switchCalificacionesLeer,
-   setSwitchCalificacionesLeer,
-   switchCalificacionesEditar,
-   setSwitchCalificacionesEditar,
-   switchAsistencia,
-   setSwitchAsistencia,
-   addUserRef,
-   isNewUser,
-}) => { 
 
-   const handleClose = () => setAddUserModal(false)
-   const [usuario,setUsuario] = useState('')
-   const [password,setPassword] = useState('')
-   const [role,setRole] = useState('Seleccione tipo de usuario')
+const ModalAddUser = ({
+   addUserRef,
+}) => { 
+   const dispatch = useDispatch()
+
+   const handleClose = () => dispatch(updateAddUserModal()) 
+
    const stateUser =  useSelector(state => state.authReducer)
+
    const hardCodeData = useSelector(state => state.hardCodeDataReducer.hardCodeData)
+
+   const {
+      addUserModal,
+      user,
+      password,
+      role,
+   } = useSelector (state => state.adminOptionsReducer)
+
    return ( 
       <Modal 
          show={addUserModal} 
@@ -95,7 +91,10 @@ const ModalAddUser = ({
                         <Form.Control 
                            placeholder='Ingerse Usuario' 
                            type='text' 
-                           onChange={(event)=> handleChangeUser(event,setUsuario)}
+                           onChange={(event)=> handleChangeUser(
+                              event,
+                              dispatch
+                           )}
                         />
                         <Form.Text 
                            className='text-muted'
@@ -108,7 +107,10 @@ const ModalAddUser = ({
                         <Form.Control 
                            placeholder='Ingerse Contraseña' 
                            type='password' 
-                           onChange={(event)=> handleChangePassowrd(event,setPassword)}
+                           onChange={(event)=> handleChangePassowrd(
+                              event,
+                              dispatch
+                           )}
                         />
                         <Form.Text 
                            className='text-muted'
@@ -119,7 +121,10 @@ const ModalAddUser = ({
                            className='mt-2'
                            style={{color:colors.darken}}
                            aria-label='Puesto Trabajo' 
-                           onChange={(event)=> handleClickRole(event.target.value,setRole)}
+                           onChange={(event)=> handleClickRole(
+                              event.target.value,
+                              dispatch
+                           )}
                         >
                            <option>Puesto Trabajo</option>
                            {hardCodeData?.puestoTrabajo?.map((dataMap)=>
@@ -135,17 +140,7 @@ const ModalAddUser = ({
                   </Form>
                </Col>
                <Permissions
-                  isNewUser={isNewUser}
-                  switchAsistencia={switchAsistencia}
-                  reRender={reRender}
-                  setReRender={setReRender}
                   addUserRef={addUserRef}
-                  switchAsistencia={switchAsistencia}
-                  setSwitchAsistencia={setSwitchAsistencia}
-                  setSwitchCalificacionesLeer={setSwitchCalificacionesLeer}
-                  switchCalificacionesLeer={switchCalificacionesLeer}
-                  switchCalificacionesEditar={switchCalificacionesEditar}
-                  setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
                />
             </Container>
          </Modal.Body>
@@ -158,12 +153,11 @@ const ModalAddUser = ({
                onClick={ ()=> {
                   handleClick(
                      stateUser,
-                     usuario,
+                     user,
                      password,
                      role,
                      addUserUrl,
-                     setAddUserModal,
-                     setUsuariosModal,
+                     dispatch,
                      addUserRef
                   )
                }}

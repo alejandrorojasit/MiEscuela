@@ -6,8 +6,7 @@ function App () {
 
    return (
       <Provider store={globalStore}>  
-      <AppRouter
-      />
+      <AppRouter/>
       </Provider>
    )
 }

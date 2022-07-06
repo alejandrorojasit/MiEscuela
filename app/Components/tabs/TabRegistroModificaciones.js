@@ -30,9 +30,6 @@ const TabRegistroModificaciones = ({
             <thead>
                <tr>
                   <th>
-                     #
-                  </th>
-                  <th>
                      Usuario:
                   </th>
                   <th>
@@ -48,9 +45,6 @@ const TabRegistroModificaciones = ({
                <tr
                   key={index}
                >
-                  <td>
-                     {index}
-                  </td>
                   <td>
                      {dataMap?.user}
                   </td>

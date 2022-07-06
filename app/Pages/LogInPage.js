@@ -4,7 +4,6 @@ import {
    Row
 } from 'react-bootstrap'
 
-import ModalAlertSpinner from '../components/modals/ModalAlertSpinner'
 import Login from '../components/Login'
 import WebFont from 'webfontloader'
 
@@ -23,9 +22,6 @@ const LogInPage = () => {
          style={{fontFamily:'Droid Sans'}}
          fluid
       >
-         <ModalAlertSpinner
-            message={`Conectando al servidor de login. Por favor espere`}
-         />
          <Row>
          </Row>
          <Row>

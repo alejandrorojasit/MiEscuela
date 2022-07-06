@@ -1,34 +1,36 @@
 import {getFetchUsuarios} from '../../hooks/getFetch.js'
 
+import { 
+   updateDataUsuarios ,
+   updateIsNewUser,
+   updateUsuariosModal,
+   updateSelectedUser,
+   updateUserEditModal,
+   updateAddUserModal,
+} from '../../redux/actions/adminOptions.actions.js'
+
 export const handleEdit = (
    dataMap,
-   userEditModal,
-   setUserEditModal,
-   setUsuariosModal,
-   setSelectedUser,
-   setIsNewUser,
+   dispatch
 ) =>{
-   setIsNewUser(false)
-   setUsuariosModal(false) 
-   setSelectedUser(dataMap.usuario)
-   setUserEditModal(true)
+   dispatch(updateUsuariosModal())
+   dispatch(updateSelectedUser(dataMap.usuario))
+   dispatch(updateUserEditModal())
 }
 
 export const handleAddUser = (
-   setAddUserModal,
-   setUsuariosModal,
-   setIsNewUser
+   dispatch
 ) =>{
-   setUsuariosModal(false)
-   setAddUserModal(true) 
-   setIsNewUser(true)
+   dispatch(updateUsuariosModal())
+   dispatch(updateAddUserModal())
+   dispatch(updateIsNewUser(true))
 }
 
 export const upDateUsers = (
    token,
-   setDataUsuarios
+   dispatch
 )=> {
    getFetchUsuarios(token).then((data) =>
-      setDataUsuarios(data.data)
+      dispatch(updateDataUsuarios(data.data))
    )
 }

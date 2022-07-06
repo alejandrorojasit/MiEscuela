@@ -20,6 +20,7 @@ const HomePage = () => {
 
    return (
       <Container 
+         style={{fontFamily:'Droid Sans'}}
          fluid
       >
          <Row>

@@ -23,7 +23,8 @@ const NuevoCicloLectivoPage = () => {
    
    return (
       <Container 
-         style={{fontFamily:'Droid Sans'}} 
+         style={{fontFamily:'Droid Sans'}}
+         fluid
       >
          <Row>
          </Row>

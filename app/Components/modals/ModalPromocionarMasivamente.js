@@ -13,7 +13,7 @@ import {
 
 import {getMatriculaActivo} from '../../hooks/getFetch'
 
-import useAuth from '../../context/store/useAuth'
+import {useSelector} from 'react-redux'
 
 const ModalPromocionarMasivamente = ({stateShow,setStateShow}) => { 
 
@@ -21,13 +21,8 @@ const ModalPromocionarMasivamente = ({stateShow,setStateShow}) => {
    const [nivel,setNivel] = useState(null)
    const [division,setDivision] = useState('A')
    const [grado,setGrado] = useState(1)
-   const context = useAuth()
 
-   useEffect(()=>{
-      getMatriculaActivo(context.stateUser.token).then((res)=>{
-         setMatricula(res.data)
-      }) 
-   },[])
+   const userState = useSelector(state =>  state.authReducer)
 
    const handleClose = () => setStateShow(false)
       return ( 

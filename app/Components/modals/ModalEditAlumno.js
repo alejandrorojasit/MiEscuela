@@ -6,13 +6,20 @@ import {
 import {Modal} from 'react-bootstrap'
 
 import {
+   checkIsSealed
+} from '../logic/matriculaLogic'
+
+import {
    handleShow,
 } from '../logic/modaleditalumnoLogic.js'
 
 import {
+   Container,
    Col,
    Tabs,
    Tab,
+   Row,
+   Button
 } from 'react-bootstrap'
 
 import {createISODate} from '../logic/dateHandler'
@@ -33,7 +40,6 @@ import {
    updateFechaIngreso,
    updateFechaEgreso,
    updateFechaNacimiento,
-   show_ModalEditAlumno,
 } from '../../redux/actions/modalEditAlumno.action'
 
 const ModalEditAlumno = ({
@@ -47,6 +53,12 @@ const ModalEditAlumno = ({
 
    const {showModalEditAlumno} = useSelector(state => state.modalEditAlumnoReducer)
 
+   const sealedDatabase = useSelector(state => state.sealedDatabaseReducer)
+
+   const {
+      switchEdit
+   } = useSelector(state => state.matriculaReducer)
+
    const dispatch =  useDispatch()
 
    useEffect (()=> {
@@ -54,20 +66,20 @@ const ModalEditAlumno = ({
          dispatch(updateFechaNacimiento(createISODate(dataAlumno.fechaNacimiento))
          )
       }
-      if(dataAlumno.egreso === 'Sin datos'){
+      if(dataAlumno.egreso === 'Sin datos' || dataAlumno.egreso === ''){
          dispatch(updateFechaEgreso(''))
       }else{
          dispatch(updateFechaEgreso(createISODate(dataAlumno.egreso))
          )
       }
-      if(dataAlumno.ingreso === 'Sin datos'){
+      if(dataAlumno.ingreso === 'Sin datos' || dataAlumno.ingreso === ''){
          dispatch(updateFechaIngreso(''))
       }else{
          dispatch(updateFechaIngreso(createISODate(dataAlumno.ingreso))
          )
       }
    },[dataAlumno])
-   
+
 
    return ( 
       <Modal 
@@ -84,7 +96,7 @@ const ModalEditAlumno = ({
                className='d-flex justify-content-center'
             >
                <h4>
-                  {dataAlumno.nombre} {dataAlumno.apellido}
+                  {dataAlumno?.nombre} {dataAlumno?.apellido}
                </h4>      
             </Col>
          </Modal.Header>
@@ -142,9 +154,6 @@ const ModalEditAlumno = ({
             }
             </Tabs>
          </Modal.Body>
-<Modal.Footer>
-
-         </Modal.Footer>
       </Modal>
    )
 }

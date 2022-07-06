@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap'
 
 import {FaUserEdit} from 'react-icons/fa'
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 
 import {
    handleEdit,
@@ -20,27 +20,34 @@ import {
 
 import {colors} from '../../helpers/styleColors'
 
+import {
+   updateUsuariosModal,
+} from '../../redux/actions/adminOptions.actions'
+
 const ModalUsuarios = ({
-   usuariosModal,
-   setUsuariosModal,
-   setAddUserModal,
-   userEditModal,
-   setUserEditModal,
-   setSelectedUser,
-   setIsNewUser,
 }) => { 
+
+   const dispatch = useDispatch()
 
    const userState = useSelector(state => state.authReducer)
 
-   const handleClose = () => setUsuariosModal(false)
-   const [dataUsuarios,setDataUsuarios] = useState([])
+   const {
+      usuariosModal,
+      userEditModal,
+      dataUsuarios,
+   } = useSelector(state => state.adminOptionsReducer)
+
+   const handleClose = () => dispatch(updateUsuariosModal()) 
 
    return ( 
 
       <Modal 
          show={usuariosModal} 
          onHide={handleClose} 
-         onShow={()=> upDateUsers(userState.token,setDataUsuarios)}
+         onShow={()=> upDateUsers(
+            userState.token,
+            dispatch
+         )}
       >
          <Modal.Header 
             closeButton
@@ -76,11 +83,7 @@ const ModalUsuarios = ({
                                     variant='outline-success'
                                     onClick={()=> handleEdit(
                                        dataMap,
-                                       userEditModal,
-                                       setUserEditModal,
-                                       setUsuariosModal,
-                                       setSelectedUser,
-                                       setIsNewUser,
+                                       dispatch
                                     )}
                                  >
                                     <FaUserEdit/>
@@ -98,7 +101,9 @@ const ModalUsuarios = ({
             <Button 
                variant='outline-success'
                size='sm'
-               onClick={()=> handleAddUser(setAddUserModal,setUsuariosModal,setIsNewUser)}
+               onClick={()=> handleAddUser(
+                  dispatch
+               )}
             >
                Nuevo Usuario
             </Button>

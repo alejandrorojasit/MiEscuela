@@ -14,8 +14,8 @@ import {getHardCodeData} from '../../hooks/getFetch'
 
 export const AuthContext = createContext()
 
-export const baseUrl = 'https://us-central1-miescuela-5e8d6.cloudfunctions.net/app' 
-//export const baseUrl = 'http://localhost:5001/miescuela-5e8d6/us-central1/app'
+//export const baseUrl = 'https://us-central1-miescuela-5e8d6.cloudfunctions.net/app' 
+export const baseUrl = 'http://localhost:5001/miescuela-5e8d6/us-central1/app'
 
 const AuthProvider = (props) => {
 

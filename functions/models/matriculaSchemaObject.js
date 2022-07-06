@@ -60,5 +60,4 @@ const matriculaSchemaObject = {
    telCelular2                         : {type : String,require  : true},
    emailTutor2                         : {type : String,require  : true},
 }
-
 module.exports = matriculaSchemaObject

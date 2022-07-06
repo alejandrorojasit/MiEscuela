@@ -19,6 +19,10 @@ import {useSelector,useDispatch} from 'react-redux'
 
 import {updateSwitchEdit} from '../../redux/actions/modalEditAlumno.action'
 
+import {
+   checkIsSealed
+} from '../logic/matriculaLogic'
+
 const TabDatosContacto = ({
    modalEditRef,
 }) => { 
@@ -36,6 +40,8 @@ const TabDatosContacto = ({
       fechaNacimiento,
       updatedData,
    } = useSelector(state => state.modalEditAlumnoReducer)
+
+   const sealedDatabase = useSelector(state => state.sealedDatabaseReducer)
 
    const userState = useSelector(state => state.authReducer)
 
@@ -68,7 +74,8 @@ const TabDatosContacto = ({
             <Col
                className='d-flex justify-content-end' 
             >
-               {DecodeToken(userState).usuario.permissions.editarMatricula ?
+               {
+                  DecodeToken(userState).usuario.permissions.editarMatricula &&  !checkIsSealed(sealedDatabase,dataAlumno.nivel)?
                      switchEdit ?
                         <Button
                            variant='outline-success'

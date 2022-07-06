@@ -1,4 +1,7 @@
-import {SHOW_HIDE} from '../actions/modalAlertSpinner.action'
+import {
+   UPDATE_STATESHOW,
+   UPDATE_MESSAGE,
+} from '../actions/modalAlertSpinner.action'
 import { modalAlertSpinnerState } from '../states/modalAlertSpinner.state'
 
 export const modalAlertSpinnerReducer = (
@@ -6,7 +9,12 @@ export const modalAlertSpinnerReducer = (
    action
 ) => {
    switch(action.type) {
-      case SHOW_HIDE:
+      case UPDATE_MESSAGE:
+         return {
+            ...state,
+            message: action.payload
+         }
+      case UPDATE_STATESHOW:
          return{
             ...state,
             show: !state.show

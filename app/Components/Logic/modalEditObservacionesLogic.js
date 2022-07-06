@@ -37,7 +37,7 @@ export const handleClickAñadir = (
       cambios: [`Observacion: ${nuevaObservacion}`]
    }
    postFetchUpdateAlumno(
-      userState.token,
+      userState,
       updatedData,
       apiUrl,
       id,

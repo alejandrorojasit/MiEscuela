@@ -2,7 +2,7 @@ import axios from 'axios'
 import {baseUrl} from '../context/store/AuthProvider'
 
 export const postFetchUpdateRegistroSalud = async (
-   token,
+   userState,
    dataToSend,
    apiUrl,
    id,
@@ -11,17 +11,18 @@ export const postFetchUpdateRegistroSalud = async (
    let objetToSend = {
       _id : id,
       data: dataToSend,
+      currentYear:userState.currentYear
    }
    const url= `${baseUrl}/${apiUrl}`  
    const config = {
       headers: {                    
          "Accept": "application/json",                    
          "Content-Type": "application/json",
-         "Authorization": token                
+         "Authorization": userState.token                
       }           
    }
    try{
-      const resData = await axios.post(
+      const resData = await axios.put(
          url,
          objetToSend,
          config
@@ -34,7 +35,7 @@ export const postFetchUpdateRegistroSalud = async (
 }
 
 export const postFetchUpdateAlumno = async (
-   token,
+   userState,
    updatedData,
    apiUrl,
    id,
@@ -45,17 +46,18 @@ export const postFetchUpdateAlumno = async (
       _id : id, 
       data : updatedData,
       dataRegistro: dataRegistro,
+      currentYear:userState.currentYear
    }
    const url= `${baseUrl}/${apiUrl}`  
    const config = {
       headers: {                    
          "Accept": "application/json",                    
          "Content-Type": "application/json",
-         "Authorization": token                
+         "Authorization": userState.token                
       }           
    }
    try{
-      const resData = await axios.post(
+      const resData = await axios.put(
          url,
          objetToSend,
          config
@@ -86,7 +88,7 @@ export const postFetchUpdateUser = async (
       }           
    }
    try{
-      const resData = await axios.post(
+      const resData = await axios.put(
          url,
          objetToSend,
          config
@@ -117,7 +119,7 @@ export const postUpdateWholeDB = async (
       }           
    }
    try{
-      const resData = await axios.post(
+      const resData = await axios.put(
          url,
          objetToSend,
          config
@@ -130,25 +132,23 @@ export const postUpdateWholeDB = async (
 }
 
 export const postCopyWholeDb = async (
-   token,
-   dataDb,
+   userState,
    apiUrl,
 ) => {
-   let objetToSend = {
-      data : dataDb,
-   }
    const url= `${baseUrl}/${apiUrl}`  
    const config = {
       headers: {                    
          "Accept": "application/json",                    
          "Content-Type": "application/json",
-         "Authorization": token                
+         "Authorization": userState.token                
       }           
    }
    try{
       const resData = await axios.post(
          url,
-         objetToSend,
+         {
+            currentYear: userState.currentYear
+         },
          config
       )
       return resData
@@ -332,3 +332,31 @@ const url = `${baseUrl}/${apiUrl}`
       return(err.response)
    }
 }
+
+export const putFinCicloLectivo = async (
+   userState,
+   apiUrl,
+   dataPut,
+) => {
+const url = `${baseUrl}/${apiUrl}`
+
+   const config = {
+      headers: {                    
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": userState.token                
+      }           
+   }
+   try{
+      const resData = await axios.put(
+         url,
+         dataPut,
+         config
+      )
+      return resData
+   }
+   catch(err) {
+      return(err.response)
+   }
+}
+

@@ -23,7 +23,6 @@ app.get('/:usuario',verificarToken,(req,res) => {
 })
 
 app.delete('/delete/:id',verificarToken,(req,res) => {
-   console.log(req.params.id)
    data.findOneAndRemove({
       usuario:req.params.id
    },

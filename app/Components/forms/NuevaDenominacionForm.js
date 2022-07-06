@@ -21,7 +21,7 @@ const NuevaDenominacionForm = () => {
    const dispatch = useDispatch()
 
    const [ denominacion,setDenominacion ] = useState(''); 
-   const {Group,Label,Control,Text,Select} = Form
+   const {Label,Control} = Form
 
    return ( 
       <Container>
@@ -40,7 +40,6 @@ const NuevaDenominacionForm = () => {
                   onChange={(element)=> setDenominacion(element.target.value)}
                   value={denominacion}
                >
-                     
                </Control>
             </Col>
             <Col

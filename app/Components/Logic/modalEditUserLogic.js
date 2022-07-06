@@ -4,25 +4,45 @@ import {getFetchUsuarioSingle} from '../../hooks/getFetch.js'
 
 import {postFetchUpdateUser} from '../../hooks/postFetch'
 
-export const handleClose = (setSwitchRole,setSwitchPassword,setSwitchUsuario,setUserEditModal,setUsuariosModal,setDataUser) => {
-   setDataUser({})
-   setSwitchRole(true)
-   setSwitchPassword(true)
-   setSwitchUsuario(true)
-   setUserEditModal(false)
-   setUsuariosModal(true)
+import {
+   updateDataUser,
+   updateSwitchRole,
+   updateSwitchPassword,
+   updateSwitchUsuario,
+   updateUserEditModal,
+   updateUsuariosModal,
+} from '../../redux/actions/adminOptions.actions'
+
+export const handleClose = (
+   dispatch
+) => {
+   dispatch(updateDataUser({}))
+   dispatch(updateSwitchRole())
+   dispatch(updateSwitchUsuario())
+   dispatch(updateSwitchPassword())
+   dispatch(updateUserEditModal())
+   dispatch(updateUsuariosModal())
 }
 
-export const handleShow = (setDataUser,context,selectedUser) => {
+export const handleShow = (
+   dispatch,
+   userState,
+   selectedUser
+) => {
    getFetchUsuarioSingle(
-      context.token,
+      userState.token,
       selectedUser
    ).then((res) => 
-      setDataUser(res.data)
+      dispatch(updateDataUser(res.data))
    )
 }
 
-export const handleClickDelete = (userState,selectedUser,userDeleteUrl,setUserEditModal) => {
+export const handleClickDelete = (
+   userState,
+   selectedUser,
+   userDeleteUrl,
+   dispatch
+) => {
    deleteFetchDeleteUser(
       userState.token,
       selectedUser,
@@ -30,7 +50,7 @@ export const handleClickDelete = (userState,selectedUser,userDeleteUrl,setUserEd
    ).then((res) =>{
       if(res.status === 200){
          alert('Usuario eliminado con exito')
-         setUserEditModal(false)
+         dispatch(updateUserEditModal())
       }
    }
    ) 
@@ -43,9 +63,9 @@ export const handleClickAccept = (
    role,
    addUserRef,
    userState,
-   apiUrl,_id,
-   setUserEditModal,
-   setUsuariosModal,
+   apiUrl,
+   _id,
+   dispatch
 ) =>{
    let permissions = {}
    let dataToSend = {}
@@ -73,8 +93,8 @@ export const handleClickAccept = (
       apiUrl,_id
    ).then(res => {
          if(res.status === 200){
-            setUserEditModal(false)         
-            setUsuariosModal(true)
+            dispatch(updateUserEdiModal())
+            dispatch(updateUsuariosModal())
          }
 })
 }

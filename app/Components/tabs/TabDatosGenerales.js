@@ -19,6 +19,10 @@ import {
    splitDate
 } from '../logic/dateHandler'
 
+import {
+   checkIsSealed
+} from '../logic/matriculaLogic'
+
 import {DecodeToken} from '../logic/tokenhandler'
 
 import DatePicker,{registerLocale} from 'react-datepicker'
@@ -67,6 +71,8 @@ const TabDatosGenerales = ({
       tipoDNI
    } = useSelector(state => state.hardCodeDataReducer.hardCodeData)
 
+   const sealedDatabase = useSelector(state => state.sealedDatabaseReducer)
+
    const userState =  useSelector(state => state.authReducer)
 
    const [isValid,setIsValid] = useState(true)
@@ -89,12 +95,12 @@ const TabDatosGenerales = ({
                   ref={(element) => modalEditRef.current[3] = element}
                >
                   <option 
-                     value={dataAlumno.tipo}
+                     value={dataAlumno?.tipo}
                   >
-                     {dataAlumno.tipo}
+                     {dataAlumno?.tipo}
                   </option>
                   {tipoDNI.map((dataMap)=> 
-                     dataMap !== dataAlumno.tipo ? 
+                     dataMap !== dataAlumno?.tipo ? 
                         <option 
                            key={dataMap} 
                            value={dataMap}
@@ -414,7 +420,8 @@ const TabDatosGenerales = ({
             <Col
                className='mt-3 d-flex justify-content-end'
             >
-               {DecodeToken(userState).usuario.permissions.editarMatricula ?
+               {
+               DecodeToken(userState).usuario.permissions.editarMatricula &&  !checkIsSealed(sealedDatabase,dataAlumno.nivel)?
                switchEdit ?
                   <Button
                      variant='outline-success'

@@ -16,60 +16,59 @@ import {
    handleClickAccept,
 } from '../logic/modalEditUserLogic' 
 
+import {
+   updateRole,
+   updateUser,
+   updatePassword,
+   updateSwitchRole,
+   updateSwitchUsuario,
+   updateSwitchPassword,
+} from '../../redux/actions/adminOptions.actions'
+
 import {userDeleteUrl} from '../../helpers/Urls'
 
 import Permissions from '../forms/PermissionsForm'
 
-import {updateUser} from '../../helpers/Urls.js' 
+import {updateUserUrl} from '../../helpers/Urls.js' 
 
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 
 const ModalEditUser = ({
-   userEditModal,
-   setUserEditModal,
-   setUsuariosModal,
-   selectedUser,
-   setSwitchCalificacionesLeer,
-   switchCalificacionesLeer,
-   setSwitchCalificacionesEditar,
-   switchCalificacionesEditar,
-   switchAsistencia,
-   setSwitchAsistencia,
-   reRender,
-   setReRender,
    addUserRef,
-   isNewUser,
 }) => { 
 
-   const [dataUser,setDataUser] = useState({})
-   const [switchUsuario,setSwitchUsuario] = useState(true)
-   const [switchPassword,setSwitchPassword] = useState(true)
-   const [switchRole,setSwitchRole] = useState(true)
-   const [user,setUser] = useState(null)
-   const [password,setPassword] = useState(null)
-   const [role,setRole] = useState(null)
+   const {
+      dataUser,
+      userEditModal,
+      selectedUser,
+      switchUsuario,
+      switchPassword,
+      switchRole,
+      user,
+      password,
+      role,
+   } = useSelector(state => state.adminOptionsReducer)
 
    const userState = useSelector(state => state.authReducer)
+
    const hardCodeData =  useSelector(state => state.hardCodeDataReducer.hardCodeData)
 
+   const dispatch =  useDispatch()
+
    useEffect(()=>{
-      setUser(dataUser.usuario)
-      setRole(dataUser.role)
+      dispatch(updateUser(dataUser.usuario))
+      dispatch(updateRole(dataUser.role))
    },[dataUser.usuario,dataUser.role])
+
    return ( 
       <Modal 
          show={userEditModal} 
          onHide={()=> handleClose(
-            setSwitchRole,
-            setSwitchPassword,
-            setSwitchUsuario,
-            setUserEditModal,
-            setUsuariosModal,
-            setDataUser
+            dispatch
          )} 
          onShow={()=> {
             handleShow(
-               setDataUser,
+               dispatch,
                userState,
                selectedUser
             )
@@ -117,12 +116,12 @@ const ModalEditUser = ({
                               placeholder={dataUser?.usuario}
                               aria-label="usuario"
                               readOnly={switchUsuario}
-                              onChange={(element)=>setUser(element.target.value)}
+                              onChange={(element)=>dispatch(updateUser(element.target.value))}
                            />
                            <Button 
                               size='sm'
                               variant="outline-secondary" 
-                              onClick={()=> setSwitchUsuario(false)}
+                              onClick={()=> dispatch(updateSwitchUsuario())}
                            >
                               Editar
                            </Button>
@@ -138,12 +137,12 @@ const ModalEditUser = ({
                               size='sm'
                               placeholder={'Ingrese nuevo password'}
                               readOnly={switchPassword}
-                              onChange={(element)=>setPassword(element.target.value)}
+                              onChange={(element)=>dispatch(updatePassword(element.target.value))}
                            />
                            <Button 
                               size='sm'
                               variant="outline-secondary" 
-                              onClick={()=> setSwitchPassword(false)}
+                              onClick={()=> dispatch(updateSwitchPassword())}
                            >
                               Editar
                            </Button>
@@ -158,7 +157,7 @@ const ModalEditUser = ({
                               size='sm'
                               placeholder={dataUser?.role}
                               disabled={switchRole}
-                              onChange={(element)=>setRole(element.target.value)}
+                              onChange={(element)=>dispatch(updateRole(element.target.value))}
                            >
                               <option 
                                  value={dataUser.role}
@@ -180,7 +179,7 @@ const ModalEditUser = ({
                            <Button 
                               size='sm'
                               variant="outline-secondary" 
-                              onClick={()=> setSwitchRole(false)}
+                              onClick={()=> dispatch(updateSwitchRole())}
                            >
                               Editar
                            </Button>
@@ -199,7 +198,7 @@ const ModalEditUser = ({
                            userState,
                            selectedUser,
                            userDeleteUrl,
-                           setUserEditModal
+                           dispatch
                         )}
                      >
                         Eliminar Usuario
@@ -208,18 +207,7 @@ const ModalEditUser = ({
                </Row>
                <Row>
                      <Permissions
-                        dataUser={dataUser}
-                        switchAsistencia={switchAsistencia}
-                        reRender={reRender}
-                        setReRender={setReRender}
                         addUserRef={addUserRef}
-                        switchAsistencia={switchAsistencia}
-                        setSwitchAsistencia={setSwitchAsistencia}
-                        setSwitchCalificacionesLeer={setSwitchCalificacionesLeer}
-                        switchCalificacionesLeer={switchCalificacionesLeer}
-                        switchCalificacionesEditar={switchCalificacionesEditar}
-                        setSwitchCalificacionesEditar={setSwitchCalificacionesEditar}
-                        isNewUser={isNewUser}
                      />
                </Row>
             </Container>
@@ -239,10 +227,9 @@ const ModalEditUser = ({
                         role,
                         addUserRef,
                         userState,
-                        updateUser,
+                        updateUserUrl,
                         dataUser._id,
-                        setUserEditModal,
-                        setUsuariosModal
+                        dispatch
                      )}
                      >
                         Aceptar cambios

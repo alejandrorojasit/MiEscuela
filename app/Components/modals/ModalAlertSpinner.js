@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux'
 
 import LoadingSpinner from '../spinners/LoadingSpinner'
 
-const ModalAlertSpinner = ({message}) => { 
+const ModalAlertSpinner = () => { 
 
    const modalAlertState = useSelector(state => state.modalAlertSpinnerReducer)
 
@@ -26,7 +26,7 @@ const ModalAlertSpinner = ({message}) => {
          <Footer
             className='d-flex justify-content-center'
          >
-               {message}
+            {modalAlertState.message}
          </Footer>
       </Modal>
    )

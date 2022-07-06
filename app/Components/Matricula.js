@@ -12,7 +12,9 @@ import LoadingSpinner from './spinners/LoadingSpinner'
 import ModalConfirmUpdateData from './modals/ModalConfirmUpdateData'
 
 import {
-   Container
+   Container,
+   Row,
+   Col
 } from 'react-bootstrap'
 
 import {getMatriculaActivo} from '../hooks/getFetch.js'
@@ -47,6 +49,13 @@ const Matricula = () => {
             <Container
                className='border border-success p-3 mb-3'
             >
+               <Row>
+                  <Col
+                     className='d-flex justify-content-center h1'
+                  >
+                     Matricula año {userState.currentYear}
+                  </Col>
+               </Row>
                <ModalEditAlumno/>
                <ModalEditRegistroSalud/>
                <ModalEditObservaciones/>

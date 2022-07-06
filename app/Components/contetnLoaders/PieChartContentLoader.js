@@ -5,8 +5,8 @@ const PieChartContentLoader = () => (
       speed={2}
       height={400}
       width='100%'
-      backgroundColor="#f3f3f3"
-      foregroundColor="#ecebeb"
+      backgroundColor="#bfbfbf"
+      foregroundColor="#8e8e8e"
    >
       <circle cx="250" cy="200" r="125" /> 
       <rect x="120" y="40" rx="0" ry="0" width="250" height="10" /> 

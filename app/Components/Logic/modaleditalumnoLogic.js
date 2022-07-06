@@ -27,10 +27,8 @@ export const handleUpdateData = (
    fechaEgreso,
    dispatch
 ) => {
-   console.log(fechaIngreso)
    let newDataAlumno = {}
    let changedData = {}
-   console.log(modalEditRef)
    for(let i = 0 ; i < Object.keys(dataAlumno).length ; i ++){
       if(modalEditRef.current[i] !== undefined){
          newDataAlumno = {...newDataAlumno , [Object.keys(dataAlumno)[i]] : modalEditRef.current[i].value}
@@ -39,15 +37,11 @@ export const handleUpdateData = (
             }
       }
    }
-   console.log(dataAlumno)
-   console.log('Fecha de ingreso' + fechaIngreso)
-   console.log('Fecha de egreso' + fechaEgreso)
    newDataAlumno = {...newDataAlumno, 
       fechaNacimiento: createStringDate(fechaNacimiento),
-      ingreso: fechaIngreso === '' ? 'Sin datos' : createStringDate(fechaIngreso),
-      egreso: fechaEgreso === '' ? 'Sin datos' : createStringDate(fechaEgreso),
+      ingreso: fechaIngreso === '' ? '' : createStringDate(fechaIngreso),
+      egreso: fechaEgreso === '' ? '' : createStringDate(fechaEgreso),
    }
-   console.log(newDataAlumno)
 
    for (let i = 0 ; i < Object.keys(dataAlumno).length ; i ++){
       Object.values(dataAlumno)[i].toString() !== Object.values(newDataAlumno)[i].toString() ?

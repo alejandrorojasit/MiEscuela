@@ -1,5 +1,3 @@
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import {
    Container, 
    Row
@@ -8,15 +6,15 @@ import {
 const NotFoundPage = () => {
    return (
       <Container 
+         style={{fontFamily:'Droid Sans'}}
          fluid
       >
          <Row>
          </Row>
          <Row>
-            <h1>Not Found Page</h1>
+            asdfasdfasdfasdf
          </Row>
          <Row>
-            <Footer/>
          </Row>
       </Container>
    )

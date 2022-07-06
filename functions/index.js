@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const path = require('path')
 const cors = require('cors')
 
-const {mongoose} = require('./database');
+const db = require('./database');
 
 const app = express();
 
@@ -21,5 +21,6 @@ app.use('/api/verifyToken',require('./routes/verify.routes'))
 app.use('/api/hardCodeData',require('./routes/hardCodeData.routes'))
 app.use('/api/municipiosArg',require('./routes/municipiosArg.routes'))
 app.use('/api/callesArg',require('./routes/callesArg.routes'))
+app.use('/api/sealedDatabase',require('./routes/sealedDatabase.routes'))
 
 exports.app = functions.https.onRequest(app)

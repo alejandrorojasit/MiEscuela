@@ -1,6 +1,12 @@
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
+
 import {Chart} from 'react-google-charts'
-import {getMatriculaActivo} from '../../hooks/getFetch'
+
+import {
+   getMatriculaActivo,
+   getSealedDatabaseSingle,
+} from '../../hooks/getFetch'
+
 import {
    Container,
    Col,
@@ -18,20 +24,53 @@ import {
    updateAlumnoFullList
 } from '../../redux/actions/matricula.action'
 
+import ModalAlert from '../modals/ModalAlert'
+
+import {setCurrentYear} from '../../redux/actions/autentication.action'
+
+import {
+   sealedDatabase_updateWholeState
+} from '../../redux/actions/sealedDatabase.action'
+
+import {
+   modalAlert_updateModel,
+   modalAlert_updateMessage,
+   modalAlert_updateStateShow,
+   modalAlert_updateCallBack,
+} from '../../redux/actions/modalAlert.action'
+
 const ChartsPannelHomePage = () => { 
 
    const dispatch =  useDispatch()
 
    const userState = useSelector(state => state.authReducer)
 
-   const {alumnosFullList} =  useSelector(state => state.matriculaReducer)
+   const {alumnosFullList} = useSelector(state => state.matriculaReducer)
 
    useEffect(async ()=>{
-      const res = await getMatriculaActivo(userState.token) 
-      if(res.status === 200){
+      const res = await getMatriculaActivo(
+         userState.token,
+         userState.currentYear
+      ) 
+      switch(res.status){
+         case 200:
+            dispatch(updateAlumnoFullList(res.data))
+            const sealedDatabaseData = await getSealedDatabaseSingle(userState)
+            dispatch(sealedDatabase_updateWholeState(sealedDatabaseData.data))
+            break
+         case 404:
+            dispatch(modalAlert_updateModel('Alert'))
+            dispatch(modalAlert_updateCallBack(
+               ()=>dispatch(setCurrentYear(userState.currentYear - 1))
+            ))
+            dispatch(modalAlert_updateMessage(`${res.data}. Se volvera a la base de datos del año anterior, los coordinadores administrativos de los sectores Inicial, Primario y Secundario deberan realizar el fin de ciclo lectivo para dejar lista la base de datos para realizar la copia para el nuevo ciclo lectivo`))
+            dispatch(modalAlert_updateStateShow())
+            break
+         default:
          dispatch(updateAlumnoFullList(res.data))
+         break
       }
-   },[])
+   },[userState.currentYear])
 
    const varonesMatriculaCompleta = alumnosFullList.filter((valor)=> valor.sexo === "Masculino")
 
@@ -95,6 +134,18 @@ const ChartsPannelHomePage = () => {
 
    return ( 
       <>
+         <Row>
+            <Col>
+               <ModalAlert/>
+            </Col>
+         </Row>
+         <Row>
+            <Col
+               className='d-flex justify-content-center h1'
+            >
+               Matricula año {userState.currentYear}
+            </Col>
+         </Row>
          <Row
          >
             <Col
@@ -137,7 +188,6 @@ const ChartsPannelHomePage = () => {
             >
                {
                alumnosFullList.length === 0 ?
-
                   <PieChartContentLoader/>
                   :
                   <Chart
@@ -166,7 +216,7 @@ const ChartsPannelHomePage = () => {
             }
             </Col>
          </Row>
-      </>
+         </>
    )
 }
 

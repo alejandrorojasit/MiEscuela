@@ -1,7 +1,3 @@
-import Header from '../components/Header'
-import Menu from '../components/Menu'
-import Footer from '../components/Footer'
-
 import {
    Container,
    Col,
@@ -11,6 +7,7 @@ import {
 const ForbiddenPage = () => {
    return(
       <Container 
+         style={{fontFamily:'Droid Sans'}}
       >
          <Row>
          </Row>
@@ -18,12 +15,11 @@ const ForbiddenPage = () => {
             <Menu/>
          </Row>
          <Row>
-            <h1>
-               Ud no tiene autorizacion para esta pagina
-            </h1>
+            <Col>
+               asdfasdfasdfasdf
+            </Col>
          </Row>
          <Row>
-            <Footer/>
          </Row>
       </Container>
          

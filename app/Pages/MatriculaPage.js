@@ -11,9 +11,11 @@ const MatriculaPage = () => {
    
    return (
       <Container 
+         style={{fontFamily:'Droid Sans'}}
          fluid
       >
          <Row>
+            
          </Row>
          <Row>
             <Menu/>

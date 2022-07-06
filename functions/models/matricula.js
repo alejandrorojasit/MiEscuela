@@ -3,10 +3,10 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const matriculaSchema = new Schema({
-   estado:              { type: String,require:true},
-   nDniAlumno:          { type: String,require:true},
-   tipo:                { type: String, require:true},
-   apellido:            { type: String, require:true},
+   estado:              { type:String,require:true},
+   nDniAlumno:          { type:String,require:true},
+   tipo:                { type:String,require:true},
+   apellido:            { type:String,require:true},
    nombre:              { type:String,require:true},
    sexo:                { type:String,require:true},
    fechaNacimiento:     { type:String,require:true},
@@ -23,9 +23,9 @@ const matriculaSchema = new Schema({
    provincia:           { type:String,require:true},
    telFijo:             { type:String,require:true},
    telCelular:          { type:String,require:true},
-   nivel:               { type: String, require:true},
-   grado:               { type: Number,require:true},
-   division:            { type: String, require:true},
+   nivel:               { type:String,require:true},
+   grado:               { type:Number,require:true},
+   division:            { type:String,require:true},
    denominacion:        { type:String,require:true},
    apellidoTutor:       { type:String,require:true},
    nombreTutor:         { type:String,require:true},
@@ -54,15 +54,15 @@ const matriculaSchema = new Schema({
    nombreTutor2:        { type:String,require:true},
    dniTutor2:           { type:String,require:true},
    profesionTutor2:     { type:String,require:true},
-   relacionTutor2:      {type:String,require:true},
+   relacionTutor2:      { type:String,require:true},
    calle2:              { type:String,require:true},
    nro2:                { type:String,require:true},
    barrio2:             { type:String,require:true},
    localidad2:          { type:String,require:true},
    provincia2:          { type:String,require:true},
    telFijo2:            { type:String,require:true},
-   telCelular2:          { type:String,require:true},
+   telCelular2:         { type:String,require:true},
    emailTutor2:         { type:String,require:true},
-},{collection: 'Matricula'});
+},{collection: '2022'});
 
-module.exports = mongoose.model('Matricula', matriculaSchema)
+module.exports = mongoose.model('2022', matriculaSchema)

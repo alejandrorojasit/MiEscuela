@@ -1,20 +1,76 @@
-import {Modal,Button} from 'react-bootstrap'
+import {
+   Modal,
+   Button
+} from 'react-bootstrap'
+
+import {
+   useSelector,
+   useDispatch,
+} from 'react-redux'
+
+import {
+   modalAlert_updateStateShow,
+} from '../../redux/actions/modalAlert.action'
+
+import LoadingSpinner from '../spinners/LoadingSpinner'
 
 const ModalAlert = ({
-   stateShow,
-   setStateShow,
-   message,
-   type,
-   callBack
 }) => { 
 
+   const dispatch = useDispatch()
+
+   const {
+      model,
+      message,
+      stateShow,
+      callBack,
+   } = useSelector(state => state.modalAlertReducer)
+
+   const conditionalRenderingButton = (model) => {
+      switch(model){
+         case "AcceptCancel":
+            return (
+               <>
+                  <Button
+                     variant='outline-success'
+                     size='sm'
+                     onClick={()=> handleAccept()}
+                  >
+                     Aceptar 
+                  </Button>
+                  <Button
+                     variant='outline-success'
+                     size='sm'
+                     onClick={()=> handleCancel()}
+                  >
+                     Cancelar 
+                  </Button>
+                  </>
+            ) 
+         case "Alert":
+            return (
+               <Button
+                  variant='outline-success'
+                  size='sm'
+                  onClick={()=> handleAccept()}
+               >
+                  Aceptar 
+               </Button>
+            )
+         case "Spinner":
+         return (
+            <LoadingSpinner/>
+            )
+      }
+   }
+
    const handleCancel = () => {
-      setStateShow(false)
+      dispatch(modalAlert_updateStateShow())
       callBack(false)
    }
 
    const handleAccept = () => {
-      setStateShow(false)
+      dispatch(modalAlert_updateStateShow())
       callBack(true)
    }
    return ( 
@@ -31,34 +87,8 @@ const ModalAlert = ({
          </Modal.Body>
          <Modal.Footer>
             {
-               type === 'AcceptCancel' ?
-                  <>
-                     <Button
-                        variant='outline-success'
-                        size='sm'
-                        onClick={()=> handleAccept()}
-                     >
-                        Aceptar 
-                     </Button>
-                     <Button
-                        variant='outline-success'
-                        size='sm'
-                        onClick={()=> handleCancel()}
-                     >
-                        Cancelar 
-                     </Button>
-                  </>
-                  :
-                  <>
-                     <Button
-                        variant='outline-success'
-                        size='sm'
-                        onClick={()=> handleAccept()}
-                     >
-                        Aceptar 
-                     </Button>
-                  </>
-            }
+            conditionalRenderingButton(model)
+         }
          </Modal.Footer>
       </Modal>
    )

@@ -11,7 +11,7 @@ import {
 } from '../logic/dateHandler'
 
 import {
-handleEdit,
+   handleEdit,
 } from '../logic/matriculaLogic'
 
 import {FaUserEdit} from 'react-icons/fa'
@@ -48,11 +48,11 @@ const TableAlumnosMatricula = ({
                className='d-flex justify-content-center text-danger'
             >
                {
-                  !isFiltredStage2 ? 
-                     filtredDatosAlumnoStage1.length 
-                     :
-                     filtredDatosAlumnoStage2.length
-               }
+               !isFiltredStage2 ? 
+                  filtredDatosAlumnoStage1.length 
+                  :
+                  filtredDatosAlumnoStage2.length
+            }
             </Col>
          </Row>
          <Row 
@@ -84,76 +84,76 @@ const TableAlumnosMatricula = ({
                   </thead>
                   <tbody>
                      {
-                        !isFiltredStage2 ? 
-                           filtredDatosAlumnoStage1.map(
-                              (dataMap) =>
-                                 <tr 
-                                    key={dataMap._id}
-                                 >
-                                    <th>
-                                       <Button 
-                                          variant='outline-success'
-                                          onClick={()=> handleEdit(
-                                             dataMap._id,
-                                             dispatch,
-                                             userState
-                                          )}
-                                       >
-                                          <FaUserEdit/>
-                                       </Button>
-                                    </th>
-                                    <th>{dataMap.nombre}</th>
-                                    <th>{dataMap.apellido}</th>
-                                    <th>{dataMap.nDniAlumno}</th>
-                                    <th>{dataMap.nivel}</th>
-                                    <th>{dataMap.grado}</th>
-                                    <th>{dataMap.division}</th>
-                                    <th>{
-                                          ageCalculate3006(
-                                             splitDate(
-                                                dataMap.fechaNacimiento,
-                                                3
-                                             ))}
-                                    </th>
-                                 </tr>
-                           ):
-                           filtredDatosAlumnoStage2.map(
-                              (dataMap) =>
-                                 <tr 
-                                    key={dataMap._id}
-                                 >
-                                    <th>
-                                       <Button 
-                                          variant='outline-success'
-                                          onClick={()=> handleEdit(
-                                             dataMap._id,
-                                             dispatch,
-                                             userState
-                                          )}
-                                       >
-                                          <FaUserEdit/>
-                                       </Button>
-                                    </th>
-                                    <th>{dataMap.nombre}</th>
-                                    <th>{dataMap.apellido}</th>
-                                    <th>{dataMap.nDniAlumno}</th>
-                                    <th>{dataMap.nivel}</th>
-                                    <th>{dataMap.grado}</th>
-                                    <th>{dataMap.division}</th>
-                                    <th>{
-                                       ageCalculate3006(
-                                          splitDate(
-                                             dataMap.fechaNacimiento,
-                                             3
+                     !isFiltredStage2 ? 
+                        filtredDatosAlumnoStage1.map(
+                           (dataMap) => 
+                              <tr 
+                                 key={dataMap._id}
+                              >
+                                 <th>
+                                    <Button 
+                                       variant='outline-success'
+                                       onClick={()=> handleEdit(
+                                          dataMap.nDniAlumno,
+                                          dispatch,
+                                          userState,
+                                       )}
+                                    >
+                                       <FaUserEdit/>
+                                    </Button>
+                                 </th>
+                                 <th>{dataMap.nombre}</th>
+                                 <th>{dataMap.apellido}</th>
+                                 <th>{dataMap.nDniAlumno}</th>
+                                 <th>{dataMap.nivel}</th>
+                                 <th>{dataMap.grado}</th>
+                                 <th>{dataMap.division}</th>
+                                 <th>{
+                                    ageCalculate3006(
+                                       splitDate(
+                                          dataMap.fechaNacimiento,
+                                          3
                                        ))}
-                                    </th>
-                                 </tr>
-                           )}   
+                                 </th>
+                              </tr>
+                        ):
+                        filtredDatosAlumnoStage2.map(
+                           (dataMap) =>
+                              <tr 
+                                 key={dataMap._id}
+                              >
+                                 <th>
+                                    <Button 
+                                       variant='outline-success'
+                                       onClick={()=> handleEdit(
+                                          dataMap.nDniAlumno,
+                                          dispatch,
+                                          userState
+                                       )}
+                                    >
+                                       <FaUserEdit/>
+                                    </Button>
+                                 </th>
+                                 <th>{dataMap.nombre}</th>
+                                 <th>{dataMap.apellido}</th>
+                                 <th>{dataMap.nDniAlumno}</th>
+                                 <th>{dataMap.nivel}</th>
+                                 <th>{dataMap.grado}</th>
+                                 <th>{dataMap.division}</th>
+                                 <th>{
+                                    ageCalculate3006(
+                                       splitDate(
+                                          dataMap.fechaNacimiento,
+                                          3
+                                       ))}
+                                 </th>
+                              </tr>
+                        )}   
                   </tbody>
                </Table>
             </Col>
          </Row>
-      </>
+         </>
    )
 }
 

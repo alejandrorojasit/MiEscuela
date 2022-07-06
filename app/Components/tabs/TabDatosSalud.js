@@ -8,6 +8,10 @@ import {
 } from 'react-bootstrap'
 
 import {
+   checkIsSealed
+} from '../logic/matriculaLogic'
+
+import {
    handleUpdateData,
    handleSwitchEdit,
 } from '../logic/modaleditalumnoLogic.js' 
@@ -43,6 +47,8 @@ const TabDatosSalud = ({
       fechaEgreso,
       updatedData,
    } = useSelector(state => state.modalEditAlumnoReducer)
+
+   const sealedDatabase = useSelector(state => state.sealedDatabaseReducer)
 
    return ( 
       <Container
@@ -306,18 +312,18 @@ const TabDatosSalud = ({
                   <Col>
                      <h6>Examen visual:</h6>
                      <Form.Select
-                        placeholder={dataAlumno?.examenvisual}
+                        placeholder={dataAlumno?.examenVisual}
                         aria-label="examenVisual"
                         disabled={switchEdit}
                         ref={(element) => modalEditRef.current[31] = element}
                      >
                         <option 
-                           value={dataAlumno.examenvisual}
+                           value={dataAlumno.examenVisual}
                         >
-                           {dataAlumno.examenvisual}
+                           {dataAlumno.examenVisual}
                         </option>
                         {vacunas.map((dataMap)=> 
-                           dataMap !== dataAlumno.examenvisual ? 
+                           dataMap !== dataAlumno.examenVisual ? 
                               <option 
                                  key={dataMap} 
                                  value={dataMap}
@@ -387,7 +393,8 @@ const TabDatosSalud = ({
             <Col
                className='mt-3 d-flex justify-content-end'
             >
-               {DecodeToken(userState).usuario.permissions.editarMatricula ?
+               {
+                     DecodeToken(userState).usuario.permissions.editarMatricula &&  !checkIsSealed(sealedDatabase,dataAlumno.nivel)?
                      switchEdit ?
                         <Button
                            variant='outline-success'
@@ -428,9 +435,6 @@ const TabDatosSalud = ({
                   <thead>
                      <tr>
                         <th>
-                           #
-                        </th>
-                        <th>
                            Usuario:
                         </th>
                         <th>
@@ -446,9 +450,6 @@ const TabDatosSalud = ({
                      <tr
                         key={index}
                      >
-                        <td>
-                           {index}
-                        </td>
                         <td>
                            {dataMap?.usuario}
                         </td>
@@ -476,7 +477,7 @@ const TabDatosSalud = ({
                className='mt-1 d-flex justify-content-end'
             >
                {
-                  DecodeToken(userState).usuario.permissions.añadirRegistroSalud ?
+                  DecodeToken(userState).usuario.permissions.añadirRegistroSalud && !checkIsSealed(sealedDatabase,dataAlumno.nivel)?
                      <Button
                         variant='outline-success'
                         size='sm'

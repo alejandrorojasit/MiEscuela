@@ -20,9 +20,8 @@ import LogoEscuela from '../../assets/jpg/LogoEPAt.png'
 import {colors} from '../../helpers/styleColors'
 
 
-import 
-   ModalAlert
- from '../modals/ModalAlert'
+import ModalAlertSpinner from '../modals/ModalAlertSpinner'
+import ModalAlert from '../modals/ModalAlert'
 
 import {useDispatch,useSelector} from 'react-redux'
 
@@ -59,8 +58,10 @@ const LoginForm = () => {
 
    const dispatch = useDispatch()
    const {user,password} = useSelector(state => state.logInFormReducer)
-
-   const [stateShow,setStateShow] = useState(false)
+   const {
+      show,
+      message,
+   } = useSelector(state => state.modalAlertSpinnerReducer)
 
    return (
       <Container 
@@ -82,13 +83,8 @@ const LoginForm = () => {
             <Col
                style={{display:'flex',margin:'auto'}}
             >
-               <ModalAlert
-                  stateShow={stateShow} 
-                  setStateShow={setStateShow}
-                  message='Usuario o clave incorrecta. Por favor verifique los datos ingresados.'
-                  type=''
-                  callBack={()=>{}}
-               />
+               <ModalAlert/>
+               <ModalAlertSpinner/>
                <Form
                > 
                   <Form.Group>
@@ -140,7 +136,6 @@ const LoginForm = () => {
                            user,
                            password,
                            dispatch,
-                           setStateShow
                         )
                         }
                      }

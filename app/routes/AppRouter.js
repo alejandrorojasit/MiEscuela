@@ -1,6 +1,7 @@
 import React from 'react'
 import {
    BrowserRouter,
+   HashRouter,
    Routes,
    Route,
    Navigate
@@ -15,120 +16,130 @@ import MatriculaPage from '../pages/MatriculaPage'
 import NuevoCicloLectivoPage from '../pages/NuevoCicloLectivoPage'
 import NuevoIngresoPage from '../pages/NuevoIngresoPage'
 import NuevaDenominacionPage from '../pages/NuevaDenominacionPage'
+import FinCicloLectivoPage from '../pages/FinCicloLectivoPage'
 
-import useAuth from '../context/store/useAuth'
 import {useSelector} from 'react-redux'
 
-import {AdminRoute} from './PrivateRoute'
+import {
+   AdminRoute,
+   NuevoCicloLectivoRoute,
+} from './PrivateRoute'
 
 const AppRouter = () => {
 
    const stateUser = useSelector(state => state.authReducer)
 
    return (
-      <BrowserRouter>
+      <HashRouter>
          <Routes>
             <Route 
                path='/'
                element={ 
-                     stateUser.isAuthenticated ? 
-                        <HomePage/> 
-                        : 
-                        <Navigate 
-                           to='/LogIn'
-                        />
-               }
-            />
+               stateUser.isAuthenticated ? 
+                  <HomePage/> 
+                  : 
+                  <Navigate 
+                     to='/LogIn'
+                     />
+            }
+               />
             <Route 
                path='/Home' 
                element={ 
-                     stateUser.isAuthenticated ? 
-                        <HomePage/> 
-                        : 
-                        <Navigate 
-                           to='/LogIn'
-                        />
-               } />
+               stateUser.isAuthenticated ? 
+                  <HomePage/> 
+                  : 
+                  <Navigate 
+                     to='/LogIn'
+                     />
+            } />
             <Route 
                path='/LogIn' 
                element={ 
-                     !stateUser.isAuthenticated ? 
-                        <LogInPage/> 
-                        : 
-                        <Navigate 
-                           to='/'
-                        />
-               } 
-            />
+               !stateUser.isAuthenticated ? 
+                  <LogInPage/> 
+                  : 
+                  <Navigate 
+                     to='/'
+                     />
+            } 
+               />
             <Route 
                path='/RatificacionInscripcion'
                element={
-                     stateUser.isAuthenticated ? 
-                        <RatificacionInscripcionPage/> 
-                        : 
-                        <Navigate 
-                           to='/LogIn'
-                        />
-               }
-            />
+               stateUser.isAuthenticated ? 
+                  <RatificacionInscripcionPage/> 
+                  : 
+                  <Navigate 
+                     to='/LogIn'
+                     />
+            }
+               />
             <Route 
                path='/Matricula'
                element={
-                     stateUser.isAuthenticated ? 
-                        <MatriculaPage/> 
-                        : 
-                        <Navigate 
-                           to='/LogIn'
-                        />
-               }
-            />
+               stateUser.isAuthenticated ? 
+                  <MatriculaPage/> 
+                  : 
+                  <Navigate 
+                     to='/LogIn'
+                     />
+            }
+               />
             <Route 
                path='/NuevoIngreso'
                element={
-                     stateUser.isAuthenticated ? 
-                        <NuevoIngresoPage/> 
-                        : 
-                        <Navigate 
-                           to='/LogIn'
-                        />
-               }
-            />
+               stateUser.isAuthenticated ? 
+                  <NuevoIngresoPage/> 
+                  : 
+                  <Navigate 
+                     to='/LogIn'
+                     />
+            }
+               />
             <Route 
                path='/NuevaDenominacion'
                element={
-                     stateUser.isAuthenticated ? 
-                        <NuevaDenominacionPage/> 
-                        : 
-                        <Navigate 
-                           to='/LogIn'
-                        />
-               }
-            />
+               stateUser.isAuthenticated ? 
+                  <NuevaDenominacionPage/> 
+                  : 
+                  <Navigate 
+                     to='/LogIn'
+                     />
+            }
+               />
             <Route
                path='/NuevoCicloLectivo'
                element={
-                  stateUser.isAuthenticated ? 
-                     <NuevoCicloLectivoPage/>
-                     :
-                     <Navigate 
-                  to='/LogIn'
-                     />
-               }
-            />
+               <NuevoCicloLectivoRoute>
+                  <NuevoCicloLectivoPage/>
+               </NuevoCicloLectivoRoute>
+            }
+               />
             <Route
                path='/AdminPannel' 
                element={
-                  <AdminRoute>
-                     <AdminPannelPage/>
-                  </AdminRoute>
-               }
+               <AdminRoute>
+                  <AdminPannelPage/>
+               </AdminRoute>
+            }
             >
             </Route>
+            <Route
+               path='/FinCicloLectivo'
+               element={
+                  <NuevoCicloLectivoRoute>
+                     <FinCicloLectivoPage/>
+                  </NuevoCicloLectivoRoute>
+               
+            }
+            >
+            </Route> 
             <Route 
                path='/Forbidden' 
-               component={ForbiddenPage}/>
+               element={ForbiddenPage}/>
          </Routes>
-      </BrowserRouter>
+      </HashRouter>
    )
 }
 

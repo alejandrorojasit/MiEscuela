@@ -9,7 +9,49 @@ import {
    hardCodeData,
    municipiosArgUrl,
    callesArgUrl,
+   currentYear,
+   sealedDatabaseSingle,
 } from '../helpers/Urls'
+
+export const getSealedDatabaseSingle = async (
+   userState
+) => {
+
+   const config = {
+      headers: {
+         "Accept": "application/json",                    
+         "Content-Type": "application/json",
+         "Authorization": userState.token                
+      }
+   }
+
+   const url = `${baseUrl}/${sealedDatabaseSingle}/${userState.currentYear}`
+
+   try{
+      const dataRes = await axios.get(
+         url,
+         config
+      )
+      return dataRes
+   }
+   catch(err){
+      return err.response
+   }
+}
+
+export const getCurrentYear = () => {
+
+   const url = `${baseUrl}/${currentYear}`
+
+   try{
+      const dataRes = axios.get(url)
+      return dataRes
+   }
+   catch(err){
+      return err.response
+   }
+
+}
 
 export const getFetchCallesArg =  async (
    token,
@@ -90,7 +132,7 @@ export const getFetchUsuarios = async (token) => {
 
 export const getFetchUsuarioSingle = async (
    token,
-   usuario
+   usuario,
 ) => {
 
    const config = {
@@ -116,6 +158,7 @@ const dataRes = await axios.get(
 
 export const getMatriculaActivo = async (
    token,
+   currentYear
 ) => {
    const config = {
       headers: {                    
@@ -124,7 +167,7 @@ export const getMatriculaActivo = async (
          "Authorization": token                
       }           
    } 
-   const url= `${baseUrl}/${matriculaUrlActivo}` 
+   const url= `${baseUrl}/${matriculaUrlActivo}/${currentYear}` 
    try{
    const dataRes = await axios.get(
       url,
@@ -140,6 +183,7 @@ export const getMatriculaActivo = async (
 
 export const getMatriculaCompleta = async (
    token,
+   currentYear
 ) => {
    const config = {
       headers: {                    
@@ -148,7 +192,7 @@ export const getMatriculaCompleta = async (
          "Authorization": token                
       }           
    } 
-   const url= `${baseUrl}/${matriculaUrlCompleta}` 
+   const url= `${baseUrl}/${matriculaUrlCompleta}/${currentYear}` 
    try{
    const dataRes = await axios.get(
       url,
@@ -186,15 +230,18 @@ export const getMatriculaBaja = async (
    }
 }
 
-export const getMatriculaSingle = async (token,DNI) => {
+export const getMatriculaSingle = async (
+   userState,
+   nDniAlumno,
+) => {
    const config = {
       headers: {                    
          "Accept": "application/json",                    
          "Content-Type": "application/json",
-         "Authorization": token                
+         "Authorization": userState.token                
       }           
    } 
-   const url= `${baseUrl}/${matriculaUrlSingle}/${DNI}` 
+   const url= `${baseUrl}/${matriculaUrlSingle}/${nDniAlumno}/${userState.currentYear}` 
    try{
    const dataRes = await axios.get(
       url,

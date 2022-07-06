@@ -1,15 +1,23 @@
 import {postFetchAddUser} from '../../hooks/postFetch.js'
 
-export const handleClickRole = (item,setRole)=>{
-      setRole(item)
+import {
+   updateUser,
+   updatePassword,
+   updateRole,
+   updateAddUserModal,
+   updateUsuariosModal,
+} from '../../redux/actions/adminOptions.actions'
+
+export const handleClickRole = (item,dispatch)=>{
+   dispatch(updateRole(item))
    }
 
-export const handleChangeUser = (event,setUsuario)=> {
-      setUsuario(event.target.value);
+export const handleChangeUser = (event,dispatch)=> {
+   dispatch(updateUser(event.target.value))
    }
 
-export const handleChangePassowrd = (event,setPassword)=> {
-      setPassword(event.target.value)
+export const handleChangePassowrd = (event,dispatch)=> {
+      dispatch(updatePassword(event.target.value))
    }
 
 export const handleClick = (
@@ -18,8 +26,7 @@ export const handleClick = (
    password,
    role,
    addUserUrl,
-   setAddUserModal,
-   setUsuariosModal,
+   dispatch,
    addUserRef
 )=>{
    let permissions = {
@@ -35,17 +42,20 @@ export const handleClick = (
          permissions,
          addUserUrl
       ).then(res => {
-         console.log(res)
          if(res.status === 200) {
-            setAddUserModal(false)
-            setUsuariosModal(true)
+            dispatch(updateAddUserModal())
+            dispatch(updateUsuariosModal())
          }else {
             alert(res.data.err.message)
          }
       })
    }
 
-export const handleSwitchCheckbox = (checkboxBoolean1,checkboxBoolean2,setFunctionToSwitch) =>{
+export const handleSwitchCheckbox = (
+   checkboxBoolean1,
+   checkboxBoolean2,
+   setFunctionToSwitch
+) =>{
    switch(true){
       case checkboxBoolean1 || checkboxBoolean2 === true :
          setFunctionToSwitch(false)

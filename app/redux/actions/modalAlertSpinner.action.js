@@ -1,7 +1,14 @@
-export const SHOW_HIDE = "SHOW_HIDE"
+export const UPDATE_STATESHOW = "UPDATE_STATESHOW"
+export const UPDATE_MESSAGE = "UPDATE_MESSAGE"
 
-export const showHideAlert = () => {
+export const modalAlertSpinner_updateMessage = (payload) => {
    return {
-      type: SHOW_HIDE
+      type: UPDATE_MESSAGE,
+      payload
+   }
+}
+export const modalAlertSpinner_updateStateShow = () => {
+   return {
+      type: UPDATE_STATESHOW
    }
 } 

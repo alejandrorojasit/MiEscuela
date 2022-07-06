@@ -20,7 +20,7 @@ export const handleClickAccept = (
    dispatch
 ) => {
    postFetchUpdateAlumno(
-      userState.token,
+      userState,
       updatedData,
       apiUrl,
       id,

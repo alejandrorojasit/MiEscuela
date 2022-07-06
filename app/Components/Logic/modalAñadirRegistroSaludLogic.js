@@ -19,7 +19,7 @@ export const handleClickAñadir = (
    }
    
    postFetchUpdateRegistroSalud(
-      userState.token,
+      userState,
       dataToSend,
       updateRegistroSaludUrl,
       dataAlumno

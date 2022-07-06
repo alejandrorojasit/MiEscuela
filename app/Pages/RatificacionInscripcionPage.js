@@ -8,6 +8,7 @@ import Ratificacion from '../components/Ratificacion'
 const RatificacionInscripcionPage = () => {
    return (
       <Container 
+         style={{fontFamily:'Droid Sans'}}
       >
          <Row>
          </Row>

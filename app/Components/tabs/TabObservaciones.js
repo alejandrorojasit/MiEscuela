@@ -21,6 +21,10 @@ import {
    show_ModalEditObservaciones
 } from '../../redux/actions/modalEditAlumno.action'
 
+import {
+   checkIsSealed
+} from '../logic/matriculaLogic'
+
 const TabObservaciones = ({
 }) => { 
 
@@ -32,7 +36,9 @@ const TabObservaciones = ({
       dataAlumno
    } = useSelector(state => state.matriculaReducer)
 
-   const hardCodeData =  useSelector (state => state.hardCodeDataReducer.hardCodeData)
+   const hardCodeData =  useSelector(state => state.hardCodeDataReducer.hardCodeData)
+
+   const sealedDatabase =  useSelector(state => state.sealedDatabaseReducer)
 
    const [filtredData,setFiltredData] = useState([]) 
 
@@ -48,15 +54,16 @@ const TabObservaciones = ({
             <Col
                className='mt-2 d-flex justify-content-start'
             >
-               {DecodeToken(userState).usuario.permissions.añadirObservaciones ?
+               {
+               DecodeToken(userState).usuario.permissions.añadirObservaciones && !checkIsSealed(sealedDatabase,dataAlumno.nivel)?
                   <Button
                      variant='outline-success'
                      size='sm'
                      onClick={() => dispatch(show_ModalEditObservaciones())}
                   >Añadir Observacion</Button> 
                   :
-                     null
-               }
+                  null
+            }
             </Col> 
             <Col
                className='mt-2 d-flex justify-content-center'
@@ -141,9 +148,6 @@ const TabObservaciones = ({
                   <thead>
                      <tr>
                         <th>
-                           #
-                        </th>
-                        <th>
                            Usuario:
                         </th>
                         <th>
@@ -159,47 +163,44 @@ const TabObservaciones = ({
                   </thead>
                   <tbody>
                      {
-                        filtredData?.filter(dataFilter => 
-                              dataFilter.puesto === 'Auxiliar Sec. Administrativo/a' && DecodeToken(userState).usuario.permissions.filterSecretariaAdministrativa
+                     filtredData?.filter(dataFilter => 
+                        dataFilter.puesto === 'Auxiliar Sec. Administrativo/a' && DecodeToken(userState).usuario.permissions.filterSecretariaAdministrativa
                            ||
-                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Inicial' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
+                           dataFilter.puesto === 'Coordinacion Pedagogica Nivel Inicial' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
                            ||
-                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Primario' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
+                           dataFilter.puesto === 'Coordinacion Pedagogica Nivel Primario' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
                            ||
-                              dataFilter.puesto === 'Coordinacion Pedagogica Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
+                           dataFilter.puesto === 'Coordinacion Pedagogica Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterCoordinacionPedagogica
                            ||
-                              dataFilter.puesto === 'Coordinacion Administrativa Nivel Primario' && DecodeToken(userState).usuario.permissions.filterCoordinacionAdministrativa
+                           dataFilter.puesto === 'Coordinacion Administrativa Nivel Primario' && DecodeToken(userState).usuario.permissions.filterCoordinacionAdministrativa
                            ||
-                              dataFilter.puesto === 'Coordinacion Administrativa Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterCoordinacionAdministrativa
+                           dataFilter.puesto === 'Coordinacion Administrativa Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterCoordinacionAdministrativa
                            ||
-                              dataFilter.puesto === 'Preceptor/a' && DecodeToken(userState).usuario.permissions.filterPreceptoria
+                           dataFilter.puesto === 'Preceptor/a' && DecodeToken(userState).usuario.permissions.filterPreceptoria
                            || dataFilter.puesto === 'Psicopedagoga/o' && DecodeToken(userState).usuario.permissions.filterPsicopedagogia
                            || dataFilter.puesto === 'Tutora Nivel Secundario' && DecodeToken(userState).usuario.permissions.filterTutoria
 
                            || dataFilter.puesto === 'Auxiliar N. Inicial' && DecodeToken(userState).usuario.permissions.filterSecretariaAdministrativa
                            || dataFilter.puesto === 'E.T.I.' && DecodeToken(userState).usuario.permissions.filterPsicopedagogia 
-                        ).map((dataMap,index) =>
-                           <tr
-                              key={index}
-                           >
-                              <td>
-                                 {index}
-                              </td>
-                              <td>
-                                 {dataMap?.user}
-                              </td>
-                              <td>
-                                 {dataMap?.puesto}
-                              </td>
-                              <td>
-                                 {dataMap?.fecha}
-                              </td>
-                              <td>
-                                 {dataMap?.observacion}
-                              </td>
-                           </tr>
-                        )
-                     }
+                     ).map((dataMap,index) =>
+                        <tr
+                           key={index}
+                        >
+                           <td>
+                              {dataMap?.user}
+                           </td>
+                           <td>
+                              {dataMap?.puesto}
+                           </td>
+                           <td>
+                              {dataMap?.fecha}
+                           </td>
+                           <td>
+                              {dataMap?.observacion}
+                           </td>
+                        </tr>
+                     )
+                  }
                   </tbody>
                </Table>
             </Col>

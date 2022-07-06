@@ -13,6 +13,7 @@ import AdminOptions from '../components/AdminOptions'
 const AdminPannelPage = () => {
    return(
       <Container 
+         style={{fontFamily:'Droid Sans'}}
          fluid
       >
          <Row>
