@@ -49,8 +49,7 @@ const ChartsPannelHomePage = () => {
 
    useEffect(async ()=>{
       const res = await getMatriculaActivo(
-         userState.token,
-         userState.currentYear
+         userState,
       ) 
       switch(res.status){
          case 200:

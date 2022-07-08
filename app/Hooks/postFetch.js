@@ -32,6 +32,7 @@ export const postFetchUpdateRegistroSalud = async (
    catch(err) {
       return(err.response)
    }
+
 }
 
 export const postFetchUpdateAlumno = async (
@@ -306,7 +307,7 @@ export const postFetchNuevaDenominacion = async (
 }
 
 export const postFetchNuevoAlumno = async (
-   token,
+   userState,
    apiUrl,
    dataPost
 ) => {
@@ -317,13 +318,16 @@ const url = `${baseUrl}/${apiUrl}`
       headers: {                    
          "Accept": "application/json",                    
          "Content-Type": "application/json",
-         "Authorization": token                
+         "Authorization": userState.token                
       }           
    }
    try{
       const resData = await axios.post(
          url,
-         dataPost,
+         {
+            currentYear: userState.currentYear,
+            dataPost,
+         },
          config
       )
       return resData

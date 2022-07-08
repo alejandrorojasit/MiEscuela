@@ -157,17 +157,16 @@ const dataRes = await axios.get(
 }
 
 export const getMatriculaActivo = async (
-   token,
-   currentYear
+   userState,
 ) => {
    const config = {
       headers: {                    
          "Accept": "application/json",                    
          "Content-Type": "application/json",
-         "Authorization": token                
+         "Authorization": userState.token                
       }           
    } 
-   const url= `${baseUrl}/${matriculaUrlActivo}/${currentYear}` 
+   const url= `${baseUrl}/${matriculaUrlActivo}/${userState.currentYear}` 
    try{
    const dataRes = await axios.get(
       url,
@@ -182,17 +181,16 @@ export const getMatriculaActivo = async (
 }
 
 export const getMatriculaCompleta = async (
-   token,
-   currentYear
+   userState
 ) => {
    const config = {
       headers: {                    
          "Accept": "application/json",                    
          "Content-Type": "application/json",
-         "Authorization": token                
+         "Authorization": userState.token                
       }           
    } 
-   const url= `${baseUrl}/${matriculaUrlCompleta}/${currentYear}` 
+   const url= `${baseUrl}/${matriculaUrlCompleta}/${userState.currentYear}` 
    try{
    const dataRes = await axios.get(
       url,

@@ -19,9 +19,8 @@ app.post('/Ratificacion',verificarToken,(req,res) => {
 })
 
 app.post('/nuevoAlumno',verificarToken,(req,res)=> {
-
-   sendData = new data ({...req.body,estado:'Activo'})
-   sendData.save(
+   
+   mongoose.model(req.body.currentYear)({...req.body.dataPost,estado:'Activo'}).save(
       (err,data)=>
          res.json(data)
    )
@@ -153,6 +152,7 @@ app.get('/activo/:year',async (req,res) => {
 
    let collectionExist =  false
    const listCollections = await mongoose.connection.db.listCollections().toArray()
+   
 
    listCollections.map(name => {
       if(name.name === req.params.year && collectionExist===false){
@@ -164,6 +164,7 @@ app.get('/activo/:year',async (req,res) => {
 
       let modelExist = false 
       const models = mongoose.modelNames()
+      console.log(models)
       models.map(model => {
          if(model === req.params.year){
             modelExist = true

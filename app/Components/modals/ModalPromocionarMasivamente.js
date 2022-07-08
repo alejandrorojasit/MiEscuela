@@ -15,7 +15,10 @@ import {getMatriculaActivo} from '../../hooks/getFetch'
 
 import {useSelector} from 'react-redux'
 
-const ModalPromocionarMasivamente = ({stateShow,setStateShow}) => { 
+const ModalPromocionarMasivamente = ({
+   stateShow,
+   setStateShow
+}) => { 
 
    const [matricula,setMatricula]  = useState([])
    const [nivel,setNivel] = useState(null)

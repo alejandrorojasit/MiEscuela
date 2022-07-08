@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import {
    Container,
-   Row
+   Row,
 } from 'react-bootstrap'
 
 import Menu from '../components/Menu'
@@ -9,7 +9,7 @@ import WebFont from 'webfontloader'
 import NuevoIngresoForm from '../components/forms/NuevoIngresoForm'
 
 const NuevoIngresoPage = () => {
-   
+
    useEffect(()=>{
       WebFont.load({
          google:{
@@ -19,19 +19,19 @@ const NuevoIngresoPage = () => {
    },[])
 
    return (
-      <Container 
-         style={{fontFamily:'Droid Sans'}}
-         fluid
-      >
-         <Row>
-         </Row>
-         <Row>
-            <Menu/>
-         </Row>
-         <Row>
-            <NuevoIngresoForm/>
-         </Row>
-      </Container>
+         <Container 
+            style={{fontFamily:'Droid Sans'}}
+            fluid
+         >
+            <Row>
+            </Row>
+            <Row>
+               <Menu/>
+            </Row>
+            <Row>
+               <NuevoIngresoForm/>
+            </Row>
+         </Container>
    )
 }
 

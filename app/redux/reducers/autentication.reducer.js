@@ -2,7 +2,8 @@ import {
    SET_CURRENT_USER,
    LOG_OUT_CURRENT_USER,
    GET_STATE,
-   SET_CURRENT_YEAR
+   SET_CURRENT_YEAR,
+   SET_CURRENT_YEARSERVER
 } from "../actions/autentication.action";
 import isEmpty from "../Validations/isEmpty";
 import jwt_decode from "jwt-decode";
@@ -14,6 +15,11 @@ export const authReducer = (
 ) => {
    switch (action.type) {
 
+      case SET_CURRENT_YEARSERVER:
+         return {
+            ...state,
+            currentYearServer: action.payload
+         }
       case SET_CURRENT_YEAR:
          return {
             ...state,

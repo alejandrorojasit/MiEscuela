@@ -1,7 +1,8 @@
 import {
    setCurrentUser,
    logOutCurrentUser,
-   setCurrentYear
+   setCurrentYear,
+   setCurrentYearServer
 } from '../../redux/actions/autentication.action.js'
 
 import {
@@ -58,6 +59,7 @@ export const handleClick = async (
    if (fetchLogin.data.ok === true){
       const currentYear = await getCurrentYear()
       dispatch(setCurrentYear(currentYear.data))
+      dispatch(setCurrentYearServer(currentYear.data))
       const hardCodeData = await getHardCodeData(fetchLogin.data.token)
       dispatch(setHardCodeData(hardCodeData.data[0]))
       dispatch(setCurrentUser(fetchLogin.data.token))
@@ -69,5 +71,3 @@ export const handleClick = async (
       dispatch(modalAlertSpinner_updateStateShow())
    }
 }
-
-

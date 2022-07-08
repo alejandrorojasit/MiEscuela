@@ -1,8 +1,12 @@
 import { getMatriculaCompleta } from '../../hooks/getFetch'
 
-export const findLastFile = async (token) => {
+export const findLastFile = async (
+   userState
+) => {
    let lastNumber = ''
-   const data = await getMatriculaCompleta(token)
+   const data = await getMatriculaCompleta(
+      userState
+   )
 
    for(let i = 0;i < data.data.length;i++){
       if (data.data[i].nroLegajo !== 'Sin Datos' || data.data[i].nroLegajo !== undefined){

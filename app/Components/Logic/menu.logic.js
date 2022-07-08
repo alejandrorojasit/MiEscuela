@@ -7,5 +7,5 @@ export const changeMatriucla = (
 ) => {
   dispatch(resetState())
   dispatch(updateAlumnoFullList([]))
-  dispatch(setCurrentYear(matriculaYear)) 
+  dispatch(setCurrentYear(parseInt(matriculaYear))) 
 }
